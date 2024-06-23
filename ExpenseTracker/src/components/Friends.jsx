@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { splitCreateActions } from "../store/main";
 import styled from "styled-components";
@@ -25,28 +25,48 @@ const Button = styled.button`
 export default function Friends() {
   const friends = useSelector((state) => state.splitCreate.friends);
   const dispatch = useDispatch();
-
-  console.log(friends);
+  const [error, setError] = useState(null);
   const friendName = useRef();
 
+  function checkForDuplicacy() {
+    for (let i of friends) {
+      if (i.name === friendName.current.value.trim()) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   function addFriendClick() {
-    if (friendName.current.value != "") {
-      const name = friendName.current.value;
+    if (checkForDuplicacy() === true) {
+      setError(
+        "Names of 2 Friends cannot be same. Try Aliases or change Casing."
+      );
+      return;
+    } else if (error != null) {
+      setError(null);
+    }
+    const nameVal = friendName.current.value.trim();
+    if (nameVal != "") {
+      const name = nameVal;
       friendName.current.value = "";
       dispatch(splitCreateActions.addFriend({ name: name }));
     }
   }
   function removeClick(friend) {
+    if (error != null) {
+      setError(null);
+    }
     dispatch(splitCreateActions.removeFriend({ name: friend }));
   }
 
   return (
-    <Main className="rounded-xl flex flex-col  shadow-md  w-[500px] h-[500px]">
+    <Main className="rounded-xl flex flex-col min-w-[300px] shadow-md  w-[500px] h-[500px]">
       <Header className="w-full py-4 flex justify-center items-center rounded-t-xl  text-xl font-bold uppercase">
         Friends
       </Header>
 
-      <div className="w-full h-full p-6 overflow-auto">
+      <div className="w-full flex-grow p-6 overflow-auto">
         {friends.length != 0 ? (
           <ul>
             {friends.map((obj, index) => {
@@ -67,11 +87,18 @@ export default function Friends() {
             })}
           </ul>
         ) : (
-          <p className="text-lg">No friends added</p>
+          <p className="text-lg">No Friends added</p>
         )}
       </div>
-
-      <div className="flex w-full h-[70px] p-2">
+      <div
+        style={{
+          display: `${error === null ? "none" : "block"}`,
+        }}
+        className="bg-red-300 mx-3 text-sm rounded-xl p-2 px-4"
+      >
+        <p>{error}</p>
+      </div>
+      <div className="flex w-full h-[55px] p-2">
         <input
           ref={friendName}
           placeholder="Write Name..."

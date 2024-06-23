@@ -26,14 +26,25 @@ const splitCreateSlice = createSlice({
             state.bills.unshift({
                 total: action.payload.total,
                 payer: action.payload.payer,
-                shares: [action.payload.shares.map((sh) => {
+                id: action.payload.id,
+                shares: action.payload.shares.map((sh) => {
                     return {
                         name: sh.name,
                         share: sh.share
                     }
-                })]
+                })
             })
             console.log(state.bills);
+        },
+        removeBill(state, action) {
+            let index = 0;
+            for (let i of state.bills) {
+                if (i.id === action.payload) {
+                    break;
+                }
+                ++index;
+            }
+            state.bills.splice(index, 1);
         }
     }
 });

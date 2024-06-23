@@ -9,7 +9,7 @@ export default function Root() {
       <>
         <div
           style={{ backgroundColor: styling.backColor }}
-          className="flex h-screen"
+          className="flex h-screen overflow-auto"
         >
           <SideNav />
           <div

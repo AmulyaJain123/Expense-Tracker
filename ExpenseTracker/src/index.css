@@ -14,3 +14,31 @@ a.active div {
   background-color: black;
   opacity: 0.5;
 }
+
+.disabled {
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  height: 80px;
+  font-family: "Fredoka";
+  letter-spacing: 1px;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: center;
+}
+
+tr {
+  height: 55px;
+}
