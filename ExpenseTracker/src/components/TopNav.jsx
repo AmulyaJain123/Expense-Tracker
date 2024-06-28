@@ -1,13 +1,26 @@
 import { styling } from "../util/styling";
+import { useLocation, useParams } from "react-router-dom";
+import TopNavThumbs from "../UIComponents/TopNavThumbs";
+import { createSplitHeirachy } from "../util/componentNavigation";
 
 export default function TopNav() {
+  const location = useLocation();
+  const isOnCreateSplit = location.pathname.includes("/split/create");
   return (
     <div
       style={{
         marginTop: `${styling.spacing}px`,
         backgroundColor: styling.navColor,
       }}
-      className="w-full h-14 rounded-l-xl"
-    ></div>
+      className="flex items-center p-2 h-14 rounded-l-xl"
+    >
+      {isOnCreateSplit
+        ? createSplitHeirachy.map((status) => (
+            <TopNavThumbs key={status} bool={location.search}>
+              {status}
+            </TopNavThumbs>
+          ))
+        : ""}
+    </div>
   );
 }

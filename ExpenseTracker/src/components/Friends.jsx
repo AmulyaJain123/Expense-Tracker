@@ -5,11 +5,27 @@ import styled from "styled-components";
 import { styling } from "../util/styling";
 
 const Main = styled.div`
-  background-color: ${styling.friendsBoxBgCol};
+  /* background-color: ${styling.friendsBoxBgCol}; */
 `;
 
 const Header = styled.div`
-  background-color: ${styling.friendsTitleBgCol};
+  /* background-color: ${styling.friendsTitleBgCol}; */
+`;
+
+const Div = styled.div`
+  &::-webkit-scrollbar {
+    width: 8px;
+    border-radius: 30px;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 30px;
+  }
+
+  &:hover::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 30px;
+  }
 `;
 
 const Button = styled.button`
@@ -27,6 +43,7 @@ export default function Friends() {
   const dispatch = useDispatch();
   const [error, setError] = useState(null);
   const friendName = useRef();
+  const buttonRef = useRef();
 
   function checkForDuplicacy() {
     for (let i of friends) {
@@ -60,28 +77,52 @@ export default function Friends() {
     dispatch(splitCreateActions.removeFriend({ name: friend }));
   }
 
+  function changeHandler() {
+    if (checkForDuplicacy() === true) {
+      setError(
+        "Names of 2 Friends cannot be same. Try Aliases or change Casing."
+      );
+      return;
+    } else {
+      setError(null);
+    }
+  }
+
+  function keyDownHandle(event) {
+    if (event.key === "Enter") {
+      buttonRef.current.click();
+    }
+  }
+
   return (
-    <Main className="rounded-xl flex flex-col min-w-[300px] shadow-md  w-[500px] h-[500px]">
-      <Header className="w-full py-4 flex justify-center items-center rounded-t-xl  text-xl font-bold uppercase">
+    <Main className="rounded-lg flex flex-col min-w-[300px] bg-slate-100 p-3  h-[500px]">
+      <Header className="w-full py-2 bg-black text-white flex justify-center items-center rounded-lg  text-lg font-semibold uppercase">
         Friends
       </Header>
 
-      <div className="w-full flex-grow p-6 overflow-auto">
+      <Div className="w-full text-stone-500 mt-4 rounded-lg  flex-grow p-6 overflow-auto">
         {friends.length != 0 ? (
           <ul>
             {friends.map((obj, index) => {
               return (
                 <li className="mb-4 flex w-full text-lg" key={obj.name}>
-                  <span className="min-w-[35px] m-r-2">{`${index + 1}.`}</span>
-                  <span>{obj.name}</span>
-                  <button
-                    onClick={() => {
-                      removeClick(obj.name);
-                    }}
-                    className="ml-auto"
-                  >
-                    <i className="fi fi-ss-cross-circle text-xl"></i>
-                  </button>
+                  <div className="min-w-[50px]">
+                    <span className="bg-[white] flex justify-center items-center w-[35px] h-[35px] rounded-lg ">{`${
+                      index + 1
+                    }`}</span>
+                  </div>
+
+                  <span className="bg-[white] flex-grow mr-4 flex px-4 items-center h-[35px] rounded-lg ">
+                    <span>{obj.name}</span>
+                    <button
+                      onClick={() => {
+                        removeClick(obj.name);
+                      }}
+                      className="ml-auto "
+                    >
+                      <i className="fi fi-ss-cross-circle text-xl flex h-[35px] justify-center items-center"></i>
+                    </button>
+                  </span>
                 </li>
               );
             })}
@@ -89,25 +130,29 @@ export default function Friends() {
         ) : (
           <p className="text-lg">No Friends added</p>
         )}
-      </div>
+      </Div>
       <div
         style={{
-          display: `${error === null ? "none" : "block"}`,
+          display: `${error === null ? "none" : "flex"}`,
         }}
-        className="bg-red-300 mx-3 text-sm rounded-xl p-2 px-4"
+        className="bg-red-300 text-sm items-center rounded-lg p-2 px-4"
       >
+        <i className="fi fi-rs-exclamation mr-2 text-lg flex justify-center items-center"></i>
         <p>{error}</p>
       </div>
-      <div className="flex w-full h-[55px] p-2">
+      <div className="flex mt-4 text-lg ">
         <input
           ref={friendName}
+          onChange={changeHandler}
+          onKeyDown={(event) => keyDownHandle(event)}
           placeholder="Write Name..."
-          className="rounded-lg px-4 w-full mr-2"
+          className="rounded-lg px-4 py-2 w-full mr-2"
           type="text"
         />
         <Button
           className="text-white w-48 rounded-md ml-auto"
           onClick={addFriendClick}
+          ref={buttonRef}
         >
           &#43; Friend
         </Button>

@@ -4,7 +4,7 @@ export function splitAlgo(bills) {
     const edges = [];
     const set = new Set();
     for (let bill of bills) {
-        const { payer, total, shares } = bill;
+        const { payedBy: payer, totalAmt: total, shares } = bill;
         set.add(payer);
         for (let i of shares) {
             const { name, share: amt } = i;
@@ -12,20 +12,44 @@ export function splitAlgo(bills) {
             if (name === payer) {
                 continue;
             } else {
-                edges.push({
-                    before: name,
-                    after: payer,
-                    amount: parseFloat(amt)
-                })
+                const key = `${name} -> ${payer}`
+                if (map.has(key)) {
+                    map.set(key, map.get(key) + parseFloat(amt));
+                } else {
+                    map.set(key, parseFloat(amt));
+                }
+
             }
         }
+    }
+    for (let i of map) {
+        console.log("testing", i);
+        const st = i[0].split(" -> ")[0];
+        const en = i[0].split(" -> ")[1];
+        const amount = i[1];
+        edges.push({
+            before: st,
+            after: en,
+            amount: parseFloat(amount)
+        })
+    }
+    if (edges.length <= set.length) {
+        const ans = [];
+        for (let i of edges) {
+            ans.push({
+                start: i.before,
+                end: i.after,
+                amount: i.amount
+            })
+        }
+        return ans;
     }
     const people = []
     for (let i of set) {
         people.push(i);
     }
     people.sort();
-    console.log("edges", edges, "people", people);
+    // console.log("edges", edges, "people", people);
     const count = people.length;
     let payment = []
     for (let i = 0; i < people.length; ++i) {
@@ -41,7 +65,7 @@ export function splitAlgo(bills) {
         }
         edges.splice(0, 1);
     }
-    console.log("payment", payment);
+    // console.log("payment", payment);
     let minimum = Number.MAX_VALUE;
     for (let i of payment) {
         minimum = Math.min(minimum, i);
@@ -61,4 +85,30 @@ export function splitAlgo(bills) {
     }
     console.log("ans", ans)
     return ans;
+}
+
+export function formatVal(value) {
+    let decimalPart = (value + "").split('.')[1];
+    let intPart = (value + "").split('.')[0];
+    if (decimalPart === undefined) {
+        decimalPart = "00";
+    }
+    if (decimalPart.length >= 2) {
+        decimalPart = decimalPart[0] + decimalPart[1];
+    } else {
+        decimalPart += "0";
+    }
+    const ans = `${intPart}.${decimalPart} ₹`;
+    return ans;
+}
+
+export function amountInRange(val) {
+    if (val[0] === '-') {
+        return false;
+    }
+    if (val.length > 15) {
+        return false;
+    }
+    return true;
+
 }

@@ -1,9 +1,9 @@
 
 export const styling = {
-    navColor: "#A5A5A5",
-    backColor: "#f8f9fa",
+    navColor: "white",
+    backColor: "rgb(231 229 228)",
     spacing: 8,
-    pageTileHover: 'white',
+    pageTileHover: '#dc93f6',
     logoFont: 'Fredoka',
     friendsBoxBgCol: '#e9ecef',
     friendsTitleBgCol: '#dee2e6',
@@ -18,5 +18,6 @@ export const styling = {
     GoToSplitButtonBgCol: '#000',
     GoToSplitButtonTextCol: '#fff',
     splitResultModalBgCol: '#e9ecef',
-    splitResultModalTitleBgCol: '#CCCCCC'
+    splitResultModalTitleBgCol: '#CCCCCC',
+    topNavThumbsBgCol: '#dc93f6'
 };

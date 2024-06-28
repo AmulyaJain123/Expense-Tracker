@@ -7,7 +7,7 @@ body {
 }
 
 a.active div {
-  background-color: white;
+  background-color: #dc93f6;
 }
 
 ::backdrop {
@@ -41,4 +41,18 @@ td {
 
 tr {
   height: 55px;
+}
+
+.customScroll::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 30px;
+}
+
+.customScroll::-webkit-scrollbar-track {
+  border-radius: 30px;
+}
+
+.customScroll:hover::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 30px;
 }
