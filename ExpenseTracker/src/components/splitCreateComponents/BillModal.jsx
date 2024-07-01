@@ -1,10 +1,10 @@
 import { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { splitCreateActions } from "../store/main";
+import { splitCreateActions } from "../../store/main";
 import { useState } from "react";
 import styled from "styled-components";
-import { styling } from "../util/styling";
-import { addBillHeirarchy } from "../util/componentNavigation";
+import { styling } from "../../util/styling";
+import { addBillHeirarchy } from "../../util/componentNavigation";
 import DivideEquallySplitModal from "./DivideEquallySplitModal";
 import DivideByRatioSplitModal from "./DivideByRatioSplitModal";
 import DivideManuallySplitModal from "./DivideManuallySplitModal";

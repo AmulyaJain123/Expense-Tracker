@@ -6,7 +6,8 @@ const intialSplitCreateState = {
     topNavSplitStatus: "Split Creation",
     splitInfo: {
         splitName: "",
-        description: ""
+        description: "",
+        splitDate: ""
     },
     addBillNavStatus: "Divide Equally",
     selectBillNavStatus: null
@@ -67,11 +68,14 @@ export const splitCreateSlice = createSlice({
         },
         setSplitInfo(state, action) {
             state.splitInfo.splitName = action.payload.name;
-            if (action.desc != "") {
+            if (action.payload.desc != "") {
                 state.splitInfo.description = action.payload.desc;
             } else {
                 state.splitInfo.description = "None";
             }
+            const currDate = new Date();
+            const formattedDate = `${currDate.getDate()}/${currDate.getMonth() + 1}/${currDate.getFullYear()}`
+            state.splitInfo.splitDate = formattedDate;
         },
         changeAddBillNavStatus(state, action) {
             state.addBillNavStatus = action.payload;

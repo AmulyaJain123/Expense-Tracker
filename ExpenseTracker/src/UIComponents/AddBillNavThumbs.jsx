@@ -13,7 +13,12 @@ const Button = styled.button`
   }
 `;
 
-export default function AddBillNavThumbs({ status, identity, children }) {
+export default function AddBillNavThumbs({
+  status,
+  viewOnly,
+  identity,
+  children,
+}) {
   const dispatch = useDispatch();
   function clickHandle() {
     dispatch(splitCreateActions.changeSelectBillNavStatus(identity));
@@ -36,7 +41,7 @@ export default function AddBillNavThumbs({ status, identity, children }) {
         className="rounded-md p-1 justify-center flex-grow text-black px-3 flex items-center"
       >
         <span>{children}</span>
-        {status === "true" ? (
+        {viewOnly == "false" && status === "true" ? (
           <button
             onClick={removeClick}
             className="ml-3 hover:scale-125 duration-500"

@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { useRef, useState } from "react";
-import { formatVal } from "../util/algo";
-import { amountInRange } from "../util/algo";
+import { formatVal } from "../../util/algo";
+import { amountInRange } from "../../util/algo";
 import { useDispatch } from "react-redux";
-import { splitCreateActions } from "../store/main";
+import { splitCreateActions } from "../../store/main";
 
 const Textarea = styled.textarea`
   resize: none;
@@ -14,6 +14,8 @@ const Button = styled.button`
   flex-grow: 1;
   padding: 0.75rem;
   display: flex;
+  font-weight: 600;
+  text-transform: uppercase;
   justify-content: center;
   align-items: center;
   border-radius: 0.5rem;
@@ -46,7 +48,7 @@ const Div = styled.div`
   }
 `;
 
-export default function DivideEquallySplitModal() {
+export default function DivideByRatioSplitModal() {
   const dispatch = useDispatch();
   const friends = useSelector((state) => state.splitCreate.friends);
   const [error, setError] = useState(null);
@@ -59,7 +61,7 @@ export default function DivideEquallySplitModal() {
   const dateRef = useRef();
   const cancelRef = useRef();
 
-  function resetPreview(no) {
+  function resetPreview() {
     if (
       amountRef.current.value === "" ||
       parseFloat(amountRef.current.value) === 0 ||
@@ -70,13 +72,30 @@ export default function DivideEquallySplitModal() {
       }
       return;
     }
-    const val = amountRef.current.value / no;
-    const finalVal = formatVal(val);
+    let totalWeight = 0;
     for (let i of checkboxRef.current.children) {
-      if (i.children[1].children[0].checked === false) {
-        continue;
+      if (
+        i.children[1].children[0].checked &&
+        i.children[0].children[2].value != "" &&
+        amountInRange(i.children[0].children[2].value) === true
+      ) {
+        totalWeight += parseFloat(i.children[0].children[2].value);
       }
-      i.children[0].children[1].innerText = finalVal;
+    }
+    for (let i of checkboxRef.current.children) {
+      if (
+        i.children[1].children[0].checked &&
+        i.children[0].children[2].value != "" &&
+        amountInRange(i.children[0].children[2].value) === true &&
+        parseFloat(i.children[0].children[2].value) != 0
+      ) {
+        const currWeight = i.children[0].children[2].value;
+        const val = (amountRef.current.value / totalWeight) * currWeight;
+        const finalVal = formatVal(val);
+        i.children[0].children[1].innerText = finalVal;
+      } else {
+        i.children[0].children[1].innerText = "";
+      }
     }
   }
 
@@ -88,17 +107,43 @@ export default function DivideEquallySplitModal() {
     } else if (selectRef.current.value === "") {
       setError("Payer not Selected.");
     } else {
+      let count = 0;
+      for (let i of checkboxRef.current.children) {
+        if (i.children[0].children[2].value === "") {
+          ++count;
+        }
+      }
+      if (count === friends.length) {
+        setError("No Weights assigned.");
+        return;
+      }
       const billName = nameRef.current.value;
       const billDate = dateRef.current.value;
       const desc = descRef.current.value;
       const totalAmt = amountRef.current.value;
       const payedBy = selectRef.current.value;
       const shares = [];
+      let totalWeight = 0;
       for (let i of checkboxRef.current.children) {
-        if (i.children[1].children[0].checked) {
+        if (
+          i.children[1].children[0].checked &&
+          i.children[0].children[2].value != "" &&
+          amountInRange(i.children[0].children[2].value) === true
+        ) {
+          totalWeight += parseFloat(i.children[0].children[2].value);
+        }
+      }
+      for (let i of checkboxRef.current.children) {
+        if (
+          i.children[1].children[0].checked &&
+          i.children[0].children[1].innerText != ""
+        ) {
+          const ans =
+            (amountRef.current.value / totalWeight) *
+            parseFloat(i.children[0].children[2].value);
           shares.push({
             name: i.children[1].children[0].value,
-            share: totalAmt / checkedNo,
+            share: ans,
           });
         }
       }
@@ -118,8 +163,9 @@ export default function DivideEquallySplitModal() {
   }
 
   function toggleCheckbox(event) {
+    resetPreview();
     if (event.target.checked) {
-      resetPreview(checkedNo + 1);
+      event.target.parentElement.parentElement.children[0].children[2].disabled = false;
       setCheckedNo((preval) => {
         if (preval === 0) {
           setError(null);
@@ -129,10 +175,12 @@ export default function DivideEquallySplitModal() {
     } else {
       event.target.parentElement.parentElement.children[0].children[1].innerText =
         "";
+      event.target.parentElement.parentElement.children[0].children[2].value =
+        "";
+      event.target.parentElement.parentElement.children[0].children[2].disabled = true;
       if (checkedNo === 1) {
         setError("No Shares Selected");
       }
-      resetPreview(checkedNo - 1);
       setCheckedNo((preval) => preval - 1);
     }
   }
@@ -154,6 +202,22 @@ export default function DivideEquallySplitModal() {
     }
   }
 
+  function weightChange(event) {
+    if (event.target.value != "" && error === "No Weights assigned.") {
+      setError(null);
+    }
+    const name = event.target.parentElement.children[0].innerText;
+    resetPreview();
+    if (
+      amountInRange(event.target.value) === false ||
+      parseFloat(event.target.value) === 0
+    ) {
+      setError(`Share Input value of '${name}' is out of range`);
+    } else if (error === `Share Input value of '${name}' is out of range`) {
+      setError(null);
+    }
+  }
+
   function selectChange(event) {
     if (event.target.value === "") {
       setError("Payer not Selected.");
@@ -166,6 +230,8 @@ export default function DivideEquallySplitModal() {
     for (let i of checkboxRef.current.children) {
       i.children[1].children[0].checked = true;
       i.children[0].children[1].innerText = "";
+      i.children[0].children[2].value = "";
+      i.children[0].children[2].disabled = false;
     }
     nameRef.current.value = "";
     descRef.current.value = "";
@@ -202,6 +268,7 @@ export default function DivideEquallySplitModal() {
           <Textarea
             type="text"
             ref={descRef}
+            maxLength={70}
             placeholder="Write Here......(Optional)"
             className="text-md rounded-md h-[105px] bg-slate-100 flex-grow p-2 pl-4 text-lg"
           ></Textarea>
@@ -266,12 +333,20 @@ export default function DivideEquallySplitModal() {
                 >
                   <label
                     htmlFor={friend.name}
-                    className="p-3 pl-4 bg-white border-2 flex border-stone-200 rounded-md flex-grow"
+                    className="p-2 pl-4 bg-white border-2 flex border-stone-200 rounded-md flex-grow"
                   >
-                    <span className="flex-grow">{friend.name}</span>
-                    <span className="w-auto text-right text-stone-400"></span>
+                    <span className="flex-grow flex items-center">
+                      {friend.name}
+                    </span>
+                    <span className="w-auto text-right flex items-center mr-2 text-stone-400"></span>
+                    <input
+                      type="number"
+                      min={0}
+                      onChange={(event) => weightChange(event)}
+                      className="rounded-md bg-slate-100 p-1 w-[60px]"
+                    />
                   </label>
-                  <div className="p-3 rounded-md px-3 flex justify-center items-center bg-white border-2 border-stone-200">
+                  <div className="p-2 rounded-md px-3 flex justify-center items-center bg-white border-2 border-stone-200">
                     <input
                       className="w-[20px] h-[20px]"
                       type="checkbox"
@@ -296,18 +371,18 @@ export default function DivideEquallySplitModal() {
           <i className="fi fi-rs-exclamation mr-2 text-lg flex justify-center items-center"></i>
           <p>{error}</p>
         </div>
-        <form method="dialog" className="flex space-x-3 mt-auto">
+        <form method="dialog" className="flex  space-x-3 mt-auto">
           <button
             onClick={cancelClick}
             ref={cancelRef}
-            className="flex-grow p-3  flex justify-center items-center rounded-lg bg-red-500 text-white shadow-md hover:bg-white hover:text-red-500 border-2 border-red-500 hover:translate-y-[-5px] duration-500 "
+            className="flex-grow p-3 font-semibold uppercase  flex justify-center items-center rounded-lg bg-red-500 text-white shadow-md hover:bg-white hover:text-red-500 border-2 border-red-500 hover:translate-y-[-5px] duration-500 "
           >
             Cancel
           </button>
           <button
             onClick={() => reset()}
             type="button"
-            className="flex-grow p-3  flex justify-center items-center rounded-lg bg-blue-500 text-white shadow-md hover:bg-white hover:text-blue-500 border-2 border-blue-500 hover:translate-y-[-5px] duration-500 "
+            className="flex-grow p-3 font-semibold uppercase  flex justify-center items-center rounded-lg bg-blue-500 text-white shadow-md hover:bg-white hover:text-blue-500 border-2 border-blue-500 hover:translate-y-[-5px] duration-500 "
           >
             Reset
           </button>

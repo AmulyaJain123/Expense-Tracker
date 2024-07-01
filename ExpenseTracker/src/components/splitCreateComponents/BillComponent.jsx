@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
-import { splitCreateActions } from "../store/main";
+import { splitCreateActions } from "../../store/main";
 import { useSelector } from "react-redux";
-import { formatVal } from "../util/algo";
+import { formatVal } from "../../util/algo";
 
 export default function BillComponent({ id }) {
   const bills = useSelector((state) => state.splitCreate.bills);

@@ -56,3 +56,17 @@ tr {
   background: #888;
   border-radius: 30px;
 }
+
+.splitHome {
+  /* background-repeat: repeat; */
+  background-color: white;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url("./assets/splitHomeBg.jpg");
+}
+
+.splitBox {
+  background-image: url("./assets/splitBox.png");
+  background-repeat: repeat;
+  background-size: contain;
+}

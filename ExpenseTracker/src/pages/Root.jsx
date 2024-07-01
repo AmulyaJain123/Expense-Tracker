@@ -17,7 +17,7 @@ export default function Root() {
             className="flex w-full flex-col"
           >
             <TopNav />
-            <div className="w-full px-12 py-12 h-screen overflow-auto ">
+            <div className="w-full rounded-l-xl h-screen my-2 overflow-auto">
               <Outlet />
             </div>
           </div>

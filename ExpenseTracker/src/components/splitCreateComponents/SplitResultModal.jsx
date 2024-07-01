@@ -1,6 +1,6 @@
 import { forwardRef, useImperativeHandle, useRef } from "react";
 import styled from "styled-components";
-import { styling } from "../util/styling";
+import { styling } from "../../util/styling";
 import { useState } from "react";
 
 const Modal = styled.dialog`

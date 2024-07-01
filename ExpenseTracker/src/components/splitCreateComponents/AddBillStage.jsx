@@ -1,19 +1,19 @@
-import { BackButton, Button } from "../UIComponents/NextButton";
-import AddBillNavThumbs from "../UIComponents/AddBillNavThumbs";
+import { BackButton, Button } from "../../UIComponents/NextButton";
+import AddBillNavThumbs from "../../UIComponents/AddBillNavThumbs";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { styling } from "../util/styling";
+import { styling } from "../../util/styling";
 import BillModal from "./BillModal";
 import { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { splitCreateActions } from "../store/main";
+import { splitCreateActions } from "../../store/main";
 import {
   addBillHeirarchy,
   createSplitHeirachy,
-} from "../util/componentNavigation";
+} from "../../util/componentNavigation";
 import BillComponent from "./BillComponent";
-import { splitAlgo } from "../util/algo";
-import DiscardButton from "../UIComponents/DiscardButton";
+import { splitAlgo } from "../../util/algo";
+import DiscardButton from "../../UIComponents/DiscardButton";
 
 export default function AddBillStage() {
   const modalRef = useRef();
@@ -77,6 +77,7 @@ export default function AddBillStage() {
                 return (
                   <AddBillNavThumbs
                     key={bill.id}
+                    viewOnly="false"
                     status={bill.id === selectBillNavStatus ? "true" : "false"}
                     identity={bill.id}
                   >

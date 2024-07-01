@@ -12,7 +12,7 @@ export default function TopNav() {
         marginTop: `${styling.spacing}px`,
         backgroundColor: styling.navColor,
       }}
-      className="flex items-center p-2 h-14 rounded-l-xl"
+      className="flex  items-center p-2 h-14 rounded-l-xl"
     >
       {isOnCreateSplit
         ? createSplitHeirachy.map((status) => (

@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { splitCreateActions } from "../store/main";
+import { splitCreateActions } from "../../store/main";
 import styled from "styled-components";
-import { styling } from "../util/styling";
+import { styling } from "../../util/styling";
 
 const Main = styled.div`
   /* background-color: ${styling.friendsBoxBgCol}; */
@@ -145,6 +145,7 @@ export default function Friends() {
           ref={friendName}
           onChange={changeHandler}
           onKeyDown={(event) => keyDownHandle(event)}
+          maxLength={20}
           placeholder="Write Name..."
           className="rounded-lg px-4 py-2 w-full mr-2"
           type="text"

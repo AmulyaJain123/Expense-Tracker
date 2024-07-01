@@ -1,12 +1,12 @@
-import Friends from "../components/Friends";
+import Friends from "./Friends";
 import { useSelector } from "react-redux";
-import { splitAlgo } from "../util/algo";
+import { splitAlgo } from "../../util/algo";
 import { useDispatch } from "react-redux";
-import { splitCreateActions } from "../store/main";
+import { splitCreateActions } from "../../store/main";
 import { useRef, useState, useEffect } from "react";
-import { createSplitHeirachy } from "../util/componentNavigation";
-import { Button } from "../UIComponents/NextButton";
-import DiscardButton from "../UIComponents/DiscardButton";
+import { createSplitHeirachy } from "../../util/componentNavigation";
+import { Button } from "../../UIComponents/NextButton";
+import DiscardButton from "../../UIComponents/DiscardButton";
 
 export default function CreateSplitStage() {
   const dispatch = useDispatch();
@@ -35,7 +35,7 @@ export default function CreateSplitStage() {
   }
 
   function disable() {
-    if (friends.length > 0 && valid) {
+    if (friends.length > 1 && valid) {
       return false;
     }
     return true;
@@ -50,8 +50,9 @@ export default function CreateSplitStage() {
   }
 
   function clickHandler() {
-    const splitName = nameRef.current.value;
-    const desc = descRef.current.value;
+    const splitName = nameRef.current.value.trim();
+    const desc = descRef.current.value.trim();
+    console.log(desc);
     dispatch(splitCreateActions.setSplitInfo({ name: splitName, desc: desc }));
     const ind = createSplitHeirachy.indexOf(currentStatus);
     const str = createSplitHeirachy[ind + 1];

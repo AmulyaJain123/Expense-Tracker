@@ -26,7 +26,7 @@ const pages = [
     iconClassBold: "fi fi-ss-home",
   },
   {
-    name: "Split",
+    name: "BillSplit",
     path: "split",
     iconClass: "fi fi-rs-hexagon-divide",
     iconClassBold: "fi fi-ss-hexagon-divide",
