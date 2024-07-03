@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import AddBillNavThumbs from "../../UIComponents/AddBillNavThumbs";
 import BillComponent from "../splitCreateComponents/BillComponent";
 import DiscardButton from "../../UIComponents/DiscardButton";
-import { Button } from "../../UIComponents/NextButton";
+import SaveToDB from "./SaveToDB";
 
 export default function SplitResultStage() {
   const bills = useSelector((state) => state.splitCreate.bills);
@@ -199,7 +199,7 @@ export default function SplitResultStage() {
       </div>
       <div className="flex justify-between mx-8 mt-6 mb-6">
         <DiscardButton>Discard</DiscardButton>
-        <Button>Save</Button>
+        <SaveToDB res={res} />
       </div>
     </>
   );

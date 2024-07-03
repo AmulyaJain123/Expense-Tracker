@@ -56,6 +56,9 @@ export default function AddBillStage() {
 
   return (
     <>
+      <div className="flex justify-end">
+        <DiscardButton>Discard</DiscardButton>
+      </div>
       <div className="w-[900px] bg-[#fff] flex flex-col p-4 rounded-xl mt-8  mx-auto ">
         <BillModal ref={modalRef} />
         <header
@@ -104,7 +107,6 @@ export default function AddBillStage() {
       </div>
       <div className="flex justify-between">
         <BackButton onClick={handleBackClick}>{"<<-- Back"}</BackButton>
-        <DiscardButton>Discard</DiscardButton>
         <Button
           disabled={disable() ? true : false}
           className={disable() ? "disabled" : ""}

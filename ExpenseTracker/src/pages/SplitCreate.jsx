@@ -11,11 +11,17 @@ export default function SplitCreate() {
 
   return (
     <>
-      <span id="Top"></span>
-      <div className="pt-12">
-        {topNavStatus === createSplitHeirachy[0] ? <CreateSplitStage /> : null}
-        {topNavStatus === createSplitHeirachy[1] ? <AddBillStage /> : null}
-        {topNavStatus === createSplitHeirachy[2] ? <SplitResultStage /> : null}
+      <div className="h-full w-full bg-white whiteScr overflow-auto pb-[80px] rounded-l-xl">
+        <span id="Top"></span>
+        <div className="pt-12">
+          {topNavStatus === createSplitHeirachy[0] ? (
+            <CreateSplitStage />
+          ) : null}
+          {topNavStatus === createSplitHeirachy[1] ? <AddBillStage /> : null}
+          {topNavStatus === createSplitHeirachy[2] ? (
+            <SplitResultStage />
+          ) : null}
+        </div>
       </div>
     </>
   );

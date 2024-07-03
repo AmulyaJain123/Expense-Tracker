@@ -8,7 +8,7 @@ export default function SplitHome() {
 
   return (
     <>
-      <div className="h-full w-full bg-white overflow-auto text-stone-700 rounded-l-xl">
+      <div className="h-full w-full bg-white overflow-auto pb-[200px] text-stone-700 rounded-l-xl">
         <h2 className="flex justify-center text-[50px] mt-12 p-4 font-bold capitalize ">
           BillSplit
         </h2>

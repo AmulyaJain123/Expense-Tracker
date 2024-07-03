@@ -9,7 +9,7 @@ const Button = styled.button`
   border-bottom: ${(props) => {
     return props.$status === true ? "solid black 4px" : "solid white 4px";
   }};
-  transition: all 500ms;
+  transition: all 200ms;
   padding: 0 1px;
 `;
 

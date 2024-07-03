@@ -62,6 +62,9 @@ export default function CreateSplitStage() {
 
   return (
     <>
+      <div className="flex justify-end">
+        <DiscardButton>Discard</DiscardButton>
+      </div>
       <div className="w-[700px] bg-[#fff] flex flex-col p-4 rounded-xl mt-8  mx-auto ">
         <header
           style={{}}
@@ -100,8 +103,7 @@ export default function CreateSplitStage() {
         </div>
         <Friends />
       </div>
-      <div className="flex justify-between">
-        <DiscardButton>Discard</DiscardButton>
+      <div className="flex justify-end">
         <Button
           disabled={disable() ? true : false}
           className={disable() ? "disabled" : ""}

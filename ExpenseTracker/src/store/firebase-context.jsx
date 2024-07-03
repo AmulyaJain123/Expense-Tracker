@@ -11,6 +11,11 @@ import {
   query,
   where,
   setDoc,
+  orderBy,
+  startAt,
+  endAt,
+  limit,
+  startAfter,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -28,26 +33,73 @@ const analytics = getAnalytics(app);
 const firestore = getFirestore();
 
 const FirebaseContext = createContext({
-  getDocumentWithId: () => {},
-  getAllSplits: () => {},
+  getRangeOfSplits: () => {},
+  addSplit: () => {},
 });
 
 export const useFirebase = () => useContext(FirebaseContext);
 
 export default function FirebaseProvider({ children }) {
-  function getDocumentWithId(id) {
-    const docRef = doc(firestore, "splits", id);
-    return getDoc(docRef);
+  async function getRangeOfSplits(startDoc, count) {
+    try {
+      const collRef = collection(firestore, "splits");
+      let q = null;
+      if (startDoc === null) {
+        q = query(collRef, orderBy("createdAt", "desc"), limit(count));
+      } else {
+        q = query(
+          collRef,
+          orderBy("createdAt", "desc"),
+          startAfter(startDoc),
+          limit(count)
+        );
+      }
+      let res = await getDocs(q);
+      // console.log(res);
+      const lastDoc = res.docs[res.docs.length - 1];
+      const newres = await getDocs(
+        query(
+          collRef,
+          orderBy("createdAt", "desc"),
+          startAfter(lastDoc),
+          limit(1)
+        )
+      );
+      // console.log("newres", newres);
+      const nextExists = !newres.empty;
+      return { res, lastDoc, nextExists };
+    } catch (err) {
+      console.log(err);
+      const res = new Response(
+        JSON.stringify({ message: "Could not fetch data." }),
+        {
+          status: 500,
+        }
+      );
+      return res;
+    }
   }
-  async function getAllSplits() {
-    const collRef = collection(firestore, "splits");
-    const res = await getDocs(collRef);
-    return res;
+
+  async function addSplit(data) {
+    try {
+      const collRef = collection(firestore, "splits");
+      const res = await addDoc(collRef, data);
+      return new Response(
+        JSON.stringify({ message: "Data Appended Successfully" }),
+        { status: 200 }
+      );
+    } catch (err) {
+      console.log(err);
+      return new Response(
+        JSON.stringify({ message: "Could not Append Data." }),
+        { status: 403 }
+      );
+    }
   }
 
   const initialContext = {
-    getDocumentWithId,
-    getAllSplits,
+    getRangeOfSplits,
+    addSplit,
   };
 
   return (

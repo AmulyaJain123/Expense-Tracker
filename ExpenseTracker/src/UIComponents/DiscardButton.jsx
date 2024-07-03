@@ -11,7 +11,7 @@ const Discard = styled.button`
   border-width: 2px; /* border-2 */
   border-color: #ff4d6d; /* border-[#9d4edd] */
   display: flex; /* flex */
-  align-items: flex-start; /* flex-end */
+  align-items: flex-end; /* flex-end */
   font-weight: bold; /* font-bold */
   border-radius: 0.75rem; /* rounded-xl */
   background-color: #ff4d6d; /* bg-[#9d4edd] */
