@@ -10,7 +10,8 @@ const intialSplitCreateState = {
         splitDate: ""
     },
     addBillNavStatus: "Divide Equally",
-    selectBillNavStatus: null
+    selectBillNavStatus: null,
+    bgPattern: null
 };
 
 export const splitCreateSlice = createSlice({
@@ -90,6 +91,10 @@ export const splitCreateSlice = createSlice({
             state.addBillNavStatus = "Divide Equally";
             state.selectBillNavStatus = null;
             state.splitInfo = { splitName: "", description: "" };
+            state.bgPattern = null;
+        },
+        setBgPattern(state, action) {
+            state.bgPattern = action.payload;
         }
     }
 });

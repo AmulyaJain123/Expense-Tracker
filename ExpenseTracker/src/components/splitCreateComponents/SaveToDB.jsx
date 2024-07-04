@@ -12,6 +12,7 @@ export default function SaveToDB({ res }) {
   const splitInfo = useSelector((state) => state.splitCreate.splitInfo);
   const friends = useSelector((state) => state.splitCreate.friends);
   const storedBills = useSelector((state) => state.splitCreate.bills);
+  const bgpattern = useSelector((state) => state.splitCreate.bgPattern);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [saving, setSaving] = useState(false);
@@ -61,6 +62,7 @@ export default function SaveToDB({ res }) {
       };
     });
     // console.log(bills);
+    const bgPattern = bgpattern;
 
     const obj = {
       createdAt: time,
@@ -73,13 +75,9 @@ export default function SaveToDB({ res }) {
       transactionToLiquidate,
       expenditure,
       bills,
+      bgPattern,
     };
-    const timer = setTimeout(() => {
-      setSaving(false);
-      alert("ERROR: Save Unsuccessfull :(");
-    }, 10000);
     const reply = await firebase.addSplit(obj);
-    clearTimeout(timer);
     setSaving(false);
     // console.log(reply);
     if (reply.status === 200) {

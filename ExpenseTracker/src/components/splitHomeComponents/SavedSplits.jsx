@@ -72,7 +72,13 @@ export default function SavedSplits() {
         ) : (
           splits.map((split) => {
             console.log(split);
-            return <SplitBox key={split.docId} data={split} />;
+            return (
+              <SplitBox
+                setSplitState={setSplits}
+                key={split.docId}
+                data={split}
+              />
+            );
           })
         )}
       </div>

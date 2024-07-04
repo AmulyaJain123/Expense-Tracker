@@ -16,6 +16,7 @@ import {
   endAt,
   limit,
   startAfter,
+  deleteDoc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -35,6 +36,7 @@ const firestore = getFirestore();
 const FirebaseContext = createContext({
   getRangeOfSplits: () => {},
   addSplit: () => {},
+  deleteSplit: () => {},
 });
 
 export const useFirebase = () => useContext(FirebaseContext);
@@ -97,9 +99,27 @@ export default function FirebaseProvider({ children }) {
     }
   }
 
+  async function deleteSplit(id) {
+    try {
+      console.log(id);
+      const res = await deleteDoc(doc(firestore, "splits", id));
+      return new Response(
+        JSON.stringify({ message: "Data Deleted Successfully" }),
+        { status: 200 }
+      );
+    } catch (err) {
+      console.log(err);
+      return new Response(
+        JSON.stringify({ message: "Could not Delete Data." }),
+        { status: 403 }
+      );
+    }
+  }
+
   const initialContext = {
     getRangeOfSplits,
     addSplit,
+    deleteSplit,
   };
 
   return (
