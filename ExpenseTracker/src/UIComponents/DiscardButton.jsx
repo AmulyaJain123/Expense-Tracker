@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { splitCreateActions } from "../store/main";
+import { splitCreateActions, vaultActions } from "../store/main";
 
 const Discard = styled.button`
   font-size: 1.25rem; /* text-xl */
@@ -36,6 +36,15 @@ export default function DiscardButton({ children }) {
   function clickHandler() {
     dispatch(splitCreateActions.clearAll());
     navigate("/split");
+  }
+  return <Discard onClick={clickHandler}>{children}</Discard>;
+}
+export function DiscardBillButton({ children }) {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  function clickHandler() {
+    dispatch(vaultActions.clearAll());
+    navigate("/vault");
   }
   return <Discard onClick={clickHandler}>{children}</Discard>;
 }

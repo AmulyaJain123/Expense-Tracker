@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { splitCreateActions } from "../../store/main";
+import add from "../../assets/add.png";
 
 const options = [
   { name: "striped" },
@@ -28,11 +29,13 @@ export default function NewSplitBox() {
         return (
           <Link
             to={"create"}
+            key={Math.random()}
             onClick={() => setBack(option.name)}
             className={str}
           >
-            <div className="w-[40] rounded-full h-[40px] bg-black group-hover:bg-white flex items-center justify-center">
-              <i className="fi fi-ss-add text-[50px] text-[#fff] group-hover:text-[black] duration-500 flex justify-center items-center"></i>
+            <div className="w-[40] rounded-full h-[40px] bg-white flex items-center justify-center">
+              <img src={add} className="w-[40px] h-[40px]" alt="" />
+              {/* <i className="fi fi-ss-add text-[50px] text-[#fff] group-hover:text-[black] duration-500 flex justify-center items-center"></i> */}
             </div>
           </Link>
         );

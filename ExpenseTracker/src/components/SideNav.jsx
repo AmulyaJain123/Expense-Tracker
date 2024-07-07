@@ -31,6 +31,12 @@ const pages = [
     iconClass: "fi fi-rs-hexagon-divide",
     iconClassBold: "fi fi-ss-hexagon-divide",
   },
+  {
+    name: "BillVault",
+    path: "vault",
+    iconClass: "fi fi-rs-vault",
+    iconClassBold: "fi fi-ss-vault",
+  },
 ];
 
 export default function SideNav() {

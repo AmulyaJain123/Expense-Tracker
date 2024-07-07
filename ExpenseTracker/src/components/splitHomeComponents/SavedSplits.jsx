@@ -14,6 +14,11 @@ export default function SavedSplits() {
     async function initialFetch() {
       const reply = await firebase.getRangeOfSplits(finalDoc, 5);
       console.log(reply);
+      if (reply.res === null) {
+        setLoading("No Splits Saved");
+        setHide(true);
+        return;
+      }
       if (reply.status === 500 || reply.res.metadata.fromCache === true) {
         setLoading("ERROR: Cannot Fetch Data");
         setHide(true);

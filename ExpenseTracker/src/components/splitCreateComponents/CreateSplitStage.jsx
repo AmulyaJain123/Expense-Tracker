@@ -81,7 +81,7 @@ export default function CreateSplitStage() {
             ref={nameRef}
             maxLength={40}
             defaultValue={splitInfo.splitName != "" ? splitInfo.splitName : ""}
-            placeholder="Type Name Here...."
+            placeholder="Name...."
             onChange={(event) => changeHandler(event)}
             className="rounded-md text-md px-6 flex-grow p-2 bg-white "
           />
@@ -97,7 +97,7 @@ export default function CreateSplitStage() {
             defaultValue={
               splitInfo.description != "" ? splitInfo.description : ""
             }
-            placeholder="Type Desc Here (Optional)"
+            placeholder="Desc(Optional)...."
             className="rounded-md text-md px-6 flex-grow p-2 bg-white "
           />
         </div>

@@ -131,3 +131,40 @@ export function amountInRange(val) {
     return true;
 
 }
+
+export function billAmountValidate(val) {
+    if (val === "") {
+        return true;
+    }
+    const num = parseFloat(val);
+    if (num <= 0) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+export function billDurationValidate(val) {
+    if (val === "") {
+        return true;
+    }
+    const num = parseFloat(val);
+    if (num % 1.0 != 0) {
+        return false;
+    }
+    if (num <= 0) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+export function validateFileUpload(file) {
+    if (file.size > 2000000) {
+        return "file size is too big. File should be less than 2KB.";
+    }
+    if (!["image/jpg", "image/jpeg", "image/png"].includes(file.type)) {
+        return "file type not supported. File must only have .jpg .jpeg or .png extension.";
+    }
+    return null;
+}

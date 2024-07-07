@@ -58,6 +58,9 @@ export default function FirebaseProvider({ children }) {
       }
       let res = await getDocs(q);
       // console.log(res);
+      if (res.metadata.fromCache === false && res.empty) {
+        return { res: null, lastDoc: null, nextExists: false };
+      }
       const lastDoc = res.docs[res.docs.length - 1];
       const newres = await getDocs(
         query(

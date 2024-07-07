@@ -4,6 +4,8 @@ import HomePage from "./pages/HomePage";
 import SplitPage from "./pages/SplitPage";
 import SplitCreate from "./pages/SplitCreate";
 import SplitHome from "./pages/SplitHome";
+import VaultHome from "./pages/VaultHome";
+import VaultCreate from "./pages/VaultCreate";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +27,19 @@ const router = createBrowserRouter([
           {
             path: "create",
             element: <SplitCreate />,
+          },
+        ],
+      },
+      {
+        path: "vault",
+        children: [
+          {
+            path: "",
+            element: <VaultHome />,
+          },
+          {
+            path: "create",
+            element: <VaultCreate />,
           },
         ],
       },

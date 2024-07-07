@@ -193,7 +193,7 @@ export default function DivideEquallySplitModal() {
             type="text"
             ref={nameRef}
             maxLength={20}
-            placeholder="Type Name Here...(Optional)"
+            placeholder="Name(Optional)...."
             className="rounded-md ml-4 bg-slate-100 flex-grow p-2 pl-6 text-md"
           />
         </div>
@@ -205,8 +205,8 @@ export default function DivideEquallySplitModal() {
             type="text"
             ref={descRef}
             maxLength={70}
-            placeholder="Write Here......(Optional)"
-            className="text-md rounded-md h-[105px] bg-slate-100 flex-grow p-2 pl-4 text-lg"
+            placeholder="Desc(Optional)......"
+            className="text-md rounded-md h-[105px] bg-slate-100 flex-grow p-2 pl-4 text-md"
           ></Textarea>
         </div>
         <div className="flex mt-4 rounded-xl bg-white p-3">
@@ -228,7 +228,7 @@ export default function DivideEquallySplitModal() {
             min={0}
             ref={amountRef}
             onChange={(event) => amountChange(event)}
-            placeholder="Type Total Here ...."
+            placeholder="Total Amount...."
             className="rounded-md ml-4 bg-slate-100 flex-grow p-2 pl-6 text-md"
           />
         </div>
