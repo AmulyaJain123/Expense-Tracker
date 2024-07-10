@@ -55,7 +55,7 @@ export default function Preview() {
           </div>
         </div>
       ) : (
-        <div>
+        <div className="mt-[150px]">
           <p className="text-center p-3 pb-2">You can add upto 4 files</p>
           <p className="text-center px-3 pb-2">
             <span className="mr-3">Supported Extensions:</span>

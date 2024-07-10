@@ -85,7 +85,7 @@ export default function SaveToDB({ res }) {
       alert("Split Saved Successfully!!");
       navigate("/split");
     } else {
-      alert("ERROR: Save Unsuccessfull :(");
+      alert("ERROR: Save Unsuccessfull : (");
     }
   }
   return (

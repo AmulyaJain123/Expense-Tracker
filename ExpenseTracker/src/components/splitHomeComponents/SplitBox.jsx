@@ -38,7 +38,7 @@ export default function SplitBox({ data, setSplitState }) {
     if (reply.status === 200) {
       alert("Split Deleted Succesfully!!");
     } else {
-      alert("ERROR: Delete Unsuccessful :(");
+      alert("ERROR: Delete Unsuccessful : (");
       confirmRef.current.close();
       return;
     }

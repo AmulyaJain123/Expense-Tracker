@@ -27,7 +27,41 @@ const BillDetails = forwardRef(function BillDetails({ ...prop }, ref) {
   const dispatch = useDispatch();
 
   useImperativeHandle(ref, () => {
-    return {};
+    return {
+      getData() {
+        const billName = name.trim();
+        const billDate = new Date(billdate);
+        let billDesc = billDescRef.current.value.trim();
+        if (billDesc === "") {
+          billDesc = "None";
+        }
+        const billTotal = total;
+        const createdOn = new Date();
+        const warrantyAdded = warrantyStatus;
+        let expireDate = null;
+        let expireDuration = null;
+        if (warrantyOption === 1) {
+          expireDate = expireRef.current.value;
+        } else if (warrantyOption === 2) {
+          expireDuration = {
+            days: durationRef.current.children[2].children[1].value,
+            months: durationRef.current.children[1].children[1].value,
+            years: durationRef.current.children[0].children[1].value,
+          };
+        }
+        const obj = {
+          billName,
+          billDate,
+          billDesc,
+          billTotal,
+          createdOn,
+          warrantyAdded,
+          expireDate,
+          expireDuration,
+        };
+        return obj;
+      },
+    };
   });
 
   useEffect(() => {

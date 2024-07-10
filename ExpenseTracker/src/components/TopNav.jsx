@@ -5,7 +5,9 @@ import { createSplitHeirachy } from "../util/componentNavigation";
 
 export default function TopNav() {
   const location = useLocation();
-  const isOnCreateSplit = location.pathname.includes("/split/create");
+  const isOnCreateSplit = location.pathname === "/split/create";
+  const isOnCreateBill = location.pathname === "/vault/create";
+
   return (
     <div
       style={{
@@ -21,6 +23,19 @@ export default function TopNav() {
             </TopNavThumbs>
           ))
         : ""}
+      {isOnCreateBill ? (
+        <div className="p-1">
+          <div
+            style={{
+              backgroundColor: styling.topNavThumbsBgCol,
+              border: `2px solid ${styling.topNavThumbsBgCol}`,
+            }}
+            className="p-1 rounded-lg px-2 flex items-center"
+          >
+            Bill Upload
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

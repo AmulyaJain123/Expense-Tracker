@@ -11,11 +11,16 @@ import { forwardRef, useImperativeHandle } from "react";
 const InputFile = forwardRef(function InputFile({ ...props }, ref) {
   const dispatch = useDispatch();
   const files = useSelector((state) => state.vault.files);
-  const previews = useSelector((state) => state.vault.previews);
+  const [fileObj, setFileObj] = useState([]);
   const fileError = useSelector((state) => state.vault.fileError);
 
   useImperativeHandle(ref, () => {
-    return {};
+    return {
+      getData() {
+        const fileObjects = [...fileObj];
+        return { fileObjects };
+      },
+    };
   });
 
   useEffect(() => {
@@ -28,6 +33,10 @@ const InputFile = forwardRef(function InputFile({ ...props }, ref) {
 
   function fileUpload(event) {
     const res = validateFileUpload(event.target.files[0]);
+    setFileObj((preval) => {
+      const file = event.target.files[0];
+      return [...preval, file];
+    });
     if (res != null) {
       const str = `ERROR: FileName "${event.target.files[0].name}" - ${res}`;
       const obj = {
@@ -46,9 +55,17 @@ const InputFile = forwardRef(function InputFile({ ...props }, ref) {
     dispatch(vaultActions.pushPreview(preview));
   }
 
+  function removeFileObj(ind) {
+    setFileObj((preval) => {
+      let newArr = [...preval];
+      newArr.splice(ind, 1);
+      return newArr;
+    });
+  }
+
   return (
     <>
-      <div className="bg-white zigzag w-[800px] pb-[100px]">
+      <div className="bg-white zigzag w-[750px] pb-[100px]">
         <div className="bg-slate-100 m-4 rounded-lg flex text-black justify-center items-center h-[60px] text-2xl uppercase font-bold">
           Add Files
         </div>
@@ -65,7 +82,13 @@ const InputFile = forwardRef(function InputFile({ ...props }, ref) {
         ) : null}
         <div className="flex mt-4 mx-3 items-center space-x-4 p-2">
           {files.map((file, index) => {
-            return <ImageThumbs key={Math.random()} ind={index} />;
+            return (
+              <ImageThumbs
+                removeFileObj={removeFileObj}
+                key={Math.random()}
+                ind={index}
+              />
+            );
           })}
           {files.length < 4 ? (
             <div>

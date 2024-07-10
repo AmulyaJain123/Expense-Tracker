@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { splitCreateActions, vaultActions } from "../store/main";
 
-const Discard = styled.button`
+export const Discard = styled.button`
   font-size: 1.25rem; /* text-xl */
   padding: 0.75rem; /* p-3 */
   padding-left: 1.25rem; /* px-5 */

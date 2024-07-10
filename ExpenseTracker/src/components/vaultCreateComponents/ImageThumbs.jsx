@@ -16,7 +16,7 @@ const Button = styled.div`
   }
 `;
 
-export default function ImageThumbs({ ind }) {
+export default function ImageThumbs({ ind, removeFileObj }) {
   const fileInd = useSelector((state) => state.vault.fileInd);
   const dispatch = useDispatch();
   const fileError = useSelector((state) => state.vault.fileError);
@@ -26,6 +26,7 @@ export default function ImageThumbs({ ind }) {
     dispatch(vaultActions.setFileInd(ind));
   }
   function remove() {
+    removeFileObj(fileInd);
     if (fileError.file === files[fileInd].name) {
       let nextError = null;
       let arr = [...files];
