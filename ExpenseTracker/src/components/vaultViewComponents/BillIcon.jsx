@@ -16,7 +16,14 @@ export default function BillIcon({ data }) {
   console.log(billDate);
 
   function warrantyStatus() {
-    if (obj.warrantyAdded && obj.expiryDate.toDate() > new Date()) {
+    if (obj.expiryDate === null) {
+      return null;
+    }
+    let currDate = new Date();
+    currDate.setHours(0, 0, 0, 0);
+    let expiry = obj.expiryDate.toDate();
+    expiry.setHours(0, 0, 0, 0);
+    if (obj.warrantyAdded && expiry > currDate) {
       return true;
     } else if (obj.warrantyAdded) {
       return false;

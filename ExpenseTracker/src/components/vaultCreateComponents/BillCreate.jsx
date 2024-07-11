@@ -67,10 +67,12 @@ export default function BillCreate() {
     setLoading("Saving...");
     const res = detailRef.current.getData();
     const res1 = inputRef.current.getData();
+    console.log(res, res1);
     let expiryDate = null;
     if (res.warrantyAdded) {
       if (res.expireDate != null) {
         expiryDate = new Date(res.expireDate);
+        expiryDate.setHours(0, 0, 0, 0);
       } else {
         const days =
           res.expireDuration.days === ""

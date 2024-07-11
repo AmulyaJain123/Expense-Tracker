@@ -17,6 +17,7 @@ const InputFile = forwardRef(function InputFile({ ...props }, ref) {
   useImperativeHandle(ref, () => {
     return {
       getData() {
+        console.log(fileObj);
         const fileObjects = [...fileObj];
         return { fileObjects };
       },
@@ -32,27 +33,31 @@ const InputFile = forwardRef(function InputFile({ ...props }, ref) {
   }, [fileError, files]);
 
   function fileUpload(event) {
-    const res = validateFileUpload(event.target.files[0]);
+    const enteredFile = event.target.files[0];
+    const res = validateFileUpload(enteredFile);
     setFileObj((preval) => {
-      const file = event.target.files[0];
+      const file = enteredFile;
+      console.log("nextFile", file);
       return [...preval, file];
     });
     if (res != null) {
-      const str = `ERROR: FileName "${event.target.files[0].name}" - ${res}`;
+      const str = `ERROR: FileName "${enteredFile.name}" - ${res}`;
       const obj = {
-        file: event.target.files[0].name,
+        file: enteredFile.name,
         error: str,
       };
       dispatch(vaultActions.setFileError(obj));
     }
+    console.log("File", event.target.files[0]);
     const file = {
-      name: event.target.files[0].name,
-      size: event.target.files[0].size,
-      type: event.target.files[0].type,
+      name: enteredFile.name,
+      size: enteredFile.size,
+      type: enteredFile.type,
     };
-    const preview = URL.createObjectURL(event.target.files[0]);
+    const preview = URL.createObjectURL(enteredFile);
     dispatch(vaultActions.pushFile(file));
     dispatch(vaultActions.pushPreview(preview));
+    event.target.value = "";
   }
 
   function removeFileObj(ind) {

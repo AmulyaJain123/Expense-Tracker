@@ -31,6 +31,7 @@ const BillDetails = forwardRef(function BillDetails({ ...prop }, ref) {
       getData() {
         const billName = name.trim();
         const billDate = new Date(billdate);
+        billDate.setHours(0, 0, 0, 0);
         let billDesc = billDescRef.current.value.trim();
         if (billDesc === "") {
           billDesc = "None";

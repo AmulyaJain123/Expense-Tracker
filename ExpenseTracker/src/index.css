@@ -167,3 +167,9 @@ tr {
 input[type="file"] {
   display: none;
 }
+.imgPlaceholder {
+  background-image: url("./assets/loading-circle.gif");
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-position: center;
+}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import noImg from "../../assets/noImg.jpg";
+import loadingIcon from "../../assets/loading-circle.gif";
 
 const Button = styled.button`
   background-color: ${(props) =>
@@ -17,15 +18,22 @@ const Button = styled.button`
 export default function FileView({ data }) {
   console.log(data[0]);
   const [currUrl, setcurrUrl] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   function clickThumb(url) {
     setcurrUrl(url);
+    setLoading(true);
   }
 
   function errorDeal(event) {
     console.log(event, event.target);
     console.dir(event.target);
     event.target.src = noImg;
+  }
+
+  function loadComplete() {
+    setLoading(false);
+    console.log("completed");
   }
 
   return (
@@ -46,6 +54,7 @@ export default function FileView({ data }) {
           return (
             <Button
               key={image}
+              disabled={image === currUrl}
               $status={image === currUrl ? "true" : "false"}
               onClick={() => clickThumb(image)}
               className="p-1 px-2 rounded-md duration-500"
@@ -53,27 +62,29 @@ export default function FileView({ data }) {
           );
         })}
       </div>
-      <div className="flex justify-center">
-        {currUrl != null ? (
+      <div className="flex h-[100px] justify-center">
+        {currUrl != null && loading === false ? (
           <a
-            className="text-lg p-1 mt-[30px] hover:scale-110 hover:shadow-xl mx-auto px-2 m-4 rounded-lg bg-black text-white duration-500 hover:bg-white hover:text-black border-2 border-black"
+            className="text-lg p-1 h-fit mt-[30px] hover:scale-110 hover:shadow-xl mx-auto px-2 m-4 rounded-lg bg-black text-white duration-500 hover:bg-white hover:text-black border-2 border-black"
             href={currUrl}
             target="_blank"
           >
             Download
           </a>
         ) : null}
+        {loading === true ? (
+          <img src={loadingIcon} className="w-auto mt-[30px] h-[50px]" alt="" />
+        ) : null}
       </div>
       <div className="mt-[10px] h-[700px] overflow-auto px-10 mx-2 customScroll">
         {currUrl != null ? (
-          <>
-            <img
-              src={currUrl}
-              className="mx-auto"
-              alt="Image"
-              onError={(event) => errorDeal(event)}
-            />
-          </>
+          <img
+            src={currUrl}
+            className="mx-auto billImg"
+            onLoad={loadComplete}
+            alt="Image"
+            onError={(event) => errorDeal(event)}
+          />
         ) : (
           <p className="mt-[20px]  text-center">No Image Selected</p>
         )}

@@ -213,6 +213,7 @@ export default function FirebaseProvider({ children }) {
       let enteredExpireDate = null;
       if (data.expireDate != null) {
         enteredExpireDate = new Date(data.expireDate);
+        enteredExpireDate.setHours(0, 0, 0, 0);
       }
       const enteredExpireDuration = data.expireDuration;
       const warrantyAdded = data.warrantyAdded;
@@ -247,6 +248,7 @@ export default function FirebaseProvider({ children }) {
       };
       console.log(obj);
       const result = await addDoc(collRef, obj);
+      console.log("hellllo");
       return new Response(
         JSON.stringify({ message: "Data Appended Successfully" }),
         { status: 200 }
