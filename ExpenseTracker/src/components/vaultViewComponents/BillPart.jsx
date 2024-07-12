@@ -3,7 +3,10 @@ import { formatDate } from "../../util/algo";
 export default function BillPart({ data }) {
   function dateDiff() {
     let today = new Date();
-    let diff = Math.ceil((data.expiryDate - today) / (36e5 * 24));
+    today.setHours(0, 0, 0, 0);
+    console.log(data.expiryDate, today);
+    console.log((data.expiryDate - today) / (36e5 * 24));
+    let diff = Math.round((data.expiryDate - today) / (36e5 * 24));
     console.log(diff);
     if (diff === 1) {
       return "Expiring Today";
@@ -11,7 +14,8 @@ export default function BillPart({ data }) {
     let years = 0;
     let months = 0;
     let days = 0;
-    const daysInMonths = [31, 28, 31, 30, 31, 30, 31, 30, 31, 30, 31, 30];
+    const daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    console.log(today);
     while (diff != 0) {
       console.log(today, diff);
       const todayY = today.getFullYear();
@@ -34,6 +38,7 @@ export default function BillPart({ data }) {
         daysInMonths[1] = 29;
       }
       month = daysInMonths[todayM - 1];
+      console.log(month);
       if (diff >= year) {
         ++years;
         diff -= year;
@@ -126,7 +131,8 @@ export default function BillPart({ data }) {
               Expiration Date
             </div>
             <div className="p-2 px-4 text-lg text-center text-stone-500 rounded-md mx-4 mt-2 bg-slate-100">
-              {formatDate(data.expiryDate)}
+              <span className="mr-4">{`${formatDate(data.expiryDate)}`}</span>
+              <span>11:59:59 PM</span>
             </div>
           </div>
         ) : null}

@@ -44,7 +44,7 @@ export default function BillCreate() {
     }
     while (months != 0) {
       let month = 30;
-      const daysInMonths = [31, 28, 31, 30, 31, 30, 31, 30, 31, 30, 31, 30];
+      const daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
       let currY = currDate.getFullYear();
       let currM = currDate.getMonth();
       if ((currY % 100 != 0 && currY % 4 === 0) || currY % 400 === 0) {
@@ -59,7 +59,7 @@ export default function BillCreate() {
     const res = currDate.setDate(currDate.getDate() + days);
     currDate = new Date(res);
     console.log(currDate);
-    currDate.setHours(0, 0, 0, 0);
+    currDate.setHours(23, 59, 59, 0);
     return currDate;
   }
 

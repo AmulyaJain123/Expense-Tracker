@@ -95,7 +95,7 @@ const BillDetails = forwardRef(function BillDetails({ ...prop }, ref) {
 
   function billNameChange(event) {
     setName(event.target.value);
-    if (event.target.value === "") {
+    if (event.target.value.trim() === "") {
       setNameError("Bill Name cannot be empty.");
     } else {
       setNameError(null);
@@ -196,6 +196,7 @@ const BillDetails = forwardRef(function BillDetails({ ...prop }, ref) {
           <input
             type="text"
             placeholder="Bill Name"
+            maxLength={"40"}
             ref={billNameRef}
             value={name}
             onChange={(event) => billNameChange(event)}

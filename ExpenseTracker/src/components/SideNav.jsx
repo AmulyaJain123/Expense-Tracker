@@ -1,6 +1,7 @@
 import { styling } from "../util/styling";
 import styled from "styled-components";
 import PageTile from "./PageTile";
+import { Link } from "react-router-dom";
 
 const Main = styled.div`
   height: calc(100vh - ${styling.spacing * 2}px);
@@ -26,23 +27,31 @@ const pages = [
     iconClassBold: "fi fi-ss-home",
   },
   {
-    name: "BillSplit",
-    path: "split",
-    iconClass: "fi fi-rs-hexagon-divide",
-    iconClassBold: "fi fi-ss-hexagon-divide",
-  },
-  {
     name: "BillVault",
     path: "vault",
     iconClass: "fi fi-rs-vault",
     iconClassBold: "fi fi-ss-vault",
+  },
+  {
+    name: "BillSub",
+    path: "sub",
+    iconClass: "fi fi-rr-calculator-bill",
+    iconClassBold: "fi fi-ss-calculator-bill",
+  },
+  {
+    name: "BillSplit",
+    path: "split",
+    iconClass: "fi fi-rs-hexagon-divide",
+    iconClassBold: "fi fi-ss-hexagon-divide",
   },
 ];
 
 export default function SideNav() {
   return (
     <Main className="w-72 rounded-r-xl">
-      <Logo>BILLBUD</Logo>
+      <Logo>
+        <Link to={""}>BILLBUD</Link>
+      </Logo>
       <Tiles>
         {pages.map((page) => {
           return <PageTile key={page.name} details={{ ...page }} />;

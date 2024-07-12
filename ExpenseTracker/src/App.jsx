@@ -12,6 +12,7 @@ import ErrorPage from "./pages/ErrorPage";
 import VaultBillView from "./pages/VaultBillView";
 import BillNotFound from "./pages/BillNotFound";
 import PageNotFound from "./pages/PageNotFound";
+import SubHome from "./pages/SubHome";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,15 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <HomePage />,
+      },
+      {
+        path: "sub",
+        children: [
+          {
+            path: "",
+            element: <SubHome />,
+          },
+        ],
       },
       {
         path: "split",
