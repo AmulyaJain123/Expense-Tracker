@@ -9,7 +9,8 @@ import { useFirebase } from "../../store/firebase-context";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { vaultActions } from "../../store/main";
-
+import { universalActions } from "../../store/main";
+import Loading from "../Loading";
 export default function BillCreate() {
   const detailRef = useRef();
   const inputRef = useRef();
@@ -100,11 +101,11 @@ export default function BillCreate() {
     const response = await firebase.addBill(data);
     setLoading(null);
     if (response.ok) {
-      alert("Bill Saved Successfully!!");
+      dispatch(universalActions.setToastMsg({msg:"Bill Saved Successfully!!",mood:"success"}));
       dispatch(vaultActions.clearAll());
       navigate("/vault");
     } else {
-      alert("ERROR: Save Unsuccessful : (");
+      dispatch(universalActions.setToastMsg({msg:"ERROR: Save Unsuccessful :(",mood:"error"}));
     }
   }
 
@@ -114,9 +115,9 @@ export default function BillCreate() {
         <BillDetails ref={detailRef} />
         <InputFile ref={inputRef} />
       </div>
-      {/* {loading != null ? (
-        <div className="absolute top-0 left-0 z-50 w-[100vw] h-[100vh] bg-black opacity-40"></div>
-      ) : null} */}
+      {loading!=null ? (
+        <Loading text={"Loading"} />
+      ) : null}
 
       <div className="flex justify-between mx-16 mt-6 pr-8 mb-6">
         <DiscardBillButton>Discard</DiscardBillButton>

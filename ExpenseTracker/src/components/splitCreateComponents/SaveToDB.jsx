@@ -6,6 +6,8 @@ import { splitCreateActions } from "../../store/main";
 import { formatVal } from "../../util/algo";
 import { useFirebase } from "../../store/firebase-context";
 import { useState } from "react";
+import { universalActions } from "../../store/main";
+import Loading from "../Loading";
 
 export default function SaveToDB({ res }) {
   const firebase = useFirebase();
@@ -80,16 +82,27 @@ export default function SaveToDB({ res }) {
     const reply = await firebase.addSplit(obj);
     setSaving(false);
     // console.log(reply);
-    if (reply.status === 200) {
+    if (reply.ok) {
       dispatch(splitCreateActions.clearAll());
-      alert("Split Saved Successfully!!");
+      dispatch(
+        universalActions.setToastMsg({
+          msg: "Split Saved Successfully!!",
+          mood: "success",
+        })
+      );
       navigate("/split");
     } else {
-      alert("ERROR: Save Unsuccessfull : (");
+      dispatch(
+        universalActions.setToastMsg({
+          msg: "ERROR: Save Unsuccessfull :(",
+          mood: "error",
+        })
+      );
     }
   }
   return (
     <>
+      {saving ? <Loading text={"Saving"} /> : null}
       {saving ? (
         <p className="p-3 text-lg font-medium mt-[50px]">Saving...</p>
       ) : (

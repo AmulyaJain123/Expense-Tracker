@@ -33,8 +33,8 @@ const pages = [
     iconClassBold: "fi fi-ss-vault",
   },
   {
-    name: "BillSub",
-    path: "sub",
+    name: "BillTrack",
+    path: "track",
     iconClass: "fi fi-rr-calculator-bill",
     iconClassBold: "fi fi-ss-calculator-bill",
   },

@@ -9,12 +9,15 @@ import { useNavigate } from "react-router-dom";
 import { useState, useRef } from "react";
 import MinimizedBillIcon from "../components/vaultViewComponents/MinimizedBillIcon";
 import { formatDate } from "../util/algo";
+import { useDispatch } from "react-redux";
+import { universalActions } from "../store/main";
 
 export default function VaultBillView() {
   const data = useLoaderData();
   const firebase = useFirebase();
   const navigate = useNavigate();
   const [deleting, setDeleting] = useState(false);
+  const dispatch = useDispatch();
   const confirmRef = useRef();
   console.log(data);
 
@@ -28,10 +31,10 @@ export default function VaultBillView() {
     confirmRef.current.close();
     setDeleting(false);
     if (res.ok) {
-      alert("Bill Deleted Successfully!!");
+      dispatch(universalActions.setToastMsg({msg:"Bill Deleted Successfully!!",mood:"success"}));
       navigate("/vault/view");
     } else {
-      alert("Full Delete Unsuccessful : (");
+      dispatch(universalActions.setToastMsg({msg:"Full Delete Unsuccessful :(",mood:"error"}));
     }
   }
 

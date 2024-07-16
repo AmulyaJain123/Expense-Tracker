@@ -2,6 +2,8 @@ import { useRef, useState } from "react";
 import SplitViewModal from "./SplitViewModal";
 import { useFirebase } from "../../store/firebase-context";
 import MinimizedSplit from "./MinimizedSplit";
+import { useDispatch } from "react-redux";
+import { universalActions } from "../../store/main";
 
 export default function SplitBox({ data, setSplitState }) {
   const {
@@ -18,6 +20,7 @@ export default function SplitBox({ data, setSplitState }) {
   const confirmRef = useRef();
   const [deleting, setDeleting] = useState(false);
   const firebase = useFirebase();
+  const dispatch=useDispatch();
 
   function clickHandle() {
     modalRef.current.open();
@@ -36,9 +39,12 @@ export default function SplitBox({ data, setSplitState }) {
     const reply = await firebase.deleteSplit(docId);
     setDeleting(false);
     if (reply.status === 200) {
-      alert("Split Deleted Succesfully!!");
+      // alert("");
+      dispatch(universalActions.setToastMsg({msg:"Split Deleted Succesfully!!",mood:"success"}));
+      
     } else {
-      alert("ERROR: Delete Unsuccessful : (");
+      // alert("");
+      dispatch(universalActions.setToastMsg({msg:"ERROR: Delete Unsuccessful :(",mood:"error"}));
       confirmRef.current.close();
       return;
     }

@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./pages/Root";
 import HomePage from "./pages/HomePage";
-import SplitPage from "./pages/SplitPage";
+import SplitPage from "./pages/TrackPage";
 import SplitCreate from "./pages/SplitCreate";
 import SplitHome from "./pages/SplitHome";
 import VaultHome from "./pages/VaultHome";
@@ -12,7 +12,7 @@ import ErrorPage from "./pages/ErrorPage";
 import VaultBillView from "./pages/VaultBillView";
 import BillNotFound from "./pages/BillNotFound";
 import PageNotFound from "./pages/PageNotFound";
-import SubHome from "./pages/SubHome";
+import TrackHome from "./pages/TrackHome";
 
 const router = createBrowserRouter([
   {
@@ -25,11 +25,11 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "sub",
+        path: "track",
         children: [
           {
             path: "",
-            element: <SubHome />,
+            element: <TrackHome />,
           },
         ],
       },
