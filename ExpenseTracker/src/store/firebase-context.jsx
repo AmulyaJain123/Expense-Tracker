@@ -97,7 +97,8 @@ export async function billViewLoader({ request }) {
 
 export async function vaultViewLoader({ request, params }) {
   const url = new URL(request.url);
-  if (url.href === "http://localhost:5173/vault/view") {
+  console.log(url)
+  if (url.pathname === "/vault/view" && url.search==="") {
     return redirect("/vault/view?sortBy=createdOn");
   }
   let sortField = url.searchParams.get("sortBy");
