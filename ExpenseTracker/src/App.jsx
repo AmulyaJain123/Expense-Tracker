@@ -13,6 +13,8 @@ import VaultBillView from "./pages/VaultBillView";
 import BillNotFound from "./pages/BillNotFound";
 import PageNotFound from "./pages/PageNotFound";
 import TrackHome from "./pages/TrackHome";
+import DashBoard from "./pages/DashBoard";
+import TransactionCreate from "./pages/TransactionCreate";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +32,14 @@ const router = createBrowserRouter([
           {
             path: "",
             element: <TrackHome />,
+          },
+          {
+            path: "dashboard",
+            element: <DashBoard />,
+          },
+          {
+            path: "create",
+            element: <TransactionCreate />,
           },
         ],
       },

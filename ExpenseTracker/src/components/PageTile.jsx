@@ -1,6 +1,6 @@
 import { styling } from "../util/styling";
 import styled from "styled-components";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, Link } from "react-router-dom";
 
 const Main = styled.div`
   background-color: ${styling.navColor};
@@ -33,7 +33,7 @@ export default function PageTile({ details }) {
   const active = setActive(location, name, path);
 
   return (
-    <>
+    <div className="">
       <NavLink
         to={path}
         className={({ isActive }) => {
@@ -49,6 +49,6 @@ export default function PageTile({ details }) {
           <span>{name}</span>
         </Main>
       </NavLink>
-    </>
+    </div>
   );
 }

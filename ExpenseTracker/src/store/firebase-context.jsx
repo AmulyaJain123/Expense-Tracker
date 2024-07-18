@@ -51,6 +51,7 @@ const FirebaseContext = createContext({
   deleteSplit: () => {},
   addBill: () => {},
   deleteBill: () => {},
+  addTransaction: () => {},
 });
 
 export const useFirebase = () => useContext(FirebaseContext);
@@ -97,8 +98,8 @@ export async function billViewLoader({ request }) {
 
 export async function vaultViewLoader({ request, params }) {
   const url = new URL(request.url);
-  console.log(url)
-  if (url.pathname === "/vault/view" && url.search==="") {
+  console.log(url);
+  if (url.pathname === "/vault/view" && url.search === "") {
     return redirect("/vault/view?sortBy=createdOn");
   }
   let sortField = url.searchParams.get("sortBy");
@@ -170,7 +171,15 @@ export default function FirebaseProvider({ children }) {
   async function addSplit(data) {
     try {
       const collRef = collection(firestore, "splits");
-      const res = await addDoc(collRef, data);
+
+      const timeoutPromise = new Promise((_, reject) => {
+        setTimeout(() => {
+          reject(new Error("Operation timed out"));
+        }, 20000);
+      });
+
+      const res = await Promise.race([addDoc(collRef, data), timeoutPromise]);
+
       return new Response(
         JSON.stringify({ message: "Data Appended Successfully" }),
         { status: 200 }
@@ -187,7 +196,18 @@ export default function FirebaseProvider({ children }) {
   async function deleteSplit(id) {
     try {
       console.log(id);
-      const res = await deleteDoc(doc(firestore, "splits", id));
+
+      const timeoutPromise = new Promise((_, reject) => {
+        setTimeout(() => {
+          reject(new Error("Operation timed out"));
+        }, 20000);
+      });
+
+      const res = await Promise.race([
+        deleteDoc(doc(firestore, "splits", id)),
+        timeoutPromise,
+      ]);
+
       return new Response(
         JSON.stringify({ message: "Data Deleted Successfully" }),
         { status: 200 }
@@ -289,12 +309,37 @@ export default function FirebaseProvider({ children }) {
     }
   }
 
+  async function addTransaction(data) {
+    try {
+      const collRef = collection(firestore, "transactions");
+
+      const timeoutPromise = new Promise((_, reject) => {
+        setTimeout(() => {
+          reject(new Error("Operation timed out"));
+        }, 20000);
+      });
+
+      const res = await Promise.race([addDoc(collRef, data), timeoutPromise]);
+      return new Response(
+        JSON.stringify({ message: "Data Appended Successfully" }),
+        { status: 200 }
+      );
+    } catch (err) {
+      console.log(err);
+      return new Response(
+        JSON.stringify({ message: "Could not Append Data." }),
+        { status: 403 }
+      );
+    }
+  }
+
   const initialContext = {
     getRangeOfSplits,
     addSplit,
     deleteSplit,
     addBill,
     deleteBill,
+    addTransaction,
   };
 
   return (
