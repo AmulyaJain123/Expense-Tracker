@@ -52,6 +52,7 @@ const FirebaseContext = createContext({
   addBill: () => {},
   deleteBill: () => {},
   addTransaction: () => {},
+  fetchTransactionsForDashboard: () => {},
 });
 
 export const useFirebase = () => useContext(FirebaseContext);
@@ -122,6 +123,20 @@ export async function vaultViewLoader({ request, params }) {
     });
   }
   return res;
+}
+
+export async function transactionsLoader({ request }) {
+  const collRef = collection(firestore, "transactions");
+  const q = query(collRef, orderBy("dateTime", "desc"));
+  const documents = await getDocs(q);
+  if (documents.metadata.fromCache) {
+    throw new Response(JSON.stringify({ message: "Could Not Reach Server" }), {
+      status: 500,
+    });
+  }
+  const arr = [];
+  documents.docs.forEach((i) => arr.push(i.data()));
+  return arr;
 }
 
 export default function FirebaseProvider({ children }) {
@@ -333,6 +348,58 @@ export default function FirebaseProvider({ children }) {
     }
   }
 
+  async function fetchTransactionsForDashboard(time) {
+    try {
+      const collRef = collection(firestore, "transactions");
+      let q = query(collRef, orderBy("dateTime", "desc"));
+      let res = await getDocs(q);
+      console.log(res);
+      if (res.metadata.fromCache) {
+        throw "error";
+      }
+      let arr = [];
+      res.docs.forEach((i) => arr.push(i.data()));
+      console.log(arr);
+      const ans = [];
+      const currDate = new Date().getDate();
+      const currMonth = new Date().getMonth() + 1;
+      const currYear = new Date().getFullYear();
+      for (let i of arr) {
+        const date = i.dateTime.toDate();
+        date.setHours(0, 0, 0, 0);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const diff = Math.round((today - date) / 864e5);
+        if (
+          time === 1 &&
+          date.getFullYear() === currYear &&
+          date.getMonth() + 1 === currMonth &&
+          date.getDate() === currDate
+        ) {
+          ans.push(i);
+        } else if (time === 7 && diff < 7) {
+          ans.push(i);
+        } else if (time === 30 && diff < 30) {
+          ans.push(i);
+        } else {
+          break;
+        }
+      }
+      console.log(ans);
+      return ans;
+    } catch (err) {
+      console.log(err);
+      return "error";
+      // const res = new Response(
+      //   JSON.stringify({ message: "Could not fetch data." }),
+      //   {
+      //     status: 500,
+      //   }
+      // );
+      // return res;
+    }
+  }
+
   const initialContext = {
     getRangeOfSplits,
     addSplit,
@@ -340,6 +407,7 @@ export default function FirebaseProvider({ children }) {
     addBill,
     deleteBill,
     addTransaction,
+    fetchTransactionsForDashboard,
   };
 
   return (

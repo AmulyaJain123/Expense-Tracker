@@ -7,6 +7,7 @@ export default function TopNav() {
   const location = useLocation();
   const isOnCreateSplit = location.pathname === "/split/create";
   const isOnCreateBill = location.pathname === "/vault/create";
+  const isOnCreateTransaction = location.pathname === "/track/create";
 
   return (
     <div
@@ -33,6 +34,19 @@ export default function TopNav() {
             className="p-1 rounded-lg px-2 flex items-center"
           >
             Bill Upload
+          </div>
+        </div>
+      ) : null}
+      {isOnCreateTransaction ? (
+        <div className="p-1">
+          <div
+            style={{
+              backgroundColor: styling.topNavThumbsBgCol,
+              border: `2px solid ${styling.topNavThumbsBgCol}`,
+            }}
+            className="p-1 rounded-lg px-2 flex items-center"
+          >
+            Transaction Creation
           </div>
         </div>
       ) : null}

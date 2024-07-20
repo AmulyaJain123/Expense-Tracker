@@ -7,7 +7,11 @@ import SplitHome from "./pages/SplitHome";
 import VaultHome from "./pages/VaultHome";
 import VaultCreate from "./pages/VaultCreate";
 import VaultView from "./pages/VaultView";
-import { vaultViewLoader, billViewLoader } from "./store/firebase-context";
+import {
+  vaultViewLoader,
+  billViewLoader,
+  transactionsLoader,
+} from "./store/firebase-context";
 import ErrorPage from "./pages/ErrorPage";
 import VaultBillView from "./pages/VaultBillView";
 import BillNotFound from "./pages/BillNotFound";
@@ -15,6 +19,7 @@ import PageNotFound from "./pages/PageNotFound";
 import TrackHome from "./pages/TrackHome";
 import DashBoard from "./pages/DashBoard";
 import TransactionCreate from "./pages/TransactionCreate";
+import TransactionPage from "./pages/TransactionPage";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +45,11 @@ const router = createBrowserRouter([
           {
             path: "create",
             element: <TransactionCreate />,
+          },
+          {
+            path: "transactions",
+            element: <TransactionPage />,
+            loader: transactionsLoader,
           },
         ],
       },

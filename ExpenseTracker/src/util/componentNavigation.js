@@ -99,7 +99,7 @@ export const outgoingTransactionCategories = [
                 icon: giftsAndDonations
             },
             {
-                name: "Misc",
+                name: "Misc-Out",
                 icon: misc
             },
         ],
@@ -153,7 +153,7 @@ export const incomingTransactionCategories = [
                 icon: giftsAndDonations
             },
             {
-                name: "Misc",
+                name: "Misc-In",
                 icon: misc
             }
         ],

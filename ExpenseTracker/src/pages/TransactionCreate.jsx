@@ -11,7 +11,7 @@ export default function TransactionCreate() {
   }
 
   return (
-    <div className="h-full w-full whiteScr overflow-auto pb-[200px] text-stone-700 rounded-l-xl">
+    <div className="h-full w-full whiteScr overflow-auto px-16 pt-8 pb-[200px] text-stone-700 rounded-l-xl">
       <div className="flex justify-between bg-white rounded-xl m-4 items-center flex-grow p-3">
         <div className="text-3xl font-bold ml-8">
           <span>Create</span>{" "}
