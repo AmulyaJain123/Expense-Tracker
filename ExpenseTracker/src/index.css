@@ -57,6 +57,20 @@ tr {
   border-radius: 30px;
 }
 
+.customScrollThin::-webkit-scrollbar {
+  width: 4px;
+  border-radius: 20px;
+}
+
+.customScrollThin::-webkit-scrollbar-track {
+  border-radius: 20px;
+}
+
+.customScrollThin:hover::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 20px;
+}
+
 .splitBox {
   background-image: url("./assets/bg-pattern-striped.jpg");
   background-repeat: repeat;
@@ -187,4 +201,9 @@ input[type="file"] {
 .isInRange {
   background-color: aquamarine;
   color: black;
+}
+
+.removeDropDown {
+  -moz-appearance: none;
+  -webkit-appearance: none;
 }

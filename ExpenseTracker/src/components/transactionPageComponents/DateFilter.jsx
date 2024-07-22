@@ -42,7 +42,25 @@ export default function DateFilter() {
     dispatch(transactionActions.clearDurations());
   }, []);
 
-  function applyClick() {}
+  function applyClick() {
+    const arr = durations.map((i, index) => {
+      const date1 = `${day[(new Date(i.first).getDay() + 6) % 7]} ${new Date(
+        i.first
+      ).getDate()}/${new Date(i.first).getMonth() + 1}/${new Date(
+        i.first
+      ).getFullYear()}`;
+      const date2 = `${day[(new Date(i.second).getDay() + 6) % 7]} ${new Date(
+        i.second
+      ).getDate()}/${new Date(i.second).getMonth() + 1}/${new Date(
+        i.second
+      ).getFullYear()}`;
+      return `${date1} - ${date2}`;
+    });
+    const obj = { name: filterParam, options: [...arr] };
+    console.log(obj);
+    dispatch(transactionActions.pushFilter(obj));
+    dispatch(transactionActions.closeOpen());
+  }
 
   function removeClick(ind) {
     dispatch(transactionActions.popDuration(ind));
@@ -64,26 +82,26 @@ export default function DateFilter() {
         </div>
 
         <div className="flex flex-col px-4 items-center flex-grow gap-y-2  h-[400px]">
-          <div className="text-xl w-full text-center font-semibold uppercase mb-12 pb-12 border-b-2 border-black">
+          <div className="text-xl w-full text-center font-semibold uppercase mb-12 pb-12 border-b-2 border-stone-400">
             Preview
           </div>
           {durations.length === 0 ? (
-            <p className="flex justify-center text-lg font-medium mt-12">
+            <p className="flex justify-center text-lg font-medium ">
               No Durations
             </p>
           ) : (
             <>
               {durations.map((i, index) => {
                 const date1 = `${
-                  day[(i.first.getDay() + 6) % 7]
-                } ${i.first.getDate()}/${
-                  i.first.getMonth() + 1
-                }/${i.first.getFullYear()}`;
+                  day[(new Date(i.first).getDay() + 6) % 7]
+                } ${new Date(i.first).getDate()}/${
+                  new Date(i.first).getMonth() + 1
+                }/${new Date(i.first).getFullYear()}`;
                 const date2 = `${
-                  day[(i.second.getDay() + 6) % 7]
-                } ${i.second.getDate()}/${
-                  i.second.getMonth() + 1
-                }/${i.second.getFullYear()}`;
+                  day[(new Date(i.second).getDay() + 6) % 7]
+                } ${new Date(i.second).getDate()}/${
+                  new Date(i.second).getMonth() + 1
+                }/${new Date(i.second).getFullYear()}`;
 
                 return (
                   <div

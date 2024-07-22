@@ -39,7 +39,20 @@ export default function TypeFilter() {
     setSelectedType(event.target.innerText);
   }
 
-  function applyClick() {}
+  function applyClick() {
+    let options = null;
+    if (selectedType === "Incoming") {
+      options = ["Incoming"];
+    } else if (selectedType === "Outgoing") {
+      options = ["Outgoing"];
+    } else {
+      options = ["Incoming", "Outgoing"];
+    }
+    const obj = { name: filterParam, options: options };
+    console.log(obj);
+    dispatch(transactionActions.pushFilter(obj));
+    dispatch(transactionActions.closeOpen());
+  }
 
   return (
     <div className="flex relative flex-col flex-grow bg-[#fefae0] mr-4 rounded-r-xl p-4 px-16">

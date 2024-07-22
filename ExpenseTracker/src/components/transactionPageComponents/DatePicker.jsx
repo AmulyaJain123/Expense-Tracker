@@ -87,14 +87,15 @@ const Pin = styled.button`
       : props.$status === 1
       ? "2px dashed #78716c"
       : "2px solid #2dc753"};
-  font-size: 1rem; /* text-xl */
+  font-size: ${(props) =>
+    props.$status === 0 ? "1.25rem" : props.$status === 1 ? "1rem" : "1rem"};
   font-weight: 600; /* font-semibold */
   justify-content: center; /* justify-center */
   padding-top: 0.5rem; /* py-2 */
   padding-left: 10px;
   padding-right: 10px;
   padding-bottom: 0.5rem; /* py-2 */
-  transition: all 500ms;
+  transition: border 500ms, color 500ms, background-color 500ms, transform 500ms;
 
   &:hover {
     transform: ${(props) =>
@@ -280,7 +281,9 @@ export default function DatePicker() {
   function submitClick() {
     const first = date1 < date2 ? date1 : date2;
     const second = date1 < date2 ? date2 : date1;
-    dispatch(transactionActions.pushDuration({ first, second }));
+    const f = first.toString();
+    const s = second.toString();
+    dispatch(transactionActions.pushDuration({ first: f, second: s }));
     setPin1(0);
     setPin2(0);
     setDate1(null);
@@ -289,7 +292,7 @@ export default function DatePicker() {
 
   return (
     <>
-      <div className="p-8 rounded-xl scale-90  bg-white">
+      <div className="p-8 rounded-xl scale-90  bg-[white] shadow-lg">
         <header className="flex space-x-2">
           <div className="flex space-x-3">
             <button
@@ -339,79 +342,84 @@ export default function DatePicker() {
           </header>
 
           <div className="flex flex-col gap-y-3 mt-2">
-            {calander.map((i) => {
-              return (
-                <header className="flex flex-grow items-center gap-x-1 justify-between">
-                  {i.map((j) => {
-                    let endpoint1 = false;
-                    let isInRange = false;
-                    if (date1 && date2) {
-                      const thumbDate = new Date();
-                      thumbDate.setMonth(currMonth - 1);
-                      thumbDate.setFullYear(currYear);
-                      thumbDate.setDate(j);
-                      thumbDate.setHours(0, 0, 0, 0);
-                      console.log(thumbDate, date1, date2);
-                      if (
-                        thumbDate.getTime() == date1.getTime() ||
-                        thumbDate.getTime() == date2.getTime() ||
-                        (thumbDate > date1 && thumbDate < date2) ||
-                        (thumbDate < date1 && thumbDate > date2)
-                      ) {
-                        isInRange = true;
-                      }
-                    }
-                    if (date1 != null) {
-                      endpoint1 =
-                        currYear === date1.getFullYear() &&
-                        currMonth === date1.getMonth() + 1 &&
-                        j === date1.getDate();
-                    }
-                    let endpoint2 = false;
-                    if (date2 != null) {
-                      endpoint2 =
-                        currYear === date2.getFullYear() &&
-                        currMonth === date2.getMonth() + 1 &&
-                        j === date2.getDate();
-                    }
-                    let str =
-                      currYear === todayY &&
-                      currMonth === todayM &&
-                      j === currDate
-                        ? "presentDay"
-                        : "";
-                    if (isInRange) {
-                      str += " isInRange";
-                    }
-                    console.log(str);
-                    return (
-                      <>
-                        {j != null ? (
-                          <Thumb
-                            onClick={() => dateClick(j)}
-                            key={j}
-                            className={str}
-                          >
-                            <span>{j}</span>
-                            {date1 != null && endpoint1 ? (
-                              <i className="fi fi-sr-circle-1 flex justify-center items-center text-lg absolute top-[-5px] left-[-5px]"></i>
-                            ) : null}
-                            {date2 != null && endpoint2 ? (
-                              <i className="fi fi-sr-circle-2 flex justify-center items-center text-lg absolute top-[-5px] right-[-5px]"></i>
-                            ) : null}
-                          </Thumb>
-                        ) : (
-                          <div
-                            key={j}
-                            className="aspect-square w-[35px]  font-medium flex items-center justify-center"
-                          ></div>
-                        )}
-                      </>
-                    );
-                  })}
-                </header>
-              );
-            })}
+            {calander.length != 0
+              ? calander.map((i) => {
+                  return (
+                    <header
+                      key={Math.random()}
+                      className="flex flex-grow items-center gap-x-1 justify-between"
+                    >
+                      {i.map((j) => {
+                        let endpoint1 = false;
+                        let isInRange = false;
+                        if (date1 && date2) {
+                          const thumbDate = new Date();
+                          thumbDate.setMonth(currMonth - 1);
+                          thumbDate.setFullYear(currYear);
+                          thumbDate.setDate(j);
+                          thumbDate.setHours(0, 0, 0, 0);
+                          console.log(thumbDate, date1, date2);
+                          if (
+                            thumbDate.getTime() == date1.getTime() ||
+                            thumbDate.getTime() == date2.getTime() ||
+                            (thumbDate > date1 && thumbDate < date2) ||
+                            (thumbDate < date1 && thumbDate > date2)
+                          ) {
+                            isInRange = true;
+                          }
+                        }
+                        if (date1 != null) {
+                          endpoint1 =
+                            currYear === date1.getFullYear() &&
+                            currMonth === date1.getMonth() + 1 &&
+                            j === date1.getDate();
+                        }
+                        let endpoint2 = false;
+                        if (date2 != null) {
+                          endpoint2 =
+                            currYear === date2.getFullYear() &&
+                            currMonth === date2.getMonth() + 1 &&
+                            j === date2.getDate();
+                        }
+                        let str =
+                          currYear === todayY &&
+                          currMonth === todayM &&
+                          j === currDate
+                            ? "presentDay"
+                            : "";
+                        if (isInRange) {
+                          str += " isInRange";
+                        }
+                        console.log(str);
+                        return (
+                          <div key={Math.random()}>
+                            {j != null ? (
+                              <Thumb
+                                onClick={() => dateClick(j)}
+                                key={Math.random()}
+                                className={str}
+                              >
+                                <span>{j}</span>
+                                {date1 != null && endpoint1 ? (
+                                  <i className="fi fi-sr-circle-1 flex justify-center items-center text-lg absolute top-[-5px] left-[-5px]"></i>
+                                ) : null}
+                                {date2 != null && endpoint2 ? (
+                                  <i className="fi fi-sr-circle-2 flex justify-center items-center text-lg absolute top-[-5px] right-[-5px]"></i>
+                                ) : null}
+                              </Thumb>
+                            ) : (
+                              <div
+                                key={Math.random()}
+                                className="aspect-square w-[35px]  font-medium flex items-center justify-center"
+                              ></div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </header>
+                  );
+                })
+              : null}
           </div>
         </main>
 

@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { transactionActions } from "../../store/main";
 import { useSelector } from "react-redux";
-import { formatVal } from "../../util/algo";
 
 const Button = styled.button`
   position: absolute;
@@ -31,6 +30,12 @@ const Button = styled.button`
   }
 `;
 
+function formatVal(num) {
+  const val = parseFloat(num);
+  const ans = val + " ₹";
+  return ans;
+}
+
 export default function AmountFilter() {
   const dispatch = useDispatch();
   const filterParam = useSelector((state) => state.transactions.filterParam);
@@ -40,12 +45,18 @@ export default function AmountFilter() {
   const [amountError, setAmountError] = useState(null);
   const [constraints, setConstraints] = useState([]);
 
-  function applyClick() {}
+  function applyClick() {
+    const obj = { name: filterParam, options: [...constraints] };
+    console.log(obj);
+    dispatch(transactionActions.pushFilter(obj));
+    dispatch(transactionActions.closeOpen());
+  }
 
   function addClick() {
     const num = parseFloat(inputRef.current.value);
     const constraint = selectRef.current.value;
     console.log(num, constraint);
+    inputRef.current.value = "";
     if (num && num > 0) {
       setConstraints((preval) => {
         const str = `${constraint} ${formatVal(num)}`;

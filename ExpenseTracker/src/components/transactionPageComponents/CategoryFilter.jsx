@@ -49,7 +49,15 @@ export default function CategoryFilter() {
   const filterParam = useSelector((state) => state.transactions.filterParam);
   const [names, setNames] = useState([]);
 
-  function applyClick() {}
+  function applyClick() {
+    const arr = names.filter((i) => {
+      return i.trim() != "" ? true : false;
+    });
+    const obj = { name: filterParam, options: [...arr] };
+    console.log(obj);
+    dispatch(transactionActions.pushFilter(obj));
+    dispatch(transactionActions.closeOpen());
+  }
 
   function check(name) {
     const res = names.find((i) => i === name);
@@ -90,6 +98,7 @@ export default function CategoryFilter() {
           return i.subCategories.map((j) => {
             return (
               <Option
+                key={j.name}
                 $status={check(j.name) ? "true" : "false"}
                 onClick={(event) => clickHandle(event)}
                 className="p-1 px-2 text-sm duration-500 flex space-x-3 items-center rounded-lg bg-white border-2 border-stone-400 "
@@ -107,6 +116,7 @@ export default function CategoryFilter() {
           return i.subCategories.map((j) => {
             return (
               <Option
+                key={j.name}
                 $status={check(j.name) ? "true" : "false"}
                 onClick={(event) => clickHandle(event)}
                 className="p-1 px-2 text-sm duration-500 flex space-x-3 items-center rounded-lg bg-white border-2 border-stone-400 "

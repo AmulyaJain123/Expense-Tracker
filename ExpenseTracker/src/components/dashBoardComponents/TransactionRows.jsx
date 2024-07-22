@@ -23,6 +23,7 @@ export default function TransactionRows({ data }) {
   const date = `${formatNum(dateTime.toDate().getDate())}/${formatNum(
     dateTime.toDate().getMonth() + 1
   )}/${dateTime.toDate().getFullYear()}`;
+
   const time = `${formatNum(dateTime.toDate().getHours())}:${formatNum(
     dateTime.toDate().getMinutes()
   )}`;

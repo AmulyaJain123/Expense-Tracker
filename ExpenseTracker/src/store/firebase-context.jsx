@@ -136,6 +136,9 @@ export async function transactionsLoader({ request }) {
   }
   const arr = [];
   documents.docs.forEach((i) => arr.push(i.data()));
+  for (let i of arr) {
+    i.dateTime = i.dateTime.toDate().toString();
+  }
   return arr;
 }
 

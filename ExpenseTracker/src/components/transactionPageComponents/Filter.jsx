@@ -20,13 +20,13 @@ const filterParams = [
 ];
 
 export default function Filter() {
-  const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const filterParam = useSelector((state) => state.transactions.filterParam);
+  const open = useSelector((state) => state.transactions.open);
 
   function clickHandle() {
     dispatch(transactionActions.setFilterParam(null));
-    setOpen((preval) => !preval);
+    dispatch(transactionActions.reverseOpen());
   }
   function filterClick(event) {
     dispatch(transactionActions.setFilterParam(event.target.innerText));
