@@ -142,6 +142,23 @@ export async function transactionsLoader({ request }) {
   return arr;
 }
 
+export async function distributionLoader({ request }) {
+  const collRef = collection(firestore, "transactions");
+  const q = query(collRef, orderBy("dateTime", "desc"));
+  const documents = await getDocs(q);
+  if (documents.metadata.fromCache) {
+    throw new Response(JSON.stringify({ message: "Could Not Reach Server" }), {
+      status: 500,
+    });
+  }
+  const arr = [];
+  documents.docs.forEach((i) => arr.push(i.data()));
+  for (let i of arr) {
+    i.dateTime = i.dateTime.toDate().toString();
+  }
+  return arr;
+}
+
 export default function FirebaseProvider({ children }) {
   async function getRangeOfSplits(startDoc, count) {
     try {
@@ -327,10 +344,135 @@ export default function FirebaseProvider({ children }) {
     }
   }
 
+  // async function addEntries() {
+  //   const collRef = collection(firestore, "transactions");
+
+  //   // Helper functions
+  //   const getRandomElement = (arr) =>
+  //     arr[Math.floor(Math.random() * arr.length)];
+  //   const getRandomDate = (start, end) =>
+  //     new Date(
+  //       start.getTime() + Math.random() * (end.getTime() - start.getTime())
+  //     );
+
+  //   // Constants
+  //   const transactionTypes = ["Outgoing", "Incoming"];
+  //   const outgoingCategories = [
+  //     "Housing",
+  //     "Transportation",
+  //     "Utility & Bills",
+  //     "Health & Fitness",
+  //     "Education",
+  //     "Food & Dining",
+  //     "Personal Care",
+  //     "Entertainment",
+  //     "Insurance",
+  //     "Debt Payment",
+  //     "Savings & Investment",
+  //     "Gifts & Donations",
+  //     "Misc-Out",
+  //   ];
+  //   const incomingCategories = [
+  //     "Salary & Wage",
+  //     "Business Income",
+  //     "Government Payments",
+  //     "Refund & Reimbursements",
+  //     "Investment Returns",
+  //     "Savings Withdrawals",
+  //     "Debt Taken",
+  //     "Gifts",
+  //     "Misc-In",
+  //   ];
+  //   const names = [
+  //     "TV Croma",
+  //     "Gym Membership",
+  //     "Online Course",
+  //     "Freelance Project",
+  //     "Groceries",
+  //     "Electricity Bill",
+  //     "Car Repair",
+  //     "Vacation",
+  //     "Insurance Premium",
+  //     "Loan Repayment",
+  //     "Stock Investment",
+  //     "Charity Donation",
+  //     "Miscellaneous Income",
+  //     "Salary",
+  //     "Business Revenue",
+  //   ];
+  //   const recipientsOutgoing = [
+  //     "Croma",
+  //     "Gym",
+  //     "Udemy",
+  //     "Client",
+  //     "Grocery Store",
+  //     "Electric Company",
+  //     "Mechanic",
+  //     "Travel Agency",
+  //     "Insurance Company",
+  //     "Bank",
+  //     "Broker",
+  //     "NGO",
+  //   ];
+  //   const recipientsIncoming = [
+  //     "Employer",
+  //     "Client",
+  //     "Government",
+  //     "Stock Broker",
+  //     "Bank",
+  //     "Friend",
+  //   ];
+
+  //   const generateTransaction = () => {
+  //     const transactionType = getRandomElement(transactionTypes);
+  //     const category =
+  //       transactionType === "Outgoing"
+  //         ? getRandomElement(outgoingCategories)
+  //         : getRandomElement(incomingCategories);
+  //     const transactionName = getRandomElement(names);
+  //     const recipient =
+  //       transactionType === "Outgoing"
+  //         ? getRandomElement(recipientsOutgoing)
+  //         : getRandomElement(recipientsIncoming);
+  //     const transactionAmount = Math.floor(Math.random() * 100000); // Random amount up to 100,000
+  //     const dateTime = getRandomDate(
+  //       new Date(2022, 0, 1),
+  //       new Date(2024, 6, 25)
+  //     ); // Spread over 2 years (up to 25th July 2024)
+  //     dateTime.setHours(
+  //       Math.floor(Math.random() * 24),
+  //       Math.floor(Math.random() * 60),
+  //       0,
+  //       0
+  //     );
+
+  //     return {
+  //       transactionName,
+  //       transactionAmount,
+  //       transactionType,
+  //       category,
+  //       dateTime,
+  //       from: transactionType === "Outgoing" ? "Me" : recipient,
+  //       to: transactionType === "Outgoing" ? recipient : "Me",
+  //     };
+  //   };
+
+  //   // Adding 100 random transactions
+  //   for (let i = 0; i < 100; i++) {
+  //     const data = generateTransaction();
+  //     addDoc(collRef, data)
+  //       .then(() => {
+  //         console.log(`Transaction ${i + 1} added successfully.`);
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error adding transaction: ", error);
+  //       });
+  //   }
+  // }
+
   async function addTransaction(data) {
     try {
       const collRef = collection(firestore, "transactions");
-
       const timeoutPromise = new Promise((_, reject) => {
         setTimeout(() => {
           reject(new Error("Operation timed out"));
@@ -338,6 +480,7 @@ export default function FirebaseProvider({ children }) {
       });
 
       const res = await Promise.race([addDoc(collRef, data), timeoutPromise]);
+      // await addEntries();
       return new Response(
         JSON.stringify({ message: "Data Appended Successfully" }),
         { status: 200 }

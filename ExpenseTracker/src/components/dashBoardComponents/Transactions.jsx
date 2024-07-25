@@ -47,7 +47,7 @@ export default function Transactions() {
           Transaction History
         </span>
         <select
-          defaultValue={"1"}
+          value={count}
           className="px-4 rounded-md focus:outline-none"
           onChange={(event) => selectChange(event)}
           name="time"
@@ -70,9 +70,13 @@ export default function Transactions() {
         </header>
         <div className="flex flex-col pt-4 space-y-3 pr-2">
           {fetching != null ? (
-            <p className="mx-4 ">{fetching}</p>
+            <p className="mx-4 flex flex-grow justify-center my-8 ">
+              {fetching}
+            </p>
           ) : transactions.length === 0 ? (
-            <p className="mx-4">No Transactions</p>
+            <p className="mx-4 flex flex-grow justify-center my-8">
+              No Transactions
+            </p>
           ) : (
             transactions.map((transaction) => {
               return <TransactionRows key={Math.random()} data={transaction} />;

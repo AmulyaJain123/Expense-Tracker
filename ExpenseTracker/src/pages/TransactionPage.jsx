@@ -6,6 +6,8 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { transactionActions } from "../store/main";
 import { useEffect } from "react";
+import { Button } from "../UIComponents/NextButton";
+import { Link } from "react-router-dom";
 
 export default function TransactionPage() {
   const data = useLoaderData();
@@ -198,6 +200,11 @@ export default function TransactionPage() {
               </div>
             </div>
           </div>
+        </div>
+        <div className="flex justify-center">
+          <Link to="/track/dashboard">
+            <Button>Back to Dashboard</Button>
+          </Link>
         </div>
       </div>
     </>

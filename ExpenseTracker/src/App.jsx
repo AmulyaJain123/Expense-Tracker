@@ -7,10 +7,12 @@ import SplitHome from "./pages/SplitHome";
 import VaultHome from "./pages/VaultHome";
 import VaultCreate from "./pages/VaultCreate";
 import VaultView from "./pages/VaultView";
+import DistributionPage from "./pages/DistributionPage";
 import {
   vaultViewLoader,
   billViewLoader,
   transactionsLoader,
+  distributionLoader,
 } from "./store/firebase-context";
 import ErrorPage from "./pages/ErrorPage";
 import VaultBillView from "./pages/VaultBillView";
@@ -50,6 +52,11 @@ const router = createBrowserRouter([
             path: "transactions",
             element: <TransactionPage />,
             loader: transactionsLoader,
+          },
+          {
+            path: "distributions",
+            element: <DistributionPage />,
+            loader: distributionLoader,
           },
         ],
       },

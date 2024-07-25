@@ -115,7 +115,7 @@ export const incomingTransactionCategories = [
                 icon: salaryAndWage,
             },
             {
-                name: "Buisness Income",
+                name: "Business Income",
                 icon: businessIncome
             },
             {

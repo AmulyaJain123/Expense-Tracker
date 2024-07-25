@@ -207,3 +207,7 @@ input[type="file"] {
   -moz-appearance: none;
   -webkit-appearance: none;
 }
+
+.recharts-legend-wrapper ul li {
+  cursor: pointer;
+}
