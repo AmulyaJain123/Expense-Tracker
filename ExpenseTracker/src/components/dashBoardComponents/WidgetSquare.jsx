@@ -5,70 +5,41 @@ import numeral from "numeral";
 import { formats } from "numeral";
 import exit from "../../assets/backward.png";
 import add from "../../assets/plus.png";
+import { useSelector } from "react-redux";
 
 export default function WidgetSquare() {
-  const firebase = useFirebase();
-  const [transactions, setTransactions] = useState([]);
   const [val, setVal] = useState(null);
-  const [fetching, setFetching] = useState(null);
-  const [count, setCount] = useState("1");
+  const transactions = useSelector((state) => state.dashboard.data);
 
   useEffect(() => {
-    async function fetchData() {
-      setFetching("Fetching Data....");
-      const res = await firebase.fetchTransactionsForDashboard(parseInt(count));
-      if (res === "error") {
-        console.log("erferfrfer");
-        setFetching("ERROR: Cannot Fetch Data");
-      } else {
-        setFetching(null);
-        setTransactions(res);
+    if (transactions != null) {
+      let pos = 0;
+      let neg = 0;
+      let net = 0;
+      console.log(transactions);
+      for (let i of transactions) {
+        console.log(i);
+        if (i.transactionType === "Incoming") {
+          pos += i.transactionAmount;
+          net += i.transactionAmount;
+        } else {
+          neg += i.transactionAmount;
+          net -= i.transactionAmount;
+        }
       }
+      setVal({ pos, neg, net });
     }
-    fetchData();
-  }, [count]);
-
-  useEffect(() => {
-    let pos = 0;
-    let neg = 0;
-    let net = 0;
-    for (let i of transactions) {
-      console.log(i);
-      if (i.transactionType === "Incoming") {
-        pos += i.transactionAmount;
-        net += i.transactionAmount;
-      } else {
-        neg += i.transactionAmount;
-        net -= i.transactionAmount;
-      }
-    }
-    setVal({ pos, neg, net });
   }, [transactions]);
-
-  function selectChange(event) {
-    setCount(parseInt(event.target.value));
-  }
 
   return (
     <section className="flex w-[600px] h-[600px] aspect-square flex-col space-y-4">
       <div className="flex flex-col space-y-4 h-[220px] rounded-xl p-4 bg-[#f7ebfd]">
-        <header className="flex p-2 px-4 pr-2 h-fit justify-between rounded-xl bg-[#9f21e3] text-white">
+        <header className="flex p-2 px-4 pr-2 h-fit justify-center rounded-xl bg-[#9f21e3] text-white">
           <span className="text-2xl font-semibold ">Financial Summary</span>
-          <select
-            className="p-1 px-3 text-base text-stone-600 rounded-md"
-            onChange={(event) => selectChange(event)}
-            name=""
-            id=""
-            value={count}
-          >
-            <option value="1">Today</option>
-            <option value="7">Last 7 Days</option>
-            <option value="30">Last 30 Days</option>
-          </select>
         </header>
-        {fetching != null || val === null ? (
+        {transactions === null || val === null ? (
           <p className="font-normal text-base flex text-stone-500 pt-12 items-center justify-center">
-            {fetching}
+            Loading....
           </p>
         ) : (
           <div className="flex flex-grow text-stone-600 space-x-4 ">

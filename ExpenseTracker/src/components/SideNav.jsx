@@ -50,7 +50,24 @@ const pages = [
     path: "track",
     iconClass: "fi fi-rr-calculator-bill",
     iconClassBold: "fi fi-ss-calculator-bill",
-    children: [],
+    children: [
+      {
+        name: "Dashboard",
+        path: "track/dashboard",
+      },
+      {
+        name: "Transaction Create",
+        path: "track/create",
+      },
+      {
+        name: "Transactions",
+        path: "track/transactions",
+      },
+      {
+        name: "Distributions",
+        path: "track/distributions",
+      },
+    ],
   },
   {
     name: "BillSplit",

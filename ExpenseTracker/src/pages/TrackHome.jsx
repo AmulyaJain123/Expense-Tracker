@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import billTrackIcon from "../assets/billTrack-Icon.png";
 import { Link } from "react-router-dom";
+import TrackHomeMenu from "../components/trackHomeComponents/TrackHomeMenu";
 
 const Span = styled.span`
   font-size: large;
@@ -33,91 +34,42 @@ export default function TrackHome() {
         </div>
         <img className="w-[450px]" src={billTrackIcon} alt="" />
       </div>
-      <div id="menu">
-        <div className="flex justify-center space-x-10 mt-[175px]">
-          <Span className="">How to Use BillVault</Span>
-        </div>
-        <div id="menuContent" className="mt-8 mx-[100px]">
-          <div className="mt-16 flex flex-col space-y-2">
-            <div className="flex bg-stone-100 py-4 px-2 border-b-2 border-stone-300 space-x-[50px] mx-[100px]">
-              <div className="font-medium text-lg pl-2 w-1/3">
-                Create a New Bill{" "}
-              </div>
-              <div className="w-2/3 flex flex-col space-y-2">
-                <p>
-                  Navigate to the BillVault section and click on "Add Bill".
-                </p>
-                <p>
-                  Fill in the required details like Bill Date, Bill Name, Bill
-                  Amount, Etc.
-                </p>
-              </div>
-            </div>
-            <div className="flex bg-stone-100 py-4 px-2 border-b-2 border-stone-300 space-x-[50px] mx-[100px]">
-              <div className="font-medium text-lg pl-2 w-1/3">
-                {"Add Warranty Information (Optional)"}{" "}
-              </div>
-              <div className="w-2/3 flex flex-col space-y-2">
-                <p>
-                  If your Bill includes a warranty, you can provide additional
-                  details by specifying either the warranty duration or the
-                  warranty expiration date.
-                </p>
-                <p>
-                  This information will be used to display the warranty status
-                  when you view your saved Bills.
-                </p>
-              </div>
-            </div>
-            <div className="flex bg-stone-100 py-4 px-2 border-b-2 border-stone-300 space-x-[50px] mx-[100px]">
-              <div className="font-medium text-lg pl-2 w-1/3">
-                Upload Bill Images
-              </div>
-              <div className="w-2/3 flex flex-col space-y-2">
-                <p>
-                  You can upload up to four images of your Bill to keep a visual
-                  record of your documents.
-                </p>
-              </div>
-            </div>
-            <div className="flex bg-stone-100 py-4 px-2 border-b-2 border-stone-300 space-x-[50px] mx-[100px]">
-              <div className="font-medium text-lg pl-2 w-1/3">
-                Save Your Bill
-              </div>
-              <div className="w-2/3 flex flex-col space-y-2">
-                <p>
-                  After entering all the necessary details and uploading images,
-                  click "Save" to store your Bill in BillVault.
-                </p>
-              </div>
-            </div>
-            <div className="flex bg-stone-100 py-4 px-2 border-b-2 border-stone-300 space-x-[50px] mx-[100px]">
-              <div className="font-medium text-lg pl-2 w-1/3">
-                View and Manage Saved Bills
-              </div>
-              <div className="w-2/3 flex flex-col space-y-2">
-                <p>
-                  Access your saved Bills anytime from the BillVault section.
-                </p>
-                <p>
-                  Each Bill entry will display its warranty status if warranty
-                  information was provided.
-                </p>
-                <p>
-                  You can also download the images attached to each BIll for
-                  your records.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+      <TrackHomeMenu />
+
+      <div className="text-3xl font-bold text-stone-500  p-2 mt-[50px] pl-6 py-2 bg-stone-200 border-2 border-stone-400 rounded-l-xl border-r-[0px] mb-12 mx-[200px]">
+        Links
       </div>
-      <div className="flex justify-center">
+
+      <div className="flex mb-4">
         <Link
-          className="py-2 px-4 rounded-xl text-2xl mx-auto my-[80px] text-[#e7e5e4] font-semibold bg-[#9d4edd]"
+          className="py-2 px-4 rounded-lg ml-[220px] text-2xl  text-[#fff] hover:text-[#9d4edd] hover:scale-110 hover:bg-[#fff] border-2 border-[#9d4edd] duration-500 font-semibold bg-[#9d4edd]"
           to={"dashboard"}
         >
           Go to DashBoard
+        </Link>
+      </div>
+
+      <div className="flex justify-start  ml-[220px] gap-y-8 gap-x-8 items-center flex-wrap">
+        <Link
+          className="py-2 px-4 flex rounded-lg text-2xl text-[#fff] hover:text-[#000] hover:scale-110 hover:bg-[#fff] border-2 border-[#000] duration-500 font-semibold bg-[#000]"
+          to={"create"}
+        >
+          <span className="flex items-center mr-3">
+            <i className="fi fi-br-plus flex justify-center text-xl items-center"></i>
+          </span>
+          <span className="flex items-center">Create Transaction</span>
+        </Link>
+        <Link
+          className="py-2 px-4 flex rounded-lg text-2xl  text-[#fff] hover:text-[#000] hover:scale-110 hover:bg-[#fff] border-2 border-[#000] duration-500 font-semibold bg-[#000]"
+          to={"transactions"}
+        >
+          Go to Transactions
+        </Link>
+        <Link
+          className="py-2 px-4 flex rounded-lg text-2xl text-[#fff] hover:text-[#000] hover:scale-110 hover:bg-[#fff] border-2 border-[#000] duration-500 font-semibold bg-[#000]"
+          to={"distributions"}
+        >
+          Go to Distributions
         </Link>
       </div>
     </div>

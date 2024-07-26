@@ -69,8 +69,8 @@ export default function PieChart2() {
           filteredData[1].subFields.length != 0 ? (
             <div className="flex relative justify-center items-center flex-grow mt-4">
               <div
-                style={{ top: stage === null ? "53%" : "55%" }}
-                className="absolute right-[50%] translate-x-[50%] -translate-y-[50%]"
+                style={{ top: stage === null ? "36.5%" : "38.5%" }}
+                className="absolute flex justify-between items-center right-[36.5%] w-[180px] h-[180px] rounded-full"
               >
                 {activeSector === null ? (
                   ""

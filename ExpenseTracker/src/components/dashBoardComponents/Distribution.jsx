@@ -17,6 +17,7 @@ import {
   incomingTransactionCategories,
   outgoingTransactionCategories,
 } from "../../util/componentNavigation";
+import { useSelector } from "react-redux";
 
 const colorPal = [
   "#fd7f6f",
@@ -31,33 +32,19 @@ const colorPal = [
 ];
 
 export default function Distribution() {
-  const firebase = useFirebase();
-  const [transactions, setTransactions] = useState(null);
-  const [fetching, setFetching] = useState(null);
   const [activeSector, setActiveSector] = useState(null);
-  const [count, setCount] = useState("1");
   const [stage, setStage] = useState(null);
+  const data = useSelector((state) => state.dashboard.data);
+  const [transactions, setTransactions] = useState(null);
+  console.log(data);
 
   useEffect(() => {
-    async function fetchData() {
-      setFetching("Fetching Data....");
-      const res = await firebase.fetchTransactionsForDashboard(parseInt(count));
-      if (res === "error") {
-        console.log("erferfrfer");
-        setFetching("ERROR: Cannot Fetch Data");
-      } else {
-        const result = getData(JSON.parse(JSON.stringify(res)));
-        setFetching(null);
-        setTransactions(JSON.parse(JSON.stringify(result)));
-      }
+    if (data != null) {
+      const result = getData(JSON.parse(JSON.stringify(data)));
+      setTransactions(JSON.parse(JSON.stringify(result)));
+      setStage(null);
     }
-    fetchData();
-  }, [count]);
-
-  function selectChange(event) {
-    setCount(event.target.value);
-    setStage(null);
-  }
+  }, [data]);
 
   function sectorHover(event, index) {
     const percent = numeral(event.percent).format("0.00%");
@@ -101,21 +88,10 @@ export default function Distribution() {
           <img src={more} className="w-[50px]" alt="" />
         </div>
       </Link>
-      <header className="rounded-xl text-white pl-4 text-2xl font-semibold flex justify-between p-2 bg-[#9f21e3]">
+      <header className="rounded-xl text-white pl-4 text-2xl font-semibold flex justify-center p-2 bg-[#9f21e3]">
         <span>Expense Distribution</span>
-        <select
-          value={count}
-          className="px-4 rounded-md text-base text-stone-500 font-normal focus:outline-none"
-          onChange={(event) => selectChange(event)}
-          name="time"
-          id=""
-        >
-          <option value="1">Today</option>
-          <option value="7">Last 7 Days</option>
-          <option value="30">Last 30 Days</option>
-        </select>
       </header>
-      {transactions != null && fetching == null ? (
+      {transactions != null ? (
         <>
           {transactions.length != 0 ? (
             <div className="flex relative justify-center items-center flex-grow mt-4">
@@ -304,13 +280,13 @@ export default function Distribution() {
             </div>
           ) : (
             <p className="flex py-16 items-center text-base font-normal text-stone-500 justify-center">
-              No Transactions
+              No Data to Process
             </p>
           )}
         </>
       ) : (
         <p className="flex py-16 items-center text-base font-normal text-stone-500 justify-center">
-          {fetching}
+          Loading....
         </p>
       )}
     </section>

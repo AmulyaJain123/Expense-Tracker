@@ -11,6 +11,8 @@ export default function TransactionRows({ data }) {
     transactionType,
   } = data;
 
+  console.log(dateTime);
+
   function formatNum(num) {
     const n = parseInt(num);
     if (n < 10) {
@@ -20,12 +22,12 @@ export default function TransactionRows({ data }) {
     }
   }
 
-  const date = `${formatNum(dateTime.toDate().getDate())}/${formatNum(
-    dateTime.toDate().getMonth() + 1
-  )}/${dateTime.toDate().getFullYear()}`;
+  const date = `${formatNum(new Date(dateTime).getDate())}/${formatNum(
+    new Date(dateTime).getMonth() + 1
+  )}/${new Date(dateTime).getFullYear()}`;
 
-  const time = `${formatNum(dateTime.toDate().getHours())}:${formatNum(
-    dateTime.toDate().getMinutes()
+  const time = `${formatNum(new Date(dateTime).getHours())}:${formatNum(
+    new Date(dateTime).getMinutes()
   )}`;
 
   return (

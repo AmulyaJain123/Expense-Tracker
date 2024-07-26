@@ -47,7 +47,7 @@ export default function PieChart1() {
         <>
           {filteredData.length != 0 ? (
             <div className="flex relative justify-center items-center flex-grow mt-4">
-              <div className="absolute top-[52%] right-[50%] translate-x-[50%] -translate-y-[50%]">
+              <div className="absolute top-[48%] right-[44%] ">
                 {activeSector === null ? (
                   ""
                 ) : (

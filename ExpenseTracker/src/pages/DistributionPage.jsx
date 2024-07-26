@@ -10,6 +10,8 @@ import PieChart1 from "../components/distributionPageComponents/PieChart1";
 import Heirarchy from "../components/distributionPageComponents/Heirarchy";
 import PieChart2 from "../components/distributionPageComponents/PieChart2";
 import PieChart3 from "../components/distributionPageComponents/PieChart3";
+import { Link } from "react-router-dom";
+import { Button } from "../UIComponents/NextButton";
 
 export default function DistributionPage() {
   const data = useLoaderData();
@@ -43,7 +45,10 @@ export default function DistributionPage() {
     date1.setMonth(0);
     date1.setDate(1);
     dispatch(
-      distributionActions.resetDuration({ first: date1, second: date2 })
+      distributionActions.resetDuration({
+        first: date1.toString(),
+        second: date2.toString(),
+      })
     );
     dispatch(distributionActions.clearFilteredData());
   }, []);
@@ -151,6 +156,11 @@ export default function DistributionPage() {
               <PieChart3 />
             </div>
           </div>
+        </div>
+        <div className="flex justify-center">
+          <Link to="/track/dashboard">
+            <Button>Back to Dashboard</Button>
+          </Link>
         </div>
       </div>
     </div>

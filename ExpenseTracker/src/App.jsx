@@ -13,6 +13,7 @@ import {
   billViewLoader,
   transactionsLoader,
   distributionLoader,
+  dashboardLoader,
 } from "./store/firebase-context";
 import ErrorPage from "./pages/ErrorPage";
 import VaultBillView from "./pages/VaultBillView";
@@ -43,6 +44,7 @@ const router = createBrowserRouter([
           {
             path: "dashboard",
             element: <DashBoard />,
+            loader: dashboardLoader,
           },
           {
             path: "create",

@@ -52,7 +52,7 @@ const FirebaseContext = createContext({
   addBill: () => {},
   deleteBill: () => {},
   addTransaction: () => {},
-  fetchTransactionsForDashboard: () => {},
+  fetchAllTransactions: () => {},
 });
 
 export const useFirebase = () => useContext(FirebaseContext);
@@ -157,6 +157,37 @@ export async function distributionLoader({ request }) {
     i.dateTime = i.dateTime.toDate().toString();
   }
   return arr;
+}
+
+export async function dashboardLoader({ request }) {
+  const collRef = collection(firestore, "transactions");
+  const q = query(collRef, orderBy("dateTime", "desc"));
+  const documents = await getDocs(q);
+  if (documents.metadata.fromCache) {
+    throw new Response(JSON.stringify({ message: "Could Not Reach Server" }), {
+      status: 500,
+    });
+  }
+
+  let arr = [];
+  documents.docs.forEach((i) => arr.push(i.data()));
+  console.log(arr);
+  const ans = [];
+  const currDate = new Date().getDate();
+  const currMonth = new Date().getMonth() + 1;
+  const currYear = new Date().getFullYear();
+  for (let i of arr) {
+    const date = i.dateTime.toDate();
+    date.setHours(0, 0, 0, 0);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const diff = Math.round((today - date) / 864e5);
+    if (diff <= 31) {
+      ans.push(i);
+    }
+  }
+  console.log(ans);
+  return ans;
 }
 
 export default function FirebaseProvider({ children }) {
@@ -494,7 +525,7 @@ export default function FirebaseProvider({ children }) {
     }
   }
 
-  async function fetchTransactionsForDashboard(time) {
+  async function fetchAllTransactions() {
     try {
       const collRef = collection(firestore, "transactions");
       let q = query(collRef, orderBy("dateTime", "desc"));
@@ -505,34 +536,7 @@ export default function FirebaseProvider({ children }) {
       }
       let arr = [];
       res.docs.forEach((i) => arr.push(i.data()));
-      console.log(arr);
-      const ans = [];
-      const currDate = new Date().getDate();
-      const currMonth = new Date().getMonth() + 1;
-      const currYear = new Date().getFullYear();
-      for (let i of arr) {
-        const date = i.dateTime.toDate();
-        date.setHours(0, 0, 0, 0);
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        const diff = Math.round((today - date) / 864e5);
-        if (
-          time === 1 &&
-          date.getFullYear() === currYear &&
-          date.getMonth() + 1 === currMonth &&
-          date.getDate() === currDate
-        ) {
-          ans.push(i);
-        } else if (time === 7 && diff < 7) {
-          ans.push(i);
-        } else if (time === 30 && diff < 30) {
-          ans.push(i);
-        } else {
-          break;
-        }
-      }
-      console.log(ans);
-      return ans;
+      return arr;
     } catch (err) {
       console.log(err);
       return "error";
@@ -553,7 +557,7 @@ export default function FirebaseProvider({ children }) {
     addBill,
     deleteBill,
     addTransaction,
-    fetchTransactionsForDashboard,
+    fetchAllTransactions,
   };
 
   return (
