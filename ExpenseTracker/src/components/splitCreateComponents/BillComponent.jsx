@@ -53,7 +53,7 @@ export default function BillComponent({ id }) {
       <div className="flex space-x-10">
         <div className="p-1 px-2 bg-white h-fit  rounded-lg">
           <span className="text-black mr-3 text-md font-semibold">
-            Payed By :
+            Paid By :
           </span>
           <span className="p-1 text-stone-400 px-2 h-fit ">
             {reqBill.payedBy}

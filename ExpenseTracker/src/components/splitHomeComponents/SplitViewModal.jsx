@@ -69,7 +69,7 @@ const SplitViewModal = forwardRef(function SplitViewModal({ ...props }, ref) {
   return (
     <dialog className="rounded-3xl relative" ref={modalRef}>
       <div className="w-[90vw] h-[94vh] flex flex-col p-3 rounded-2xl splitViewBg ">
-        <div className="text-[30px] p-4 mt-8 text-center mx-[100px] mr-[106px] bg-white  rounded-xl  font-extrabold">
+        <div className="text-[30px] p-4 mt-8 text-center mx-[100px] mr-[106px] text-white bg-[#9F21E3]  rounded-xl  font-extrabold">
           {"SPLIT SUMMARY (View Only)"}
         </div>
 

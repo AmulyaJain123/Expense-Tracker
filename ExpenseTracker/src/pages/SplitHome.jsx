@@ -2,9 +2,25 @@ import { useFirebase } from "../store/firebase-context";
 import split from "../assets/split.png";
 import SplitHomeMenu from "../components/splitHomeComponents/SplitHomeMenu";
 import Splits from "../components/splitHomeComponents/Splits";
+import { useEffect, useState } from "react";
+import { getCurrentUser } from "../store/firebase-context";
+import { Link } from "react-router-dom";
+import logInIcon from "../assets/logIn.png";
 
 export default function SplitHome() {
   const firebase = useFirebase();
+  const [user, setUser] = useState(null);
+  const [fetching, setFetching] = useState(true);
+
+  async function getUser() {
+    const res = await getCurrentUser();
+    setUser(res);
+    setFetching(false);
+  }
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   return (
     <>
@@ -29,7 +45,31 @@ export default function SplitHome() {
           </div>
         </div>
         <SplitHomeMenu />
-        <Splits />
+
+        {fetching ? (
+          <p className="flex justify-center text-lg mt-[50px] font-medium">
+            Loading User Info...
+          </p>
+        ) : (
+          <>
+            {user === null ? (
+              <div className="flex flex-col items-center space-y-6 mt-[150px]">
+                <Link to={"/auth"}>
+                  <img
+                    src={logInIcon}
+                    className="w-[100px] p-3 rounded-xl hover:bg-slate-200 duration-500 "
+                    alt=""
+                  />
+                </Link>
+                <p className="flex justify-center text-xl text-stone-500 font-semibold">
+                  Login to Create and View Splits
+                </p>
+              </div>
+            ) : (
+              <Splits />
+            )}
+          </>
+        )}
       </div>
     </>
   );

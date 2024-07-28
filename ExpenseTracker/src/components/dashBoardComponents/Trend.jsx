@@ -124,6 +124,7 @@ export default function Trend() {
                       tickFormatter={formatTick}
                       strokeWidth={2}
                       tickCount={8}
+                      tick={{ dx: -10 }}
                     />
                     <Tooltip
                       formatter={(name, value, props) =>

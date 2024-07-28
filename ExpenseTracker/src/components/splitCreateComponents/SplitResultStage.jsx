@@ -27,7 +27,7 @@ export default function SplitResultStage() {
   return (
     <>
       <div className="flex flex-col space-y-4 px-12">
-        <div className="text-3xl font-bold text-black flex flex-grow rounded-xl bg-white py-6 mb-4 uppercase justify-center">
+        <div className="text-3xl font-bold text-white flex flex-grow rounded-xl bg-[#9F21E3] py-4 mb-4 uppercase justify-center">
           Split Summary
         </div>
 

@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const intialUniversalState = {
-    toastMsg:null
+  toastMsg: null,
+  loggedInDetails: null
 
 };
 
@@ -9,11 +10,17 @@ export const universalSlice = createSlice({
   name: "universal",
   initialState: intialUniversalState,
   reducers: {
-    setToastMsg(state,action){
-        state.toastMsg={msg:action.payload.msg,mood:action.payload.mood};
+    setToastMsg(state, action) {
+      state.toastMsg = { msg: action.payload.msg, mood: action.payload.mood };
     },
-    clearToastMsg(state){
-        state.toastMsg=null;
+    clearToastMsg(state) {
+      state.toastMsg = null;
+    },
+    setLoginInfo(state, action) {
+      state.loggedInDetails = action.payload;
+    },
+    clearLoginInfo(state) {
+      state.loggedInDetails = null;
     }
   },
 });

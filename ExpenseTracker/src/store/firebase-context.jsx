@@ -29,6 +29,14 @@ import {
 } from "firebase/storage";
 import { v4 } from "uuid";
 import { redirect } from "react-router-dom";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut,
+  updateProfile,
+} from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAosIo6XD1RLsToLqWZp1_n-tvWZiwwSFc",
@@ -44,6 +52,11 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const firestore = getFirestore();
 const storage = getStorage();
+const auth = getAuth();
+setTimeout(() => {
+  console.log(auth.currentUser);
+}, 2000);
+console.log("auth", auth, auth.currentUser);
 
 const FirebaseContext = createContext({
   getRangeOfSplits: () => {},
@@ -53,11 +66,45 @@ const FirebaseContext = createContext({
   deleteBill: () => {},
   addTransaction: () => {},
   fetchAllTransactions: () => {},
+  getCurrUser: () => {},
+  signUp: () => {},
+  logOutCurrUser: () => {},
+  signIn: () => {},
 });
 
 export const useFirebase = () => useContext(FirebaseContext);
 
+export async function getCurrentUser() {
+  return new Promise((resolve, reject) => {
+    if (auth.currentUser) {
+      resolve(auth.currentUser);
+      return;
+    }
+    const removeListener = onAuthStateChanged(
+      auth,
+      (user) => {
+        removeListener();
+        resolve(user);
+      },
+      reject
+    );
+  });
+}
+
+export async function commonLoader({ request }) {
+  const user = await getCurrentUser();
+  if (user === null) {
+    throw "402";
+  }
+  return "";
+}
+
 export async function billViewLoader({ request }) {
+  const user = await getCurrentUser();
+  if (user === null) {
+    throw "402";
+  }
+
   const url = new URL(request.url);
   let billId = url.searchParams.get("billId");
 
@@ -66,14 +113,10 @@ export async function billViewLoader({ request }) {
   const documents = await getDocs(q);
   console.log(documents);
   if (documents.metadata.fromCache) {
-    throw new Response(JSON.stringify({ message: "Could Not Reach Server" }), {
-      status: 500,
-    });
+    throw "401";
   }
   if (documents.empty) {
-    throw new Response(JSON.stringify({ message: "Bill Not Found" }), {
-      status: 500,
-    });
+    throw "403";
   }
   const bill = documents.docs[0].data();
   console.log(bill);
@@ -98,6 +141,10 @@ export async function billViewLoader({ request }) {
 }
 
 export async function vaultViewLoader({ request, params }) {
+  const user = await getCurrentUser();
+  if (user === null) {
+    throw "402";
+  }
   const url = new URL(request.url);
   console.log(url);
   if (url.pathname === "/vault/view" && url.search === "") {
@@ -109,30 +156,29 @@ export async function vaultViewLoader({ request, params }) {
     sortField != "expiryDate" &&
     sortField != "billDate"
   ) {
-    throw new Response(JSON.stringify({ message: "Bad Request" }), {
-      status: 404,
-    });
+    throw "403";
   }
   const collRef = collection(firestore, "vaultBills");
   const q = query(collRef, orderBy(sortField, "desc"));
   const res = await getDocs(q);
   console.log(res);
   if (res.metadata.fromCache) {
-    throw new Response(JSON.stringify({ message: "Could Not Fetch Events" }), {
-      status: 500,
-    });
+    throw "401";
   }
   return res;
 }
 
 export async function transactionsLoader({ request }) {
+  const user = await getCurrentUser();
+  if (user === null) {
+    throw "402";
+  }
+
   const collRef = collection(firestore, "transactions");
   const q = query(collRef, orderBy("dateTime", "desc"));
   const documents = await getDocs(q);
   if (documents.metadata.fromCache) {
-    throw new Response(JSON.stringify({ message: "Could Not Reach Server" }), {
-      status: 500,
-    });
+    throw "401";
   }
   const arr = [];
   documents.docs.forEach((i) => arr.push(i.data()));
@@ -143,13 +189,16 @@ export async function transactionsLoader({ request }) {
 }
 
 export async function distributionLoader({ request }) {
+  const user = await getCurrentUser();
+  if (user === null) {
+    throw "402";
+  }
+
   const collRef = collection(firestore, "transactions");
   const q = query(collRef, orderBy("dateTime", "desc"));
   const documents = await getDocs(q);
   if (documents.metadata.fromCache) {
-    throw new Response(JSON.stringify({ message: "Could Not Reach Server" }), {
-      status: 500,
-    });
+    throw "401";
   }
   const arr = [];
   documents.docs.forEach((i) => arr.push(i.data()));
@@ -160,13 +209,15 @@ export async function distributionLoader({ request }) {
 }
 
 export async function dashboardLoader({ request }) {
+  const user = await getCurrentUser();
+  if (user === null) {
+    throw "402";
+  }
   const collRef = collection(firestore, "transactions");
   const q = query(collRef, orderBy("dateTime", "desc"));
   const documents = await getDocs(q);
   if (documents.metadata.fromCache) {
-    throw new Response(JSON.stringify({ message: "Could Not Reach Server" }), {
-      status: 500,
-    });
+    throw "401";
   }
 
   let arr = [];
@@ -375,131 +426,61 @@ export default function FirebaseProvider({ children }) {
     }
   }
 
-  // async function addEntries() {
-  //   const collRef = collection(firestore, "transactions");
+  async function getCurrUser() {
+    return auth.currentUser;
+  }
 
-  //   // Helper functions
-  //   const getRandomElement = (arr) =>
-  //     arr[Math.floor(Math.random() * arr.length)];
-  //   const getRandomDate = (start, end) =>
-  //     new Date(
-  //       start.getTime() + Math.random() * (end.getTime() - start.getTime())
-  //     );
+  async function signUp(email, password, firstName, lastName) {
+    try {
+      console.log(email, password);
+      const res = await createUserWithEmailAndPassword(auth, email, password);
+      console.log(lastName, firstName);
+      const user = await getCurrentUser();
+      const r = await updateProfile(user, {
+        displayName: firstName,
+        photoURL: "",
+      });
+      const result = setDoc(doc(firestore, "users", auth.currentUser.uid), {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+      });
+      await signOut(auth);
+      return "success";
+    } catch (err) {
+      console.log(err);
+      return new Response(JSON.stringify({ message: err }), {
+        status: 500,
+      });
+    }
+  }
 
-  //   // Constants
-  //   const transactionTypes = ["Outgoing", "Incoming"];
-  //   const outgoingCategories = [
-  //     "Housing",
-  //     "Transportation",
-  //     "Utility & Bills",
-  //     "Health & Fitness",
-  //     "Education",
-  //     "Food & Dining",
-  //     "Personal Care",
-  //     "Entertainment",
-  //     "Insurance",
-  //     "Debt Payment",
-  //     "Savings & Investment",
-  //     "Gifts & Donations",
-  //     "Misc-Out",
-  //   ];
-  //   const incomingCategories = [
-  //     "Salary & Wage",
-  //     "Business Income",
-  //     "Government Payments",
-  //     "Refund & Reimbursements",
-  //     "Investment Returns",
-  //     "Savings Withdrawals",
-  //     "Debt Taken",
-  //     "Gifts",
-  //     "Misc-In",
-  //   ];
-  //   const names = [
-  //     "TV Croma",
-  //     "Gym Membership",
-  //     "Online Course",
-  //     "Freelance Project",
-  //     "Groceries",
-  //     "Electricity Bill",
-  //     "Car Repair",
-  //     "Vacation",
-  //     "Insurance Premium",
-  //     "Loan Repayment",
-  //     "Stock Investment",
-  //     "Charity Donation",
-  //     "Miscellaneous Income",
-  //     "Salary",
-  //     "Business Revenue",
-  //   ];
-  //   const recipientsOutgoing = [
-  //     "Croma",
-  //     "Gym",
-  //     "Udemy",
-  //     "Client",
-  //     "Grocery Store",
-  //     "Electric Company",
-  //     "Mechanic",
-  //     "Travel Agency",
-  //     "Insurance Company",
-  //     "Bank",
-  //     "Broker",
-  //     "NGO",
-  //   ];
-  //   const recipientsIncoming = [
-  //     "Employer",
-  //     "Client",
-  //     "Government",
-  //     "Stock Broker",
-  //     "Bank",
-  //     "Friend",
-  //   ];
+  async function signIn(email, password) {
+    try {
+      console.log(email, password);
+      const res = await signInWithEmailAndPassword(auth, email, password);
+      const user = await getCurrentUser();
+      return "success";
+    } catch (err) {
+      console.log(err);
+      return new Response(JSON.stringify({ message: err }), {
+        status: 500,
+      });
+    }
+  }
 
-  //   const generateTransaction = () => {
-  //     const transactionType = getRandomElement(transactionTypes);
-  //     const category =
-  //       transactionType === "Outgoing"
-  //         ? getRandomElement(outgoingCategories)
-  //         : getRandomElement(incomingCategories);
-  //     const transactionName = getRandomElement(names);
-  //     const recipient =
-  //       transactionType === "Outgoing"
-  //         ? getRandomElement(recipientsOutgoing)
-  //         : getRandomElement(recipientsIncoming);
-  //     const transactionAmount = Math.floor(Math.random() * 100000); // Random amount up to 100,000
-  //     const dateTime = getRandomDate(
-  //       new Date(2022, 0, 1),
-  //       new Date(2024, 6, 25)
-  //     ); // Spread over 2 years (up to 25th July 2024)
-  //     dateTime.setHours(
-  //       Math.floor(Math.random() * 24),
-  //       Math.floor(Math.random() * 60),
-  //       0,
-  //       0
-  //     );
-
-  //     return {
-  //       transactionName,
-  //       transactionAmount,
-  //       transactionType,
-  //       category,
-  //       dateTime,
-  //       from: transactionType === "Outgoing" ? "Me" : recipient,
-  //       to: transactionType === "Outgoing" ? recipient : "Me",
-  //     };
-  //   };
-
-  //   // Adding 100 random transactions
-  //   for (let i = 0; i < 100; i++) {
-  //     const data = generateTransaction();
-  //     addDoc(collRef, data)
-  //       .then(() => {
-  //         console.log(`Transaction ${i + 1} added successfully.`);
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error adding transaction: ", error);
-  //       });
-  //   }
-  // }
+  async function logOutCurrUser() {
+    try {
+      const res = signOut(auth);
+      return new Response(JSON.stringify({ message: "Sign Out Successful" }), {
+        status: 200,
+      });
+    } catch (err) {
+      return new Response(JSON.stringify({ message: "Could not Sign Out" }), {
+        status: 403,
+      });
+    }
+  }
 
   async function addTransaction(data) {
     try {
@@ -511,7 +492,6 @@ export default function FirebaseProvider({ children }) {
       });
 
       const res = await Promise.race([addDoc(collRef, data), timeoutPromise]);
-      // await addEntries();
       return new Response(
         JSON.stringify({ message: "Data Appended Successfully" }),
         { status: 200 }
@@ -558,6 +538,10 @@ export default function FirebaseProvider({ children }) {
     deleteBill,
     addTransaction,
     fetchAllTransactions,
+    getCurrUser,
+    signUp,
+    logOutCurrUser,
+    signIn,
   };
 
   return (

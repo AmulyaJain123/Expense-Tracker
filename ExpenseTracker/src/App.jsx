@@ -23,6 +23,8 @@ import TrackHome from "./pages/TrackHome";
 import DashBoard from "./pages/DashBoard";
 import TransactionCreate from "./pages/TransactionCreate";
 import TransactionPage from "./pages/TransactionPage";
+import AuthPage from "./pages/AuthPage";
+import { commonLoader } from "./store/firebase-context";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +36,7 @@ const router = createBrowserRouter([
         path: "",
         element: <HomePage />,
       },
+
       {
         path: "track",
         children: [
@@ -45,20 +48,25 @@ const router = createBrowserRouter([
             path: "dashboard",
             element: <DashBoard />,
             loader: dashboardLoader,
+            errorElement: <ErrorPage />,
           },
           {
             path: "create",
             element: <TransactionCreate />,
+            loader: commonLoader,
+            errorElement: <ErrorPage />,
           },
           {
             path: "transactions",
             element: <TransactionPage />,
             loader: transactionsLoader,
+            errorElement: <ErrorPage />,
           },
           {
             path: "distributions",
             element: <DistributionPage />,
             loader: distributionLoader,
+            errorElement: <ErrorPage />,
           },
         ],
       },
@@ -73,6 +81,8 @@ const router = createBrowserRouter([
           {
             path: "create",
             element: <SplitCreate />,
+            loader: commonLoader,
+            errorElement: <ErrorPage />,
           },
         ],
       },
@@ -86,6 +96,8 @@ const router = createBrowserRouter([
           {
             path: "create",
             element: <VaultCreate />,
+            loader: commonLoader,
+            errorElement: <ErrorPage />,
           },
           {
             path: "view",
@@ -97,11 +109,15 @@ const router = createBrowserRouter([
             path: "view/bill",
             element: <VaultBillView />,
             loader: billViewLoader,
-            errorElement: <BillNotFound />,
+            errorElement: <ErrorPage />,
           },
         ],
       },
     ],
+  },
+  {
+    path: "/auth",
+    element: <AuthPage />,
   },
 ]);
 

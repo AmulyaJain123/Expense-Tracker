@@ -4,6 +4,13 @@ import PageTile from "./PageTile";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import logIn from "../assets/logIn.png";
+import logOut from "../assets/logOut.png";
+import { useDispatch } from "react-redux";
+import { getCurrentUser } from "../store/firebase-context";
+import { useFirebase } from "../store/firebase-context";
+import { useNavigate } from "react-router-dom";
+import { universalActions } from "../store/main";
 
 const Main = styled.div`
   height: calc(100vh - ${styling.spacing * 2}px);
@@ -87,6 +94,11 @@ export default function SideNav() {
   const location = useLocation();
   const [jump, setJump] = useState([]);
   console.log(location);
+  const [user, setUser] = useState(null);
+  const [fetchingUser, setFetchingUser] = useState(true);
+  const firebase = useFirebase();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (location.pathname === "/") {
@@ -114,8 +126,32 @@ export default function SideNav() {
 
   console.log(jump);
 
+  async function getUser() {
+    const us = await getCurrentUser();
+    console.log(us);
+    setFetchingUser(false);
+    setUser(us);
+  }
+  useEffect(() => {
+    getUser();
+  }, []);
+
+  async function logOutClick() {
+    const res = await firebase.logOutCurrUser();
+    if (res.ok) {
+      navigate("/auth");
+    } else {
+      dispatch(
+        universalActions.setToastMsg({
+          msg: "Logged Out Unsuccessful :(",
+          mood: "error",
+        })
+      );
+    }
+  }
+
   return (
-    <Main className="w-72 rounded-r-xl">
+    <Main className="w-72 rounded-r-xl flex flex-col">
       <Logo>
         <Link to={""}>BILLBUD</Link>
       </Logo>
@@ -135,10 +171,40 @@ export default function SideNav() {
         <div className="text-xl font-semibold mb-3">Jump to</div>
         <div className="flex flex-col pl-2 space-y-2">
           {jump.map((link) => {
-            return <Link to={link.path}>{link.name}</Link>;
+            return (
+              <Link key={link.name} to={link.path}>
+                {link.name}
+              </Link>
+            );
           })}
         </div>
       </div>
+
+      {fetchingUser === false ? (
+        <div className="flex flex-grow justify-end flex-col">
+          {user != null ? (
+            <div className="flex flex-col space-y-4 mb-[20px]  ">
+              <button
+                onClick={logOutClick}
+                className="rounded-lg hover:bg-slate-200 flex space-x-6 mx-4  p-2 duration-500"
+              >
+                <img src={logOut} className=" w-[25px]" alt="" />
+                <span className="font-medium">Logout</span>
+              </button>
+            </div>
+          ) : (
+            <div className="flex flex-col space-y-4  mb-[20px] mt-auto">
+              <Link
+                to={"/auth"}
+                className="rounded-lg space-x-6 flex mx-4 hover:bg-slate-200 p-2 duration-500"
+              >
+                <img src={logIn} className=" w-[25px]" alt="" />
+                <span className="font-medium">Login</span>
+              </Link>
+            </div>
+          )}
+        </div>
+      ) : null}
     </Main>
   );
 }

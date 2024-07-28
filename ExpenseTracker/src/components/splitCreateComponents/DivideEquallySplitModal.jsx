@@ -234,7 +234,7 @@ export default function DivideEquallySplitModal() {
         </div>
         <div className="flex mt-4 rounded-xl bg-white p-3">
           <div className="text-lg bg-black  font-semibold text-white py-2 px-6 rounded-lg">
-            Payed by
+            Paid by
           </div>
           <select
             ref={selectRef}

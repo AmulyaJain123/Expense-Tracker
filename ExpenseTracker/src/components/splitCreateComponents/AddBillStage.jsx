@@ -4,9 +4,10 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { styling } from "../../util/styling";
 import BillModal from "./BillModal";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { splitCreateActions } from "../../store/main";
+import loading from "../../assets/loadingLiq.gif";
 import {
   addBillHeirarchy,
   createSplitHeirachy,
@@ -18,6 +19,7 @@ import DiscardButton from "../../UIComponents/DiscardButton";
 export default function AddBillStage() {
   const modalRef = useRef();
   const bills = useSelector((state) => state.splitCreate.bills);
+  const [spliting, setSpliting] = useState(false);
   const selectBillNavStatus = useSelector(
     (state) => state.splitCreate.selectBillNavStatus
   );
@@ -48,10 +50,14 @@ export default function AddBillStage() {
     }
   }
   function clickHandler() {
-    splitAlgo(bills);
-    dispatch(
-      splitCreateActions.changeTopNavEventStatus(createSplitHeirachy[2])
-    );
+    setSpliting(true);
+    setTimeout(() => {
+      splitAlgo(bills);
+      dispatch(
+        splitCreateActions.changeTopNavEventStatus(createSplitHeirachy[2])
+      );
+      setSpliting(false);
+    }, 3000);
   }
 
   return (
@@ -59,6 +65,19 @@ export default function AddBillStage() {
       <div className="flex justify-end">
         <DiscardButton>Discard</DiscardButton>
       </div>
+      {spliting ? (
+        <div className="absolute bg-black/40 top-0 bottom-0 flex justify-center items-center left-0 right-0">
+          <div className="flex flex-col w-[300px] rounded-xl bg-white  p-6">
+            <div className="text-2xl font-semibold flex justify-center">
+              Spliting....
+            </div>
+            <div className="py-[30px] mx-auto">
+              <img src={loading} className="w-[200px]" alt="" />
+            </div>
+          </div>
+        </div>
+      ) : null}
+
       <div className="w-[900px] bg-[#fff] flex flex-col p-4 rounded-xl mt-8  mx-auto ">
         <BillModal ref={modalRef} />
         <header
