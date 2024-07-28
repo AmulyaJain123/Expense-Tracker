@@ -62,7 +62,7 @@ export default function SplitHome() {
                   />
                 </Link>
                 <p className="flex justify-center text-xl text-stone-500 font-semibold">
-                  Login to Create and View Splits
+                  Login to Create and Save Splits
                 </p>
               </div>
             ) : (

@@ -40,36 +40,42 @@ export default function TrackHome() {
         Links
       </div>
 
-      <div className="flex mb-4">
+      <div className="flex mb-4 justify-start space-x-6 mx-[220px] flex-wrap">
         <Link
-          className="py-2 px-4 rounded-lg ml-[220px] text-2xl  text-[#fff] hover:text-[#9d4edd] hover:scale-110 hover:bg-[#fff] border-2 border-[#9d4edd] duration-500 font-semibold bg-[#9d4edd]"
+          className="py-2 px-4 w-[200px] h-[200px] group rounded-2xl  text-2xl  text-[#fff] hover:text-[#9d4edd] hover:scale-110 hover:bg-[#fff] border-2 border-[#9d4edd] duration-500 font-semibold bg-[#9d4edd]"
           to={"dashboard"}
         >
-          Go to DashBoard
+          <p className="pb-2 border-b-2 border-white group-hover:border-[#9d4edd] ">
+            Go To Dashboard
+          </p>
         </Link>
-      </div>
-
-      <div className="flex justify-start  ml-[220px] gap-y-8 gap-x-8 items-center flex-wrap">
         <Link
-          className="py-2 px-4 flex rounded-lg text-2xl text-[#fff] hover:text-[#000] hover:scale-110 hover:bg-[#fff] border-2 border-[#000] duration-500 font-semibold bg-[#000]"
+          className="py-2 px-4 w-[200px] h-[200px] group justify-center items-center rounded-2xl  text-2xl  text-[#fff] hover:text-[#000] hover:scale-110 hover:bg-[#fff] border-2 border-[#000] duration-500 font-semibold bg-[#000]"
           to={"create"}
         >
-          <span className="flex items-center mr-3">
-            <i className="fi fi-br-plus flex justify-center text-xl items-center"></i>
-          </span>
-          <span className="flex items-center">Create Transaction</span>
+          <p className="pb-2 border-b-2 border-white group-hover:border-[#000] ">
+            <span className="flex items-center mr-3">
+              <i className="fi fi-br-plus flex justify-center mr-3 text-xl items-center"></i>
+              <span>Create</span>
+            </span>
+            <span className="flex items-center">Transaction</span>
+          </p>
         </Link>
         <Link
-          className="py-2 px-4 flex rounded-lg text-2xl  text-[#fff] hover:text-[#000] hover:scale-110 hover:bg-[#fff] border-2 border-[#000] duration-500 font-semibold bg-[#000]"
+          className="py-2 px-4 w-[200px] h-[200px] group justify-center items-center rounded-2xl  text-2xl  text-[#fff] hover:text-[#000] hover:scale-110 hover:bg-[#fff] border-2 border-[#000] duration-500 font-semibold bg-[#000]"
           to={"transactions"}
         >
-          Go to Transactions
+          <p className="pb-2 border-b-2 border-white group-hover:border-[#000] ">
+            Go To Transactions
+          </p>
         </Link>
         <Link
-          className="py-2 px-4 flex rounded-lg text-2xl text-[#fff] hover:text-[#000] hover:scale-110 hover:bg-[#fff] border-2 border-[#000] duration-500 font-semibold bg-[#000]"
+          className="py-2 px-4 w-[200px] h-[200px] group justify-center items-center rounded-2xl  text-2xl  text-[#fff] hover:text-[#000] hover:scale-110 hover:bg-[#fff] border-2 border-[#000] duration-500 font-semibold bg-[#000]"
           to={"distributions"}
         >
-          Go to Distributions
+          <p className="pb-2 border-b-2 border-white group-hover:border-[#000] ">
+            Go To Distributions
+          </p>
         </Link>
       </div>
     </div>

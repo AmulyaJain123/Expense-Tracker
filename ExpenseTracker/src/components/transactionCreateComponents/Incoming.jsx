@@ -135,7 +135,7 @@ export default function Incoming() {
   }
 
   function discardHandle() {
-    navigate("/track/dashboard");
+    navigate("/track");
   }
 
   function disableCheck() {

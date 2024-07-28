@@ -18,15 +18,15 @@ export default function Root() {
   useEffect(() => {
     console.log("toastMsg", toastMsg);
     if (toastMsg != null) {
-      if(toastMsg.mood==="success"){
+      if (toastMsg.mood === "success") {
         toast.success(toastMsg.msg);
-      }else if(toastMsg.mood==="error"){
+      } else if (toastMsg.mood === "error") {
         toast.error(toastMsg.msg);
       }
     }
   }, [toastMsg]);
 
-  function close(){
+  function close() {
     dispatch(universalActions.clearToastMsg());
   }
 

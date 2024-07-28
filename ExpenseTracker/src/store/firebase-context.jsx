@@ -66,7 +66,6 @@ const FirebaseContext = createContext({
   deleteBill: () => {},
   addTransaction: () => {},
   fetchAllTransactions: () => {},
-  getCurrUser: () => {},
   signUp: () => {},
   logOutCurrUser: () => {},
   signIn: () => {},
@@ -108,7 +107,7 @@ export async function billViewLoader({ request }) {
   const url = new URL(request.url);
   let billId = url.searchParams.get("billId");
 
-  const collRef = collection(firestore, "vaultBills");
+  const collRef = collection(firestore, `users/${user.uid}/vault`);
   const q = query(collRef, where("billId", "==", billId));
   const documents = await getDocs(q);
   console.log(documents);
@@ -126,7 +125,7 @@ export async function billViewLoader({ request }) {
     bill.expiryDate = bill.expiryDate.toDate();
   }
 
-  const path = `billVault/${billId}/`;
+  const path = `vault/${user.uid}/${billId}/`;
   console.log(path);
   const folderRef = ref(storage, path);
   const res = await listAll(folderRef);
@@ -158,7 +157,7 @@ export async function vaultViewLoader({ request, params }) {
   ) {
     throw "403";
   }
-  const collRef = collection(firestore, "vaultBills");
+  const collRef = collection(firestore, `users/${user.uid}/vault`);
   const q = query(collRef, orderBy(sortField, "desc"));
   const res = await getDocs(q);
   console.log(res);
@@ -174,7 +173,7 @@ export async function transactionsLoader({ request }) {
     throw "402";
   }
 
-  const collRef = collection(firestore, "transactions");
+  const collRef = collection(firestore, `users/${user.uid}/transactions`);
   const q = query(collRef, orderBy("dateTime", "desc"));
   const documents = await getDocs(q);
   if (documents.metadata.fromCache) {
@@ -194,7 +193,7 @@ export async function distributionLoader({ request }) {
     throw "402";
   }
 
-  const collRef = collection(firestore, "transactions");
+  const collRef = collection(firestore, `users/${user.uid}/transactions`);
   const q = query(collRef, orderBy("dateTime", "desc"));
   const documents = await getDocs(q);
   if (documents.metadata.fromCache) {
@@ -213,7 +212,7 @@ export async function dashboardLoader({ request }) {
   if (user === null) {
     throw "402";
   }
-  const collRef = collection(firestore, "transactions");
+  const collRef = collection(firestore, `users/${user.uid}/transactions`);
   const q = query(collRef, orderBy("dateTime", "desc"));
   const documents = await getDocs(q);
   if (documents.metadata.fromCache) {
@@ -244,7 +243,11 @@ export async function dashboardLoader({ request }) {
 export default function FirebaseProvider({ children }) {
   async function getRangeOfSplits(startDoc, count) {
     try {
-      const collRef = collection(firestore, "splits");
+      const user = await getCurrentUser();
+      if (user === null) {
+        throw "error";
+      }
+      const collRef = collection(firestore, `users/${user.uid}/splits`);
       let q = null;
       if (startDoc === null) {
         q = query(collRef, orderBy("createdAt", "desc"), limit(count));
@@ -287,7 +290,11 @@ export default function FirebaseProvider({ children }) {
 
   async function addSplit(data) {
     try {
-      const collRef = collection(firestore, "splits");
+      const user = await getCurrentUser();
+      if (user === null) {
+        throw "error";
+      }
+      const collRef = collection(firestore, `users/${user.uid}/splits`);
 
       const timeoutPromise = new Promise((_, reject) => {
         setTimeout(() => {
@@ -312,6 +319,10 @@ export default function FirebaseProvider({ children }) {
 
   async function deleteSplit(id) {
     try {
+      const user = await getCurrentUser();
+      if (user === null) {
+        throw "error";
+      }
       console.log(id);
 
       const timeoutPromise = new Promise((_, reject) => {
@@ -321,7 +332,7 @@ export default function FirebaseProvider({ children }) {
       });
 
       const res = await Promise.race([
-        deleteDoc(doc(firestore, "splits", id)),
+        deleteDoc(doc(firestore, `users/${user.uid}/splits`, id)),
         timeoutPromise,
       ]);
 
@@ -340,8 +351,12 @@ export default function FirebaseProvider({ children }) {
 
   async function addBill(data) {
     try {
+      const user = await getCurrentUser();
+      if (user === null) {
+        throw "error";
+      }
       console.log(data);
-      const collRef = collection(firestore, "vaultBills");
+      const collRef = collection(firestore, `users/${user.uid}/vault`);
       const billDate = data.billDate;
       const billId = v4();
       const billDesc = data.billDesc;
@@ -359,7 +374,10 @@ export default function FirebaseProvider({ children }) {
       const images = [];
       for (let i of data.fileObjects) {
         let nameOfImage = v4() + i.name;
-        const imageRef = ref(storage, `billVault/${billId}/${nameOfImage}`);
+        const imageRef = ref(
+          storage,
+          `vault/${user.uid}/${billId}/${nameOfImage}`
+        );
         console.log("ewwef");
         const result = uploadBytesResumable(imageRef, i);
         console.log("wewrwerrfrfefef");
@@ -402,17 +420,23 @@ export default function FirebaseProvider({ children }) {
 
   async function deleteBill(id) {
     try {
+      const user = await getCurrentUser();
+      if (user === null) {
+        throw "error";
+      }
       console.log(id);
-      const collRef = collection(firestore, "vaultBills");
+      const collRef = collection(firestore, `users/${user.uid}/vault`);
       const q = query(collRef, where("billId", "==", id));
       const document = await getDocs(q);
       const docId = document.docs[0].id;
       for (let i of document.docs[0].data().images) {
         const url = i;
-        const reference = ref(storage, `billVault/${id}/${url}`);
+        const reference = ref(storage, `vault/${user.uid}/${id}/${url}`);
         const res = await deleteObject(reference);
       }
-      const res = await deleteDoc(doc(firestore, "vaultBills", docId));
+      const res = await deleteDoc(
+        doc(firestore, `users/${user.uid}/vault`, docId)
+      );
       return new Response(
         JSON.stringify({ message: "Data Deleted Successfully" }),
         { status: 200 }
@@ -426,9 +450,9 @@ export default function FirebaseProvider({ children }) {
     }
   }
 
-  async function getCurrUser() {
-    return auth.currentUser;
-  }
+  // async function getCurrUser() {
+  //   return auth.currentUser;
+  // }
 
   async function signUp(email, password, firstName, lastName) {
     try {
@@ -484,7 +508,11 @@ export default function FirebaseProvider({ children }) {
 
   async function addTransaction(data) {
     try {
-      const collRef = collection(firestore, "transactions");
+      const user = await getCurrentUser();
+      if (user === null) {
+        throw "error";
+      }
+      const collRef = collection(firestore, `users/${user.uid}/transactions`);
       const timeoutPromise = new Promise((_, reject) => {
         setTimeout(() => {
           reject(new Error("Operation timed out"));
@@ -507,7 +535,11 @@ export default function FirebaseProvider({ children }) {
 
   async function fetchAllTransactions() {
     try {
-      const collRef = collection(firestore, "transactions");
+      const user = await getCurrentUser();
+      if (user === null) {
+        throw "error";
+      }
+      const collRef = collection(firestore, `users/${user.uid}/transactions`);
       let q = query(collRef, orderBy("dateTime", "desc"));
       let res = await getDocs(q);
       console.log(res);
@@ -538,7 +570,6 @@ export default function FirebaseProvider({ children }) {
     deleteBill,
     addTransaction,
     fetchAllTransactions,
-    getCurrUser,
     signUp,
     logOutCurrUser,
     signIn,

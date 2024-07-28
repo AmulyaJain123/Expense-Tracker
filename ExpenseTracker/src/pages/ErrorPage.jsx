@@ -25,10 +25,8 @@ export default function ErrorPage() {
           {error === "402" ? (
             <>
               <img src={user} className="w-[100px]  mb-6" alt="" />
-              <p className="font-semibold text-2xl mb-1">
-                Permission Not Granted
-              </p>
-              <p className="font-semibold text-2xl">Login To Continue</p>
+              <p className="font-semibold text-2xl mb-1">Permission Denied</p>
+              <p className="font-semibold text-2xl">Login Required</p>
             </>
           ) : null}
 

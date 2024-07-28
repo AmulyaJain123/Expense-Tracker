@@ -11,12 +11,23 @@ import { useFirebase } from "../store/firebase-context";
 import { useDispatch } from "react-redux";
 import { universalActions } from "../store/main";
 import { useNavigate } from "react-router-dom";
+import TopNavButton from "../UIComponents/TopNavButton";
 
 export default function TopNav() {
   const location = useLocation();
   const isOnCreateSplit = location.pathname === "/split/create";
   const isOnCreateBill = location.pathname === "/vault/create";
   const isOnCreateTransaction = location.pathname === "/track/create";
+  const isOnHome = location.pathname === "/";
+  const isOnSplitHome = location.pathname === "/split";
+  const isOnBillVaultHome = location.pathname === "/vault";
+  const isOnVault = location.pathname === "/vault/view";
+  const isOnBillView = location.pathname === "/vault/view/bill";
+  const isOnBillTrackHome = location.pathname === "/track";
+  const isOnDashboard = location.pathname === "/track/dashboard";
+  const isOnDistributions = location.pathname === "/track/distributions";
+  const isOnTransactions = location.pathname === "/track/transactions";
+
   const [user, setUser] = useState(null);
   const [fetchingUser, setFetchingUser] = useState(true);
   const firebase = useFirebase();
@@ -55,6 +66,12 @@ export default function TopNav() {
       }}
       className="flex  items-center p-2 h-14 rounded-l-xl"
     >
+      {isOnHome ? <TopNavButton>Home</TopNavButton> : null}
+      {isOnSplitHome ? <TopNavButton>BillSplit Home</TopNavButton> : null}
+      {isOnBillVaultHome ? <TopNavButton>BillVault Home</TopNavButton> : null}
+
+      {isOnBillTrackHome ? <TopNavButton>BillTrack Home</TopNavButton> : null}
+
       {fetchingUser === false ? (
         <>
           {user != null ? (
@@ -66,31 +83,20 @@ export default function TopNav() {
                     </TopNavThumbs>
                   ))
                 : ""}
-              {isOnCreateBill ? (
-                <div className="p-1">
-                  <div
-                    style={{
-                      backgroundColor: styling.topNavThumbsBgCol,
-                      border: `2px solid ${styling.topNavThumbsBgCol}`,
-                    }}
-                    className="p-1 rounded-lg px-2 flex items-center"
-                  >
-                    Bill Upload
-                  </div>
-                </div>
-              ) : null}
+              {isOnCreateBill ? <TopNavButton>Bill Upload</TopNavButton> : null}
               {isOnCreateTransaction ? (
-                <div className="p-1">
-                  <div
-                    style={{
-                      backgroundColor: styling.topNavThumbsBgCol,
-                      border: `2px solid ${styling.topNavThumbsBgCol}`,
-                    }}
-                    className="p-1 rounded-lg px-2 flex items-center"
-                  >
-                    Transaction Creation
-                  </div>
-                </div>
+                <TopNavButton>Transaction Creation</TopNavButton>
+              ) : null}
+
+              {isOnVault ? <TopNavButton>Vault</TopNavButton> : null}
+              {isOnBillView ? <TopNavButton>Bill View</TopNavButton> : null}
+
+              {isOnDashboard ? <TopNavButton>Dashboard</TopNavButton> : null}
+              {isOnDistributions ? (
+                <TopNavButton>Distributions</TopNavButton>
+              ) : null}
+              {isOnTransactions ? (
+                <TopNavButton>Transactions</TopNavButton>
               ) : null}
             </>
           ) : null}
