@@ -16,7 +16,7 @@ const Button = styled.button`
 `;
 
 export default function FileView({ data }) {
-  console.log(data[0]);
+  // console.log(data[0]);
   const [currUrl, setcurrUrl] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -26,14 +26,14 @@ export default function FileView({ data }) {
   }
 
   function errorDeal(event) {
-    console.log(event, event.target);
+    // console.log(event, event.target);
     console.dir(event.target);
     event.target.src = noImg;
   }
 
   function loadComplete() {
     setLoading(false);
-    console.log("completed");
+    // console.log("completed");
   }
 
   return (

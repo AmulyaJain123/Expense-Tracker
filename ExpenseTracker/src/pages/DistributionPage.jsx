@@ -18,16 +18,16 @@ export default function DistributionPage() {
   const dispatch = useDispatch();
   const filteredData = useSelector((state) => state.distribution.filteredData);
   const durations = useSelector((state) => state.distribution.durations);
-  console.log(data);
-  console.log(data);
+  // console.log(data);
+  // console.log(data);
 
   useEffect(() => {
-    console.log("duration", durations);
+    // console.log("duration", durations);
     if (durations.length != 0) {
       let arr = JSON.parse(JSON.stringify(data));
       arr = JSON.parse(JSON.stringify(filterarr(arr, "Date", durations)));
-      console.log(data);
-      console.log("Filtered", arr);
+      // console.log(data);
+      // console.log("Filtered", arr);
       const newData = getData(JSON.parse(JSON.stringify(arr)));
       dispatch(
         distributionActions.setFilteredData(JSON.parse(JSON.stringify(newData)))
@@ -60,11 +60,11 @@ export default function DistributionPage() {
   }
 
   function filterarr(arr, name, options) {
-    console.log(arr, name, options);
+    // console.log(arr, name, options);
     const newArr = [];
     for (let i of arr) {
       let bool = false;
-      //   console.log(i, i[name]);
+      //   // console.log(i, i[name]);
       for (let j of options) {
         const val = getVal(name, j);
         const arrVal = getName(i, name);
@@ -103,7 +103,7 @@ export default function DistributionPage() {
     }
   }
 
-  console.log(filteredData);
+  // console.log(filteredData);
 
   return (
     <div className="h-full w-full bg-white overflow-auto pb-[200px] text-stone-700 rounded-l-xl">

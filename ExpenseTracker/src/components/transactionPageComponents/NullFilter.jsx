@@ -28,7 +28,7 @@ export default function NullFilter() {
           </div>
           <div className="flex mt-4 overflow-auto pt-[20px] customScroll flex-wrap gap-3">
             {filters.map((i, index) => {
-              console.log(i);
+              // console.log(i);
               return (
                 <div
                   key={Math.random()}

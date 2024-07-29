@@ -34,7 +34,7 @@ export default function PieChart1() {
   }
 
   function legendHover(event, index) {
-    console.log("legend", event, index);
+    // console.log("legend", event, index);
 
     const percent = numeral(event.payload.percent).format("0.00%");
     const name = event.payload.name;

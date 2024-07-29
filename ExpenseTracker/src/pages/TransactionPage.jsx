@@ -14,17 +14,17 @@ export default function TransactionPage() {
   const dispatch = useDispatch();
   const filteredData = useSelector((state) => state.transactions.filteredData);
   const filters = useSelector((state) => state.transactions.filtersAdded);
-  console.log(data);
+  // console.log(data);
   useEffect(() => {
     if (filters.length != 0) {
       let arr = JSON.parse(JSON.stringify(data));
       for (let i of filters) {
-        console.log(i);
+        // console.log(i);
         const { name, options } = i;
         arr = JSON.parse(JSON.stringify(filterarr(arr, name, options)));
       }
-      console.log(data);
-      console.log("Filtered", arr);
+      // console.log(data);
+      // console.log("Filtered", arr);
       dispatch(
         transactionActions.setFilteredData(JSON.parse(JSON.stringify(arr)))
       );
@@ -63,16 +63,16 @@ export default function TransactionPage() {
   }
 
   function filterarr(arr, name, options) {
-    console.log(arr, name, options);
+    // console.log(arr, name, options);
     const newArr = [];
     for (let i of arr) {
       let bool = false;
-      //   console.log(i, i[name]);
+      //   // console.log(i, i[name]);
       for (let j of options) {
         const val = getVal(name, j);
-        console.log("val", val);
+        // console.log("val", val);
         const arrVal = getName(i, name);
-        console.log("arrVal", i, arrVal);
+        // console.log("arrVal", i, arrVal);
         const compareRes = compareVal(name, val, arrVal);
         if (compareRes) {
           bool = true;
@@ -89,7 +89,7 @@ export default function TransactionPage() {
   function compareVal(name, val, arrVal) {
     if (name === "Amount") {
       const [relation, value] = val;
-      console.log("comparison", relation, value, arrVal);
+      // console.log("comparison", relation, value, arrVal);
       if (relation === "==") {
         return value === arrVal;
       }
@@ -97,7 +97,7 @@ export default function TransactionPage() {
         return value > arrVal;
       }
       if (relation === ">") {
-        console.log(value > arrVal);
+        // console.log(value > arrVal);
         return value < arrVal;
       }
       if (relation === ">=") {
@@ -106,7 +106,7 @@ export default function TransactionPage() {
       if (relation === "<=") {
         return value >= arrVal;
       }
-      console.log("wekwfuef");
+      // console.log("wekwfuef");
     }
     if (name != "Date") {
       return val === arrVal;
@@ -134,10 +134,10 @@ export default function TransactionPage() {
       return option;
     }
     if (name === "Amount") {
-      console.log("option", option);
+      // console.log("option", option);
       const val = parseFloat(option.split(" ")[1]);
       const relation = option.split(" ")[0];
-      console.log(val, relation);
+      // console.log(val, relation);
       return [relation, val];
     }
     if (name === "Date") {

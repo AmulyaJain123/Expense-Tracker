@@ -13,7 +13,7 @@ export default function SavedSplits() {
   useEffect(() => {
     async function initialFetch() {
       const reply = await firebase.getRangeOfSplits(finalDoc, 5);
-      console.log(reply);
+      // console.log(reply);
       if (reply.res === null) {
         setLoading("No Splits Saved");
         setHide(true);
@@ -42,12 +42,12 @@ export default function SavedSplits() {
     initialFetch();
   }, []);
 
-  console.log(splits);
+  // console.log(splits);
 
   async function loadHandle() {
     setLoadMore(true);
     const reply = await firebase.getRangeOfSplits(finalDoc, 10);
-    console.log(reply);
+    // console.log(reply);
     if (reply.status === 500 || reply.res.metadata.fromCache === true) {
       alert("Error Loading Data");
       setLoadMore(false);
@@ -76,7 +76,7 @@ export default function SavedSplits() {
           <p className="p-2">{loading}</p>
         ) : (
           splits.map((split) => {
-            console.log(split);
+            // console.log(split);
             return (
               <SplitBox
                 setSplitState={setSplits}

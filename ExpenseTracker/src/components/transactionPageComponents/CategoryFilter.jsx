@@ -54,7 +54,7 @@ export default function CategoryFilter() {
       return i.trim() != "" ? true : false;
     });
     const obj = { name: filterParam, options: [...arr] };
-    console.log(obj);
+    // console.log(obj);
     dispatch(transactionActions.pushFilter(obj));
     dispatch(transactionActions.closeOpen());
   }

@@ -17,7 +17,7 @@ const InputFile = forwardRef(function InputFile({ ...props }, ref) {
   useImperativeHandle(ref, () => {
     return {
       getData() {
-        console.log(fileObj);
+        // console.log(fileObj);
         const fileObjects = [...fileObj];
         return { fileObjects };
       },
@@ -37,7 +37,7 @@ const InputFile = forwardRef(function InputFile({ ...props }, ref) {
     const res = validateFileUpload(enteredFile);
     setFileObj((preval) => {
       const file = enteredFile;
-      console.log("nextFile", file);
+      // console.log("nextFile", file);
       return [...preval, file];
     });
     if (res != null) {
@@ -48,7 +48,7 @@ const InputFile = forwardRef(function InputFile({ ...props }, ref) {
       };
       dispatch(vaultActions.setFileError(obj));
     }
-    console.log("File", event.target.files[0]);
+    // console.log("File", event.target.files[0]);
     const file = {
       name: enteredFile.name,
       size: enteredFile.size,

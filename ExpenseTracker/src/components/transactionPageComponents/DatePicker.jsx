@@ -143,16 +143,16 @@ export default function DatePicker() {
 
   useEffect(() => {
     const selectedMonth = new Date();
-    console.log("erferf");
+    // console.log("erferf");
     selectedMonth.setMonth(currMonth - 1);
     selectedMonth.setFullYear(currYear);
     let totalDays = getNoOfDays();
-    console.log(totalDays);
+    // console.log(totalDays);
     let DOW = 0;
     let dayCounter = 0;
     const arr = [];
     while (totalDays != 0) {
-      console.log("HEHEHE");
+      // console.log("HEHEHE");
       const weekDay = DOW % 7;
       const thatDate = new Date();
       thatDate.setMonth(currMonth - 1);
@@ -168,7 +168,7 @@ export default function DatePicker() {
       }
       ++DOW;
     }
-    console.log(arr);
+    // console.log(arr);
     const ans = [];
     for (let i = 0; i <= 6; ++i) {
       const week = [null, null, null, null, null, null, null];
@@ -187,7 +187,7 @@ export default function DatePicker() {
         ans.push(week);
       }
     }
-    console.log(ans);
+    // console.log(ans);
     setCalander(ans);
   }, [currYear, currMonth]);
 
@@ -358,7 +358,7 @@ export default function DatePicker() {
                           thumbDate.setFullYear(currYear);
                           thumbDate.setDate(j);
                           thumbDate.setHours(0, 0, 0, 0);
-                          console.log(thumbDate, date1, date2);
+                          // console.log(thumbDate, date1, date2);
                           if (
                             thumbDate.getTime() == date1.getTime() ||
                             thumbDate.getTime() == date2.getTime() ||
@@ -390,7 +390,7 @@ export default function DatePicker() {
                         if (isInRange) {
                           str += " isInRange";
                         }
-                        console.log(str);
+                        // console.log(str);
                         return (
                           <div key={Math.random()}>
                             {j != null ? (

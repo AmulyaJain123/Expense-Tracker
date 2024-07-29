@@ -156,7 +156,7 @@ export default function DivideByRatioSplitModal() {
         payedBy,
         shares,
       };
-      console.log(obj);
+      // console.log(obj);
       dispatch(splitCreateActions.addBill(obj));
       cancelRef.current.click();
     }

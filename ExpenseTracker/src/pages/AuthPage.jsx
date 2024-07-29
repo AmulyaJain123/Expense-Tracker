@@ -38,9 +38,9 @@ export default function AuthPage() {
   const navigate = useNavigate();
 
   const validateEmail = (email) => {
-    console.log(email);
+    // console.log(email);
     const res = email.match(/^[A-Za-z\._\-0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/);
-    console.log(res);
+    // console.log(res);
     return res;
   };
 
@@ -97,7 +97,7 @@ export default function AuthPage() {
       const password = logInPasswordRef.current.value;
       const res = await firebase.signIn(email, password);
       setLogInLoading(false);
-      console.log(res);
+      // console.log(res);
       if (res.ok === undefined) {
         dispatch(
           universalActions.setToastMsg({

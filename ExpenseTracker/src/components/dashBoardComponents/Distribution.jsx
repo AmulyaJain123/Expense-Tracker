@@ -36,7 +36,7 @@ export default function Distribution() {
   const [stage, setStage] = useState(null);
   const data = useSelector((state) => state.dashboard.data);
   const [transactions, setTransactions] = useState(null);
-  console.log(data);
+  // console.log(data);
 
   useEffect(() => {
     if (data != null) {
@@ -53,7 +53,7 @@ export default function Distribution() {
   }
 
   function sectorClick(event, index) {
-    console.log("click", event, index);
+    // console.log("click", event, index);
     setStage({ level: 1, ind: index });
     setActiveSector(null);
   }
@@ -71,7 +71,7 @@ export default function Distribution() {
   }
 
   function legendHover(event, index) {
-    console.log("legend", event, index);
+    // console.log("legend", event, index);
 
     const percent = numeral(event.payload.percent).format("0.00%");
     const name = event.payload.name;

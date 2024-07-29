@@ -62,7 +62,7 @@ export function getData(transactions) {
             }
         })
     }];
-    console.log(ans);
+    // console.log(ans);
     for (let i of transactions) {
         const category = i.category;
         const type = i.transactionType;
@@ -93,7 +93,7 @@ export function getData(transactions) {
             // if (ans[1].subFields[firstInd].value === undefined) {
             //     ans[1].subFields[firstInd].value = 0;
             // }
-            console.log(parentField, category);
+            // console.log(parentField, category);
             ans[1].subFields[firstInd].value += amount;
             const secondInd = ans[1].subFields[firstInd].subFields.findIndex((i) => i.name === category);
             // if (ans[1].subFields[firstInd].subFields[secondInd].value === undefined) {
@@ -102,21 +102,21 @@ export function getData(transactions) {
             ans[1].subFields[firstInd].subFields[secondInd].value += amount;
         }
     }
-    console.log(JSON.parse(JSON.stringify(ans)));
+    // console.log(JSON.parse(JSON.stringify(ans)));
     function eleminateNulls(currColl) {
         for (let i = 0; i < currColl.length; ++i) {
-            console.log("currcoll", JSON.parse(JSON.stringify(currColl[i])))
+            // console.log("currcoll", JSON.parse(JSON.stringify(currColl[i])))
             if (currColl[i].value === 0) {
                 currColl.splice(i, 1);
-                console.log("spliced", JSON.parse(JSON.stringify(currColl)))
+                // console.log("spliced", JSON.parse(JSON.stringify(currColl)))
                 --i;
             } else {
                 let newColl = currColl[i].subFields;
                 if (newColl === undefined) {
-                    console.log("undefined");
+                    // console.log("undefined");
                     continue;
                 } else {
-                    console.log("newcoll", JSON.parse(JSON.stringify(newColl)));
+                    // console.log("newcoll", JSON.parse(JSON.stringify(newColl)));
                     eleminateNulls(newColl);
                 }
             }
@@ -128,7 +128,7 @@ export function getData(transactions) {
     //     }
     // }
     eleminateNulls(ans);
-    console.log(ans);
+    // console.log(ans);
 
     return ans;
 }

@@ -59,7 +59,7 @@ export default function Trend() {
           obj[date.getMonth()][i.transactionType] += i.transactionAmount;
         }
       }
-      console.log(obj);
+      // console.log(obj);
       setTransactions(obj);
     }
   }, [year, data]);
@@ -69,7 +69,7 @@ export default function Trend() {
   }
 
   function formatTick(val) {
-    console.log(val);
+    // console.log(val);
     return `${numeral(val).format("0,0")}₹`;
   }
 
@@ -77,7 +77,7 @@ export default function Trend() {
     return `${numeral(name).format("0,0.00")} ₹`;
   }
 
-  console.log(data);
+  // console.log(data);
   return (
     <div className="flex flex-col relative p-4  rounded-2xl mx-4 min-h-[600px] overflow-hidden bg-[#f7ebfd]">
       <div className=" flex justify-center mb-4 pl-6 pr-2 rounded-xl  py-2 bg-[#9f21e3] ">

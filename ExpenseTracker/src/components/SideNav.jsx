@@ -93,7 +93,7 @@ const pages = [
 export default function SideNav() {
   const location = useLocation();
   const [jump, setJump] = useState([]);
-  console.log(location);
+  // console.log(location);
   const [user, setUser] = useState(null);
   const [fetchingUser, setFetchingUser] = useState(true);
   const firebase = useFirebase();
@@ -124,11 +124,11 @@ export default function SideNav() {
     }
   }, [location]);
 
-  console.log(jump);
+  // console.log(jump);
 
   async function getUser() {
     const us = await getCurrentUser();
-    console.log(us);
+    // console.log(us);
     setFetchingUser(false);
     setUser(us);
   }

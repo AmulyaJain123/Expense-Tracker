@@ -11,7 +11,7 @@ export default function TransactionRows({ data }) {
     transactionType,
   } = data;
 
-  console.log(dateTime);
+  // console.log(dateTime);
 
   function formatNum(num) {
     const n = parseInt(num);

@@ -73,7 +73,7 @@ export default function NameFilter() {
 
   function applyClick() {
     const obj = { name: filterParam, options: [...names] };
-    console.log(obj);
+    // console.log(obj);
     dispatch(transactionActions.pushFilter(obj));
     dispatch(transactionActions.closeOpen());
   }

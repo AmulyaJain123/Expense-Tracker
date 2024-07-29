@@ -49,7 +49,7 @@ export default function TypeFilter() {
       options = ["Incoming", "Outgoing"];
     }
     const obj = { name: filterParam, options: options };
-    console.log(obj);
+    // console.log(obj);
     dispatch(transactionActions.pushFilter(obj));
     dispatch(transactionActions.closeOpen());
   }

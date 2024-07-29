@@ -36,7 +36,7 @@ export default function TopNav() {
 
   async function getUser() {
     const us = await getCurrentUser();
-    console.log(us);
+    // console.log(us);
     setFetchingUser(false);
     setUser(us);
   }

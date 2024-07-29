@@ -54,9 +54,9 @@ const firestore = getFirestore();
 const storage = getStorage();
 const auth = getAuth();
 setTimeout(() => {
-  console.log(auth.currentUser);
+  // console.log(auth.currentUser);
 }, 2000);
-console.log("auth", auth, auth.currentUser);
+// console.log("auth", auth, auth.currentUser);
 
 const FirebaseContext = createContext({
   getRangeOfSplits: () => {},
@@ -110,7 +110,7 @@ export async function billViewLoader({ request }) {
   const collRef = collection(firestore, `users/${user.uid}/vault`);
   const q = query(collRef, where("billId", "==", billId));
   const documents = await getDocs(q);
-  console.log(documents);
+  // console.log(documents);
   if (documents.metadata.fromCache) {
     throw "401";
   }
@@ -118,7 +118,7 @@ export async function billViewLoader({ request }) {
     throw "403";
   }
   const bill = documents.docs[0].data();
-  console.log(bill);
+  // console.log(bill);
   bill.billDate = bill.billDate.toDate();
   bill.createdOn = bill.createdOn.toDate();
   if (bill.expiryDate != null) {
@@ -126,16 +126,16 @@ export async function billViewLoader({ request }) {
   }
 
   const path = `vault/${user.uid}/${billId}/`;
-  console.log(path);
+  // console.log(path);
   const folderRef = ref(storage, path);
   const res = await listAll(folderRef);
-  console.log(res);
+  // console.log(res);
   let images = [];
   for (let i of res.items) {
     const url = await getDownloadURL(i);
     images.push(url);
   }
-  console.log(images);
+  // console.log(images);
   return { bill: bill, images: images };
 }
 
@@ -145,7 +145,7 @@ export async function vaultViewLoader({ request, params }) {
     throw "402";
   }
   const url = new URL(request.url);
-  console.log(url);
+  // console.log(url);
   if (url.pathname === "/vault/view" && url.search === "") {
     return redirect("/vault/view?sortBy=createdOn");
   }
@@ -160,7 +160,7 @@ export async function vaultViewLoader({ request, params }) {
   const collRef = collection(firestore, `users/${user.uid}/vault`);
   const q = query(collRef, orderBy(sortField, "desc"));
   const res = await getDocs(q);
-  console.log(res);
+  // console.log(res);
   if (res.metadata.fromCache) {
     throw "401";
   }
@@ -221,7 +221,7 @@ export async function dashboardLoader({ request }) {
 
   let arr = [];
   documents.docs.forEach((i) => arr.push(i.data()));
-  console.log(arr);
+  // console.log(arr);
   const ans = [];
   const currDate = new Date().getDate();
   const currMonth = new Date().getMonth() + 1;
@@ -236,7 +236,7 @@ export async function dashboardLoader({ request }) {
       ans.push(i);
     }
   }
-  console.log(ans);
+  // console.log(ans);
   return ans;
 }
 
@@ -260,7 +260,7 @@ export default function FirebaseProvider({ children }) {
         );
       }
       let res = await getDocs(q);
-      // console.log(res);
+      // // console.log(res);
       if (res.metadata.fromCache === false && res.empty) {
         return { res: null, lastDoc: null, nextExists: false };
       }
@@ -273,11 +273,11 @@ export default function FirebaseProvider({ children }) {
           limit(1)
         )
       );
-      // console.log("newres", newres);
+      // // console.log("newres", newres);
       const nextExists = !newres.empty;
       return { res, lastDoc, nextExists };
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       const res = new Response(
         JSON.stringify({ message: "Could not fetch data." }),
         {
@@ -309,7 +309,7 @@ export default function FirebaseProvider({ children }) {
         { status: 200 }
       );
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       return new Response(
         JSON.stringify({ message: "Could not Append Data." }),
         { status: 403 }
@@ -323,7 +323,7 @@ export default function FirebaseProvider({ children }) {
       if (user === null) {
         throw "error";
       }
-      console.log(id);
+      // console.log(id);
 
       const timeoutPromise = new Promise((_, reject) => {
         setTimeout(() => {
@@ -341,7 +341,7 @@ export default function FirebaseProvider({ children }) {
         { status: 200 }
       );
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       return new Response(
         JSON.stringify({ message: "Could not Delete Data." }),
         { status: 403 }
@@ -355,7 +355,7 @@ export default function FirebaseProvider({ children }) {
       if (user === null) {
         throw "error";
       }
-      console.log(data);
+      // console.log(data);
       const collRef = collection(firestore, `users/${user.uid}/vault`);
       const billDate = data.billDate;
       const billId = v4();
@@ -378,11 +378,11 @@ export default function FirebaseProvider({ children }) {
           storage,
           `vault/${user.uid}/${billId}/${nameOfImage}`
         );
-        console.log("ewwef");
+        // console.log("ewwef");
         const result = uploadBytesResumable(imageRef, i);
-        console.log("wewrwerrfrfefef");
+        // console.log("wewrwerrfrfefef");
         const timer = setTimeout(() => {
-          console.log("wefwef");
+          // console.log("wefwef");
           result.cancel();
         }, 20000);
         await result;
@@ -402,15 +402,15 @@ export default function FirebaseProvider({ children }) {
         expiryDate,
         images,
       };
-      console.log(obj);
+      // console.log(obj);
       const result = await addDoc(collRef, obj);
-      console.log("hellllo");
+      // console.log("hellllo");
       return new Response(
         JSON.stringify({ message: "Data Appended Successfully" }),
         { status: 200 }
       );
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       return new Response(
         JSON.stringify({ message: "Could not Append Data." }),
         { status: 403 }
@@ -424,7 +424,7 @@ export default function FirebaseProvider({ children }) {
       if (user === null) {
         throw "error";
       }
-      console.log(id);
+      // console.log(id);
       const collRef = collection(firestore, `users/${user.uid}/vault`);
       const q = query(collRef, where("billId", "==", id));
       const document = await getDocs(q);
@@ -442,7 +442,7 @@ export default function FirebaseProvider({ children }) {
         { status: 200 }
       );
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       return new Response(
         JSON.stringify({ message: "Could not Delete Data." }),
         { status: 403 }
@@ -456,9 +456,9 @@ export default function FirebaseProvider({ children }) {
 
   async function signUp(email, password, firstName, lastName) {
     try {
-      console.log(email, password);
+      // console.log(email, password);
       const res = await createUserWithEmailAndPassword(auth, email, password);
-      console.log(lastName, firstName);
+      // console.log(lastName, firstName);
       const user = await getCurrentUser();
       const r = await updateProfile(user, {
         displayName: firstName,
@@ -472,7 +472,7 @@ export default function FirebaseProvider({ children }) {
       await signOut(auth);
       return "success";
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       return new Response(JSON.stringify({ message: err }), {
         status: 500,
       });
@@ -481,12 +481,12 @@ export default function FirebaseProvider({ children }) {
 
   async function signIn(email, password) {
     try {
-      console.log(email, password);
+      // console.log(email, password);
       const res = await signInWithEmailAndPassword(auth, email, password);
       const user = await getCurrentUser();
       return "success";
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       return new Response(JSON.stringify({ message: err }), {
         status: 500,
       });
@@ -525,7 +525,7 @@ export default function FirebaseProvider({ children }) {
         { status: 200 }
       );
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       return new Response(
         JSON.stringify({ message: "Could not Append Data." }),
         { status: 403 }
@@ -542,7 +542,7 @@ export default function FirebaseProvider({ children }) {
       const collRef = collection(firestore, `users/${user.uid}/transactions`);
       let q = query(collRef, orderBy("dateTime", "desc"));
       let res = await getDocs(q);
-      console.log(res);
+      // console.log(res);
       if (res.metadata.fromCache) {
         throw "error";
       }
@@ -550,7 +550,7 @@ export default function FirebaseProvider({ children }) {
       res.docs.forEach((i) => arr.push(i.data()));
       return arr;
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       return "error";
       // const res = new Response(
       //   JSON.stringify({ message: "Could not fetch data." }),

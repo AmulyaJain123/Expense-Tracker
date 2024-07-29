@@ -52,11 +52,11 @@ export default function CreateSplitStage() {
   function clickHandler() {
     const splitName = nameRef.current.value.trim();
     const desc = descRef.current.value.trim();
-    console.log(desc);
+    // console.log(desc);
     dispatch(splitCreateActions.setSplitInfo({ name: splitName, desc: desc }));
     const ind = createSplitHeirachy.indexOf(currentStatus);
     const str = createSplitHeirachy[ind + 1];
-    console.log(str);
+    // console.log(str);
     dispatch(splitCreateActions.changeTopNavEventStatus(str));
   }
 

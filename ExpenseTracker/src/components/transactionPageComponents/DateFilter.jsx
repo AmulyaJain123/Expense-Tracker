@@ -57,7 +57,7 @@ export default function DateFilter() {
       return `${date1} - ${date2}`;
     });
     const obj = { name: filterParam, options: [...arr] };
-    console.log(obj);
+    // console.log(obj);
     dispatch(transactionActions.pushFilter(obj));
     dispatch(transactionActions.closeOpen());
   }

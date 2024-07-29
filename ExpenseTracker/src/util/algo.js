@@ -29,22 +29,22 @@ export function splitAlgo(bills) {
         }
     }
     for (let i of map) {
-        console.log("testing", i);
+        // console.log("testing", i);
         const st = i[0].split(" -> ")[0];
         const en = i[0].split(" -> ")[1];
         const amount = i[1];
-        console.log(st, en, amount);
+        // console.log(st, en, amount);
         edges.push({
             before: st,
             after: en,
             amount: parseFloat(amount)
         })
     }
-    // console.log("edges : ", edges, "set : ", set);
-    console.log(edges.length, set.size);
+    // // console.log("edges : ", edges, "set : ", set);
+    // console.log(edges.length, set.size);
     const ans = [];
     if (edges.length <= set.size) {
-        console.log("Dore DOre");
+        // console.log("Dore DOre");
         for (let i of edges) {
             ans.push({
                 start: i.before,
@@ -58,7 +58,7 @@ export function splitAlgo(bills) {
             people.push(i);
         }
         people.sort();
-        console.log("edges", edges, "people", people);
+        // console.log("edges", edges, "people", people);
         const count = people.length;
         let payment = []
         for (let i = 0; i < people.length; ++i) {
@@ -74,7 +74,7 @@ export function splitAlgo(bills) {
             }
             edges.splice(0, 1);
         }
-        console.log("payment", payment);
+        // console.log("payment", payment);
         let minimum = Number.MAX_VALUE;
         for (let i of payment) {
             minimum = Math.min(minimum, i);
@@ -92,11 +92,11 @@ export function splitAlgo(bills) {
             }
         }
     }
-    console.log("ans", ans)
-    console.log("expenditure", expenditure);
+    // console.log("ans", ans)
+    // console.log("expenditure", expenditure);
     const arr = [];
     for (let i of expenditure) {
-        console.log(i);
+        // console.log(i);
         arr.push({
             name: i[0],
             amount: i[1]

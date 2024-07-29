@@ -50,7 +50,7 @@ export default function Incoming() {
       return str;
     }
   }
-  console.log(category);
+  // console.log(category);
   function categoryClick(event) {
     setCategory(event.target.innerText);
   }
@@ -61,7 +61,7 @@ export default function Incoming() {
   const time = `${formatDate(new Date().getHours())}:${formatDate(
     new Date().getMinutes()
   )}`;
-  console.log(today, time);
+  // console.log(today, time);
 
   function nameChange(event) {
     const name = event.target.value.trim();
@@ -102,10 +102,10 @@ export default function Incoming() {
     let time = timeRef.current.value;
     const hours = parseInt(time.split(":")[0]);
     const mins = parseInt(time.split(":")[1]);
-    console.log(hours, mins);
+    // console.log(hours, mins);
     let dateTime = new Date(date);
     dateTime.setHours(hours, mins, 0, 0);
-    console.log(dateTime);
+    // console.log(dateTime);
     if (dateTime > new Date()) {
       return false;
     }
@@ -116,10 +116,10 @@ export default function Incoming() {
     let time = timeRef.current.value;
     const hours = parseInt(time.split(":")[0]);
     const mins = parseInt(time.split(":")[1]);
-    // console.log(hours, mins);
+    // // console.log(hours, mins);
     let dateTime = new Date(date);
     dateTime.setHours(hours, mins, 0, 0);
-    // console.log(dateTime);
+    // // console.log(dateTime);
     return dateTime;
   }
 
@@ -167,7 +167,7 @@ export default function Incoming() {
       transactionType: "Incoming",
       category: category,
     };
-    console.log(obj);
+    // console.log(obj);
     const res = await firebase.addTransaction(obj);
     setLoading(false);
     if (res.ok) {

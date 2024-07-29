@@ -5,7 +5,7 @@ import { formatVal } from "../../util/algo";
 
 export default function BillComponent({ id }) {
   const bills = useSelector((state) => state.splitCreate.bills);
-  console.log(bills);
+  // console.log(bills);
   const reqBill = bills.find((bill) => {
     return bill.id === id ? true : false;
   });
@@ -17,8 +17,8 @@ export default function BillComponent({ id }) {
   const date = `${preDate.getDate()}/${
     preDate.getMonth() + 1
   }/${preDate.getFullYear()}`;
-  console.log(date);
-  console.log(reqBill);
+  // console.log(date);
+  // console.log(reqBill);
 
   return (
     <div className="px-3 pt-3 flex flex-col space-y-4 w-full h-full">

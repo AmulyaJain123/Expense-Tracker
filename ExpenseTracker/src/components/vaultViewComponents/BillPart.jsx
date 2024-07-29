@@ -4,10 +4,10 @@ export default function BillPart({ data }) {
   function dateDiff() {
     let today = new Date();
     today.setHours(0, 0, 0, 0);
-    console.log(data.expiryDate, today);
-    console.log((data.expiryDate - today) / (36e5 * 24));
+    // console.log(data.expiryDate, today);
+    // console.log((data.expiryDate - today) / (36e5 * 24));
     let diff = Math.round((data.expiryDate - today) / (36e5 * 24));
-    console.log(diff);
+    // console.log(diff);
     if (diff === 1) {
       return "Expiring Today";
     }
@@ -15,9 +15,9 @@ export default function BillPart({ data }) {
     let months = 0;
     let days = 0;
     const daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    console.log(today);
+    // console.log(today);
     while (diff != 0) {
-      console.log(today, diff);
+      // console.log(today, diff);
       const todayY = today.getFullYear();
       const todayM = today.getMonth() + 1;
       const todayD = today.getDate();
@@ -38,7 +38,7 @@ export default function BillPart({ data }) {
         daysInMonths[1] = 29;
       }
       month = daysInMonths[todayM - 1];
-      console.log(month);
+      // console.log(month);
       if (diff >= year) {
         ++years;
         diff -= year;
@@ -67,7 +67,7 @@ export default function BillPart({ data }) {
 
   let currDate = new Date();
   currDate.setHours(0, 0, 0, 0);
-  console.log(currDate);
+  // console.log(currDate);
 
   return (
     <div className="bg-white zigzag w-[358px] pb-[100px]">

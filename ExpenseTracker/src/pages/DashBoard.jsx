@@ -18,7 +18,7 @@ export default function DashBoard() {
   function selectChange(event) {
     setCount(event.target.value);
   }
-  console.log(loadedData);
+  // console.log(loadedData);
   useEffect(() => {
     if (count === "1" || count === "7" || count === "30") {
       const ans = [];
@@ -103,7 +103,7 @@ export default function DashBoard() {
       dispatch(dashboardActions.setData(arr));
     }
   }, [count]);
-  console.log(data);
+  // console.log(data);
 
   return (
     <div className="h-full w-full bg-white overflow-auto pb-[200px]  text-stone-700 rounded-l-xl">

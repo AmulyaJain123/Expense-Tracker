@@ -16,9 +16,9 @@ export default function WidgetSquare() {
       let pos = 0;
       let neg = 0;
       let net = 0;
-      console.log(transactions);
+      // console.log(transactions);
       for (let i of transactions) {
-        console.log(i);
+        // console.log(i);
         if (i.transactionType === "Incoming") {
           pos += i.transactionAmount;
           net += i.transactionAmount;

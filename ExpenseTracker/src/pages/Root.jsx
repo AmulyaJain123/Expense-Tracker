@@ -16,7 +16,7 @@ export default function Root() {
   const toastMsg = useSelector((state) => state.universal.toastMsg);
 
   useEffect(() => {
-    console.log("toastMsg", toastMsg);
+    // console.log("toastMsg", toastMsg);
     if (toastMsg != null) {
       if (toastMsg.mood === "success") {
         toast.success(toastMsg.msg);

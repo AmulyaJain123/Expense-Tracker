@@ -52,7 +52,7 @@ const SplitViewModal = forwardRef(function SplitViewModal({ ...props }, ref) {
   });
 
   useEffect(() => {
-    console.log("sdfsfef");
+    // console.log("sdfsfef");
   }, []);
 
   function changeSelectedBill(id) {
@@ -211,7 +211,7 @@ const SplitViewModal = forwardRef(function SplitViewModal({ ...props }, ref) {
                   <div className="text-lg flex flex-col text-stone-500  rounded-lg  ">
                     <div className="border-b-2 border-white gap-y-2 gap-x-2 p-4 flex flex-wrap flex-grow ">
                       {bills.map((bill) => {
-                        console.log(bill);
+                        // console.log(bill);
                         return (
                           <Thumb
                             key={bill.billId}

@@ -47,7 +47,7 @@ export default function AmountFilter() {
 
   function applyClick() {
     const obj = { name: filterParam, options: [...constraints] };
-    console.log(obj);
+    // console.log(obj);
     dispatch(transactionActions.pushFilter(obj));
     dispatch(transactionActions.closeOpen());
   }
@@ -55,7 +55,7 @@ export default function AmountFilter() {
   function addClick() {
     const num = parseFloat(inputRef.current.value);
     const constraint = selectRef.current.value;
-    console.log(num, constraint);
+    // console.log(num, constraint);
     inputRef.current.value = "";
     if (num && num > 0) {
       setConstraints((preval) => {

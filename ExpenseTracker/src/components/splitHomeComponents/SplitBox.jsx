@@ -20,7 +20,7 @@ export default function SplitBox({ data, setSplitState }) {
   const confirmRef = useRef();
   const [deleting, setDeleting] = useState(false);
   const firebase = useFirebase();
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
 
   function clickHandle() {
     modalRef.current.open();
@@ -40,17 +40,26 @@ export default function SplitBox({ data, setSplitState }) {
     setDeleting(false);
     if (reply.status === 200) {
       // alert("");
-      dispatch(universalActions.setToastMsg({msg:"Split Deleted Succesfully!!",mood:"success"}));
-      
+      dispatch(
+        universalActions.setToastMsg({
+          msg: "Split Deleted Succesfully!!",
+          mood: "success",
+        })
+      );
     } else {
       // alert("");
-      dispatch(universalActions.setToastMsg({msg:"ERROR: Delete Unsuccessful :(",mood:"error"}));
+      dispatch(
+        universalActions.setToastMsg({
+          msg: "ERROR: Delete Unsuccessful :(",
+          mood: "error",
+        })
+      );
       confirmRef.current.close();
       return;
     }
     setSplitState((preval) => {
       const retVal = preval.filter((x) => x.docId != docId);
-      console.log(retVal);
+      // console.log(retVal);
       return retVal;
     });
   }

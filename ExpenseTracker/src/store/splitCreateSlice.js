@@ -32,13 +32,13 @@ export const splitCreateSlice = createSlice({
             state.friends.splice(index, 1);
         },
         addBill(state, action) {
-            console.log(action.payload);
+            // console.log(action.payload);
             const newArr = [];
             for (let i of action.payload.shares) {
-                console.log(i.name, i.share);
+                // console.log(i.name, i.share);
                 newArr.push({ name: i.name, share: i.share });
             }
-            console.log("newArr", newArr);
+            // console.log("newArr", newArr);
             const newEntry = {
                 billName: action.payload.billName === "" ? "Unnamed" : action.payload.billName,
                 billDate: action.payload.billDate === "" ? (new Date()).toISOString() : action.payload.billDate,
@@ -48,9 +48,9 @@ export const splitCreateSlice = createSlice({
                 id: action.payload.id,
                 shares: newArr
             }
-            console.log("newEntry", newEntry);
+            // console.log("newEntry", newEntry);
             state.bills.push(newEntry)
-            console.log("new state bills", state.bills);
+            // console.log("new state bills", state.bills);
         },
         removeBill(state, action) {
             let index = 0;
@@ -64,7 +64,7 @@ export const splitCreateSlice = createSlice({
             state.selectBillNavStatus = null;
         },
         changeTopNavEventStatus(state, action) {
-            console.log(action.payload);
+            // console.log(action.payload);
             state.topNavSplitStatus = action.payload;
         },
         setSplitInfo(state, action) {

@@ -19,7 +19,7 @@ export default function VaultBillView() {
   const [deleting, setDeleting] = useState(false);
   const dispatch = useDispatch();
   const confirmRef = useRef();
-  console.log(data);
+  // console.log(data);
 
   function deleteHandle() {
     confirmRef.current.showModal();
@@ -31,10 +31,20 @@ export default function VaultBillView() {
     confirmRef.current.close();
     setDeleting(false);
     if (res.ok) {
-      dispatch(universalActions.setToastMsg({msg:"Bill Deleted Successfully!!",mood:"success"}));
+      dispatch(
+        universalActions.setToastMsg({
+          msg: "Bill Deleted Successfully!!",
+          mood: "success",
+        })
+      );
       navigate("/vault/view");
     } else {
-      dispatch(universalActions.setToastMsg({msg:"Full Delete Unsuccessful :(",mood:"error"}));
+      dispatch(
+        universalActions.setToastMsg({
+          msg: "Full Delete Unsuccessful :(",
+          mood: "error",
+        })
+      );
     }
   }
 

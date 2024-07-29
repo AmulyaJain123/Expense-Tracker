@@ -39,7 +39,7 @@ export default function PieChart2() {
   }
 
   function sectorClick(event, index) {
-    console.log("click", event, index);
+    // console.log("click", event, index);
     setStage({ level: 1, ind: index });
     setActiveSector(null);
   }
@@ -49,7 +49,7 @@ export default function PieChart2() {
   }
 
   function legendHover(event, index) {
-    console.log("legend", event, index);
+    // console.log("legend", event, index);
 
     const percent = numeral(event.payload.percent).format("0.00%");
     const name = event.payload.name;

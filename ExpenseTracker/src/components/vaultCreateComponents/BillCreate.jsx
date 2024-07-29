@@ -40,7 +40,7 @@ export default function BillCreate() {
       }
       const res = currDate.setDate(currDate.getDate() + year);
       currDate = new Date(res);
-      console.log(currDate);
+      // console.log(currDate);
       years--;
     }
     while (months != 0) {
@@ -54,12 +54,12 @@ export default function BillCreate() {
       month = daysInMonths[currM];
       const res = currDate.setDate(currDate.getDate() + month);
       currDate = new Date(res);
-      console.log(currDate);
+      // console.log(currDate);
       months--;
     }
     const res = currDate.setDate(currDate.getDate() + days);
     currDate = new Date(res);
-    console.log(currDate);
+    // console.log(currDate);
     currDate.setHours(23, 59, 59, 0);
     return currDate;
   }
@@ -68,7 +68,7 @@ export default function BillCreate() {
     setLoading("Saving...");
     const res = detailRef.current.getData();
     const res1 = inputRef.current.getData();
-    console.log(res, res1);
+    // console.log(res, res1);
     let expiryDate = null;
     if (res.warrantyAdded) {
       if (res.expireDate != null) {
@@ -101,11 +101,21 @@ export default function BillCreate() {
     const response = await firebase.addBill(data);
     setLoading(null);
     if (response.ok) {
-      dispatch(universalActions.setToastMsg({msg:"Bill Saved Successfully!!",mood:"success"}));
+      dispatch(
+        universalActions.setToastMsg({
+          msg: "Bill Saved Successfully!!",
+          mood: "success",
+        })
+      );
       dispatch(vaultActions.clearAll());
       navigate("/vault");
     } else {
-      dispatch(universalActions.setToastMsg({msg:"ERROR: Save Unsuccessful :(",mood:"error"}));
+      dispatch(
+        universalActions.setToastMsg({
+          msg: "ERROR: Save Unsuccessful :(",
+          mood: "error",
+        })
+      );
     }
   }
 
@@ -115,9 +125,7 @@ export default function BillCreate() {
         <BillDetails ref={detailRef} />
         <InputFile ref={inputRef} />
       </div>
-      {loading!=null ? (
-        <Loading text={"Loading"} />
-      ) : null}
+      {loading != null ? <Loading text={"Loading"} /> : null}
 
       <div className="flex justify-between mx-16 mt-6 pr-8 mb-6">
         <DiscardBillButton>Discard</DiscardBillButton>

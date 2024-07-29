@@ -14,7 +14,7 @@ export default function DataDisplay({ data }) {
   useEffect(() => {
     const arr = JSON.parse(JSON.stringify(data));
     arr.sort((a, b) => {
-      console.log("sorting", sorter);
+      // console.log("sorting", sorter);
       if (sorter.field === "name") {
         if (sorter.order === "decreasing") {
           if (a.transactionName === b.transactionName) {
@@ -119,7 +119,7 @@ export default function DataDisplay({ data }) {
   useEffect(() => {
     const arr = JSON.parse(JSON.stringify(data));
     arr.sort((a, b) => {
-      console.log("sorting", sorter);
+      // console.log("sorting", sorter);
       if (sorter.field === "name") {
         if (sorter.order === "decreasing") {
           if (a.transactionName === b.transactionName) {
@@ -218,7 +218,7 @@ export default function DataDisplay({ data }) {
         }
       }
     });
-    console.log(arr);
+    // console.log(arr);
     setSortedData(arr);
   }, [sorter]);
 
@@ -243,7 +243,7 @@ export default function DataDisplay({ data }) {
   function applyClick() {
     const f = fieldRef.current.value;
     const o = orderRef.current.value;
-    console.log(f, o);
+    // console.log(f, o);
     setSorter({ field: f, order: o });
     dialogRef.current.close();
   }
@@ -251,7 +251,7 @@ export default function DataDisplay({ data }) {
   function modalClose() {
     dialogRef.current.close();
   }
-  console.log("sorter", sorter);
+  // console.log("sorter", sorter);
 
   return (
     <>

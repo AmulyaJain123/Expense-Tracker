@@ -7,13 +7,13 @@ import expiredIcon from "../../assets/expired-icon.png";
 
 export default function BillIcon({ data }) {
   const obj = data.data();
-  console.log(obj, obj.billDate);
+  // console.log(obj, obj.billDate);
   const date = obj.billDate.toDate();
-  console.log(date);
+  // console.log(date);
   const billDate = `${date.getDate()}/${
     date.getMonth() + 1
   }/${date.getFullYear()}`;
-  console.log(billDate);
+  // console.log(billDate);
 
   function warrantyStatus() {
     if (obj.expiryDate === null) {
@@ -32,7 +32,7 @@ export default function BillIcon({ data }) {
   }
 
   const stat = warrantyStatus();
-  console.log("stat", stat);
+  // console.log("stat", stat);
 
   return (
     <Link

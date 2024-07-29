@@ -7,7 +7,7 @@ import more from "../../assets/open-book.gif";
 
 export default function Transactions() {
   const transactions = useSelector((state) => state.dashboard.data);
-  console.log(transactions);
+  // console.log(transactions);
   return (
     <div className="flex flex-col relative p-4  rounded-2xl mx-4 min-h-[600px] overflow-hidden bg-[#f7ebfd]">
       <Link

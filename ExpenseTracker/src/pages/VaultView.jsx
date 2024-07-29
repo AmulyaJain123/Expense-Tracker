@@ -8,7 +8,7 @@ import expiredIcon from "../assets/expired-icon.png";
 
 export default function VaultView() {
   const data = useLoaderData();
-  console.log(data);
+  // console.log(data);
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
 

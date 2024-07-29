@@ -23,8 +23,8 @@ export default function SaveToDB({ res }) {
     setSaving(true);
     const time = new Date();
     const registeredFriends = friends.map((friend) => friend.name);
-    // console.log(registeredFriends);
-    // console.log(res);
+    // // console.log(registeredFriends);
+    // // console.log(res);
     const transactionToLiquidate = res.ans.map((obj) => {
       return {
         sender: obj.start,
@@ -32,15 +32,15 @@ export default function SaveToDB({ res }) {
         amt: formatVal(obj.amount),
       };
     });
-    // console.log(transactionToLiquidate);
+    // // console.log(transactionToLiquidate);
     const expenditure = res.expenditure.map((obj) => {
       return {
         name: obj.name,
         amt: formatVal(obj.amount),
       };
     });
-    // console.log(expenditure);
-    // console.log(storedBills);
+    // // console.log(expenditure);
+    // // console.log(storedBills);
     const bills = storedBills.map((bill) => {
       const date = new Date(bill.billDate);
       const finalDate = `${date.getDate()}/${
@@ -63,7 +63,7 @@ export default function SaveToDB({ res }) {
         shares: newShares,
       };
     });
-    // console.log(bills);
+    // // console.log(bills);
     const bgPattern = bgpattern;
 
     const obj = {
@@ -81,7 +81,7 @@ export default function SaveToDB({ res }) {
     };
     const reply = await firebase.addSplit(obj);
     setSaving(false);
-    // console.log(reply);
+    // // console.log(reply);
     if (reply.ok) {
       dispatch(splitCreateActions.clearAll());
       dispatch(
