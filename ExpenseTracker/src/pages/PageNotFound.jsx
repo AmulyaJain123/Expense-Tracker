@@ -19,12 +19,13 @@ export default function PageNotFound() {
         >
           <TopNav />
           <div className="w-full rounded-l-xl h-screen my-2 overflow-auto">
-            <div className="h-full w-full errorBg overflow-auto border-2 border-stone-800 text-stone-700 rounded-l-xl">
-              <div className="mx-auto w-fit px-[70px] py-[50px] border-4 border-stone-500 rounded-xl mt-[100px] bg-stone-200 flex flex-col justify-center items-center">
-                <img className="h-[200px] w-[200px]" src={errorImg} alt="" />
-                <p className="text-[20px] text-center p-4 mt-[50px] font-semibold">
-                  {msg}
-                </p>
+            <div className="h-full w-full bg-stone-100 overflow-auto text-stone-400 rounded-l-xl">
+              <div className="flex flex-col mt-32 scale-[80%] items-center">
+                <div className="font-bold  mb-6 text-[40px]">
+                  OOPS &#160; : ( &#160; ERROR Occured
+                </div>
+                <i className="fi fi-rr-not-found flex items-center justify-center text-[80px] mb-6"></i>
+                <p className="font-semibold text-2xl">Page Not Found</p>
               </div>
             </div>
           </div>

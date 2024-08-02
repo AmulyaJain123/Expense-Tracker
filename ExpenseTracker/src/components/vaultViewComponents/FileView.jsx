@@ -80,7 +80,7 @@ export default function FileView({ data }) {
         {currUrl != null ? (
           <img
             src={currUrl}
-            className="mx-auto billImg"
+            className="mx-auto billImg max-w-[400px] max-h-[900px]"
             onLoad={loadComplete}
             alt="Image"
             onError={(event) => errorDeal(event)}

@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import folderIcon from "../../assets/folder.png";
-import billPageIcon from "../../assets/bill-icon.png";
 import billPage from "../../assets/billPage-icon.png";
 import warrantyIcon from "../../assets/warranty-icon.png";
 import expiredIcon from "../../assets/expired-icon.png";

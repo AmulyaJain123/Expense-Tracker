@@ -1,8 +1,4 @@
 import { useRouteError } from "react-router-dom";
-import user from "../assets/loginError.png";
-import wifi from "../assets/wifi.png";
-import sad from "../assets/sad.png";
-import warning from "../assets/warning.png";
 import { Link } from "react-router-dom";
 import logInIcon from "../assets/logIn.png";
 
@@ -16,7 +12,7 @@ export default function ErrorPage() {
         <div className="flex flex-col  pb-[200px] justify-center items-center">
           {error === "402" ? (
             <>
-              <div className="flex flex-col items-center space-y-6 mt-[150px]">
+              <div className="flex flex-col items-center space-y-6">
                 <Link to={"/auth"}>
                   <img
                     src={logInIcon}
@@ -30,14 +26,14 @@ export default function ErrorPage() {
               </div>
             </>
           ) : (
-            <>
+            <div className="flex flex-col scale-[80%] items-center">
               <div className="font-bold  mb-6 text-[40px]">
                 OOPS &#160; : ( &#160; ERROR Occured
               </div>
 
               {error === "401" ? (
                 <>
-                  <img src={wifi} className="w-[80px]  mb-6" alt="" />
+                  <i className="fi fi-rs-wifi-slash flex items-center justify-center text-[70px] mb-6"></i>
                   <p className="font-semibold text-2xl">
                     Could Not Reach Server
                   </p>
@@ -46,18 +42,18 @@ export default function ErrorPage() {
 
               {error === "403" ? (
                 <>
-                  <img src={sad} className="w-[80px]  mb-6" alt="" />
+                  <i className="fi fi-rs-sad flex items-center justify-center text-[70px] mb-6"></i>
                   <p className="font-semibold text-2xl">Bad Request</p>
                 </>
               ) : null}
 
-              {error === "404" ? (
+              {error != "401" && error != "402" && error != "403" ? (
                 <>
-                  <img src={warning} className="w-[80px]  mb-6" alt="" />
+                  <i className="fi fi-rs-document-circle-wrong flex items-center justify-center text-[70px] mb-6"></i>
                   <p className="font-semibold text-2xl">Something Went Wrong</p>
                 </>
               ) : null}
-            </>
+            </div>
           )}
         </div>
       </div>

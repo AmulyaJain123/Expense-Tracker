@@ -63,7 +63,7 @@ export default function Preview() {
             <span className="rounded-md bg-stone-200 p-1 px-2 mr-3">. png</span>
             <span className="rounded-md bg-stone-200 p-1 px-2">. jpeg</span>
           </p>
-          <p className="text-center px-3">Maximum Supported File Size: 2 KB</p>
+          <p className="text-center px-3">Maximum Supported File Size: 2 MB</p>
         </div>
       )}
     </>

@@ -174,16 +174,6 @@ tr {
   background-repeat: no-repeat;
   background-size: cover;
 }
-.bgPage {
-  background-image: url("./assets/blue-grad.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-.bgGrad {
-  background-image: url("./assets/purple-high.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
 .billCuts-stone {
   background-image: url("./assets/bg-pattern-fabric.png");
   background-repeat: no-repeat;
