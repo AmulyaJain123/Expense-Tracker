@@ -4,7 +4,6 @@ import HowItWorksMenu from "./HowItWorksMenu";
 import FeaturesMenu from "./FeaturesMenu";
 
 const Button = styled.button`
-  font-size: large;
   font-weight: 600;
   border-bottom: ${(props) => {
     return props.$status === true ? "solid black 4px" : "solid white 4px";
@@ -25,7 +24,7 @@ export default function SplitHomeMenu() {
 
   return (
     <div id="menu">
-      <div className="flex justify-center space-x-10 mt-[175px]">
+      <div className="flex sm:text-lg justify-center space-x-10 mt-[175px]">
         <Button
           $status={selectedMenu === 0}
           onClick={(event) => menuClick(event)}
@@ -43,7 +42,10 @@ export default function SplitHomeMenu() {
           Features
         </Button>
       </div>
-      <div id="menuContent" className="mt-8 h-[300px] mx-[100px]">
+      <div
+        id="menuContent"
+        className="mt-8 min-h-[300px]  mx-[50px] lg:mx-[100px]"
+      >
         {selectedMenu === 0 ? <HowItWorksMenu /> : null}
         {selectedMenu === 1 ? <FeaturesMenu /> : null}
       </div>

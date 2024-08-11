@@ -57,6 +57,10 @@ tr {
   border-radius: 30px;
 }
 
+/* .customScrollThin {
+  scrollbar-width: thin;
+} */
+
 .customScrollThin::-webkit-scrollbar {
   width: 4px;
   border-radius: 20px;

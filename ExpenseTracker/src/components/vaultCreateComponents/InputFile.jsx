@@ -7,6 +7,7 @@ import Preview from "./Preview";
 import { validateFileUpload } from "../../util/algo";
 import ErrorElement from "./ErrorElement";
 import { forwardRef, useImperativeHandle } from "react";
+import styles from "./InputFile.module.css";
 
 const InputFile = forwardRef(function InputFile({ ...props }, ref) {
   const dispatch = useDispatch();
@@ -54,6 +55,7 @@ const InputFile = forwardRef(function InputFile({ ...props }, ref) {
       size: enteredFile.size,
       type: enteredFile.type,
     };
+    console.log(file);
     const preview = URL.createObjectURL(enteredFile);
     dispatch(vaultActions.pushFile(file));
     dispatch(vaultActions.pushPreview(preview));
@@ -70,8 +72,8 @@ const InputFile = forwardRef(function InputFile({ ...props }, ref) {
 
   return (
     <>
-      <div className="bg-white zigzag w-[750px] pb-[100px]">
-        <div className="bg-slate-100 m-4 rounded-lg flex text-black justify-center items-center h-[60px] text-2xl uppercase font-bold">
+      <div className={`${styles.main} zigzag`}>
+        <div className="bg-slate-100 m-4  rounded-lg flex text-black justify-center items-center  h-[50px] sm:h-[60px] text-xl sm:text-2xl uppercase font-bold">
           Add Files
         </div>
         <div className="flex h-[20px] mb-[20px]">
@@ -85,7 +87,7 @@ const InputFile = forwardRef(function InputFile({ ...props }, ref) {
         {fileError.error != null ? (
           <ErrorElement error={fileError.error} />
         ) : null}
-        <div className="flex mt-4 mx-3 items-center space-x-4 p-2">
+        <div className="flex mt-4 mx-3 items-center flex-wrap text-xs sm:text-base gap-y-2 gap-x-2 sm:gap-x-4 p-2">
           {files.map((file, index) => {
             return (
               <ImageThumbs
@@ -96,7 +98,7 @@ const InputFile = forwardRef(function InputFile({ ...props }, ref) {
             );
           })}
           {files.length < 4 ? (
-            <div>
+            <>
               <input
                 className=""
                 type="file"
@@ -112,7 +114,7 @@ const InputFile = forwardRef(function InputFile({ ...props }, ref) {
               >
                 + Add
               </label>
-            </div>
+            </>
           ) : null}
         </div>
         <Preview />

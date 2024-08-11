@@ -12,7 +12,6 @@ const Main = styled.div`
 
 const Iframe = styled.i`
   margin-right: 30px;
-  font-size: x-large;
 `;
 
 function setActive(location, name, path) {
@@ -40,13 +39,13 @@ export default function PageTile({ details }) {
           return isActive ? "active" : undefined;
         }}
       >
-        <Main className="py-3 mb-2 pl-4 w-[90%] flex items-center rounded-r-lg">
+        <Main className="py-3 mb-2 pl-4 w-[220px] flex items-center rounded-r-lg">
           <Iframe
             className={`${
               active ? iconClassBold : iconClass
-            } flex justify-center items-center`}
+            } flex justify-center text-[20px] lg:text-[25px] items-center`}
           ></Iframe>
-          <span>{name}</span>
+          <span className="text-sm lg:text-base">{name}</span>
         </Main>
       </NavLink>
     </div>

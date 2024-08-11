@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 export default function TopNavThumbs({ children }) {
   const status = useSelector((state) => state.splitCreate.topNavSplitStatus);
   return (
-    <div className="p-1">
+    <div className="hidden sm:block p-1">
       <div
         style={{
           backgroundColor:
@@ -14,7 +14,7 @@ export default function TopNavThumbs({ children }) {
               ? `2px solid ${styling.backColor}`
               : `2px solid ${styling.topNavThumbsBgCol}`,
         }}
-        className="p-1 rounded-lg px-2 flex items-center"
+        className="p-1 text-sm sm:text-base rounded-lg px-2 flex items-center"
       >
         {children}
       </div>

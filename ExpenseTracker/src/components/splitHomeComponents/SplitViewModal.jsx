@@ -3,6 +3,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { styling } from "../../util/styling";
 import SingleBill from "./SingleBill";
+import styles from "./SplitViewModal.module.css";
 
 const Thumb = styled.button`
   transition: all 500ms;
@@ -68,57 +69,57 @@ const SplitViewModal = forwardRef(function SplitViewModal({ ...props }, ref) {
 
   return (
     <dialog className="rounded-3xl relative" ref={modalRef}>
-      <div className="w-[90vw] h-[94vh] flex flex-col p-3 rounded-2xl splitViewBg ">
-        <div className="text-[30px] p-4 mt-8 text-center mx-[100px] mr-[106px] text-white bg-[#9F21E3]  rounded-xl  font-extrabold">
+      <div className={`${styles.main} splitViewBg`}>
+        <header className="text-lg md:text-[30px] p-4 mt-8 text-center mx-[20px] md:mx-[100px] text-white bg-[#9F21E3]  rounded-xl  font-extrabold">
           {"SPLIT SUMMARY (View Only)"}
-        </div>
+        </header>
 
-        <div className="flex-grow customScroll w-full overflow-auto px-[100px] pt-[10px] flex space-y-4 flex-col mt-4">
-          <div className="flex space-x-4">
-            <div className="rounded-xl min-w-[300px] bg-white  flex items-center p-3">
+        <div className="flex-grow sm:customScroll w-full overflow-auto px-[5px] sm:px-[20px] md:px-[100px] pt-[10px] flex space-y-4 flex-col mt-4">
+          <div className="flex flex-col xl:flex-row space-y-4 xl:space-y-0 xl:space-x-4">
+            <div className="rounded-xl sm:min-w-[300px] bg-white  flex items-center p-3">
               <div className="rounded-xl  bg-[#F7EBFD] border-2 border-dashed border-stone-300 flex p-3 flex-grow flex-col">
-                <div className="rounded-lg bg-[#9F21E3] text-[#F7EBFD] font-semibold text-xl py-2 flex justify-center items-center">
+                <menu className="rounded-lg bg-[#9F21E3] text-[#F7EBFD] font-semibold text-xl py-2 flex justify-center items-center">
                   Split Name
-                </div>
-                <div className="rounded-lg h-[80px] font-medium flex-auto text-lg py-2 mt-2 flex justify-center items-center text-stone-400">
+                </menu>
+                <div className="rounded-lg h-[80px] font-medium flex-auto py-2 mt-2 flex justify-center items-center text-stone-400">
                   {splitInfo.splitName}
                 </div>
               </div>
             </div>
-            <div className="rounded-xl min-w-[300px]  bg-white  flex items-center p-3 ">
+            <div className="rounded-xl sm:min-w-[300px]  bg-white  flex items-center p-3 ">
               <div className="rounded-xl bg-[#F7EBFD] border-2 border-dashed border-stone-300 flex p-3 flex-grow flex-col">
-                <div className="rounded-lg bg-[#9F21E3] text-[#F7EBFD] font-semibold text-xl py-2 flex justify-center items-center">
+                <menu className="rounded-lg bg-[#9F21E3] text-[#F7EBFD] font-semibold text-xl py-2 flex justify-center items-center">
                   Split Created On
-                </div>
-                <div className="rounded-lg h-[80px] font-medium text-lg py-2 mt-2 flex justify-center items-center text-stone-400">
+                </menu>
+                <div className="rounded-lg h-[80px] font-medium  py-2 mt-2 flex justify-center items-center text-stone-400">
                   {splitInfo.splitDate}
                 </div>
               </div>
             </div>
             <div className="rounded-xl flex-grow bg-white flex items-center p-3 ">
               <div className="rounded-xl  bg-[#F7EBFD] border-2 border-dashed border-stone-300 flex p-3 flex-grow flex-col">
-                <div className="rounded-lg bg-[#9F21E3] text-[#F7EBFD] font-semibold text-xl py-2 flex justify-center items-center">
+                <menu className="rounded-lg bg-[#9F21E3] text-[#F7EBFD] font-semibold text-xl py-2 flex justify-center items-center">
                   Split Description
-                </div>
-                <div className="rounded-lg h-[80px] p-4 font-medium flex text-center justify-center items-center text-lg mt-2  text-stone-400">
+                </menu>
+                <div className="rounded-lg h-[80px] p-4 font-medium flex text-center justify-center items-center   mt-2  text-stone-400">
                   {splitInfo.splitDesc}
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="flex space-x-4">
-            <div className="rounded-xl bg-white flex-col space-y-3 p-3 w-[350px]   h-[500px]">
+          <div className="flex flex-col xl:flex-row space-y-4 xl:space-y-0 xl:space-x-4">
+            <div className="rounded-xl bg-white flex-col space-y-3 p-3  xl:w-[350px]   h-[500px]">
               <div className="rounded-xl  bg-[#F7EBFD] border-2 border-dashed border-stone-300 h-full flex p-3 flex-grow flex-col">
-                <div className="rounded-lg bg-[#9F21E3] text-[#F7EBFD] font-semibold text-xl py-2 flex justify-center items-center">
+                <menu className="rounded-lg bg-[#9F21E3] text-[#F7EBFD] font-semibold text-xl py-2 flex justify-center items-center">
                   Registered Friends
-                </div>
-                <div className="customScroll rounded-lg overflow-auto text-lg py-2 pt-4 mt-4 flex font-medium flex-col text-stone-400">
+                </menu>
+                <div className=" customScrollThin rounded-lg overflow-auto   py-2 pt-4 mt-4 flex font-medium flex-col text-stone-400">
                   {registeredFriends.map((friend, index) => {
                     return (
                       <li
                         key={friend}
-                        className="mb-4 px-4 flex w-full text-lg"
+                        className="mb-4 px-4 min-w-[400px] sm:min-w-0 flex w-full  "
                       >
                         <div className="min-w-[50px]">
                           <span className="bg-[#fff] flex justify-center items-center w-[35px] h-[35px] rounded-lg ">
@@ -134,17 +135,17 @@ const SplitViewModal = forwardRef(function SplitViewModal({ ...props }, ref) {
                 </div>
               </div>
             </div>
-            <div className="rounded-xl flex-grow bg-white flex-col space-y-3 p-3 w-[400px]   h-[500px]">
+            <div className="rounded-xl flex-grow bg-white flex-col space-y-3 p-3 xl:w-[400px]   h-[500px]">
               <div className="rounded-xl bg-[#F7EBFD] border-2 border-dashed border-stone-300 h-full flex p-3 flex-grow flex-col">
-                <div className="rounded-lg bg-[#9F21E3] text-[#F7EBFD] font-semibold text-xl py-2 flex justify-center items-center">
+                <menu className="rounded-lg bg-[#9F21E3] text-[#F7EBFD] font-semibold text-xl py-2 flex text-center justify-center items-center">
                   Transactions to Liquidate
-                </div>
-                <div className="customScroll rounded-lg  overflow-auto font-medium text-lg py-2 pt-4 mt-4 flex flex-col text-stone-400">
+                </menu>
+                <div className="customScrollThin rounded-lg  overflow-auto overflow-x-scroll font-medium flex-grow  py-2 pt-4 mt-4 flex flex-col text-stone-400">
                   {transactionToLiquidate.map((transaction) => {
                     return (
                       <li
                         key={Math.random()}
-                        className="mb-4 px-2 flex w-full text-lg"
+                        className="mb-4 px-2 flex w-full min-w-[450px] sm:min-w-0"
                       >
                         <div className="w-[200px]">
                           <span className="bg-[#fff] flex w-fit px-2 justify-center items-center h-[35px] rounded-lg ">
@@ -174,18 +175,18 @@ const SplitViewModal = forwardRef(function SplitViewModal({ ...props }, ref) {
             </div>
           </div>
 
-          <div className="flex space-x-4">
-            <div className="rounded-xl bg-white flex-col space-y-3 p-3 w-[400px]    h-[740px]">
+          <div className="flex flex-col xl:flex-row space-y-4 xl:space-y-0 xl:space-x-4">
+            <div className="rounded-xl bg-white flex-col space-y-3 p-3 xl:w-[400px]   h-[500px] xl:h-[740px]">
               <div className="rounded-xl h-full bg-[#F7EBFD] border-2 border-dashed border-stone-300 flex p-3 flex-grow flex-col">
-                <div className="rounded-lg bg-[#9F21E3] text-[#F7EBFD] font-semibold text-xl py-2 flex justify-center items-center">
+                <menu className="rounded-lg bg-[#9F21E3] text-[#F7EBFD] font-semibold text-xl py-2 flex justify-center items-center">
                   Expenditure
-                </div>
-                <div className="customScroll rounded-lg overflow-auto text-lg py-2 pt-4 mt-4 flex font-medium flex-col text-stone-400">
+                </menu>
+                <div className="customScrollThin rounded-lg overflow-auto  flex-grow  py-2 pt-4 mt-4 flex font-medium flex-col text-stone-400">
                   {expenditure.map((obj) => {
                     return (
                       <li
                         key={obj.name}
-                        className="mb-4 flex w-full justify-between text-lg"
+                        className="mb-4 flex w-full min-w-[400px] sm:min-w-0 justify-between  "
                       >
                         <div className="">
                           <span className="bg-[#fff] flex justify-center items-center px-2 w-fit h-[35px] rounded-lg ">
@@ -204,11 +205,11 @@ const SplitViewModal = forwardRef(function SplitViewModal({ ...props }, ref) {
 
             <div className="flex-grow bg-[#fff] flex flex-col p-3   rounded-xl ">
               <div className="rounded-xl bg-[#F7EBFD] border-2 border-dashed border-stone-300 flex p-3 flex-grow flex-col">
-                <div className="rounded-lg bg-[#9F21E3] text-[#F7EBFD] font-semibold text-xl py-2 flex justify-center items-center">
+                <menu className="rounded-lg bg-[#9F21E3] text-[#F7EBFD] font-semibold text-xl py-2 flex justify-center items-center">
                   Registered Bills
-                </div>
-                <div className=" rounded-lg  text-lg py-2 flex font-medium flex-col text-stone-400">
-                  <div className="text-lg flex flex-col text-stone-500  rounded-lg  ">
+                </menu>
+                <div className=" rounded-lg    py-2 flex font-medium flex-col text-stone-400">
+                  <div className="  flex flex-col text-stone-500  rounded-lg  ">
                     <div className="border-b-2 border-white gap-y-2 gap-x-2 p-4 flex flex-wrap flex-grow ">
                       {bills.map((bill) => {
                         // console.log(bill);
@@ -226,7 +227,7 @@ const SplitViewModal = forwardRef(function SplitViewModal({ ...props }, ref) {
                       })}
                     </div>
 
-                    <div className="p-4 w-full overflow-auto">
+                    <div className="p-4 w-full customScrollThin overflow-auto">
                       {selectedBill === null ? (
                         <p className="text-center">No Bill Selected</p>
                       ) : (

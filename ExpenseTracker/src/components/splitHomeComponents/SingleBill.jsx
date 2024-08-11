@@ -1,7 +1,7 @@
 export default function SingleBill({ data }) {
   const { billName, billDate, billDesc, payedBy, totalAmount, shares } = data;
   return (
-    <div className="px-3 pt-3 flex flex-col space-y-4 w-full h-full">
+    <div className="px-3 pt-3 sm:min-w-0 min-w-[600px] flex flex-col space-y-4 w-full h-full">
       <div className="flex justify-between">
         <div className="p-1 px-2 bg-white h-fit  rounded-lg">
           <span className="text-black mr-3 text-md font-semibold">

@@ -1,0 +1,65 @@
+.bill {
+  width: 80px; /* equivalent to w-[50px] */
+  position: absolute; /* equivalent to absolute */
+  top: 20px; /* equivalent to top-[20px] */
+  left: 24px; /* equivalent to left-[24px] */
+  transform: rotate(-90deg); /* equivalent to rotate-[-90deg] */
+  transition: transform 0.7s, top 0.7s; /* transition duration for transform only */
+}
+.bill2 {
+  width: 80px; /* equivalent to w-[50px] */
+  position: absolute; /* equivalent to absolute */
+  top: 20px; /* equivalent to top-[20px] */
+  left: 20px; /* equivalent to left-[24px] */
+  transform: rotate(-90deg); /* equivalent to rotate-[-90deg] */
+  transition: transform 0.7s, top 0.7s; /* transition duration for transform only */
+}
+
+.dad {
+  position: relative; /* equivalent to relative */
+  width: fit-content; /* equivalent to w-fit */
+  height: fit-content; /* equivalent to h-fit */
+  display: flex; /* equivalent to flex */
+  flex-direction: column; /* equivalent to flex-col */
+  padding: 0.75rem; /* equivalent to p-3 (assuming 1rem = 16px, so 0.75rem = 12px) */
+}
+
+@media (max-width: 640px) {
+  /* sm breakpoint */
+  .bill {
+    width: 50px; /* equivalent to sm:w-[80px] */
+  }
+  .bill2 {
+    width: 50px; /* equivalent to sm:w-[80px] */
+  }
+  .dad:hover .bill {
+    transform: rotate(
+      -45deg
+    ); /* equivalent to group-hover:rotate-[-45deg] and group-hover:top-[-10px] */
+    top: -4px;
+  }
+  .dad:hover .bill2 {
+    transform: rotate(
+      -60deg
+    ); /* equivalent to group-hover:rotate-[-45deg] and group-hover:top-[-10px] */
+    top: -1px;
+  }
+  .dad span {
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 640px) {
+  .dad:hover .bill {
+    transform: rotate(
+      -45deg
+    ); /* equivalent to group-hover:rotate-[-45deg] and group-hover:top-[-10px] */
+    top: -10px;
+  }
+  .dad:hover .bill2 {
+    transform: rotate(
+      -60deg
+    ); /* equivalent to group-hover:rotate-[-45deg] and group-hover:top-[-10px] */
+    top: -5px;
+  }
+}

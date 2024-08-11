@@ -37,8 +37,8 @@ export default function FileView({ data }) {
   }
 
   return (
-    <div className="bg-white zigzag w-[750px] pb-[100px]">
-      <div className="bg-slate-100 m-4 rounded-lg flex text-black justify-center items-center h-[60px] text-2xl uppercase font-bold">
+    <div className="bg-white zigzag min-h-[500px] flex flex-col w-full sm:max-w-[600px] md:w-[600px] xl:w-[500px] 2xl:w-[750px] pb-[100px]">
+      <div className="bg-slate-100 m-4 rounded-lg flex text-black justify-center items-center h-[50px] sm:h-[60px] text-xl sm:text-2xl uppercase font-bold">
         Files
       </div>
       <div className="flex h-[20px] mb-[20px]">
@@ -49,7 +49,7 @@ export default function FileView({ data }) {
         </div>
         <div className="billCuts-stone h-[20px] w-[20px] rounded-l-full"></div>
       </div>
-      <div className="flex mt-4 mx-3 items-center space-x-4 p-2">
+      <div className="flex mt-4 mx-3 items-center flex-wrap gap-y-2 gap-x-2 sm:gap-y-4 sm:gap-x-4 p-2">
         {data.map((image, index) => {
           return (
             <Button
@@ -57,7 +57,7 @@ export default function FileView({ data }) {
               disabled={image === currUrl}
               $status={image === currUrl ? "true" : "false"}
               onClick={() => clickThumb(image)}
-              className="p-1 px-2 rounded-md duration-500"
+              className="p-1 px-2 text-sm sm:text-base rounded-md duration-500"
             >{`Image ${index + 1}`}</Button>
           );
         })}
@@ -65,7 +65,7 @@ export default function FileView({ data }) {
       <div className="flex h-[100px] justify-center">
         {currUrl != null && loading === false ? (
           <a
-            className="text-lg p-1 h-fit mt-[30px] hover:scale-110 hover:shadow-xl mx-auto px-2 m-4 rounded-lg bg-black text-white duration-500 hover:bg-white hover:text-black border-2 border-black"
+            className="text-base sm:text-lg p-1 h-fit mt-[30px] hover:scale-110 hover:shadow-xl mx-auto px-2 m-4 rounded-lg bg-black text-white duration-500 hover:bg-white hover:text-black border-2 border-black"
             href={currUrl}
             target="_blank"
           >
@@ -76,11 +76,11 @@ export default function FileView({ data }) {
           <img src={loadingIcon} className="w-auto mt-[30px] h-[50px]" alt="" />
         ) : null}
       </div>
-      <div className="mt-[10px] h-[700px] overflow-auto px-10 mx-2 customScroll">
+      <div className="mt-[10px] h-[400px] sm:h-[700px] overflow-auto px-10 mx-2 customScroll">
         {currUrl != null ? (
           <img
             src={currUrl}
-            className="mx-auto billImg max-w-[400px] max-h-[900px]"
+            className="mx-auto billImg  sm:max-w-[400px]"
             onLoad={loadComplete}
             alt="Image"
             onError={(event) => errorDeal(event)}

@@ -3,6 +3,7 @@ import folderIcon from "../../assets/folder.png";
 import billPage from "../../assets/billPage-icon.png";
 import warrantyIcon from "../../assets/warranty-icon.png";
 import expiredIcon from "../../assets/expired-icon.png";
+import styles from "./BillIcon.module.css";
 
 export default function BillIcon({ data }) {
   const obj = data.data();
@@ -34,24 +35,13 @@ export default function BillIcon({ data }) {
   // console.log("stat", stat);
 
   return (
-    <Link
-      className="relative w-fit h-fit group flex flex-col p-3"
-      to={`bill?billId=${obj.billId}`}
-    >
-      <img
-        className="rotate-[-90deg] w-[80px] absolute top-[20px] duration-700 left-[24px] group-hover:rotate-[-45deg] group-hover:top-[-10px] "
-        src={billPage}
-        alt=""
-      />
-      <img
-        className="rotate-[-90deg] w-[80px] z-10 absolute top-[20px] duration-700 left-[20px] group-hover:rotate-[-60deg] group-hover:top-[-5px] "
-        src={billPage}
-        alt=""
-      />
+    <Link className={`${styles.dad}`} to={`bill?billId=${obj.billId}`}>
+      <img className={`${styles.bill}`} src={billPage} alt="" />
+      <img className={`${styles.bill2}`} src={billPage} alt="" />
       {stat === true ? (
         <>
           <img
-            className="w-[35px] absolute right-[5px] top-[15px] z-40 h-[35px]"
+            className="w-[30px] h-[30px] sm:w-[35px] absolute right-[5px] top-[15px] z-40 sm:h-[35px]"
             src={warrantyIcon}
             alt=""
           />
@@ -60,14 +50,18 @@ export default function BillIcon({ data }) {
       {stat === false ? (
         <>
           <img
-            className="w-[35px] absolute right-[5px] top-[15px] z-40 h-[35px]"
+            className="w-[30px] h-[30px] sm:w-[35px] absolute right-[5px] top-[15px] z-40 sm:h-[35px]"
             src={expiredIcon}
             alt=""
           />
         </>
       ) : null}
-      <img className="w-[100px] h-[100px] z-30" src={folderIcon} alt="" />
-      <div className="w-[100px] z-30 mt-1 font-semibold text-xs text-center flex flex-col items-center justify-center">
+      <img
+        className="w-[70px] h-[70px] sm:w-[100px] sm:h-[100px] z-30"
+        src={folderIcon}
+        alt=""
+      />
+      <div className="w-[70px] sm:w-[100px] z-30 mt-1 font-semibold  sm:text-xs text-center flex flex-col items-center justify-center">
         <span>{obj.billName}</span>
         <span className="mt-1">{billDate}</span>
       </div>

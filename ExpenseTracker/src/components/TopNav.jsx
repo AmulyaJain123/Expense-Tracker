@@ -12,6 +12,8 @@ import { useDispatch } from "react-redux";
 import { universalActions } from "../store/main";
 import { useNavigate } from "react-router-dom";
 import TopNavButton from "../UIComponents/TopNavButton";
+import HamburgerMenu from "./HamburgerMenu";
+import { useSelector } from "react-redux";
 
 export default function TopNav() {
   const location = useLocation();
@@ -33,6 +35,7 @@ export default function TopNav() {
   const firebase = useFirebase();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const menuStatus = useSelector((state) => state.universal.hamMenu);
 
   async function getUser() {
     const us = await getCurrentUser();
@@ -58,14 +61,32 @@ export default function TopNav() {
     }
   }
 
+  function menuClick() {
+    dispatch(universalActions.openMenu());
+  }
+
   return (
     <div
       style={{
         marginTop: `${styling.spacing}px`,
         backgroundColor: styling.navColor,
       }}
-      className="flex  items-center p-2 h-14 rounded-l-xl"
+      className="flex rounded-r-xl lg:rounded-r-none items-center p-2 h-11 sm:h-14 rounded-l-xl"
     >
+      {menuStatus ? (
+        <>
+          <HamburgerMenu />
+        </>
+      ) : null}
+
+      <button
+        onClick={menuClick}
+        className="flex p-2 mr-4 ml-2 rounded-lg lg:hidden hover:bg-slate-200"
+      >
+        <div>
+          <i className="fi fi-rs-burger-menu flex justify-center items-center text-xl sm:text-2xl"></i>
+        </div>
+      </button>
       {isOnHome ? <TopNavButton>Home</TopNavButton> : null}
       {isOnSplitHome ? <TopNavButton>BillSplit Home</TopNavButton> : null}
       {isOnBillVaultHome ? <TopNavButton>BillVault Home</TopNavButton> : null}
@@ -106,29 +127,39 @@ export default function TopNav() {
       {fetchingUser === false ? (
         <>
           {user != null ? (
-            <div className="flex space-x-4 mr-[20px] ml-auto">
-              <div className="flex rounded-full p-2 space-x-6 bg-slate-200 pr-6">
+            <div className="flex space-x-4 mr-[6px] sm:mr-[20px] ml-auto">
+              <div className="flex rounded-full p-2 space-x-2 sm:space-x-6 bg-slate-200 pr-4 sm:pr-6">
                 <img
                   src={userIcon}
-                  className="rounded-full w-[25px] bg-white"
+                  className="rounded-full w-[17px] h-[17px] sm:h-[25px] sm:w-[25px] bg-white"
                   alt=""
                 />
-                <span className=" font-medium">{user.displayName}</span>
+                <span className=" text-xs sm:text-base font-medium">
+                  {user.displayName}
+                </span>
               </div>
               <button
                 onClick={logOutClick}
                 className="rounded-xl hover:bg-slate-200 p-2 duration-500"
               >
-                <img src={logOut} className=" w-[25px]" alt="" />
+                <img
+                  src={logOut}
+                  className="w-[17px] h-[17px] sm:h-[25px] sm:w-[25px]"
+                  alt=""
+                />
               </button>
             </div>
           ) : (
-            <div className="flex space-x-4 mr-[20px] ml-auto">
+            <div className="flex space-x-4 mr-[6px] sm:mr-[20px] ml-auto">
               <Link
                 to={"/auth"}
                 className="rounded-xl hover:bg-slate-200 p-2 duration-500"
               >
-                <img src={logIn} className=" w-[25px]" alt="" />
+                <img
+                  src={logIn}
+                  className=" w-[17px] h-[17px] sm:h-[25px] sm:w-[25px]"
+                  alt=""
+                />
               </Link>
             </div>
           )}

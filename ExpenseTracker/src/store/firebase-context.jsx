@@ -373,6 +373,7 @@ export default function FirebaseProvider({ children }) {
       const expiryDate = data.expiryDate;
       const images = [];
       for (let i of data.fileObjects) {
+        // console.log("1");
         let nameOfImage = v4() + i.name;
         const imageRef = ref(
           storage,
@@ -389,6 +390,7 @@ export default function FirebaseProvider({ children }) {
         clearTimeout(timer);
         images.push(nameOfImage);
       }
+      // console.log("2");
       const obj = {
         billDate,
         billDesc,
@@ -404,6 +406,8 @@ export default function FirebaseProvider({ children }) {
       };
       // console.log(obj);
       const result = await addDoc(collRef, obj);
+      // console.log("3");
+
       // console.log("hellllo");
       return new Response(
         JSON.stringify({ message: "Data Appended Successfully" }),

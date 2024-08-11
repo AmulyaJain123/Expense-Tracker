@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { universalActions } from "../store/main";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import styles from "./Root.module.css";
 
 export default function Root() {
   const navigate = useNavigation();
@@ -35,7 +36,7 @@ export default function Root() {
       <>
         <div
           style={{ backgroundColor: styling.backColor }}
-          className="flex h-screen relative overflow-auto"
+          className="flex h-screen relative max-w-screen overflow-auto"
         >
           {navigate.state === "loading" ? (
             <div className="w-[100vw] h-[40px] absolute flex top-0 left-0 justify-center text-lg font-semibold items-center bg-[#dc93f6]">
@@ -45,10 +46,10 @@ export default function Root() {
           <SideNav />
           <div
             style={{ marginLeft: `${styling.spacing}px` }}
-            className="flex w-full flex-col"
+            className="flex w-full flex-col mr-[8px] lg:mr-[0px]"
           >
             <TopNav />
-            <div className="w-full rounded-l-xl h-screen my-2 overflow-auto">
+            <div className={`${styles.main}`}>
               <Outlet />
             </div>
           </div>

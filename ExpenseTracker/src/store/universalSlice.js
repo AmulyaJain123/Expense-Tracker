@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const intialUniversalState = {
   toastMsg: null,
-  loggedInDetails: null
+  loggedInDetails: null,
+  hamMenu: false
 
 };
 
@@ -21,6 +22,12 @@ export const universalSlice = createSlice({
     },
     clearLoginInfo(state) {
       state.loggedInDetails = null;
+    },
+    openMenu(state) {
+      state.hamMenu = true;
+    },
+    closeMenu(state) {
+      state.hamMenu = false;
     }
   },
 });

@@ -53,7 +53,7 @@ export default function ImageThumbs({ ind, removeFileObj }) {
   return (
     <Button
       $status={ind === fileInd ? "true" : "false"}
-      className="p-[6px] px-2 duration-500 items-center flex rounded-lg "
+      className="p-[5px] sm:p-[6px] px-2 duration-500 items-center flex rounded-md sm:rounded-lg "
     >
       <button onClick={clickHandle}>
         <span className="">{`Image ${ind + 1}`}</span>
@@ -61,7 +61,7 @@ export default function ImageThumbs({ ind, removeFileObj }) {
 
       {ind === fileInd ? (
         <button className="ml-2" onClick={remove}>
-          <i className="fi fi-ss-cross-circle flex justify-center items-center text-xl"></i>
+          <i className="fi fi-ss-cross-circle flex justify-center items-center text-lg sm:text-xl"></i>
         </button>
       ) : null}
     </Button>

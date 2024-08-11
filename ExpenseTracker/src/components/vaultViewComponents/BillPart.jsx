@@ -1,4 +1,5 @@
 import { formatDate } from "../../util/algo";
+import styles from "./BillPart.module.css";
 
 export default function BillPart({ data }) {
   function dateDiff() {
@@ -70,8 +71,8 @@ export default function BillPart({ data }) {
   // console.log(currDate);
 
   return (
-    <div className="bg-white zigzag w-[358px] pb-[100px]">
-      <div className="bg-slate-100 m-4 rounded-lg flex text-black justify-center items-center h-[60px] text-2xl uppercase font-bold">
+    <div className="bg-white zigzag  w-[290px] sm:w-[358px] pb-[100px]">
+      <div className="bg-slate-100 m-4 rounded-lg flex text-black justify-center items-center h-[50px] text-xl sm:h-[60px] sm:text-2xl uppercase font-bold">
         Bill
       </div>
 
@@ -84,12 +85,12 @@ export default function BillPart({ data }) {
         <div className="billCuts-stone h-[20px] w-[20px] rounded-l-full"></div>
       </div>
 
-      <div className="flex flex-col space-y-[40px] mt-[60px]">
+      <div className={`${styles.main}`}>
         <div className="flex flex-col">
           <div className="text-xl font-semibold flex justify-center">
             Bill Name
           </div>
-          <div className="flex p-2 px-4 justify-center text-stone-500 rounded-md text-lg mx-4 mt-2 bg-slate-100">
+          <div className="flex   px-4 justify-center text-stone-500 rounded-md text-lg mx-4 mt-2 bg-slate-100">
             {data.billName}
           </div>
         </div>
@@ -97,7 +98,7 @@ export default function BillPart({ data }) {
           <div className="text-xl font-semibold flex justify-center">
             Created On
           </div>
-          <div className="flex p-2 px-4 justify-center text-stone-500 rounded-md text-lg mx-4 mt-2 bg-slate-100">
+          <div className="flex   px-4 justify-center text-stone-500 rounded-md text-lg mx-4 mt-2 bg-slate-100">
             {formatDate(data.createdOn)}
           </div>
         </div>
@@ -105,7 +106,7 @@ export default function BillPart({ data }) {
           <div className="text-xl font-semibold flex justify-center">
             Bill Date
           </div>
-          <div className="p-2 px-4 text-lg text-center text-stone-500 rounded-md mx-4 mt-2 bg-slate-100">
+          <div className="  px-4 text-lg text-center text-stone-500 rounded-md mx-4 mt-2 bg-slate-100">
             {formatDate(data.billDate)}
           </div>
         </div>
@@ -113,15 +114,15 @@ export default function BillPart({ data }) {
           <div className="text-xl font-semibold flex justify-center">
             Bill Total
           </div>
-          <div className="p-2 px-4 text-center text-lg text-stone-500 rounded-md mx-4 mt-2 bg-slate-100">
+          <div className="  px-4 text-center text-lg text-stone-500 rounded-md mx-4 mt-2 bg-slate-100">
             {data.billTotal}
           </div>
         </div>
-        <div className="flex flex-col mb-[30px]">
+        <div className="flex flex-col mb-[20px] sm:mb-[30px]">
           <div className="text-xl font-semibold flex justify-center">
             Description
           </div>
-          <div className="p-2 px-4 text-center resize-none text-stone-500 rounded-md h-[150px] text-lg mx-4 mt-2 bg-slate-100">
+          <div className="  px-4 text-center resize-none text-stone-500 rounded-md h-[150px] text-lg mx-4 mt-2 bg-slate-100">
             {data.billDesc}
           </div>
         </div>
@@ -130,7 +131,7 @@ export default function BillPart({ data }) {
             <div className="text-xl font-semibold flex justify-center">
               Expiration Date
             </div>
-            <div className="p-2 px-4 text-lg text-center text-stone-500 rounded-md mx-4 mt-2 bg-slate-100">
+            <div className="  px-4 text-lg text-center text-stone-500 rounded-md mx-4 mt-2 bg-slate-100">
               <span className="mr-4">{`${formatDate(data.expiryDate)}`}</span>
               <span>11:59:59 PM</span>
             </div>
@@ -142,11 +143,11 @@ export default function BillPart({ data }) {
               Expiration Status
             </div>
             {data.expiryDate > currDate ? (
-              <div className="p-2 px-4 text-lg text-center text-green-600 rounded-md mx-4 mt-2 bg-green-200">
+              <div className="  px-4 text-lg text-center text-green-600 rounded-md mx-4 mt-2 bg-green-200">
                 {dateDiff()}
               </div>
             ) : (
-              <div className="p-2 px-4 text-lg text-center rounded-md font-semibold text-red-600 mx-4 mt-2 bg-red-200">
+              <div className="  px-4 text-lg text-center rounded-md font-semibold text-red-600 mx-4 mt-2 bg-red-200">
                 Expired
               </div>
             )}

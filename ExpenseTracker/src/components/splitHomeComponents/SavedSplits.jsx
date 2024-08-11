@@ -71,7 +71,7 @@ export default function SavedSplits() {
 
   return (
     <>
-      <div className="mx-[20px] flex flex-wrap gap-x-5  gap-y-5">
+      <div className="mx-[20px] flex flex-wrap gap-x-3 gap-y-3 sm:gap-x-5  sm:gap-y-5">
         {loading != null ? (
           <p className="p-2">{loading}</p>
         ) : (

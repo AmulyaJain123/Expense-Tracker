@@ -151,7 +151,7 @@ export default function SideNav() {
   }
 
   return (
-    <Main className="w-72 rounded-r-xl flex flex-col">
+    <Main className="min-w-[250px] rounded-r-xl overflow-y-auto hidden lg:flex flex-col">
       <Logo>
         <Link to={""}>BILLBUD</Link>
       </Logo>

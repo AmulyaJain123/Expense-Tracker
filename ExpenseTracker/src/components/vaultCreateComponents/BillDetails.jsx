@@ -6,6 +6,7 @@ import { forwardRef, useImperativeHandle } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { vaultActions } from "../../store/main";
+import styles from "./BillDetails.module.css";
 
 const BillDetails = forwardRef(function BillDetails({ ...prop }, ref) {
   const [warrantyStatus, setWarrantyStatus] = useState(false);
@@ -174,8 +175,8 @@ const BillDetails = forwardRef(function BillDetails({ ...prop }, ref) {
   }
 
   return (
-    <div className="bg-white zigzag w-[358px] pb-[100px]">
-      <div className="bg-slate-100 m-4 rounded-lg flex text-black justify-center items-center h-[60px] text-2xl uppercase font-bold">
+    <div className={`zigzag ${styles.main}`}>
+      <div className="bg-slate-100  m-4 rounded-lg flex text-black justify-center items-center uppercase font-bold">
         Create Bill
       </div>
 
@@ -200,7 +201,7 @@ const BillDetails = forwardRef(function BillDetails({ ...prop }, ref) {
             ref={billNameRef}
             value={name}
             onChange={(event) => billNameChange(event)}
-            className="flex p-2 px-4 text-center text-lg mx-4 mt-2 bg-slate-100"
+            className="flex p-2 px-4 text-center mx-4 mt-2 bg-slate-100"
           />
           <ErrorElement error={nameError} />
         </div>
@@ -212,7 +213,7 @@ const BillDetails = forwardRef(function BillDetails({ ...prop }, ref) {
             type="text"
             value={currDate}
             disabled
-            className="flex p-2 px-4 text-center text-lg mx-4 mt-2 bg-slate-100"
+            className="flex p-2 px-4 text-center mx-4 mt-2 bg-slate-100"
           />
         </div>
         <div className="flex flex-col">
@@ -224,7 +225,7 @@ const BillDetails = forwardRef(function BillDetails({ ...prop }, ref) {
             value={billdate}
             onChange={billDateChange}
             type="date"
-            className="p-2 px-4 text-lg text-center mx-4 mt-2 bg-slate-100"
+            className="p-2 px-4 text-center mx-4 mt-2 bg-slate-100"
           />
           <ErrorElement error={dateError} />
         </div>
@@ -238,7 +239,7 @@ const BillDetails = forwardRef(function BillDetails({ ...prop }, ref) {
             ref={billTotalRef}
             value={total}
             onChange={billTotalChange}
-            className="p-2 px-4 text-center text-lg mx-4 mt-2 bg-slate-100"
+            className="p-2 px-4 text-center  mx-4 mt-2 bg-slate-100"
           />
           <ErrorElement error={AmountError} />
         </div>
@@ -249,7 +250,7 @@ const BillDetails = forwardRef(function BillDetails({ ...prop }, ref) {
           <textarea
             placeholder="Description"
             ref={billDescRef}
-            className="p-2 px-4 text-center resize-none h-[150px] text-lg mx-4 mt-2 bg-slate-100"
+            className="p-2 px-4 text-center resize-none h-[150px] mx-4 mt-2 bg-slate-100"
           />
         </div>
         <div className="flex flex-col">
@@ -260,12 +261,12 @@ const BillDetails = forwardRef(function BillDetails({ ...prop }, ref) {
             {warrantyStatus ? (
               <div className="flex items-center">
                 <span className="text-3xl font-normal mr-2">-</span>{" "}
-                <span className="text-lg">Remove Warranty</span>
+                <span className="text-base sm:text-lg">Remove Warranty</span>
               </div>
             ) : (
               <div className="flex items-center">
                 <span className="text-3xl font-normal mr-2">+</span>{" "}
-                <span className="text-lg">Add Warranty</span>
+                <span className="text-base sm:text-lg">Add Warranty</span>
               </div>
             )}
           </button>
@@ -279,14 +280,14 @@ const BillDetails = forwardRef(function BillDetails({ ...prop }, ref) {
               <div className="flex flex-col mt-8">
                 {warrantyOption != 2 ? (
                   <div className="flex flex-col">
-                    <div className="text-xl font-semibold flex justify-center">
+                    <div className="text-base sm:text-xl font-semibold flex justify-center">
                       Warranty Expiration Date
                     </div>
                     <input
                       type="date"
                       onChange={billExpiryDateChange}
                       ref={expireRef}
-                      className="p-2 px-4 text-lg text-center mx-4 mt-2 bg-slate-100"
+                      className="p-2 px-4 text-lg  text-center mx-4 mt-2 bg-slate-100"
                     />
                     <ErrorElement error={expiryDateError} />
                   </div>
@@ -294,12 +295,12 @@ const BillDetails = forwardRef(function BillDetails({ ...prop }, ref) {
 
                 {warrantyOption != 1 ? (
                   <div className="flex flex-col">
-                    <div className="text-xl font-semibold flex justify-center">
+                    <div className="sm:text-xl font-semibold flex justify-center">
                       Warranty Duration
                     </div>
                     <div
                       ref={durationRef}
-                      className="mx-4 mt-2 flex w-[326px] space-x-2 text-lg"
+                      className="mx-4 mt-2 flex flex-grow space-x-2 sm:text-lg"
                     >
                       <div className="flex flex-col w-[1/3] space-y-2">
                         <div className="flex justify-center">Year</div>

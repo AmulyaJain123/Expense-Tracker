@@ -54,17 +54,20 @@ export default function VaultBillView() {
 
   return (
     <>
-      <dialog ref={confirmRef} className="rounded-2xl">
-        <div className="rounded-xl w-[600px] bg-stone-100">
-          <h1 className="p-4 pl-[30px] text-xl font-medium">
+      <dialog
+        ref={confirmRef}
+        className="rounded-2xl scale-[70%] md:scale-[80%] xl:scale-100"
+      >
+        <div className="rounded-xl   sm:w-[600px] bg-stone-100">
+          <h1 className="p-4 sm:pl-[30px] text-center sm:text-start  text-lg sm:text-xl font-medium">
             Are you sure you want to delete the selected Bill ?
           </h1>
-          <div className="flex space-x-[120px] px-[50px]">
+          <div className="flex  justify-center mb-[20px] sm:mb-0 sm:space-x-[120px] px-[50px]">
             <MinimizedBillIcon
               name={data.bill.billName}
               date={formatDate(data.bill.billDate)}
             />
-            <div className="flex flex-col mt-[35px] space-y-2">
+            <div className="hidden sm:flex flex-col mt-[35px] space-y-2">
               <div className="flex space-x-6">
                 <span>Bill Name: </span>
                 <span>{data.bill.billName}</span>
@@ -77,7 +80,7 @@ export default function VaultBillView() {
           </div>
           <form
             method="dialog"
-            className="flex pb-4 pr-4 justify-end space-x-6"
+            className="flex pb-4 sm:pr-4 justify-center sm:justify-end space-x-6"
           >
             {deleting === false ? (
               <>
@@ -102,12 +105,13 @@ export default function VaultBillView() {
           </form>
         </div>
       </dialog>
+
       <div className="h-full w-full billViewBg overflow-auto pb-[200px] text-stone-700 rounded-l-xl">
-        <div className="mx-[100px] justify-center space-x-[50px] mt-[50px] p-4 text-stone-600 flex">
+        <div className=" flex-col items-center xl:items-stretch space-y-20 xl:space-y-0  xl:flex-row justify-center xl:space-x-[50px] mt-[50px] px-2 p-4 text-stone-600 flex">
           <BillPart data={data.bill} />
           <FileView data={data.images} />
         </div>
-        <div className="mx-[50px] flex justify-between items-center mt-[50px]">
+        <div className="mx-[10px] scale-[90%] sm:scale-100 sm:mx-[50px] flex flex-col sm:flex-row justify-between items-center mt-[50px]">
           <Link to={"/vault/view"}>
             <BackButton>{"<<-- Vault"}</BackButton>
           </Link>

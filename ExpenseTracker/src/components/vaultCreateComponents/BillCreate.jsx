@@ -121,13 +121,13 @@ export default function BillCreate() {
 
   return (
     <>
-      <div className="mx-[100px] space-x-[50px] mt-[50px] p-4 text-stone-600 flex">
+      <div className="flex-col xl:flex-row items-center xl:items-stretch justify-center space-y-[100px] xl:space-y-0 xl:space-x-[50px] mt-[50px] p-2 sm:p-4 text-stone-600 flex">
         <BillDetails ref={detailRef} />
         <InputFile ref={inputRef} />
       </div>
       {loading != null ? <Loading text={"Loading"} /> : null}
 
-      <div className="flex justify-between mx-16 mt-6 pr-8 mb-6">
+      <div className="flex flex-col items-center sm:items-start scale-90 sm:scale-100 sm:flex-row justify-between mx-auto mt-6 sm:pr-8 mb-6">
         <DiscardBillButton>Discard</DiscardBillButton>
         {loading === null ? (
           <Button

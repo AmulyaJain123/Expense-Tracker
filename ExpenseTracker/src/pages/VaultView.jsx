@@ -19,12 +19,14 @@ export default function VaultView() {
   }
 
   return (
-    <div className="h-full w-full bg-white overflow-auto pb-[200px] text-stone-700 rounded-l-xl">
-      <div className="flex flex-grow justify-between p-3">
-        <div className="flex space-x-10 pl-[50px] items-center">
-          <span className="text-[30px] font-bold">Saved Bills</span>
+    <div className="h-full w-full bg-white overflow-auto pb-[200px] text-stone-700 rounded-r-2xl lg:rounded-r-none rounded-l-2xl">
+      <div className="flex flex-grow flex-col items-center mt-[30px] sm:mt-0 sm:flex-row justify-between p-3">
+        <div className="flex space-x-10 pl-[20px] sm:pl-[50px] items-center">
+          <span className="text-[25px] sm:text-[30px] font-bold">
+            Saved Bills
+          </span>
         </div>
-        <div className="flex justify-center space-x-[50px] scale-[90%] items-center">
+        <div className="justify-center space-x-[20px] xl:space-x-[50px] hidden md:flex scale-[80%] xl:scale-[90%] items-center">
           <div className="flex w-[40px] flex-col justify-center items-center">
             <img className="h-[40px] w-[40px]" src={expiredIcon} alt="" />
             <div className="flex flex-col text-center text-xs font-semibold">
@@ -45,8 +47,8 @@ export default function VaultView() {
             </div>
           </div>
         </div>
-        <div className="flex items-center mr-4">
-          <div className="items-center text-lg font-semibold flex">
+        <div className="flex items-center ml-6 sm:ml-0 sm:mr-4">
+          <div className="items-center text-base my-4 md:text-lg font-semibold flex ">
             <label className="mr-2" htmlFor="sort">
               Sort By:
             </label>
