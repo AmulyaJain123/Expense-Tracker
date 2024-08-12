@@ -34,7 +34,7 @@ export default function SplitHome() {
             src={split}
             alt=""
           />
-          <div className="flex text-sm md:text-base xl:text-lg flex-col space-y-6 my-auto">
+          <div className="flex text-sm self-center md:text-base xl:text-lg flex-col space-y-6 my-auto">
             <p className=" font-medium flex justify-center items-center text-center ">
               Welcome to BillSplit, the ultimate solution for managing and
               dividing expenses among friends, family, or colleagues. Whether
@@ -51,13 +51,13 @@ export default function SplitHome() {
         <SplitHomeMenu />
 
         {fetching ? (
-          <p className="flex justify-center text-lg mt-[50px] font-medium">
+          <p className="flex justify-center text-base sm:text-lg mt-[50px] font-medium">
             Loading User Info...
           </p>
         ) : (
           <>
             {user === null ? (
-              <div className="flex flex-col items-center space-y-6 mt-[150px]">
+              <div className="flex flex-col scale-90 sm:scale-100 items-center space-y-6 mt-[150px]">
                 <Link to={"/auth"}>
                   <img
                     src={logInIcon}

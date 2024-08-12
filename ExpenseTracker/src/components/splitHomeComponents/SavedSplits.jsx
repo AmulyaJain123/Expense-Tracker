@@ -73,7 +73,7 @@ export default function SavedSplits() {
     <>
       <div className="mx-[20px] flex flex-wrap gap-x-3 gap-y-3 sm:gap-x-5  sm:gap-y-5">
         {loading != null ? (
-          <p className="p-2">{loading}</p>
+          <p className="text-sm sm:text-base p-2">{loading}</p>
         ) : (
           splits.map((split) => {
             // console.log(split);
@@ -89,12 +89,12 @@ export default function SavedSplits() {
       </div>
       <div className="flex h-[100px] flex-grow">
         {loadMore === true ? (
-          <p className="ml-auto underline-offset-8 mt-[30px] mr-[30px] text-md m-3">
+          <p className="ml-auto underline-offset-8 mt-[30px] mr-[30px] text-sm sm:text-base m-3">
             Loading...
           </p>
         ) : hide === false ? (
           <button
-            className="underline ml-auto underline-offset-8 mt-[30px] mr-[30px] text-md m-3"
+            className="underline ml-auto underline-offset-8 mt-[30px] mr-[30px] text-sm sm:text-base m-3"
             onClick={loadHandle}
           >
             Load More

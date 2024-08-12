@@ -60,6 +60,9 @@ tr {
 /* .customScrollThin {
   scrollbar-width: thin;
 } */
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
+}
 
 .customScrollThin::-webkit-scrollbar {
   width: 4px;

@@ -38,7 +38,7 @@ export default function AddBillNavThumbs({
               : `2px solid ${"#9d4edd"}`,
           color: status != "true" ? "black" : "#f7ebfd",
         }}
-        className="rounded-md p-1 justify-center flex-grow text-black px-3 flex items-center"
+        className="rounded-md p-1 justify-center flex-grow text-black px-2 sm:px-3 flex items-center"
       >
         <span>{children}</span>
         {viewOnly == "false" && status === "true" ? (
@@ -46,7 +46,7 @@ export default function AddBillNavThumbs({
             onClick={removeClick}
             className="ml-3 hover:scale-125 duration-500"
           >
-            <i className="fi fi-ss-cross-circle flex justify-center items-center text-xl"></i>
+            <i className="fi fi-ss-cross-circle flex justify-center items-center text-base sm:text-xl"></i>
           </button>
         ) : null}
       </div>

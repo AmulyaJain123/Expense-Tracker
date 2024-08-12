@@ -133,15 +133,15 @@ export default function AuthPage() {
 
   return (
     <div className="flex gradient  h-screen w-screen p-8">
-      <div className="flex w-full h-full space-x-8">
-        <div className="flex w-[40%] h-full bg-white scale-90 rounded-2xl items-center justify-center">
-          <div className="rounded-3xl flex flex-col space-y-4 p-4 pb-8  h-full w-full">
-            <div className="flex justify-center m-4 mx-8 space-x-8">
+      <div className="flex w-full justify-center h-full space-x-8">
+        <div className="flex max-w-600px lg:w-[600px] xl:w-[40%] h-full overflow-auto scrollbar-hidden bg-white sm:scale-90 rounded-2xl items-center justify-center">
+          <div className="rounded-3xl flex flex-col space-y-2 sm:space-y-4  py-2 sm:py-4 p-4 pb-4 sm:pb-8  h-full w-full">
+            <div className="flex justify-center m-4 mx-2 sm:mx-8 space-x-4 sm:space-x-8">
               <Button
                 disabled={selected === 1}
                 $status={selected === 1 ? "true" : "false"}
                 onClick={() => clickHandle(1)}
-                className="p-2 px-4 flex min-w-[170px] justify-center rounded-lg bg-[#9f21e3] border-2 border-[#9f21e3] text-white text-2xl font-semibold"
+                className="p-1 sm:p-2 px-4 flex sm:min-w-[170px] justify-center rounded-lg bg-[#9f21e3] border-2 border-[#9f21e3] text-white text-base sm:text-2xl font-semibold"
               >
                 Log In
               </Button>
@@ -149,21 +149,21 @@ export default function AuthPage() {
                 disabled={selected === 2}
                 $status={selected === 2 ? "true" : "false"}
                 onClick={() => clickHandle(2)}
-                className="p-2 px-4 flex min-w-[170px] justify-center rounded-lg bg-[#9f21e3] border-2 border-[#9f21e3] text-white text-2xl font-semibold"
+                className="p-1 sm:p-2 px-4 flex sm:min-w-[170px] justify-center rounded-lg bg-[#9f21e3] border-2 border-[#9f21e3] text-white  text-base sm:text-2xl font-semibold"
               >
                 Sign Up
               </Button>
             </div>
 
             {selected === 2 ? (
-              <div className="flex flex-col mx-4 p-4 flex-grow justify-between">
+              <div className="flex flex-col sm:mx-4 p-2 sm:p-4 flex-grow justify-between">
                 <div className="flex flex-col space-y-4">
                   <div className="flex flex-col space-y-3 rounded-xl">
-                    <span className="text-lg text-black rounded-lg font-semibold p-1 px-2 w-fit">
+                    <span className="text-sm sm:text-lg text-black rounded-lg font-semibold p-1 px-2 w-fit">
                       First Name
                     </span>
                     <input
-                      className="p-2 px-3 bg-stone-100 focus:py-4 duration-700 focus:outline-none flex rounded-lg pl-8 text-lg flex-grow "
+                      className="p-2 px-3 bg-stone-100 focus:py-3 sm:focus:py-4 duration-700 focus:outline-none flex rounded-lg pl-4 sm:pl-8 text-sm sm:text-lg flex-grow "
                       placeholder="John"
                       type="text"
                       ref={firstNameRef}
@@ -171,11 +171,11 @@ export default function AuthPage() {
                     />
                   </div>
                   <div className="flex flex-col space-y-2 rounded-xl">
-                    <span className="text-lg text-black rounded-lg font-semibold p-1 px-2 w-fit">
+                    <span className="text-sm sm:text-lg text-black rounded-lg font-semibold p-1 px-2 w-fit">
                       Last Name
                     </span>
                     <input
-                      className="p-2 px-3 bg-stone-100 focus:py-4 duration-700 focus:outline-none flex rounded-lg pl-8 text-lg flex-grow "
+                      className="p-2 px-3 bg-stone-100 focus:py-3 sm:focus:py-4 duration-700 focus:outline-none flex rounded-lg pl-4 sm:pl-8 text-sm sm:text-lg flex-grow "
                       placeholder="Doe"
                       type="text"
                       ref={LastNameRef}
@@ -183,11 +183,11 @@ export default function AuthPage() {
                     />
                   </div>
                   <div className="flex flex-col space-y-2 rounded-xl">
-                    <span className="text-lg text-black rounded-lg font-semibold p-1 px-2 w-fit">
+                    <span className="text-sm sm:text-lg text-black rounded-lg font-semibold p-1 px-2 w-fit">
                       Email
                     </span>
                     <input
-                      className="p-2 px-3 bg-stone-100 focus:py-4 duration-700 focus:outline-none flex rounded-lg pl-8 text-lg flex-grow "
+                      className="p-2 px-3 bg-stone-100 focus:py-3 sm:focus:py-4 duration-700 focus:outline-none flex rounded-lg pl-4 sm:pl-8 text-sm sm:text-lg flex-grow "
                       placeholder="JohnDoe123@gmail.com"
                       type="text"
                       ref={signUpEmailRef}
@@ -195,11 +195,11 @@ export default function AuthPage() {
                     />
                   </div>
                   <div className="flex flex-col space-y-2 rounded-xl">
-                    <span className="text-lg text-black rounded-lg font-semibold p-1 px-2 w-fit">
+                    <span className="text-sm sm:text-lg text-black rounded-lg font-semibold p-1 px-2 w-fit">
                       Password
                     </span>
                     <input
-                      className="p-2 px-3 bg-stone-100 focus:py-4 duration-700 focus:outline-none flex rounded-lg pl-8 text-lg flex-grow "
+                      className="p-2 px-3 bg-stone-100 focus:py-3 sm:focus:py-4 duration-700 focus:outline-none flex rounded-lg pl-4 sm:pl-8 text-sm sm:text-lg flex-grow "
                       placeholder="Password"
                       type="password"
                       ref={signUpPasswordRef}
@@ -208,18 +208,18 @@ export default function AuthPage() {
                   </div>
                 </div>
 
-                <div className="pt-[20px] flex justify-between">
-                  <p className="text-black flex items-center text-sm p-1 h-[60px] px-4">
+                <div className="pt-[20px] flex flex-col sm:flex-row space-y-4 sm:space-y-0 justify-between">
+                  <p className="text-black flex items-center justify-center text-center sm:text-start text-xs sm:text-sm p-1 h-[60px] px-4">
                     {signUpError}
                   </p>
                   {signUpLoading ? (
-                    <div className="p-2 px-6  min-w-[130px] text-black text-xl font-semibold tracking-wide">
+                    <div className="p-2 px-6 text-center min-w-[130px] text-black text-base sm:text-xl font-semibold tracking-wide">
                       Signing Up...
                     </div>
                   ) : (
                     <button
                       onClick={signUp}
-                      className="p-2 px-6 bg-[#9f21e3] border-2 border-[#9f21e3] min-w-[130px] text-white text-xl font-bold rounded-lg duration-500 hover:shadow-xl hover:scale-110 hover:bg-white hover:text-[#9f21e3]"
+                      className="p-2 px-6 bg-[#9f21e3] border-2 border-[#9f21e3] min-w-[130px] text-white sm:text-xl font-bold rounded-lg duration-500 hover:shadow-xl hover:scale-110 hover:bg-white hover:text-[#9f21e3]"
                     >
                       Sign Up
                     </button>
@@ -227,13 +227,13 @@ export default function AuthPage() {
                 </div>
               </div>
             ) : (
-              <div className="flex flex-col flex-grow mx-4 p-4 ">
+              <div className="flex flex-col flex-grow sm:mx-4 p-2 sm:p-4 ">
                 <div className="flex flex-col space-y-2 mb-4 rounded-xl">
-                  <span className="text-lg text-black rounded-lg font-semibold p-1 px-2 w-fit">
+                  <span className="text-sm sm:text-lg text-black rounded-lg font-semibold p-1 px-2 w-fit">
                     Email
                   </span>
                   <input
-                    className="p-2 px-3 bg-stone-100 flex focus:py-4 duration-700 focus:outline-none rounded-lg pl-8 text-lg flex-grow "
+                    className="p-2 px-3 bg-stone-100 flex focus:py-3 sm:focus:py-4 duration-700 focus:outline-none rounded-lg pl-4 sm:pl-8 text-sm sm:text-lg flex-grow "
                     placeholder="JohnDoe123@gmail.com"
                     type="text"
                     ref={logInEmailRef}
@@ -241,29 +241,29 @@ export default function AuthPage() {
                   />
                 </div>
                 <div className="flex flex-col space-y-2 rounded-xl">
-                  <span className="text-lg text-black rounded-lg font-semibold p-1 px-2 w-fit">
+                  <span className="text-sm sm:text-lg text-black rounded-lg font-semibold p-1 px-2 w-fit">
                     Password
                   </span>
                   <input
-                    className="p-2 px-3 bg-stone-100 flex focus:py-4 duration-700 focus:outline-none rounded-lg pl-8 text-lg flex-grow "
+                    className="p-2 px-3 bg-stone-100 flex focus:py-3 sm:focus:py-4 duration-700 focus:outline-none rounded-lg pl-4 sm:pl-8 text-sm sm:text-lg flex-grow "
                     placeholder="Password"
                     type="password"
                     ref={logInPasswordRef}
                     onChange={() => setLogInError(null)}
                   />
                 </div>
-                <div className="pt-[20px] flex  mt-auto justify-between">
-                  <p className="text-black flex items-center text-sm p-1 h-[60px] px-4">
+                <div className="pt-[20px] flex flex-col sm:flex-row space-y-4 sm:space-y-0 mt-auto justify-between">
+                  <p className="text-black flex items-center text-xs justify-center sm:justify-start  text-center sm:text-start sm:text-sm p-1 h-[60px] px-4">
                     {logInError}
                   </p>
                   {logInLoading ? (
-                    <div className="p-2 px-6  min-w-[130px] text-black text-xl font-semibold tracking-wide">
+                    <div className="p-2 px-6  text-center min-w-[130px] text-black sm:text-xl font-semibold tracking-wide">
                       Logging In...
                     </div>
                   ) : (
                     <button
                       onClick={logIn}
-                      className="p-2 px-6 bg-[#9f21e3] border-2 border-[#9f21e3] min-w-[130px] text-white text-xl font-bold rounded-lg duration-500 hover:shadow-xl hover:scale-110 hover:bg-white hover:text-[#9f21e3]"
+                      className="p-2 px-6 bg-[#9f21e3] border-2 border-[#9f21e3] min-w-[130px] text-white sm:text-xl font-bold rounded-lg duration-500 hover:shadow-xl hover:scale-110 hover:bg-white hover:text-[#9f21e3]"
                     >
                       Log In
                     </button>
@@ -273,7 +273,7 @@ export default function AuthPage() {
             )}
           </div>
         </div>
-        <div className="flex w-[60%] relative h-full rounded-3xl bgLogin">
+        <div className="w-[60%] hidden xl:flex relative h-full rounded-3xl bgLogin">
           <div
             style={{ fontFamily: styling.logoFont }}
             className="text-[50px] font-bold text-black font p-4 pt-2 px-6 bg-white rounded-b-3xl absolute top-p right-[100px]"

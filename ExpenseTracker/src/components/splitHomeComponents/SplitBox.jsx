@@ -64,7 +64,7 @@ export default function SplitBox({ data, setSplitState }) {
     });
   }
   const str =
-    "text-black border-2 border-stone-600 flex flex-col space-y-2 sm:space-y-4 text-xl font-semibold justify-center items-center rounded-xl w-[120px] h-[120px] sm:w-[200px] sm:h-[200px] " +
+    "text-black border-[1px] sm:border-2 border-stone-600 flex flex-col space-y-2 sm:space-y-4 text-xl font-semibold justify-center items-center rounded-xl w-[120px] h-[120px] sm:w-[200px] sm:h-[200px] " +
     bgPattern;
   return (
     <>

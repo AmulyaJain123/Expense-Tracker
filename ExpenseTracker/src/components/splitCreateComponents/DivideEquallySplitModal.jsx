@@ -5,6 +5,7 @@ import { formatVal } from "../../util/algo";
 import { amountInRange } from "../../util/algo";
 import { useDispatch } from "react-redux";
 import { splitCreateActions } from "../../store/main";
+import styles from "./DivideEquallySplitModal.module.css";
 
 const Textarea = styled.textarea`
   resize: none;
@@ -12,7 +13,6 @@ const Textarea = styled.textarea`
 
 const Button = styled.button`
   flex-grow: 1;
-  padding: 0.75rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -183,10 +183,10 @@ export default function DivideEquallySplitModal() {
   }
 
   return (
-    <div className="bg-stone-200 rounded-xl mt-4 flex flex-grow">
-      <div className=" p-4 pr-2 flex flex-col w-1/2 h-fit">
-        <div className="flex rounded-xl bg-white p-3">
-          <div className="text-lg bg-black  font-semibold text-white py-2 px-6 rounded-lg">
+    <div className={`${styles.main}`}>
+      <div className=" p-4 lg:pr-2 flex flex-col lg:w-1/2 h-fit">
+        <div className="flex flex-col space-y-3 sm:space-y-0 text-center sm:text-start sm:flex-row rounded-xl bg-white p-3">
+          <div className=" text-sm sm:text-base xl:text-lg bg-black  font-semibold text-white py-2 px-6 rounded-lg">
             Bill Name
           </div>
           <input
@@ -194,11 +194,11 @@ export default function DivideEquallySplitModal() {
             ref={nameRef}
             maxLength={20}
             placeholder="Name(Optional)...."
-            className="rounded-md ml-4 bg-slate-100 flex-grow p-2 pl-6 text-md"
+            className="rounded-md sm:ml-4 bg-slate-100 text-center sm:text-start flex-grow p-2 pl-6 text-md"
           />
         </div>
         <div className="flex mt-4 flex-col space-y-4 rounded-xl bg-white p-3">
-          <div className="text-lg bg-black flex justify-center items-center font-semibold text-white py-2 px-6 rounded-lg">
+          <div className=" text-sm sm:text-base xl:text-lg bg-black flex justify-center items-center font-semibold text-white py-2 px-6 rounded-lg">
             Description
           </div>
           <Textarea
@@ -209,18 +209,18 @@ export default function DivideEquallySplitModal() {
             className="text-md rounded-md h-[105px] bg-slate-100 flex-grow p-2 pl-4 text-md"
           ></Textarea>
         </div>
-        <div className="flex mt-4 rounded-xl bg-white p-3">
-          <div className="text-lg bg-black  font-semibold text-white py-2 px-6 rounded-lg">
+        <div className="flex space-y-3 sm:space-y-0 text-center sm:text-start flex-col sm:flex-row mt-4 rounded-xl bg-white p-3">
+          <div className=" text-sm sm:text-base xl:text-lg bg-black  font-semibold text-white py-2 px-6 rounded-lg">
             Bill Date
           </div>
           <input
             type="date"
             ref={dateRef}
-            className="rounded-md ml-4 bg-slate-100 flex-grow p-2 pl-6 text-md"
+            className="rounded-md sm:ml-4 bg-slate-100 flex-grow p-2 pl-6 text-md"
           />
         </div>
-        <div className="flex mt-4 rounded-xl bg-white p-3">
-          <div className="text-lg bg-black  font-semibold text-white py-2 px-6 rounded-lg">
+        <div className="flex mt-4 flex-col sm:flex-row space-y-3 sm:space-y-0 rounded-xl bg-white p-3">
+          <div className="text-sm sm:text-base text-center xl:text-lg bg-black  font-semibold text-white py-2 px-6 rounded-lg">
             Total Amount
           </div>
           <input
@@ -229,17 +229,17 @@ export default function DivideEquallySplitModal() {
             ref={amountRef}
             onChange={(event) => amountChange(event)}
             placeholder="Total Amount...."
-            className="rounded-md ml-4 bg-slate-100 flex-grow p-2 pl-6 text-md"
+            className="rounded-md text-center sm:text-start sm:ml-4 bg-slate-100 flex-grow p-2 pl-6 text-md"
           />
         </div>
-        <div className="flex mt-4 rounded-xl bg-white p-3">
-          <div className="text-lg bg-black  font-semibold text-white py-2 px-6 rounded-lg">
+        <div className="flex mt-4 flex-col  sm:flex-row space-y-3 sm:space-y-0 rounded-xl bg-white p-3">
+          <div className=" text-sm sm:text-base text-center xl:text-lg bg-black  font-semibold text-white py-2 px-6 rounded-lg">
             Paid by
           </div>
           <select
             ref={selectRef}
             onChange={selectChange}
-            className="rounded-md ml-4 bg-slate-100 flex-grow p-2 pl-6 text-md"
+            className="rounded-md sm:ml-4 bg-slate-100 flex-grow p-2 pl-6 text-md"
           >
             <option value="">Select Payer</option>
             {friends.map((friend) => {
@@ -252,14 +252,14 @@ export default function DivideEquallySplitModal() {
           </select>
         </div>
       </div>
-      <div className=" pl-2 p-4 flex flex-col w-1/2 flex-grow">
+      <div className=" lg:pl-2 p-4 flex flex-col lg:w-1/2 flex-grow">
         <div className="flex flex-col rounded-xl bg-white h-[400px] p-3">
-          <div className="text-lg bg-black flex justify-center items-center font-semibold text-white py-2 px-6 rounded-lg">
+          <div className=" text-sm sm:text-base xl:text-lg bg-black flex justify-center items-center font-semibold text-white py-2 px-6 rounded-lg">
             Shares
           </div>
           <Div
             ref={checkboxRef}
-            className="rounded-md mt-4 bg-slate-100 h-[500px] p-4 overflow-auto text-md"
+            className="rounded-md mt-4 bg-slate-100 h-[500px] p-4 overflow-auto text-xs sm:text-base"
           >
             {friends.map((friend) => {
               return (
@@ -269,14 +269,14 @@ export default function DivideEquallySplitModal() {
                 >
                   <label
                     htmlFor={friend.name}
-                    className="p-3 pl-4 bg-white border-2 flex border-stone-200 rounded-md flex-grow"
+                    className="p-1 sm:p-3 pl-2 items-center sm:pl-4 bg-white border-2 flex border-stone-200 rounded-md flex-grow"
                   >
                     <span className="flex-grow">{friend.name}</span>
                     <span className="w-auto text-right text-stone-400"></span>
                   </label>
-                  <div className="p-3 rounded-md px-3 flex justify-center items-center bg-white border-2 border-stone-200">
+                  <div className="p-2 sm:p-3 rounded-md px-2 sm:px-3 flex justify-center items-center bg-white border-2 border-stone-200">
                     <input
-                      className="w-[20px] h-[20px]"
+                      className="w-[15px] sm:w-[20px] h-[15px] sm:h-[20px]"
                       type="checkbox"
                       value={friend.name}
                       onClick={(event) => toggleCheckbox(event)}
@@ -294,29 +294,32 @@ export default function DivideEquallySplitModal() {
           style={{
             display: `${error === null ? "none" : "flex"}`,
           }}
-          className="bg-red-300 mt-auto text-sm items-center rounded-lg p-2 px-4"
+          className="bg-red-300 text-xs sm:text-sm mt-4 lg:mt-auto items-center rounded-lg p-2 px-4"
         >
-          <i className="fi fi-rs-exclamation mr-2 text-lg flex justify-center items-center"></i>
+          <i className="fi fi-rs-exclamation mr-2  text-sm sm:text-base xl:text-lg flex justify-center items-center"></i>
           <p>{error}</p>
         </div>
-        <form method="dialog" className="flex space-x-3 mt-auto">
+        <form
+          method="dialog"
+          className="flex space-y-2 sm:space-y-0 sm:space-x-3 sm:text-base text-sm mt-4 flex-col sm:flex-row lg:mt-auto"
+        >
           <button
             onClick={cancelClick}
             ref={cancelRef}
-            className="flex-grow p-3 font-semibold uppercase flex justify-center items-center rounded-lg bg-red-500 text-white shadow-md hover:bg-white hover:text-red-500 border-2 border-red-500 hover:translate-y-[-5px] duration-500 "
+            className="flex-grow p-2 sm:p-3 font-semibold uppercase flex justify-center items-center rounded-lg bg-red-500 text-white shadow-md hover:bg-white hover:text-red-500 border-2 border-red-500 hover:translate-y-[-5px] duration-500 "
           >
             Cancel
           </button>
           <button
             onClick={() => reset()}
             type="button"
-            className="flex-grow p-3 font-semibold uppercase flex justify-center items-center rounded-lg bg-blue-500 text-white shadow-md hover:bg-white hover:text-blue-500 border-2 border-blue-500 hover:translate-y-[-5px] duration-500 "
+            className="flex-grow p-2 sm:p-3 font-semibold uppercase flex justify-center items-center rounded-lg bg-blue-500 text-white shadow-md hover:bg-white hover:text-blue-500 border-2 border-blue-500 hover:translate-y-[-5px] duration-500 "
           >
             Reset
           </button>
           <Button
             disabled={error != null ? true : false}
-            className={error != null ? "disabled" : ""}
+            className={error != null ? "disabled p-2 sm:p-3" : "p-2 sm:p-3"}
             type="button"
             onClick={addClick}
           >

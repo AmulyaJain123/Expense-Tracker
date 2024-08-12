@@ -225,7 +225,7 @@ const BillDetails = forwardRef(function BillDetails({ ...prop }, ref) {
             value={billdate}
             onChange={billDateChange}
             type="date"
-            className="p-2 px-4 text-center mx-4 mt-2 bg-slate-100"
+            className="p-2 px-4 flex flex-grow justify-center mx-4 mt-2 bg-slate-100"
           />
           <ErrorElement error={dateError} />
         </div>
@@ -287,7 +287,7 @@ const BillDetails = forwardRef(function BillDetails({ ...prop }, ref) {
                       type="date"
                       onChange={billExpiryDateChange}
                       ref={expireRef}
-                      className="p-2 px-4 text-lg  text-center mx-4 mt-2 bg-slate-100"
+                      className="p-2 px-4 text-lg flex flex-grow justify-center mx-4 mt-2 bg-slate-100"
                     />
                     <ErrorElement error={expiryDateError} />
                   </div>

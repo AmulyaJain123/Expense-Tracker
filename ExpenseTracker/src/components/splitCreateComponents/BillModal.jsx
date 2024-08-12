@@ -83,28 +83,34 @@ const BillModal = forwardRef(function BillModal({ ...rest }, ref) {
   return (
     <Main
       ref={dialog}
-      className="w-[90vw] bg-white  max-w-[1000px] h-[90vh] p-4 rounded-2xl "
+      className="sm:max-w-[90vw] bg-white scrollbar-hidden min-w-[300px] w-[80%] sm:w-[500px] md:w-[700px] lg:w-[900px] xl:w-[1000px] max-h-[90vh] p-4 rounded-2xl "
     >
       <div className="w-full h-fit flex flex-col">
-        <div className="rounded-2xl flex space-x-4">
+        <div className="rounded-2xl mb-4 flex-col sm:flex-row space-y-2 sm:space-y-0 flex sm:space-x-4">
           {addBillHeirarchy.map((text) => {
             return (
               <NavButton
                 key={text}
                 onClick={(event) => navClick(event)}
                 $status={`${evalBool(navStatus, text)}`}
-                className=" rounded-xl font-bold text-xl py-3 px-6 flex-auto border-2 border-stone-300 "
+                className="rounded-md sm:rounded-xl font-bold text-sm sm:text-base md:text-lg xl:text-xl py-1 sm:py-2 xl:py-3 px-6 flex-auto border-2 border-stone-300 "
               >
                 {text}
               </NavButton>
             );
           })}
         </div>
-        {navStatus === addBillHeirarchy[0] ? <DivideEquallySplitModal /> : null}
-        {navStatus === addBillHeirarchy[2] ? <DivideByRatioSplitModal /> : null}
-        {navStatus === addBillHeirarchy[1] ? (
-          <DivideManuallySplitModal />
-        ) : null}
+        <div className=" overflow-auto">
+          {navStatus === addBillHeirarchy[0] ? (
+            <DivideEquallySplitModal />
+          ) : null}
+          {navStatus === addBillHeirarchy[2] ? (
+            <DivideByRatioSplitModal />
+          ) : null}
+          {navStatus === addBillHeirarchy[1] ? (
+            <DivideManuallySplitModal />
+          ) : null}
+        </div>
       </div>
     </Main>
   );

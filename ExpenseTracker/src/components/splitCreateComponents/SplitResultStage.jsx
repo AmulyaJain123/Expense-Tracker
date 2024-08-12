@@ -7,6 +7,7 @@ import AddBillNavThumbs from "../../UIComponents/AddBillNavThumbs";
 import BillComponent from "../splitCreateComponents/BillComponent";
 import DiscardButton from "../../UIComponents/DiscardButton";
 import SaveToDB from "./SaveToDB";
+import styles from "./SplitResultStage.module.css";
 
 export default function SplitResultStage() {
   const bills = useSelector((state) => state.splitCreate.bills);
@@ -27,55 +28,55 @@ export default function SplitResultStage() {
   return (
     <>
       <div className="flex flex-col space-y-4 px-12">
-        <div className="text-3xl font-bold text-white flex flex-grow rounded-xl bg-[#9F21E3] py-4 mb-4 uppercase justify-center">
+        <div className="text-xl lg:text-3xl font-bold text-white flex flex-grow rounded-xl bg-[#9F21E3] py-3 lg:py-4 mb-4 uppercase justify-center">
           Split Summary
         </div>
 
-        <div className="flex space-x-4">
+        <div className="flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
           <div className="rounded-xl min-w-[300px] bg-white p-3 ">
             <div className="rounded-xl border-dashed border-2 border-stone-300 bg-[#F7EBFD] flex p-3 flex-grow flex-col">
-              <div className="rounded-lg bg-[#9F21E3] text-[#F7EBFD] font-semibold text-xl py-2 flex justify-center items-center">
+              <div className="rounded-lg bg-[#9F21E3] text-[#F7EBFD] font-semibold lg:text-xl text-lg py-2 flex justify-center items-center">
                 Split Name
               </div>
-              <div className="rounded-lg h-[80px] font-medium flex-auto text-lg py-2 mt-2 flex justify-center items-center text-stone-400">
+              <div className="rounded-lg h-[60px] lg:h-[80px] font-medium flex-auto text-sm md:text-base lg:text-lg py-2 mt-2 flex justify-center items-center text-stone-400">
                 {splitInfo.splitName}
               </div>
             </div>
           </div>
           <div className="rounded-xl min-w-[300px] bg-white p-3 ">
             <div className="rounded-xl border-dashed border-2 border-stone-300 bg-[#F7EBFD] flex p-3 flex-grow flex-col">
-              <div className="rounded-lg bg-[#9F21E3] text-[#F7EBFD] font-semibold text-xl py-2 flex justify-center items-center">
+              <div className="rounded-lg bg-[#9F21E3] text-[#F7EBFD] font-semibold lg:text-xl text-lg py-2 flex justify-center items-center">
                 Split Created On
               </div>
-              <div className="rounded-lg h-[80px] font-medium text-lg py-2 mt-2 flex justify-center items-center text-stone-400">
+              <div className="rounded-lg h-[60px] lg:h-[80px] font-medium text-sm md:text-base lg:text-lg py-2 mt-2 flex justify-center items-center text-stone-400">
                 {splitInfo.splitDate}
               </div>
             </div>
           </div>
           <div className="rounded-xl flex-grow bg-white p-3 ">
             <div className="rounded-xl border-dashed border-2 border-stone-300  bg-[#F7EBFD] flex p-3 flex-grow flex-col">
-              <div className="rounded-lg bg-[#9F21E3] text-[#F7EBFD] font-semibold text-xl py-2 flex justify-center items-center">
+              <div className="rounded-lg bg-[#9F21E3] text-[#F7EBFD] font-semibold lg:text-xl text-lg py-2 flex justify-center items-center">
                 Split Description
               </div>
-              <div className="rounded-lg h-[80px] p-4 font-medium flex text-center justify-center items-center text-lg mt-2  text-stone-400">
+              <div className="rounded-lg h-[60px] lg:h-[80px] p-4 font-medium flex text-center justify-center items-center text-sm md:text-base lg:text-lg mt-2  text-stone-400">
                 {splitInfo.description}
               </div>
             </div>
           </div>
         </div>
 
-        <div className="flex space-x-4">
-          <div className="rounded-xl bg-white flex-col space-y-3 p-3 w-[350px] h-[500px]">
+        <div className="flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
+          <div className="rounded-xl bg-white flex-col space-y-3 p-3 2xl:w-[350px] h-[500px]">
             <div className="rounded-xl border-dashed border-2 border-stone-300  bg-[#F7EBFD] h-full flex p-3 flex-grow flex-col">
-              <div className="rounded-lg bg-[#9F21E3] text-[#F7EBFD] font-semibold text-xl py-2 flex justify-center items-center">
+              <div className="rounded-lg bg-[#9F21E3] text-[#F7EBFD] font-semibold lg:text-xl text-lg py-2 flex justify-center items-center">
                 Registered Friends
               </div>
-              <div className="customScroll rounded-lg overflow-auto text-lg py-2 pt-4 mt-4 flex font-medium flex-col text-stone-400">
+              <div className="customScroll rounded-lg overflow-auto text-sm md:text-base lg:text-lg py-2 pt-4 mt-4 flex font-medium flex-col text-stone-400">
                 {friends.map((friend, index) => {
                   return (
                     <li
                       key={friend.name}
-                      className="mb-4 px-4 flex w-full text-lg"
+                      className="mb-4 px-4 flex w-full text-sm md:text-base lg:text-lg"
                     >
                       <div className="min-w-[50px]">
                         <span className="bg-[#fff] flex justify-center items-center w-[35px] h-[35px] rounded-lg ">
@@ -93,34 +94,39 @@ export default function SplitResultStage() {
             </div>
           </div>
 
-          <div className="rounded-xl flex-grow bg-white flex-col space-y-3 p-3 w-[400px] h-[500px]">
+          <div className="rounded-xl flex-grow bg-white flex-col space-y-3 p-3 2xl:w-[400px] h-[500px]">
             <div className="rounded-xl border-dashed border-2 border-stone-300  bg-[#F7EBFD] h-full flex p-3 flex-grow flex-col">
-              <div className="rounded-lg bg-[#9F21E3] text-[#F7EBFD] font-semibold text-xl py-2 flex justify-center items-center">
+              <div className="rounded-lg bg-[#9F21E3] text-[#F7EBFD] font-semibold lg:text-xl text-lg py-2 flex justify-center items-center">
                 Transactions to Liquidate
               </div>
-              <div className="customScroll rounded-lg  overflow-auto font-medium text-lg py-2 pt-4 mt-4 flex flex-col text-stone-400">
+              <div className="customScroll rounded-lg  overflow-auto font-medium text-sm md:text-base lg:text-lg py-2 pt-4 mt-4 flex flex-col text-stone-400">
                 {res.ans.map((ele) => {
                   return (
                     <li
                       key={Math.random()}
-                      className="mb-4 px-2 flex w-full text-lg"
+                      className="mb-4 px-2 flex w-fit mx-auto  border-b-2 border-stone-300 pb-2 text-sm lg:text-lg"
                     >
-                      <div className="w-[200px]">
+                      <div className="mr-4">
                         <span className="bg-[#fff] flex w-fit px-2 justify-center items-center h-[35px] rounded-lg ">
                           {ele.start}
                         </span>
                       </div>
-                      <div className="w-[200px]">
+                      <div className="mr-4">
                         <span className="flex w-fit px-2 mx-auto items-center h-[35px]">
                           Pays
                         </span>
                       </div>
-                      <div className="w-[200px]">
+                      <div className="mr-4">
                         <span className="bg-[#fff] ml-auto flex w-fit px-2 justify-center items-center h-[35px] rounded-lg ">
                           {ele.end}
                         </span>
                       </div>
-                      <div className="w-[190px] ml-[100px]">
+                      <div className="mr-4">
+                        <span className="flex w-fit px-2 mx-auto items-center h-[35px]">
+                          Total of
+                        </span>
+                      </div>
+                      <div className="">
                         <span className="bg-[#fff] px-2 ml-auto flex w-fit justify-center items-center h-[35px] rounded-lg ">
                           {formatVal(ele.amount)}
                         </span>
@@ -133,18 +139,18 @@ export default function SplitResultStage() {
           </div>
         </div>
 
-        <div className="flex space-x-4">
-          <div className="rounded-xl bg-white flex-col space-y-3 p-3 w-[400px] h-[740px]">
+        <div className="flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
+          <div className="rounded-xl bg-white flex-col space-y-3 p-3 2xl:w-[400px] h-[740px]">
             <div className="rounded-xl border-dashed border-2 border-stone-300 h-full bg-[#F7EBFD] flex p-3 flex-grow flex-col">
-              <div className="rounded-lg bg-[#9F21E3] text-[#F7EBFD] font-semibold text-xl py-2 flex justify-center items-center">
+              <div className="rounded-lg bg-[#9F21E3] text-[#F7EBFD] font-semibold lg:text-xl text-lg py-2 flex justify-center items-center">
                 Expenditure
               </div>
-              <div className="customScroll rounded-lg overflow-auto text-lg py-2 pt-4 mt-4 flex font-medium flex-col text-stone-400">
+              <div className="customScroll rounded-lg overflow-auto text-sm md:text-base lg:text-lg py-2 pt-4 mt-4 flex font-medium flex-col text-stone-400">
                 {res.expenditure.map((ele) => {
                   return (
                     <li
                       key={ele.name}
-                      className="mb-4 flex w-full justify-between text-lg"
+                      className="mb-4 flex w-full justify-between text-sm md:text-base lg:text-lg"
                     >
                       <div className="">
                         <span className="bg-[#fff] flex justify-center items-center px-2 w-fit h-[35px] rounded-lg ">
@@ -164,11 +170,11 @@ export default function SplitResultStage() {
 
           <div className="flex-grow bg-[#fff] flex flex-col p-3 rounded-xl ">
             <div className="rounded-xl border-dashed border-2 border-stone-300  bg-[#F7EBFD] flex p-3 flex-grow flex-col">
-              <div className="rounded-lg bg-[#9F21E3] text-[#F7EBFD] font-semibold text-xl py-2 flex justify-center items-center">
+              <div className="rounded-lg bg-[#9F21E3] text-[#F7EBFD] font-semibold lg:text-xl text-lg py-2 flex justify-center items-center">
                 Registered Bills
               </div>
-              <div className=" rounded-lg  text-lg py-2 flex font-medium flex-col text-stone-400">
-                <div className="text-lg flex flex-col text-stone-500  rounded-lg  ">
+              <div className=" rounded-lg  text-sm md:text-base lg:text-lg py-2 flex font-medium flex-col text-stone-400">
+                <div className="text-sm md:text-base lg:text-lg flex flex-col text-stone-500  rounded-lg  ">
                   <div className="border-b-2 border-white gap-y-2 gap-x-2 p-4 flex flex-wrap flex-grow ">
                     {bills.map((bill) => {
                       return (
@@ -184,7 +190,7 @@ export default function SplitResultStage() {
                     })}
                   </div>
 
-                  <div className="p-4 w-full overflow-auto">
+                  <div className="p-4 w-full overflow-auto ">
                     {selectedBill === null ? (
                       <p className="text-center">No Bill Selected</p>
                     ) : (
