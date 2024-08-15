@@ -1,4 +1,4 @@
-import errorImg from "../../public/error-icon.png";
+import errorImg from "../assets/error-icon.png";
 import SideNav from "../components/SideNav";
 import TopNav from "../components/TopNav";
 import { styling } from "../util/styling";

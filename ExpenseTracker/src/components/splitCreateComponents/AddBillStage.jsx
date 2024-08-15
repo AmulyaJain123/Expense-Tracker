@@ -7,7 +7,7 @@ import BillModal from "./BillModal";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { splitCreateActions } from "../../store/main";
-import loading from "../../../public/loadingLiq.gif";
+import loading from "../../assets/loadingLiq.gif";
 import {
   addBillHeirarchy,
   createSplitHeirachy,

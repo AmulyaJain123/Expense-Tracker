@@ -1,4 +1,4 @@
-import folderIcon from "../../../public/folder.png";
+import folderIcon from "../../assets/folder.png";
 
 export default function MinimizedBillIcon({ name, date }) {
   return (

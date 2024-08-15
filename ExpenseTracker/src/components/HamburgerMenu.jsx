@@ -10,8 +10,8 @@ import { Link } from "react-router-dom";
 import { getCurrentUser } from "../store/firebase-context";
 import { useFirebase } from "../store/firebase-context";
 import { useNavigate } from "react-router-dom";
-import logIn from "../../public/logIn.png";
-import logOut from "../../public/logOut.png";
+import logIn from "../assets/logIn.png";
+import logOut from "../assets/logOut.png";
 
 const Logo = styled.div`
   padding: 10px;

@@ -1,6 +1,6 @@
 import { useRouteError } from "react-router-dom";
 import { Link } from "react-router-dom";
-import logInIcon from "../../public/logIn.png";
+import logInIcon from "../assets/logIn.png";
 
 export default function ErrorPage() {
   const error = useRouteError();

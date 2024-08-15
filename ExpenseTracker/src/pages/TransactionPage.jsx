@@ -8,8 +8,8 @@ import { transactionActions } from "../store/main";
 import { useEffect } from "react";
 import { Button } from "../UIComponents/NextButton";
 import { Link } from "react-router-dom";
-import responsive from "../../public/responsive-website.png";
-import prohibition from "../../public/prohibition.png";
+import responsive from "../assets/responsive-website.png";
+import prohibition from "../assets/prohibition.png";
 
 export default function TransactionPage() {
   const data = useLoaderData();

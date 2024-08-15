@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
-import noImg from "../../../public/noImg.png";
-import loadingIcon from "../../../public/loading-circle.gif";
+import noImg from "../../assets/noImg.png";
+import loadingIcon from "../../assets/loading-circle.gif";
 
 const Button = styled.button`
   background-color: ${(props) =>

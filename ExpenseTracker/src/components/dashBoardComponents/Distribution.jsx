@@ -1,6 +1,6 @@
 import { useFirebase } from "../../store/firebase-context";
 import { useState, useEffect } from "react";
-import more from "../../../public/open-book.gif";
+import more from "../../assets/open-book.gif";
 import { Link } from "react-router-dom";
 import {
   PieChart,

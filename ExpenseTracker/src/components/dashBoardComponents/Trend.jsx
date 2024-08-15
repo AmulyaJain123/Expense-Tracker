@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import more from "../../../public/open-book.gif";
+import more from "../../assets/open-book.gif";
 import { getData } from "../../util/distribution";
 import { useFirebase } from "../../store/firebase-context";
 import {

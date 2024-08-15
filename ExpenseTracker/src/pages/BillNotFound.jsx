@@ -1,4 +1,4 @@
-import errorImg from "../../public/error-icon.png";
+import errorImg from "../assets/error-icon.png";
 import { useRouteError } from "react-router-dom";
 
 export default function BillNotFound() {

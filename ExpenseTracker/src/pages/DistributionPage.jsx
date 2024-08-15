@@ -12,8 +12,8 @@ import PieChart2 from "../components/distributionPageComponents/PieChart2";
 import PieChart3 from "../components/distributionPageComponents/PieChart3";
 import { Link } from "react-router-dom";
 import { Button } from "../UIComponents/NextButton";
-import responsive from "../../public/responsive-website.png";
-import prohibition from "../../public/prohibition.png";
+import responsive from "../assets/responsive-website.png";
+import prohibition from "../assets/prohibition.png";
 
 export default function DistributionPage() {
   const data = useLoaderData();

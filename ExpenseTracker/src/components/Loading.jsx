@@ -1,4 +1,4 @@
-import loadingIcon from "../../public/loading-desktop.gif";
+import loadingIcon from "../assets/loading-desktop.gif";
 
 export default function Loading({ text }) {
   return (

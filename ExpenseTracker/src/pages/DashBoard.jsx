@@ -8,8 +8,8 @@ import { dashboardActions } from "../store/main";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import Trend from "../components/dashBoardComponents/Trend";
-import responsive from "../../public/responsive-website.png";
-import prohibition from "../../public/prohibition.png";
+import responsive from "../assets/responsive-website.png";
+import prohibition from "../assets/prohibition.png";
 
 export default function DashBoard() {
   const loadedData = useLoaderData();

@@ -1,7 +1,7 @@
-import vault from "../../public/vault.png";
+import vault from "../assets/vault.png";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import vaultImg from "../../public/vault-icon.png";
+import vaultImg from "../assets/vault-icon.png";
 import styles from "./VaultHome.module.css";
 
 const Span = styled.span`

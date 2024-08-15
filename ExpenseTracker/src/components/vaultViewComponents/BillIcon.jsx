@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import folderIcon from "../../../public/folder.png";
-import billPage from "../../../public/billPage-icon.png";
-import warrantyIcon from "../../../public/warranty-icon.png";
-import expiredIcon from "../../../public/expired-icon.png";
+import folderIcon from "../../assets/folder.png";
+import billPage from "../../assets/billPage-icon.png";
+import warrantyIcon from "../../assets/warranty-icon.png";
+import expiredIcon from "../../assets/expired-icon.png";
 import styles from "./BillIcon.module.css";
 
 export default function BillIcon({ data }) {

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useFirebase } from "../../store/firebase-context";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import more from "../../../public/open-book.gif";
+import more from "../../assets/open-book.gif";
 
 export default function Transactions() {
   const transactions = useSelector((state) => state.dashboard.data);

@@ -2,9 +2,9 @@ import { styling } from "../util/styling";
 import { Link, redirect, useLocation, useParams } from "react-router-dom";
 import TopNavThumbs from "../UIComponents/TopNavThumbs";
 import { createSplitHeirachy } from "../util/componentNavigation";
-import logIn from "../../public/logIn.png";
-import logOut from "../../public/logOut.png";
-import userIcon from "../../public/user.png";
+import logIn from "../assets/logIn.png";
+import logOut from "../assets/logOut.png";
+import userIcon from "../assets/user.png";
 import { getCurrentUser } from "../store/firebase-context";
 import { useEffect, useRef, useState } from "react";
 import { useFirebase } from "../store/firebase-context";
@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 import TopNavButton from "../UIComponents/TopNavButton";
 import HamburgerMenu from "./HamburgerMenu";
 import { useSelector } from "react-redux";
-import responsive from "../../public/responsive-website.png";
+import responsive from "../assets/responsive-website.png";
 
 export default function TopNav() {
   const location = useLocation();

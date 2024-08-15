@@ -79,68 +79,68 @@ tr {
 }
 
 .splitBox {
-  background-image: url("./../public/bg-pattern-striped.jpg");
+  background-image: url("./assets/bg-pattern-striped.jpg");
   background-repeat: repeat;
   background-size: cover;
 }
 
 .splitViewBg {
-  background-image: url("./../public/bg-pattern-fabric.png");
+  background-image: url("./assets/bg-pattern-fabric.png");
   /* border: 2px solid #e2e8f0; */
   background-repeat: repeat;
   background-size: contain;
 }
 
 .whiteScr {
-  background-image: url("./../public/bg-pattern-once.png");
+  background-image: url("./assets/bg-pattern-once.png");
   background-repeat: repeat;
   background-size: contain;
 }
 
 .errorBg {
-  background-image: url("./../public/error-bg-pattern.jpg");
+  background-image: url("./assets/error-bg-pattern.jpg");
   background-repeat: repeat;
   background-size: contain;
 }
 
 .akatsuki {
-  background-image: url("./../public/bg-pattern-akatsuki.jpg");
+  background-image: url("./assets/bg-pattern-akatsuki.jpg");
   background-repeat: repeat;
   background-size: cover;
 }
 
 .striped {
-  background-image: url("./../public/bg-pattern-striped.jpg");
+  background-image: url("./assets/bg-pattern-striped.jpg");
   background-repeat: repeat;
   background-size: cover;
 }
 
 .lemon {
-  background-image: url("./../public/bg-pattern-lemon.jpg");
+  background-image: url("./assets/bg-pattern-lemon.jpg");
   background-repeat: repeat;
   background-size: cover;
 }
 
 .waves {
-  background-image: url("./../public/bg-pattern-waves.jpg");
+  background-image: url("./assets/bg-pattern-waves.jpg");
   background-repeat: repeat;
   background-size: cover;
 }
 
 .liquid {
-  background-image: url("./../public/bg-pattern-liquid.jpg");
+  background-image: url("./assets/bg-pattern-liquid.jpg");
   background-repeat: repeat;
   background-size: cover;
 }
 
 .skulls {
-  background-image: url("./../public/bg-pattern-skulls.jpg");
+  background-image: url("./assets/bg-pattern-skulls.jpg");
   background-repeat: repeat;
   background-size: cover;
 }
 
 .autumn {
-  background-image: url("./../public/bg-pattern-autumn.jpg");
+  background-image: url("./assets/bg-pattern-autumn.jpg");
   background-repeat: repeat;
   background-size: cover;
 }
@@ -172,21 +172,21 @@ tr {
   transform: rotateX(180deg);
 }
 .billCuts {
-  background-image: url("./../public/bg-pattern-once.png");
+  background-image: url("./assets/bg-pattern-once.png");
   background-repeat: repeat;
   background-size: auto;
 }
 .bgLogin {
-  background-image: url("./../public/money-hand.jpg");
+  background-image: url("./assets/money-hand.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
 .billCuts-stone {
-  background-image: url("./../public/bg-pattern-fabric.png");
+  background-image: url("./assets/bg-pattern-fabric.png");
   background-repeat: no-repeat;
 }
 .billViewBg {
-  background-image: url("./../public/bg-pattern-fabric.png");
+  background-image: url("./assets/bg-pattern-fabric.png");
   background-repeat: repeat;
   background-size: contain;
 }
@@ -194,7 +194,7 @@ input[type="file"] {
   display: none;
 }
 .imgPlaceholder {
-  background-image: url("./../public/loading-circle.gif");
+  background-image: url("./assets/loading-circle.gif");
   background-size: auto;
   background-repeat: no-repeat;
   background-position: center;
