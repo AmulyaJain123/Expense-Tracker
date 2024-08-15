@@ -134,8 +134,8 @@ export default function AuthPage() {
   return (
     <div className="flex gradient  h-screen w-screen p-8">
       <div className="flex w-full justify-center h-full space-x-8">
-        <div className="flex max-w-600px lg:w-[600px] xl:w-[40%] h-full overflow-auto scrollbar-hidden bg-white sm:scale-90 rounded-2xl items-center justify-center">
-          <div className="rounded-3xl flex flex-col space-y-2 sm:space-y-4  py-2 sm:py-4 p-4 pb-4 sm:pb-8  h-full w-full">
+        <div className="flex w-full max-w-600px sm:w-[500px] lg:w-[600px] xl:w-[40%] h-full overflow-auto scrollbar-hidden bg-white sm:scale-90 rounded-2xl items-center justify-center">
+          <div className="rounded-3xl flex flex-col space-y-2 sm:space-y-4  py-2 sm:py-4 p-4   h-full w-full">
             <div className="flex justify-center m-4 mx-2 sm:mx-8 space-x-4 sm:space-x-8">
               <Button
                 disabled={selected === 1}
@@ -208,7 +208,7 @@ export default function AuthPage() {
                   </div>
                 </div>
 
-                <div className="pt-[20px] flex flex-col sm:flex-row space-y-4 sm:space-y-0 justify-between">
+                <div className="pt-[20px] mb-2 flex flex-col sm:flex-row space-y-4 sm:space-y-0 justify-between">
                   <p className="text-black flex items-center justify-center text-center sm:text-start text-xs sm:text-sm p-1 h-[60px] px-4">
                     {signUpError}
                   </p>

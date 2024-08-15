@@ -88,7 +88,7 @@ export default function PieChart2() {
               {stage != null ? (
                 <button
                   onClick={() => goBack()}
-                  className="flex rounded-full justify-center items-center text-3xl text-black absolute left-[-5px] top-[50%] -translate-y-[50%]"
+                  className="flex rounded-full z-20 justify-center items-center text-3xl text-black absolute left-[-5px] top-[50%] -translate-y-[50%]"
                 >
                   <i className="fi fi-ss-angle-circle-left flex justify-center items-center"></i>
                 </button>

@@ -1,6 +1,6 @@
 import { useFirebase } from "../../store/firebase-context";
 import { useState, useEffect } from "react";
-import more from "../../assets/open-book.gif";
+import more from "../../../public/open-book.gif";
 import { Link } from "react-router-dom";
 import {
   PieChart,
@@ -132,7 +132,7 @@ export default function Distribution() {
               {stage != null && stage.level === 1 ? (
                 <button
                   onClick={() => goBack(1)}
-                  className="flex rounded-full justify-center items-center text-3xl text-black absolute left-[20px] top-[50%] -translate-y-[50%]"
+                  className="flex rounded-full z-20 justify-center items-center text-3xl text-black absolute left-[20px] top-[50%] -translate-y-[50%]"
                 >
                   <i className="fi fi-ss-angle-circle-left flex justify-center items-center"></i>
                 </button>
@@ -140,7 +140,7 @@ export default function Distribution() {
               {stage != null && stage.level === 2 ? (
                 <button
                   onClick={() => goBack(2)}
-                  className="flex rounded-full justify-center items-center text-3xl text-black absolute left-[20px] top-[50%] -translate-y-[50%]"
+                  className="flex rounded-full z-20 justify-center items-center text-3xl text-black absolute left-[20px] top-[50%] -translate-y-[50%]"
                 >
                   <i className="fi fi-ss-angle-circle-left flex justify-center items-center"></i>
                 </button>

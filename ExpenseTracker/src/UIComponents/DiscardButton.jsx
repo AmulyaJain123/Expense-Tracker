@@ -37,7 +37,11 @@ export default function DiscardButton({ children }) {
     dispatch(splitCreateActions.clearAll());
     navigate("/split");
   }
-  return <Discard onClick={clickHandler}>{children}</Discard>;
+  return (
+    <Discard className="scale-90 sm:scale-100" onClick={clickHandler}>
+      {children}
+    </Discard>
+  );
 }
 export function DiscardBillButton({ children }) {
   const navigate = useNavigate();

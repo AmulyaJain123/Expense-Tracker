@@ -1,11 +1,11 @@
 import { useFirebase } from "../store/firebase-context";
-import split from "../assets/split.png";
+import split from "../../public/split.png";
 import SplitHomeMenu from "../components/splitHomeComponents/SplitHomeMenu";
 import Splits from "../components/splitHomeComponents/Splits";
 import { useEffect, useState } from "react";
 import { getCurrentUser } from "../store/firebase-context";
 import { Link } from "react-router-dom";
-import logInIcon from "../assets/logIn.png";
+import logInIcon from "../../public/logIn.png";
 
 export default function SplitHome() {
   const firebase = useFirebase();

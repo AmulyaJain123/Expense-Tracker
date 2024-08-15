@@ -74,7 +74,7 @@ export default function BillComponent({ id }) {
           <span className="text-black text-md p-2 px-4 font-semibold">
             Shares :
           </span>
-          <div className="p-5 pt-3 px-8 sm:px-16 h-[250px] overflow-auto text-stone-400 customScroll">
+          <div className="p-5 pt-3 px-4 sm:px-16 h-[250px] overflow-auto text-stone-400 customScroll">
             {reqBill.shares.map((share) => {
               return (
                 <div key={share.name} className="flex justify-between">

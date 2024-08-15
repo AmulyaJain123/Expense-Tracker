@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import numeral from "numeral";
 import { formats } from "numeral";
-import exit from "../../assets/backward.png";
-import add from "../../assets/plus.png";
+import exit from "../../../public/backward.png";
+import add from "../../../public/plus.png";
 import { useSelector } from "react-redux";
 
 export default function WidgetSquare() {

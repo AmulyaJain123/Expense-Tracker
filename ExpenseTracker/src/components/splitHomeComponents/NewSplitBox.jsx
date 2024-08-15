@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { splitCreateActions } from "../../store/main";
-import add from "../../assets/add.png";
+import add from "../../../public/add.png";
 
 const options = [
   { name: "striped" },

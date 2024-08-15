@@ -1,10 +1,10 @@
 import { useLoaderData } from "react-router-dom";
 import BillIcon from "../components/vaultViewComponents/BillIcon";
 import { useNavigate } from "react-router-dom";
-import folderIcon from "../assets/folder.png";
+import folderIcon from "../../public/folder.png";
 import { useSearchParams } from "react-router-dom";
-import warrantyIcon from "../assets/warranty-icon.png";
-import expiredIcon from "../assets/expired-icon.png";
+import warrantyIcon from "../../public/warranty-icon.png";
+import expiredIcon from "../../public/expired-icon.png";
 
 export default function VaultView() {
   const data = useLoaderData();

@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { useFirebase } from "../../store/firebase-context";
 import Loading from "../Loading";
 import { universalActions } from "../../store/main";
+import styles from "./Incoming.module.css";
 
 const Thumb = styled.button`
   background-color: ${(props) =>
@@ -190,9 +191,9 @@ export default function Incoming() {
 
   return (
     <>
-      <div className="flex m-4 space-x-4">
-        <div className="p-4 bg-white min-w-[700px] max-w-[800px] flex flex-col space-y-4 w-[50%] rounded-xl">
-          <div className="rounded-lg text-[28px] font-bold text-center bg-slate-100 p-3 uppercase">
+      <div className={`${styles.main} flex-col xl:flex-row`}>
+        <div className="p-4 bg-white w-full xl:w-auto 2xl:min-w-[700px] max-w-[800px] flex flex-col space-y-4 rounded-xl">
+          <div className="rounded-lg font-bold text-center bg-slate-100 p-3 uppercase">
             Transaction Info
           </div>
           <div className="flex flex-col">
@@ -216,7 +217,7 @@ export default function Incoming() {
                   <span>{nameError}</span>
                 </div>
               ) : (
-                <p className=" border-2 border-stone-300 border-dashed min-h-[30px] mx-4 my-2 py-1 flex-grow flex text-sm justify-center items-center px-3 tracking-wider font-medium rounded-md text-stone-300">
+                <p className=" border-2 border-stone-300 border-dashed min-h-[30px] mx-4 my-2 py-1 flex-grow flex text-xs sm:text-sm justify-center items-center px-3 tracking-wider font-medium rounded-md text-stone-300">
                   Error Box
                 </p>
               )}
@@ -227,7 +228,7 @@ export default function Incoming() {
               </span>
               <div className="flex space-x-4">
                 <Input
-                  className="flex-grow p-2 pl-24 bg-white text-center  text-stone-600 rounded-lg text-lg"
+                  className="flex-grow p-2 sm:pl-24 bg-white text-center  text-stone-600 rounded-lg text-lg"
                   type="number"
                   $error={amountError != null ? "true" : "false"}
                   onChange={(event) => amountChange(event)}
@@ -235,7 +236,7 @@ export default function Incoming() {
                   min={"0"}
                   ref={amountRef}
                 />
-                <span className="p-2 px-4 bg-white  text-stone-600 rounded-lg text-2xl font-bold flex items-center justify-center">
+                <span className="p-2 px-4 bg-white hidden sm:flex text-stone-600 rounded-lg text-2xl font-bold items-center justify-center">
                   &#8377;
                 </span>
               </div>
@@ -247,13 +248,13 @@ export default function Incoming() {
                   <span>{amountError}</span>
                 </div>
               ) : (
-                <p className=" border-2 border-stone-300 border-dashed min-h-[30px] mx-4 my-2 py-1 flex-grow flex text-sm justify-center items-center px-3 tracking-wider font-medium rounded-md text-stone-300">
+                <p className=" border-2 border-stone-300 border-dashed min-h-[30px] mx-4 my-2 py-1 flex-grow flex text-xs sm:text-sm justify-center items-center px-3 tracking-wider font-medium rounded-md text-stone-300">
                   Error Box
                 </p>
               )}
             </div>
             <div className="flex flex-col space-y-4">
-              <div className="flex space-x-4">
+              <div className="flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
                 <div className="flex flex-col flex-auto space-y-4 p-4 rounded-lg bg-slate-100">
                   <span className="p-2 px-3 font-semibold text-lg text-white bg-black text-center rounded-lg">
                     From
@@ -287,13 +288,13 @@ export default function Incoming() {
                   <span>{toNameError}</span>
                 </div>
               ) : (
-                <p className=" border-2 border-stone-300 border-dashed min-h-[30px] mx-4 my-2 py-1 flex-grow flex text-sm justify-center items-center px-3 tracking-wider font-medium rounded-md text-stone-300">
+                <p className=" border-2 border-stone-300 border-dashed min-h-[30px] mx-4 my-2 py-1 flex-grow flex text-xs sm:text-sm justify-center items-center px-3 tracking-wider font-medium rounded-md text-stone-300">
                   Error Box
                 </p>
               )}
             </div>
             <div className="flex flex-col space-y-4">
-              <div className="flex space-x-4">
+              <div className="flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
                 <div className="flex flex-col flex-1 space-y-4 p-4 rounded-lg bg-slate-100">
                   <span className="p-2 px-3 font-semibold text-lg text-white bg-black text-center rounded-lg">
                     Date
@@ -329,7 +330,7 @@ export default function Incoming() {
                   <span>{dateError}</span>
                 </div>
               ) : (
-                <p className=" border-2 border-stone-300 border-dashed min-h-[30px] mx-4 my-2 py-1 flex-grow flex text-sm justify-center items-center px-3 tracking-wider font-medium rounded-md text-stone-300">
+                <p className=" border-2 border-stone-300 border-dashed min-h-[30px] mx-4 my-2 py-1 flex-grow flex text-xs sm:text-sm justify-center items-center px-3 tracking-wider font-medium rounded-md text-stone-300">
                   Error Box
                 </p>
               )}
@@ -346,7 +347,7 @@ export default function Incoming() {
                 key={cat.name}
                 className="flex flex-col space-y-4 p-4 rounded-lg bg-slate-100"
               >
-                <div className="p-2 px-6 font-semibold text-center text-lg text-white bg-black rounded-lg">
+                <div className="p-2 px-6 font-semibold text-center  text-white bg-black rounded-lg">
                   {cat.name}
                 </div>
                 <div className="flex flex-wrap gap-2">
@@ -359,7 +360,7 @@ export default function Incoming() {
                           category === subCategory.name ? "true" : "false"
                         }
                         onClick={(event) => categoryClick(event)}
-                        className="duration-500 p-1 px-2 flex space-x-3 items-center rounded-lg text-md font-medium"
+                        className="duration-500 p-1 px-2 flex space-x-3 items-center rounded-lg font-medium"
                       >
                         <img
                           className="w-[30px]"
@@ -378,7 +379,7 @@ export default function Incoming() {
           })}
         </div>
       </div>
-      <div className="flex mx-[30px] justify-between items-center mt-[20px]">
+      <div className="flex flex-col sm:flex-row mx-[30px] scale-90 sm:scale-100 justify-between items-center mt-[20px]">
         <Discard onClick={discardHandle}>Discard</Discard>
         {loading ? (
           <p className="mx-[70px] font-semibold text-lg mt-[50px] pl-[10px] px-[20px] flex items-end">

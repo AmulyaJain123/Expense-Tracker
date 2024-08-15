@@ -32,7 +32,7 @@ export default function NullFilter() {
               return (
                 <div
                   key={Math.random()}
-                  className="w-[32%] group relative aspect-square flex flex-col border-2 border-[#ccd5ae] rounded-xl bg-[#e9edc9]"
+                  className="w-[32%] max-w-[300px] max-h-[300px] group relative aspect-square flex flex-col border-2 border-[#ccd5ae] rounded-xl bg-[#e9edc9]"
                 >
                   <button
                     onClick={() => removeClick(index)}

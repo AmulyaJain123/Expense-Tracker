@@ -106,7 +106,9 @@ export default function SaveToDB({ res }) {
       {saving ? (
         <p className="p-3 text-lg font-medium mt-[50px]">Saving...</p>
       ) : (
-        <Button onClick={save}>Save</Button>
+        <Button className="scale-90 sm:scale-100" onClick={save}>
+          Save
+        </Button>
       )}
     </>
   );

@@ -1,0 +1,96 @@
+.main {
+  display: flex; /* equivalent to flex */
+  margin: 1rem; /* equivalent to m-4 (assuming 1rem = 16px, so 1rem = 16px) */
+  gap: 1rem; /* equivalent to space-x-4 (assuming 1rem = 16px, so 1rem = 16px) */
+}
+
+.main > div > div:first-child {
+  font-size: 28px;
+}
+
+.main > div:first-child span {
+  font-size: 18px;
+}
+
+.main > div:nth-of-type(2) > div:nth-of-type(2) > div > div:first-child {
+  font-size: 18px;
+}
+
+.main
+  > div:nth-of-type(2)
+  > div:nth-of-type(2)
+  > div
+  > div:nth-of-type(2)
+  button {
+  font-size: 16px;
+}
+
+.main img {
+  width: 30px;
+}
+
+.main input {
+  font-size: large;
+}
+
+@media (max-width: 1700px) {
+  .main > div > div:first-child {
+    font-size: 24px;
+  }
+
+  .main > div:first-child span {
+    font-size: 16px;
+  }
+
+  .main > div:nth-of-type(2) > div:nth-of-type(2) > div > div:first-child {
+    font-size: 16px;
+  }
+
+  .main
+    > div:nth-of-type(2)
+    > div:nth-of-type(2)
+    > div
+    > div:nth-of-type(2)
+    button {
+    font-size: 14px;
+  }
+
+  .main img {
+    width: 25px;
+  }
+
+  .main input {
+    font-size: medium;
+  }
+}
+
+@media (max-width: 500px) {
+  .main > div > div:first-child {
+    font-size: 22px;
+  }
+
+  .main > div:first-child span {
+    font-size: 14px;
+  }
+
+  .main > div:nth-of-type(2) > div:nth-of-type(2) > div > div:first-child {
+    font-size: 14px;
+  }
+
+  .main
+    > div:nth-of-type(2)
+    > div:nth-of-type(2)
+    > div
+    > div:nth-of-type(2)
+    button {
+    font-size: 14px;
+  }
+
+  .main img {
+    width: 25px;
+  }
+
+  .main input {
+    font-size: small;
+  }
+}

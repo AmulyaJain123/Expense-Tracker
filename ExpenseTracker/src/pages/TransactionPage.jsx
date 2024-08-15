@@ -8,6 +8,8 @@ import { transactionActions } from "../store/main";
 import { useEffect } from "react";
 import { Button } from "../UIComponents/NextButton";
 import { Link } from "react-router-dom";
+import responsive from "../../public/responsive-website.png";
+import prohibition from "../../public/prohibition.png";
 
 export default function TransactionPage() {
   const data = useLoaderData();
@@ -165,8 +167,8 @@ export default function TransactionPage() {
   return (
     <>
       <div className="h-full w-full bg-white overflow-auto pb-[200px] text-stone-700 rounded-l-xl">
-        <div className="bg-[#f7ebfd] rounded-xl pb-[40px] m-4 mt-[30px] p-4">
-          <div className="relative flex flex-col overflow-hidden h-fit ">
+        <div className="bg-[#f7ebfd] hidden 2xl:block rounded-xl  pb-[40px] m-4 mt-[30px] p-4">
+          <div className="relative flex flex-col overflow-hidden  h-fit ">
             <Filter />
 
             <div className="flex flex-col">
@@ -201,10 +203,24 @@ export default function TransactionPage() {
             </div>
           </div>
         </div>
-        <div className="flex justify-center">
+        <div className="hidden 2xl:flex justify-center">
           <Link to="/track/dashboard">
             <Button>Back to Dashboard</Button>
           </Link>
+        </div>
+
+        <div className="flex flex-col mt-[200px] items-center 2xl:hidden">
+          <div className="relative">
+            <img className="w-[200px] opacity-75" src={responsive} alt="" />
+            <img
+              src={prohibition}
+              className="absolute top-[50%] right-[50%] translate-x-[50%] opacity-85 translate-y-[-50%] w-[130px]"
+              alt=""
+            />
+          </div>
+          <p className="mx-auto px-16 mt-8 text-center text-sm sm:text-base">
+            Please switch to a screen size bigger than 1500px
+          </p>
         </div>
       </div>
     </>

@@ -12,6 +12,8 @@ import PieChart2 from "../components/distributionPageComponents/PieChart2";
 import PieChart3 from "../components/distributionPageComponents/PieChart3";
 import { Link } from "react-router-dom";
 import { Button } from "../UIComponents/NextButton";
+import responsive from "../../public/responsive-website.png";
+import prohibition from "../../public/prohibition.png";
 
 export default function DistributionPage() {
   const data = useLoaderData();
@@ -107,7 +109,7 @@ export default function DistributionPage() {
 
   return (
     <div className="h-full w-full bg-white overflow-auto pb-[200px] text-stone-700 rounded-l-xl">
-      <div className="flex flex-col space-y-4 m-4">
+      <div className="hidden 2xl:flex flex-col space-y-4 m-4">
         <div className="flex flex-grow font-semibold uppercase text-white bg-[#9f21e3] rounded-xl text-3xl p-4 px-8 justify-center ">
           Distributions
         </div>
@@ -162,6 +164,20 @@ export default function DistributionPage() {
             <Button>Back to Dashboard</Button>
           </Link>
         </div>
+      </div>
+
+      <div className="flex flex-col mt-[200px] items-center 2xl:hidden">
+        <div className="relative">
+          <img className="w-[200px] opacity-75" src={responsive} alt="" />
+          <img
+            src={prohibition}
+            className="absolute top-[50%] right-[50%] translate-x-[50%] opacity-85 translate-y-[-50%] w-[130px]"
+            alt=""
+          />
+        </div>
+        <p className="mx-auto px-16 mt-8 text-center text-sm sm:text-base">
+          Please switch to a screen size bigger than 1500px
+        </p>
       </div>
     </div>
   );

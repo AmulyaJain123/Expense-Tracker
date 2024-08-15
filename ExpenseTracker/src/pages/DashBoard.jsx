@@ -8,6 +8,8 @@ import { dashboardActions } from "../store/main";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import Trend from "../components/dashBoardComponents/Trend";
+import responsive from "../../public/responsive-website.png";
+import prohibition from "../../public/prohibition.png";
 
 export default function DashBoard() {
   const loadedData = useLoaderData();
@@ -107,7 +109,7 @@ export default function DashBoard() {
 
   return (
     <div className="h-full w-full bg-white overflow-auto pb-[200px]  text-stone-700 rounded-l-xl">
-      <div className="flex flex-col space-y-4">
+      <div className=" hidden 2xl:flex flex-col space-y-4">
         <div className="flex mx-4 relative mt-4 p-2 px-6 justify-center items-center uppercase text-[35px] font-bold rounded-xl bg-[#9f21e3] text-white">
           <span>Dashboard</span>
           <select
@@ -131,6 +133,20 @@ export default function DashBoard() {
         <Trend />
 
         <Transactions />
+      </div>
+
+      <div className="flex flex-col mt-[200px] items-center 2xl:hidden">
+        <div className="relative">
+          <img className="w-[200px] opacity-75" src={responsive} alt="" />
+          <img
+            src={prohibition}
+            className="absolute top-[50%] right-[50%] translate-x-[50%] opacity-85 translate-y-[-50%] w-[130px]"
+            alt=""
+          />
+        </div>
+        <p className="mx-auto px-16 mt-8 text-center text-sm sm:text-base">
+          Please switch to a screen size bigger than 1500px
+        </p>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import { useRouteError } from "react-router-dom";
 import { Link } from "react-router-dom";
-import logInIcon from "../assets/logIn.png";
+import logInIcon from "../../public/logIn.png";
 
 export default function ErrorPage() {
   const error = useRouteError();
@@ -27,7 +27,7 @@ export default function ErrorPage() {
             </>
           ) : (
             <div className="flex flex-col scale-[80%] items-center">
-              <div className="font-bold  mb-6 text-[40px]">
+              <div className="font-bold text-center mb-6 text-[40px]">
                 OOPS &#160; : ( &#160; ERROR Occured
               </div>
 

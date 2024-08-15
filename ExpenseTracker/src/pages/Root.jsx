@@ -39,7 +39,7 @@ export default function Root() {
           className="flex h-screen relative max-w-screen overflow-auto"
         >
           {navigate.state === "loading" ? (
-            <div className="w-[100vw] h-[40px] absolute flex top-0 left-0 justify-center text-lg font-semibold items-center bg-[#dc93f6]">
+            <div className="w-[100vw] h-[40px] z-[100] absolute flex top-0 left-0 justify-center text-lg font-semibold items-center bg-[#dc93f6]">
               Loading......
             </div>
           ) : null}

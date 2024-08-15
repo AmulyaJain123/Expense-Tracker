@@ -1,8 +1,8 @@
 export default function SingleBill({ data }) {
   const { billName, billDate, billDesc, payedBy, totalAmount, shares } = data;
   return (
-    <div className="px-3 pt-3 sm:min-w-0 min-w-[600px] flex flex-col space-y-4 w-full h-full">
-      <div className="flex justify-between">
+    <div className="px-3 pt-3  flex flex-col space-y-4 w-full h-full">
+      <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0  justify-between">
         <div className="p-1 px-2 bg-white h-fit  rounded-lg">
           <span className="text-black mr-3 text-md font-semibold">
             Bill Name :
@@ -18,17 +18,17 @@ export default function SingleBill({ data }) {
       </div>
 
       <div className="flex">
-        <div className="p-1 px-2 bg-white h-fit flex rounded-lg">
+        <div className="p-1 px-2 bg-white flex-grow sm:flex-row flex-col items-center space-y-2 sm:space-y-0 sm:items-start flex rounded-lg">
           <span className="text-black mr-3 text-md font-semibold">
             Description :
           </span>
-          <span className="px-2 text-stone-400 w-[400px] h-[80px]">
+          <span className="px-2 text-stone-400 text-center sm:text-start min-h-[80px]">
             {billDesc}
           </span>
         </div>
       </div>
 
-      <div className="flex space-x-10">
+      <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-10">
         <div className="p-1 px-2 bg-white h-fit  rounded-lg">
           <span className="text-black mr-3 text-md font-semibold">
             Paid By :
@@ -48,7 +48,7 @@ export default function SingleBill({ data }) {
           <span className="text-black text-md p-2 px-4 font-semibold">
             Shares :
           </span>
-          <div className="p-5 pt-3 px-16 h-[250px] overflow-auto text-stone-400 customScroll">
+          <div className="p-5 pt-3 px-4 sm:px-16 h-[250px] overflow-auto text-stone-400 customScroll">
             {shares.map((share) => {
               return (
                 <div key={share.name} className="flex justify-between">
