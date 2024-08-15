@@ -17,8 +17,8 @@ export default function TrackHome() {
       <h2 className="flex justify-center text-[35px] sm:text-[40px] xl:text-[50px] mt-12 p-4 font-bold capitalize ">
         BillTrack
       </h2>
-      <div className=" mt-8 flex md:flex-row flex-col space-y-4 md:space-y-0 mx-[50px] sm:mx-[100px] items-center md:space-x-[20px]">
-        <div className="flex flex-col lg:text-base text-sm xl:text-lg space-y-6 my-auto">
+      <div className=" mt-8 flex md:flex-row flex-col space-y-4 justify-center md:space-y-0 mx-[50px] sm:mx-[100px] items-center md:space-x-[20px]">
+        <div className="flex flex-col max-w-[900px] lg:text-base text-sm xl:text-lg space-y-6 my-auto">
           <p className=" font-medium flex justify-center items-center text-center ">
             With BillTrack, you can seamlessly monitor and manage your expenses
             in one convenient place. Whether it's daily spending, monthly bills,

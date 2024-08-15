@@ -28,13 +28,13 @@ export default function SplitHome() {
         <h2 className="flex justify-center text-[35px] sm:text-[40px] xl:text-[50px] mt-12 p-4 font-bold capitalize ">
           BillSplit
         </h2>
-        <div className=" mt-8 flex flex-col sm:flex-row space-y-8 sm:space-y-0 mx-[50px] md:mx-[100px] sm:space-x-[20px]">
+        <div className=" mt-8 flex flex-col justify-center  items-center  flex-grow sm:flex-row space-y-8 sm:space-y-0 mx-[50px] md:mx-[100px] sm:space-x-[20px]">
           <img
             className="w-[350px] sm:w-[300px] h-fit self-center xl:w-[450px]"
             src={split}
             alt=""
           />
-          <div className="flex text-sm self-center md:text-base xl:text-lg flex-col space-y-6 my-auto">
+          <div className="flex text-sm max-w-[900px] self-center md:text-base xl:text-lg flex-col space-y-6 my-auto">
             <p className=" font-medium flex justify-center items-center text-center ">
               Welcome to BillSplit, the ultimate solution for managing and
               dividing expenses among friends, family, or colleagues. Whether
