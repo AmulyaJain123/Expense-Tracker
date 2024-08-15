@@ -55,7 +55,7 @@ const InputFile = forwardRef(function InputFile({ ...props }, ref) {
       size: enteredFile.size,
       type: enteredFile.type,
     };
-    console.log(file);
+    //console.log(file);
     const preview = URL.createObjectURL(enteredFile);
     dispatch(vaultActions.pushFile(file));
     dispatch(vaultActions.pushPreview(preview));

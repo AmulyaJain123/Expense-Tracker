@@ -7,7 +7,7 @@ export default function Preview() {
   const previews = useSelector((state) => state.vault.previews);
   const fileInd = useSelector((state) => state.vault.fileInd);
   const fileError = useSelector((state) => state.vault.fileError);
-  console.log(files, previews, fileInd);
+  //console.log(files, previews, fileInd);
   function formatSize(val) {
     const newVal = parseFloat(val) / 1024;
     let str = newVal + "";
