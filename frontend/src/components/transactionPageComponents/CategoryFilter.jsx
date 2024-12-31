@@ -3,8 +3,7 @@ import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { transactionActions } from "../../store/main";
 import { useSelector } from "react-redux";
-import { outgoingTransactionCategories } from "../../util/componentNavigation";
-import { incomingTransactionCategories } from "../../util/componentNavigation";
+import { useLoaderData } from "react-router-dom";
 
 const Button = styled.button`
   position: absolute;
@@ -45,13 +44,17 @@ const Option = styled.button`
 `;
 
 export default function CategoryFilter() {
+  const data = useLoaderData();
   const dispatch = useDispatch();
   const filterParam = useSelector((state) => state.transactions.filterParam);
   const [names, setNames] = useState([]);
 
   function applyClick() {
-    const arr = names.filter((i) => {
+    let arr = names.filter((i) => {
       return i.trim() != "" ? true : false;
+    });
+    arr = arr.map((i) => {
+      return i.split("ADAVRA");
     });
     const obj = { name: filterParam, options: [...arr] };
     // console.log(obj);
@@ -66,8 +69,7 @@ export default function CategoryFilter() {
     }
     return true;
   }
-  function clickHandle(event) {
-    const token = event.target.innerText;
+  function clickHandle(token) {
     const res = names.findIndex((i) => i === token);
     if (res === -1) {
       setNames((preval) => {
@@ -84,49 +86,101 @@ export default function CategoryFilter() {
 
   return (
     <div className="flex relative flex-col flex-grow bg-[#fefae0] mr-4 rounded-r-xl p-4 px-16">
-      <div className="font-semibold flex flex-col mt-[8px] mb-[40px] text-xl text-black text-center">
-        <div className="mb-4 p-1 px-3 w-fit mx-auto rounded-md bg-[#9d4edd] text-white">
-          {filterParam}
-        </div>
-      </div>
+      <div className="font-semibold flex flex-col mt-[8px] mb-[40px] text-xl text-black text-center"></div>
       <div className="text-xl font-semibold mx-auto mb-[10px] uppercase">
         {"Select categorie(s)"}
       </div>
 
-      <div className="flex mx-4 py-4 border-y-2 border-stone-300 justify-center mt-4 flex-wrap gap-3">
-        {outgoingTransactionCategories.map((i) => {
-          return i.subCategories.map((j) => {
-            return (
-              <Option
-                key={j.name}
-                $status={check(j.name) ? "true" : "false"}
-                onClick={(event) => clickHandle(event)}
-                className="p-1 px-2 text-sm duration-500 flex space-x-3 items-center rounded-lg bg-white border-2 border-stone-400 "
-              >
-                <img className="w-[25px]" src={j.icon} alt="" />
-                <span>{j.name}</span>
-              </Option>
-            );
-          });
-        })}
-      </div>
+      <div className="flex flex-col  h-[450px] overflow-auto customScrollThin">
+        <div className="flex mx-4 py-4 flex-col  justify-center mt-4 flex-wrap gap-3">
+          <span className="flex text-lg rounded-lg py-1 px-4 bg-[#dc93f6] font-medium">
+            Outgoing
+          </span>
+          <Option
+            key={"null"}
+            $status={check(`outgoingADAVRAnull`) ? "true" : "false"}
+            onClick={() => clickHandle(`outgoingADAVRAnull`)}
+            className="p-1 px-2 w-fit uppercase ml-12 text-sm duration-500 flex space-x-3 items-center rounded-lg bg-white border-2 border-stone-400 "
+          >
+            <span>{"null"}</span>
+          </Option>
+          <div className="flex flex-col space-y-2">
+            {data.categories.outgoing.map((i) => {
+              return (
+                <div className="flex flex-col pl-12 space-y-2">
+                  <span className="flex bg-black rounded-lg text-white px-3 py-1">
+                    {i.name}
+                  </span>
+                  <div className="flex flex-wrap gap-2 pl-8">
+                    {i.categories.map((j) => {
+                      return (
+                        <Option
+                          key={j}
+                          $status={
+                            check(`outgoingADAVRA${i.name}ADAVRA${j}`)
+                              ? "true"
+                              : "false"
+                          }
+                          onClick={() =>
+                            clickHandle(`outgoingADAVRA${i.name}ADAVRA${j}`)
+                          }
+                          className="p-1 px-2 text-sm duration-500 flex space-x-3 items-center rounded-lg bg-white border-2 border-stone-400 "
+                        >
+                          <span>{j}</span>
+                        </Option>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
 
-      <div className="flex mx-4 pb-4 border-b-2 border-stone-300 mt-4 justify-center flex-wrap gap-3">
-        {incomingTransactionCategories.map((i) => {
-          return i.subCategories.map((j) => {
-            return (
-              <Option
-                key={j.name}
-                $status={check(j.name) ? "true" : "false"}
-                onClick={(event) => clickHandle(event)}
-                className="p-1 px-2 text-sm duration-500 flex space-x-3 items-center rounded-lg bg-white border-2 border-stone-400 "
-              >
-                <img className="w-[25px]" src={j.icon} alt="" />
-                <span>{j.name}</span>
-              </Option>
-            );
-          });
-        })}
+        <div className="flex mx-4 py-4 flex-col  justify-center mt-4 flex-wrap gap-3">
+          <span className="flex text-lg rounded-lg py-1 px-4 bg-[#dc93f6] font-medium">
+            Incoming
+          </span>
+          <Option
+            key={"null"}
+            $status={check(`incomingADAVRAnull`) ? "true" : "false"}
+            onClick={() => clickHandle(`incomingADAVRAnull`)}
+            className="p-1 px-2 w-fit uppercase ml-12 text-sm duration-500 flex space-x-3 items-center rounded-lg bg-white border-2 border-stone-400 "
+          >
+            <span>{"null"}</span>
+          </Option>
+          <div className="flex flex-col space-y-2">
+            {data.categories.incoming.map((i) => {
+              return (
+                <div className="flex flex-col pl-12 space-y-2">
+                  <span className="flex bg-black rounded-lg text-white px-3 py-1">
+                    {i.name}
+                  </span>
+                  <div className="flex flex-wrap gap-2 pl-8">
+                    {i.categories.map((j) => {
+                      return (
+                        <Option
+                          key={j}
+                          $status={
+                            check(`incomingADAVRA${i.name}ADAVRA${j}`)
+                              ? "true"
+                              : "false"
+                          }
+                          onClick={() =>
+                            clickHandle(`incomingADAVRA${i.name}ADAVRA${j}`)
+                          }
+                          className="p-1 px-2 text-sm duration-500 flex space-x-3 items-center rounded-lg bg-white border-2 border-stone-400 "
+                        >
+                          <span>{j}</span>
+                        </Option>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
 
       <Button

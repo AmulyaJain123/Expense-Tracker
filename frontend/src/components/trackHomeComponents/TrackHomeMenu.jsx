@@ -4,7 +4,6 @@ import WhatIsMenu from "./WhatIsMenu";
 import AddingTransactions from "./AddingTransactions";
 import DashboardMenu from "./DashboardMenu";
 import TransactionMenu from "./TransactionMenu";
-import DistributionMenu from "./DistributionMenu";
 
 const Button = styled.button`
   font-weight: 600;
@@ -34,7 +33,7 @@ export default function TrackHomeMenu() {
           id="0"
           className="w-fit "
         >
-          What is BillTrack?
+          What is TRACK?
         </Button>
         <Button
           $status={selectedMenu === 1}
@@ -60,14 +59,6 @@ export default function TrackHomeMenu() {
         >
           Transaction Page
         </Button>
-        <Button
-          $status={selectedMenu === 4}
-          onClick={(event) => menuClick(event)}
-          id="4"
-          className="w-fit"
-        >
-          Distribution Page
-        </Button>
       </div>
       <div
         id="menuContent"
@@ -77,7 +68,6 @@ export default function TrackHomeMenu() {
         {selectedMenu === 1 ? <AddingTransactions /> : null}
         {selectedMenu === 2 ? <DashboardMenu /> : null}
         {selectedMenu === 3 ? <TransactionMenu /> : null}
-        {selectedMenu === 4 ? <DistributionMenu /> : null}
       </div>
     </div>
   );

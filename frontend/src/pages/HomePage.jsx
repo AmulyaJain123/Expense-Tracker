@@ -1,197 +1,165 @@
 import Footer from "../components/Footer";
 import styles from "./HomePage.module.css";
+import track from "../assets/labels/track.png";
+import split from "../assets/labels/split.png";
+import vault from "../assets/labels/vault.png";
+import linkedin from "../assets/linkedin.png";
+import github from "../assets/github.png";
+import email from "../assets/email.png";
+import SwipeAnimation from "../UIComponents/SwipeAnimation";
+import { useState, useEffect, useRef } from "react";
+import { Helmet } from "react-helmet-async";
 
 export default function HomePage() {
+  const [copyStatus, setCopyStatus] = useState(false);
+  const copyRef = useRef();
+
+  function copyEmail(str) {
+    navigator.clipboard.writeText(str);
+    setCopyStatus(true);
+  }
+
+  useEffect(() => {
+    if (copyStatus) {
+      setTimeout(() => {
+        setCopyStatus(false);
+      }, 5000);
+      setTimeout(() => {
+        copyRef.current.style.opacity = 100;
+      }, 0);
+    }
+  }, [copyStatus]);
   return (
-    <div className="h-full w-full bg-white overflow-auto text-stone-700 rounded-l-xl rounded-r-xl lg:rounded-r-none">
-      <header className="flex flex-col  py-[60px] sm:py-[100px] justify-center items-center space-y-[20px]">
-        <h2 className="text-[42px] sm:text-[56px] xl:text-[72px] mx-[20px] text-center font-bold text-stone-700">
-          Welcome to BillBud
-        </h2>
-        <p className="font-medium text-[14px] sm:text-base text-center mx-[20px]">
-          Your Go-To place for managing your Bills.
-        </p>
-      </header>
-
-      <div className={`${styles.wrapper}`}>
-        <div className="flex flex-col px-[40px]  sm:mx-[100px] 2xl:mx-[200px] ">
-          <p className="text-center flex flex-col space-y-2 font-medium text-lg">
-            <p>
-              Managing finances can often be a daunting task, but with BillBud,
-              it’s easier than ever. BillBud is designed to simplify your
-              financial life, offering a suite of powerful features that help
-              you stay organized, informed, and in control.
-            </p>
-            <p>
-              Explore our three main features, each tailored to meet your unique
-              financial needs:
-            </p>
+    <>
+      <Helmet>
+        <title>Home | BILLBUD</title>
+        <meta name="description" content="Home" />
+      </Helmet>
+      <div className="h-full w-full pb-[200px] bg-white overflow-auto text-stone-700 rounded-l-xl rounded-r-xl lg:rounded-r-none">
+        <header className="flex flex-col  sm:pt-[100px]  justify-center items-center space-y-[10px]">
+          <h2 className="text-[42px] sm:text-[56px] xl:text-[72px] mx-[20px] text-center font-bold text-stone-700">
+            Welcome to{" "}
+            <span style={{ fontFamily: "fredoka" }} className="uppercase">
+              BillBud
+            </span>
+          </h2>
+          <p className="font-medium text-[14px] sm:text-lg text-center mx-[20px]">
+            The{" "}
+            <span className="text-[#9d4edd] font-medium">Expense Tracker</span>,{" "}
+            <span className="text-[#9d4edd] font-medium">Digital Storage</span>,{" "}
+            <span className="text-[#9d4edd] font-medium">Bill Splitter</span> -
+            ALL IN ONE
           </p>
+        </header>
 
-          <menu className="flex flex-col 2xl:flex-row overflow-x-auto space-y-8 2xl:space-y-0 mx-auto mt-[80px] sm:mt-[150px] gap-x-8 justify-between">
-            <div className="flex flex-col space-y-4">
-              <div className="rounded-3xl bg-slate-100 w-[150px] sm:w-[250px] aspect-square p-4 flex justify-center items-center">
-                <i className="fi fi-ss-vault flex justify-center items-center text-[80px] sm:text-[130px] text-neutral-600"></i>
-              </div>
-            </div>
-            <div className="flex flex-col space-y-4">
-              <div className="rounded-3xl bg-slate-100 w-[150px] sm:w-[250px] aspect-square p-4 flex justify-center items-center">
-                <i className="fi fi-ss-calculator-bill flex justify-center items-center text-[80px] sm:text-[130px] text-neutral-600"></i>
-              </div>
-            </div>
-            <div className="flex flex-col space-y-4">
-              <div className="rounded-3xl bg-slate-100 w-[150px] sm:w-[250px] aspect-square p-4 flex justify-center items-center">
-                <i className="fi fi-ss-hexagon-divide flex justify-center items-center  text-[80px] sm:text-[130px] text-neutral-600"></i>
-              </div>
-            </div>
-          </menu>
+        <div className="flex flex-grow mt-[50px] justify-center items-center">
+          <SwipeAnimation />
+        </div>
 
-          <div className="flex relative flex-col pb-[30px] sm:pb-[50px] mt-[150px] sm:mt-[250px] rounded-3xl bg-slate-100">
-            <div className={`${styles.descIcon}`}>
-              <i className=" fi fi-ss-vault flex justify-center items-center text-neutral-600"></i>
-            </div>
-            <div className={`${styles.descTitle}`}>BillVault</div>
-            <div className={`${styles.desc}`}>
+        <div className={`${styles.wrapper}`}>
+          <div className="flex flex-col px-[40px]  sm:mx-[100px] 2xl:mx-[200px] ">
+            <p className="text-center flex flex-col space-y-2 font-medium text-lg">
               <p>
-                Never lose track of an important document again with BillVault.
-                This feature allows you to securely store and organize all your
-                bills and receipts in one convenient place. Whether it’s for
-                personal records or warranty claims, BillVault has you covered
-              </p>
-
-              <p className="flex mt-[30px]">
-                <span className="font-semibold sm:mr-3   sm:min-w-[250px] xl:min-w-[300px]">
-                  Bill Storage
+                Managing finances can often be a daunting task, but with{" "}
+                <span
+                  style={{ fontFamily: "fredoka" }}
+                  className="uppercase font-semibold"
+                >
+                  BillBud
                 </span>
-                <p>Save bills with details such as date, name, and amount.</p>
+                , it’s easier than ever.{" "}
+                <span
+                  style={{ fontFamily: "fredoka" }}
+                  className="uppercase font-semibold"
+                >
+                  BillBud
+                </span>{" "}
+                is designed to simplify your financial life, offering a suite of
+                powerful features that help you stay organized, informed, and in
+                control.
               </p>
-              <p className="flex mt-4">
-                <span className="font-semibold sm:mr-3   sm:min-w-[250px] xl:min-w-[300px]">
-                  Warranty Management
-                </span>
-                <p>Add warranty information and track expiration dates.</p>
-              </p>
-              <p className="flex mt-4">
-                <span className="font-semibold sm:mr-3   sm:min-w-[250px] xl:min-w-[300px]">
-                  Image Uploads
-                </span>
-                <p>Attach up to four images per bill for easy reference.</p>
-              </p>
-              <p className="flex mt-4">
-                <span className="font-semibold mr-3  min-w-[200px] sm:min-w-[250px] xl:min-w-[300px]">
-                  Access Anytime
-                </span>
-                <p>Retrieve and download your bills whenever you need them.</p>
-              </p>
-
-              <p className="mt-[30px]">
-                BillVault ensures your important documents are always at your
-                fingertips, organized, and easily accessible.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex relative flex-col pb-[30px] sm:pb-[50px] mt-[100px] rounded-3xl bg-slate-100">
-            <div className={`${styles.descIcon}`}>
-              <i className=" fi fi-ss-calculator-bill flex justify-center items-center text-[130px] text-neutral-600"></i>
-            </div>
-            <div className={`${styles.descTitle}`}>BillTrack</div>
-            <div className={`${styles.desc}`}>
               <p>
-                Stay on top of your finances with BillTrack, our comprehensive
-                expense tracking tool. Understand where your money goes, make
-                informed decisions, and take control of your spending. BillTrack
-                offers a variety of features designed to give you a clear
-                picture of your financial health
+                Explore our three main features, each tailored to meet your
+                unique financial needs:
               </p>
-              <p className="flex mt-[30px]">
-                <span className="font-semibold sm:mr-3  sm:min-w-[250px] xl:min-w-[300px]">
-                  Financial Summary
-                </span>
-                <p>Get an overview of your income, expenses, and savings.</p>
-              </p>
-              <p className="flex mt-4">
-                <span className="font-semibold sm:mr-3   sm:min-w-[250px] xl:min-w-[300px]">
-                  Recent Transactions
-                </span>
-                <p>Keep track of your latest expenses and incomes.</p>
-              </p>
-              <p className="flex mt-4">
-                <span className="font-semibold sm:mr-3 sm:min-w-[250px] xl:min-w-[300px]">
-                  Expense Categories
-                </span>
-                <p>
-                  Categorize your spending to see where your money is going.
-                </p>
-              </p>
-              <p className="flex mt-4">
-                <span className="font-semibold sm:mr-3   sm:min-w-[250px] xl:min-w-[300px]">
-                  Statistical Comparisons
-                </span>
-                <p>
-                  Compare your current spending with previous months to identify
-                  trends and make adjustments.
-                </p>
-              </p>
+            </p>
 
-              <p className="mt-[30px]">
-                BillTrack helps you budget effectively, save more, and achieve
-                your financial goals.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex relative flex-col pb-[30px] sm:pb-[50px] mt-[100px] rounded-3xl bg-slate-100">
-            <div className={`${styles.descIcon}`}>
-              <i className=" fi fi-ss-hexagon-divide flex justify-center items-center text-[130px] text-neutral-600"></i>
-            </div>
-            <div className={`${styles.descTitle}`}>BillSplit</div>
-            <div className={`${styles.desc}`}>
-              <p>
-                Splitting expenses has never been this simple. BillSplit is the
-                perfect tool for sharing costs with friends, family, or
-                roommates.Whether it's splitting the rent, utilities, or a group
-                dinner, BillSplit ensures everyone pays their fair share without
-                any hassle. Say goodbye to awkward money conversations and hello
-                to seamless cost-sharing.
-              </p>
-              <p className="flex mt-[30px]">
-                <span className="font-medium mr-3 ">
-                  Effortlessly divide multiple bills among multiple people
-                </span>
-              </p>
-              <p className="flex mt-2">
-                <span className="font-medium mr-3 ">
-                  Divide Equally, Manually and By Ratio for Quick and Easy bill
-                  division
-                </span>
-              </p>
-              <p className="flex mt-2">
-                <span className="font-medium mr-3 ">
-                  Get optimized settlements in seconds
-                </span>
-              </p>
-              <p className="flex mt-2">
-                <span className="font-medium mr-3 ">
-                  Save the Summary for record or view later
-                </span>
-              </p>
-            </div>
+            <menu className="flex flex-col 2xl:flex-row  space-y-8 2xl:space-y-0 mx-auto mt-[80px] sm:mt-[100px] gap-x-8 justify-between">
+              <div className="flex flex-col relative">
+                <div className="rounded-3xl bg-slate-100 w-[150px]  aspect-square p-4 flex justify-center items-center">
+                  <i className="fi fi-ss-vault flex justify-center items-center text-[80px]  text-neutral-600"></i>
+                </div>
+                <div className="absolute bottom-[-10px] scale-110 left-[-50px] translate-x-[-50%] translate-y-[100%]">
+                  <img src={vault} className="" alt="" />
+                </div>
+              </div>
+              <div className="flex flex-col relative">
+                <div className="rounded-3xl bg-slate-100 w-[150px]  aspect-square p-4 flex justify-center items-center">
+                  <i className="fi fi-ss-calculator-bill flex justify-center items-center text-[80px]  text-neutral-600"></i>
+                </div>
+                <div className="absolute bottom-[-10px]  left-[-30px]  translate-y-[100%]">
+                  <img src={track} className="" alt="" />
+                </div>
+              </div>
+              <div className="flex flex-col relative">
+                <div className="rounded-3xl bg-slate-100 w-[150px] aspect-square p-4 flex justify-center items-center">
+                  <i className="fi fi-ss-hexagon-divide flex justify-center items-center  text-[80px]  text-neutral-600"></i>
+                </div>
+                <div className="absolute bottom-[-5px]  right-[-50px] translate-x-[40%] translate-y-[100%]">
+                  <img src={split} className="" alt="" />
+                </div>
+              </div>
+            </menu>
           </div>
         </div>
-        <p className="text-center mx-[30px] sm:mx-[50px] lg:mx-[150px] mt-[100px] flex flex-col space-y-6 font-medium text-lg">
-          <p>
-            At BillBud, we believe in empowering you to manage your finances
-            with confidence and ease. Join our community today and experience
-            the simplicity of streamlined financial management.
-          </p>
-          <p className="">
-            BillBud – where your financial peace of mind begins.
-          </p>
-        </p>
-      </div>
 
-      <Footer />
-    </div>
+        <div className="flex flex-col mt-[300px]">
+          <h1 className="font-bold capitalize underline underline-offset-4 text-[35px] text-center">
+            Find me here
+          </h1>
+
+          <div className="flex justify-center  w-[80%] rounded-3xl mx-auto pt-[30px] pb-[70px] items-center mt-6 gap-28">
+            <div className="text-lg relative flex justify-center items-center ">
+              <img src={email} className="w-[55px] " alt="" />
+              <span className="items-center absolute bottom-[-10px] translate-y-[100%] right-[50%] translate-x-[50%] min-w-[110px] justify-center bg-white rounded-xl px-2  h-fit flex w-fit py-1">
+                {copyStatus ? (
+                  <span className=" rounded-lg px-2">
+                    <span
+                      ref={copyRef}
+                      className="opacity-[0.1] text-base font-medium text-green-600 duration-[2500ms]"
+                    >
+                      Copied
+                    </span>
+                  </span>
+                ) : (
+                  <button
+                    onClick={() => copyEmail("amulyajain123@gmail.com")}
+                    className=" hover:bg-stone-100 rounded-lg px-2"
+                  >
+                    <span className="text-base text-nowrap font-medium ">
+                      Copy Email
+                    </span>
+                  </button>
+                )}
+              </span>
+            </div>
+            <a
+              target="_blank"
+              className="hover:scale-110 duration-500"
+              href="https://www.linkedin.com/in/amulya-jain-a31180255/"
+            >
+              <img src={linkedin} className="w-[50px]" alt="" />
+            </a>
+            <a
+              className="hover:scale-110 duration-500"
+              target="_blank"
+              href="https://github.com/AmulyaJain123"
+            >
+              <img src={github} className="w-[50px]" alt="" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }

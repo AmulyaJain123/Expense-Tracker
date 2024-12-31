@@ -8,10 +8,6 @@ const Main = styled.div`
   /* background-color: ${styling.friendsBoxBgCol}; */
 `;
 
-const Header = styled.div`
-  /* background-color: ${styling.friendsTitleBgCol}; */
-`;
-
 const Div = styled.div`
   &::-webkit-scrollbar {
     width: 8px;
@@ -57,7 +53,7 @@ export default function Friends() {
   function addFriendClick() {
     if (checkForDuplicacy() === true) {
       setError(
-        "Names of 2 Friends cannot be same. Try Aliases or change Casing."
+        "Names of 2 Participants cannot be same. Try Aliases or change Casing."
       );
       return;
     } else if (error != null) {
@@ -80,7 +76,7 @@ export default function Friends() {
   function changeHandler() {
     if (checkForDuplicacy() === true) {
       setError(
-        "Names of 2 Friends cannot be same. Try Aliases or change Casing."
+        "Names of 2 Participants cannot be same. Try Aliases or change Casing."
       );
       return;
     } else {
@@ -97,7 +93,7 @@ export default function Friends() {
   return (
     <Main className="rounded-lg flex flex-col min-w-[250px] bg-slate-100 p-3  h-[500px]">
       <span className="w-full py-2 bg-black text-white flex justify-center items-center rounded-lg  text-sm sm:text-base xl:text-lg font-semibold uppercase">
-        Friends
+        Participants
       </span>
 
       <Div className="w-full text-stone-500 mt-4 rounded-lg  flex-grow p-3 sm:p-6 overflow-auto">
@@ -131,7 +127,9 @@ export default function Friends() {
             })}
           </ul>
         ) : (
-          <p className="text-sm sm:text-base xl:text-lg">No Friends added</p>
+          <p className="text-sm sm:text-base xl:text-lg">
+            No Participants added
+          </p>
         )}
       </Div>
       <div
@@ -149,17 +147,17 @@ export default function Friends() {
           onChange={changeHandler}
           onKeyDown={(event) => keyDownHandle(event)}
           maxLength={20}
-          placeholder="Write Name..."
+          placeholder="Write Name"
           className="rounded-lg px-4 py-2 w-full mr-2"
           type="text"
         />
-        <Button
-          className="text-white w-48 rounded-md ml-auto"
+        <button
           onClick={addFriendClick}
           ref={buttonRef}
+          className="bg-[#9d4edd] rounded-lg border-2 border-[#9d4edd] hover:bg-white hover:text-[#9d4edd] duration-500 text-white font-semibold text-lg py-1 w-[90px]"
         >
-          &#43; Friend
-        </Button>
+          ADD
+        </button>
       </div>
     </Main>
   );

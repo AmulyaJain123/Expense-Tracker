@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <div className="flex bg-stone-100 text-sm sm:text-base mt-[100px] md:mt-[200px] lg:mt-[300px] space-y-2  py-[30px] md:py-[50px] justify-center flex-col items-center">
+    <div className="flex bg-stone-100 text-sm sm:text-base mt-[100px] md:mt-[200px] lg:mt-[300px] space-y-2  py-[30px] md:py-[40px] justify-center flex-col items-center">
       <span>
         Uicons by{" "}
         <a

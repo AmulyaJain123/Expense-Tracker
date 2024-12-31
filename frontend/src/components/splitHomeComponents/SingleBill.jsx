@@ -1,50 +1,58 @@
+import { formatVal } from "../../util/algo";
+import OnlyXChars from "../../UIComponents/OnlyXChars";
+
 export default function SingleBill({ data }) {
-  const { billName, billDate, billDesc, payedBy, totalAmount, shares } = data;
+  console.log(data);
+  const { billName, billDate, description, payedBy, totalAmt, shares } = data;
   return (
-    <div className="px-3 pt-3  flex flex-col space-y-4 w-full h-full">
+    <div className="px-3 pt-3  flex flex-col space-y-4 flex-grow">
       <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0  justify-between">
-        <div className="p-1 px-2 bg-white h-fit  rounded-lg">
+        <div className="p-1 px-2 bg-stone-100 h-fit  rounded-lg">
           <span className="text-black mr-3 text-md font-semibold">
             Bill Name :
           </span>
           <span className="p-1 text-stone-400 px-2 h-fit ">{billName}</span>
         </div>
-        <div className="p-1 px-2 bg-white h-fit  rounded-lg">
+        <div className="p-1 px-2 bg-stone-100 h-fit  rounded-lg">
           <span className="text-black mr-3 text-md font-semibold">
             Bill Date :
           </span>
-          <span className="p-1 px-2 text-stone-400 h-fit ">{billDate}</span>
+          <span className="p-1 px-2 text-stone-400 h-fit ">
+            {new Date(billDate).toDateString()}
+          </span>
         </div>
       </div>
 
       <div className="flex">
-        <div className="p-1 px-2 bg-white flex-grow sm:flex-row flex-col items-center space-y-2 sm:space-y-0 sm:items-start flex rounded-lg">
-          <span className="text-black mr-3 text-md font-semibold">
+        <div className="p-1 px-2 bg-stone-100 flex-grow sm:flex-row flex-col items-center space-y-2 sm:space-y-0 sm:items-start flex rounded-lg">
+          <span className="text-black mr-3 text-md text-nowrap font-semibold">
             Description :
           </span>
           <span className="px-2 text-stone-400 text-center sm:text-start min-h-[80px]">
-            {billDesc}
+            <OnlyXChars x={100} text={description} />
           </span>
         </div>
       </div>
 
       <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-10">
-        <div className="p-1 px-2 bg-white h-fit  rounded-lg">
+        <div className="p-1 px-2 bg-stone-100 h-fit  rounded-lg">
           <span className="text-black mr-3 text-md font-semibold">
             Paid By :
           </span>
           <span className="p-1 text-stone-400 px-2 h-fit ">{payedBy}</span>
         </div>
-        <div className="p-1 px-2 bg-white h-fit  rounded-lg">
+        <div className="p-1 px-2 bg-stone-100 h-fit  rounded-lg">
           <span className="text-black mr-3 text-md font-semibold">
             Total Amount :
           </span>
-          <span className="p-1 px-2 text-stone-400 h-fit ">{totalAmount}</span>
+          <span className="p-1 px-2 text-stone-400 h-fit ">
+            {formatVal(totalAmt)}
+          </span>
         </div>
       </div>
 
-      <div className="p-1 px-2 bg-white h-fit  rounded-lg">
-        <div className="flex flex-col space-y-1">
+      <div className="p-1 px-2 bg-stone-100 h-fit  rounded-lg">
+        <div className="flex flex-col text-left space-y-1">
           <span className="text-black text-md p-2 px-4 font-semibold">
             Shares :
           </span>
@@ -53,13 +61,13 @@ export default function SingleBill({ data }) {
               return (
                 <div key={share.name} className="flex justify-between">
                   <span>{share.name}</span>
-                  <span>{share.amt}</span>
+                  <span>{formatVal(share.share)}</span>
                 </div>
               );
             })}
             <div className="flex mt-4 justify-between">
               <span className="text-black">Total</span>
-              <span>{totalAmount}</span>
+              <span>{formatVal(totalAmt)}</span>
             </div>
           </div>
         </div>

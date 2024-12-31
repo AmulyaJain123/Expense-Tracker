@@ -10,6 +10,13 @@ const { isAuth } = require('./middlewares/auth')
 
 const { authRouter } = require("./routes/auth");
 const { profileRouter } = require("./routes/profile");
+const { vaultRouter } = require('./routes/vault')
+const { friendsRouter } = require('./routes/friends')
+const { splitsRouter } = require('./routes/splits')
+const { trackRouter } = require('./routes/track')
+
+
+
 
 
 const app = express();
@@ -34,6 +41,17 @@ app.use('/auth', authRouter)
 app.use(isAuth);
 
 app.use('/profile', profileRouter)
+
+app.use('/vault', vaultRouter)
+
+app.use('/friends', friendsRouter)
+
+app.use('/split', splitsRouter)
+
+app.use('/track', trackRouter)
+
+
+
 
 
 

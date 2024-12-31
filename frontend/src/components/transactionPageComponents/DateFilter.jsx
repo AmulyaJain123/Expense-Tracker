@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { transactionActions } from "../../store/main";
 import { useSelector } from "react-redux";
 import DatePicker from "./DatePicker";
+import { format } from "date-fns";
 
 const day = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
@@ -68,11 +69,7 @@ export default function DateFilter() {
 
   return (
     <div className="flex relative flex-col flex-grow bg-[#fefae0] mr-4 rounded-r-xl p-4 px-8">
-      <div className="font-semibold flex flex-col mt-[8px] mb-[20px] text-xl text-black text-center">
-        <div className="mb-4 p-1 px-3 w-fit mx-auto rounded-md bg-[#9d4edd] text-white">
-          {filterParam}
-        </div>
-      </div>
+      <div className="font-semibold flex flex-col mt-[8px] mb-[20px] text-xl text-black text-center"></div>
       <div className="flex flex-grow">
         <div className="flex flex-col ">
           <div className="text-xl font-semibold mx-auto uppercase">
@@ -81,51 +78,50 @@ export default function DateFilter() {
           <DatePicker />
         </div>
 
-        <div className="flex flex-col px-4 items-center flex-grow gap-y-2  h-[400px]">
+        <div className="flex flex-col px-4 items-center flex-grow gap-y-2  h-[500px]">
           <div className="text-xl w-full text-center font-semibold uppercase mb-12 pb-12 border-b-2 border-stone-400">
             Preview
           </div>
-          {durations.length === 0 ? (
-            <p className="flex justify-center text-lg font-medium ">
-              No Durations
-            </p>
-          ) : (
-            <>
-              {durations.map((i, index) => {
-                const date1 = `${
-                  day[(new Date(i.first).getDay() + 6) % 7]
-                } ${new Date(i.first).getDate()}/${
-                  new Date(i.first).getMonth() + 1
-                }/${new Date(i.first).getFullYear()}`;
-                const date2 = `${
-                  day[(new Date(i.second).getDay() + 6) % 7]
-                } ${new Date(i.second).getDate()}/${
-                  new Date(i.second).getMonth() + 1
-                }/${new Date(i.second).getFullYear()}`;
+          <div className="flex flex-grow flex-col h-[350px] overflow-auto customScrollThin px-4 items-center space-y-3">
+            {durations.length === 0 ? (
+              <p className="flex justify-center text-lg font-medium ">
+                No Durations
+              </p>
+            ) : (
+              <>
+                {durations.map((i, index) => {
+                  const date1 = ` ${format(new Date(i.first), "dd/MM/yyyy")}`;
+                  const date2 = `${format(new Date(i.second), "dd/MM/yyyy")}`;
 
-                return (
-                  <div
-                    key={Math.random()}
-                    className="flex py-1 w-fit rounded-md bg-[#9d4edd] text-white items-center space-x-1"
-                  >
-                    <div className="flex flex-grow space-x-2 px-4">
-                      <span className="text-base font-medium  ">{date1}</span>
-                      <span className="mx-2">-</span>
-                      <span className="text-base font-medium text-right">
-                        {date2}
-                      </span>
-                    </div>
-                    <button
-                      onClick={() => removeClick(index)}
-                      className="pr-2 justify-center items-center"
+                  return (
+                    <div
+                      key={Math.random()}
+                      className="flex py-1 w-fit pr-1 rounded-md bg-[#dc93f6] text-black text-sm items-center space-x-1"
                     >
-                      <i className="fi fi-ss-cross-circle text-xl flex h-[30px] justify-center items-center"></i>
-                    </button>
-                  </div>
-                );
-              })}
-            </>
-          )}
+                      <div className="flex flex-grow flex-col px-4">
+                        <div className="flex ">
+                          <span className="font-medium mr-2 w-[50px]">
+                            From{" "}
+                          </span>
+                          <span className="   ">{date1}</span>
+                        </div>
+                        <div className="flex ">
+                          <span className="font-medium mr-2 w-[50px]">To </span>
+                          <span className="  ">{date2}</span>
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => removeClick(index)}
+                        className="pr-2 justify-center items-center"
+                      >
+                        <i className="fi fi-ss-cross-circle text-xl flex h-[30px] justify-center items-center"></i>
+                      </button>
+                    </div>
+                  );
+                })}
+              </>
+            )}
+          </div>
         </div>
       </div>
 

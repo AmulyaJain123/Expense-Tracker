@@ -28,7 +28,16 @@ const generateUserId = () => {
     return str;
 }
 
+const generateId = () => {
+    let str = v4();
+    str = parseInt(str.replace('/-/g', ''), 16);
+    console.log(str);
+    return str;
+}
+
 exports.authTransport = auth;
 exports.generateOtp = generateOtp;
 exports.generateUserId = generateUserId;
+exports.generateId = generateId;
+
 

@@ -15,7 +15,7 @@ const Button = styled.button`
 const menu = [];
 
 export default function SplitHomeMenu() {
-  const [selectedMenu, setSelectedMenu] = useState(0);
+  const [selectedMenu, setSelectedMenu] = useState(1);
 
   function menuClick(event) {
     const num = parseInt(event.target.id);
@@ -26,20 +26,20 @@ export default function SplitHomeMenu() {
     <div id="menu">
       <div className="flex sm:text-lg justify-center space-x-10 mt-[175px]">
         <Button
-          $status={selectedMenu === 0}
-          onClick={(event) => menuClick(event)}
-          id="0"
-          className=""
-        >
-          How it works
-        </Button>
-        <Button
           $status={selectedMenu === 1}
           onClick={(event) => menuClick(event)}
           id="1"
           className=""
         >
           Features
+        </Button>
+        <Button
+          $status={selectedMenu === 0}
+          onClick={(event) => menuClick(event)}
+          id="0"
+          className=""
+        >
+          How it works
         </Button>
       </div>
       <div

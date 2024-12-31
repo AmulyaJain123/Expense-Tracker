@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import styled from "styled-components";
 import { styling } from "../util/styling";
 
-import { ToastContainer, toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 
 import SignUp from "../components/authComponents/SignUp";
 import SignIn from "../components/authComponents/SignIn";
@@ -62,76 +62,67 @@ export default function AuthPage() {
   }
 
   return (
-    <div className="flex gradient  h-screen w-screen p-8">
-      <div className="flex w-full justify-center h-full space-x-8">
-        <div className="flex w-full max-w-600px sm:w-[500px] lg:w-[600px] xl:w-[40%] h-full overflow-auto scrollbar-hidden bg-white sm:scale-90 rounded-2xl items-center justify-center">
-          <div className="rounded-3xl flex flex-col space-y-2 sm:space-y-4  py-2 sm:py-4 p-4   h-full w-full">
-            <div className="flex justify-center m-4 mx-2 sm:mx-8 space-x-4 sm:space-x-8">
-              <Button
-                disabled={selected === 1 || disable1}
-                style={{
-                  pointerEvents: disable1 ? "none" : "all",
-                  opacity: disable1 ? "70%" : "",
-                }}
-                $status={selected === 1 ? "true" : "false"}
-                onClick={() => clickHandle(1)}
-                className="p-1 sm:p-2 px-4 flex sm:min-w-[170px] justify-center rounded-lg bg-[#9f21e3] border-2 border-[#9f21e3] text-white text-base sm:text-2xl font-semibold"
-              >
-                Log In
-              </Button>
-              <Button
-                disabled={selected === 2 || disable2}
-                $status={selected === 2 ? "true" : "false"}
-                style={{
-                  pointerEvents: disable2 ? "none" : "all",
-                  opacity: disable2 ? "70%" : "",
-                }}
-                onClick={() => clickHandle(2)}
-                className="p-1 sm:p-2 px-4 flex sm:min-w-[170px] justify-center rounded-lg bg-[#9f21e3] border-2 border-[#9f21e3] text-white  text-base sm:text-2xl font-semibold"
-              >
-                Sign Up
-              </Button>
-            </div>
+    <>
+      <Helmet>
+        <title> LogIn | SignUp | BILLBUD</title>
+        <meta name="description" content="Friends" />
+      </Helmet>
+      <div className="flex gradient  h-screen w-screen p-8">
+        <div className="flex w-full justify-center h-full space-x-8">
+          <div className="flex w-full max-w-600px sm:w-[500px] lg:w-[600px] xl:w-[40%] h-full overflow-auto scrollbar-hidden bg-white sm:scale-90 rounded-2xl items-center justify-center">
+            <div className="rounded-3xl flex flex-col space-y-2 sm:space-y-4  py-2 sm:py-4 p-4   h-full w-full">
+              <div className="flex justify-center m-4 mx-2 sm:mx-8 space-x-4 sm:space-x-8">
+                <Button
+                  disabled={selected === 1 || disable1}
+                  style={{
+                    pointerEvents: disable1 ? "none" : "all",
+                    opacity: disable1 ? "70%" : "",
+                  }}
+                  $status={selected === 1 ? "true" : "false"}
+                  onClick={() => clickHandle(1)}
+                  className="p-1 sm:p-2 px-4 flex sm:min-w-[170px] justify-center rounded-lg bg-[#9f21e3] border-2 border-[#9f21e3] text-white text-base sm:text-2xl font-semibold"
+                >
+                  Log In
+                </Button>
+                <Button
+                  disabled={selected === 2 || disable2}
+                  $status={selected === 2 ? "true" : "false"}
+                  style={{
+                    pointerEvents: disable2 ? "none" : "all",
+                    opacity: disable2 ? "70%" : "",
+                  }}
+                  onClick={() => clickHandle(2)}
+                  className="p-1 sm:p-2 px-4 flex sm:min-w-[170px] justify-center rounded-lg bg-[#9f21e3] border-2 border-[#9f21e3] text-white  text-base sm:text-2xl font-semibold"
+                >
+                  Sign Up
+                </Button>
+              </div>
 
-            {selected === 2 ? (
-              <SignUp
-                login={switchToLogin}
-                disableButton={disableButton}
-                enableButton={enableButton}
-              ></SignUp>
-            ) : (
-              <SignIn
-                signup={switchToSignUp}
-                disableButton={disableButton}
-                enableButton={enableButton}
-              ></SignIn>
-            )}
+              {selected === 2 ? (
+                <SignUp
+                  login={switchToLogin}
+                  disableButton={disableButton}
+                  enableButton={enableButton}
+                ></SignUp>
+              ) : (
+                <SignIn
+                  signup={switchToSignUp}
+                  disableButton={disableButton}
+                  enableButton={enableButton}
+                ></SignIn>
+              )}
+            </div>
           </div>
-        </div>
-        <div className="w-[60%] hidden xl:flex relative h-full rounded-3xl bgLogin">
-          <div
-            style={{ fontFamily: styling.logoFont }}
-            className="text-[50px] font-bold text-black font p-4 pt-2 px-6 bg-white rounded-b-3xl absolute top-p right-[100px]"
-          >
-            BILLBUD
+          <div className="w-[60%] hidden xl:flex relative h-full rounded-3xl bgLogin">
+            <div
+              style={{ fontFamily: styling.logoFont }}
+              className="text-[50px] font-bold text-black font p-4 pt-2 px-6 bg-white rounded-b-3xl absolute top-p right-[100px]"
+            >
+              BILLBUD
+            </div>
           </div>
         </div>
       </div>
-
-      <ToastContainer
-        position="top-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        onClose={close}
-        draggable
-        pauseOnHover
-        theme="light"
-        transition:Bounce
-      />
-    </div>
+    </>
   );
 }

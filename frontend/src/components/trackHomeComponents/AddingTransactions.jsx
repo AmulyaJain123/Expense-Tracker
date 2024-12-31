@@ -33,16 +33,13 @@ export default function AddingTransactions() {
           <p>
             <span className="font-semibold mr-2 md:mr-4">Category</span>
             <span>
-              Select a Category from predefined options (e.g., Housing, Salary &
-              Wage).
+              Select a Category from your defined options (e.g., Housing, Salary
+              & Wage).
             </span>
           </p>
           <p>
             <span className="font-semibold mr-2 md:mr-4">Date and Time</span>
-            <span>
-              Choose the Date and Time of the Transaction. Note that future
-              dates are not allowed.
-            </span>
+            <span>Choose the Date and Time of the Transaction.</span>
           </p>
         </div>
       </div>

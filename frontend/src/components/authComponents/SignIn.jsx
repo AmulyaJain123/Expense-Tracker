@@ -59,7 +59,7 @@ export default function SignIn({ signup, disableButton, enableButton }) {
 
   useEffect(() => {
     if (redirectTime) {
-      setTime(5);
+      setTime(3);
       const func = setInterval(() => {
         setTime((preval) => {
           if (preval == 1) {

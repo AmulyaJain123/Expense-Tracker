@@ -80,17 +80,13 @@ export default function NameFilter() {
 
   return (
     <div className="flex relative flex-col flex-grow bg-[#fefae0] mr-4 rounded-r-xl p-4 px-16">
-      <div className="font-semibold flex flex-col mt-[8px] mb-[40px] text-xl text-black text-center">
-        <div className="mb-4 p-1 px-3 w-fit mx-auto rounded-md bg-[#9d4edd] text-white">
-          {filterParam}
-        </div>
-      </div>
+      <div className="font-semibold flex flex-col mt-[8px] mb-[40px] text-xl text-black text-center"></div>
       <div className="text-xl font-semibold mx-auto mb-[20px] uppercase">
         add a name
       </div>
       <div className="flex space-x-6 my-[30px] justify-center">
         <input
-          className="rounded-lg p-2 px-4 w-[400px] text-center bg-white text-lg text-stone-600"
+          className="rounded-lg p-2 px-4 w-[400px]  bg-white  text-stone-600"
           placeholder="Name"
           type="text"
           onChange={(event) => nameChange(event)}
@@ -100,30 +96,32 @@ export default function NameFilter() {
         <button
           onClick={addClick}
           ref={addRef}
-          className="rounded-lg p-2 px-4 text-center bg-black font-semibold text-lg text-white duration-500 border-2 border-black hover:bg-white hover:text-black"
+          className="rounded-lg p-2 py-1 px-4 text-center bg-black font-semibold  text-white duration-500 border-2 border-black hover:bg-white hover:text-black"
         >
           ADD
         </button>
       </div>
 
-      <div className="flex flex-wrap gap-x-2 gap-y-2 mt-16 border-t-2 p-4 border-black mx-16">
-        {names.length != 0 ? (
-          names.map((name, index) => {
-            return (
-              <span
-                key={Math.random()}
-                className="p-1 px-3 h-fit flex items-center space-x-3 rounded-md text-white bg-[#9d4edd]"
-              >
-                <span>{name}</span>
-                <button onClick={() => removeClick(index)}>
-                  <i className="fi fi-ss-cross-circle text-xl flex h-[35px] justify-center items-center"></i>
-                </button>
-              </span>
-            );
-          })
-        ) : (
-          <p className="mx-auto">No Names Added</p>
-        )}
+      <div className="flex  mt-8 border-t-2 p-4 border-black mx-16">
+        <div className="flex flex-grow flex-wrap max-h-[300px] justify-center overflow-auto customScrollThin px-6 gap-2 mt-4">
+          {names.length != 0 ? (
+            names.map((name, index) => {
+              return (
+                <span
+                  key={Math.random()}
+                  className=" px-4 pr-2 h-fit flex items-center space-x-3 rounded-lg text-white bg-[#9d4edd]"
+                >
+                  <span>{name}</span>
+                  <button onClick={() => removeClick(index)}>
+                    <i className="fi fi-ss-cross-circle text-xl flex h-[35px] justify-center items-center"></i>
+                  </button>
+                </span>
+              );
+            })
+          ) : (
+            <p className="mx-auto">No Names Added</p>
+          )}
+        </div>
       </div>
 
       <Button

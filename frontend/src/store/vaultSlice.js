@@ -10,6 +10,10 @@ const intialSplitCreateState = {
   },
   detailValidation: false,
   fileValidation: false,
+  recFilter: null,
+  recSorting: null,
+  warFilter: null,
+  warSorting: null
 
 };
 
@@ -53,6 +57,24 @@ export const vaultSlice = createSlice({
       state.fileError = { file: null, error: null };
       state.detailValidation = false;
       state.fileValidation = false;
+
+      state.recFilter = null;
+      state.recSorting = null;
+      state.warFilter = null;
+      state.warSorting = null;
+
+    },
+    setRecFilter(state, action) {
+      state.recFilter = action.payload;
+    },
+    setRecSorting(state, action) {
+      state.recSorting = action.payload;
+    },
+    setWarFilter(state, action) {
+      state.warFilter = action.payload;
+    },
+    setWarSorting(state, action) {
+      state.warSorting = action.payload;
     }
   },
 });

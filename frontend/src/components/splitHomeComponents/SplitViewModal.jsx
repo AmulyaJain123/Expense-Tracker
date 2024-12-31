@@ -6,10 +6,12 @@ import SingleBill from "./SingleBill";
 import styles from "./SplitViewModal.module.css";
 import AddBillNavThumbs from "../../UIComponents/AddBillNavThumbs";
 
-const Thumb = styled.button`
+export const Thumb = styled.button`
   transition: all 500ms;
+  font-weight: 400;
+  font-size: medium;
   border-radius: 6px;
-  padding: 4px 12px;
+  padding: 2px 12px;
   justify-content: center;
   border: ${(props) =>
     props.$status === "true"
@@ -17,9 +19,9 @@ const Thumb = styled.button`
       : `2px solid ${styling.backColor}`};
   display: flex;
   align-items: center;
-  color: ${(props) => (props.$status === "true" ? "#f7ebfd" : "black")};
+  color: ${(props) => (props.$status === "true" ? "#f5f5f4" : "black")};
   background-color: ${(props) =>
-    props.$status === "true" ? "#9d4edd" : "white"};
+    props.$status === "true" ? "#9d4edd" : "#f5f5f4"};
   &:hover {
     scale: ${(props) => {
       return props.$status === "true" ? "100%" : "105%";

@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { formatVal } from "../../util/algo";
 import { amountInRange } from "../../util/algo";
 import { useDispatch } from "react-redux";
 import { splitCreateActions } from "../../store/main";
 import styles from "./DivideByRatioSplitModal.module.css";
+import CommonModalPart from "./CommonModalPart";
+import { v4 } from "uuid";
 
 const Textarea = styled.textarea`
   resize: none;
@@ -56,10 +58,22 @@ export default function DivideByRatioSplitModal() {
   const checkboxRef = useRef();
   const selectRef = useRef();
   const amountRef = useRef();
-  const nameRef = useRef();
-  const descRef = useRef();
-  const dateRef = useRef();
   const cancelRef = useRef();
+  const tempInfo = useSelector((state) => state.splitCreate.addBillTempStore);
+
+  useEffect(() => {
+    const inputs = document.querySelectorAll(".disableScroll");
+    inputs.forEach((i) => {
+      i.addEventListener(
+        "wheel",
+        (event) => {
+          event.preventDefault();
+          return;
+        },
+        { passive: false }
+      );
+    });
+  }, []);
 
   function resetPreview() {
     if (
@@ -117,9 +131,9 @@ export default function DivideByRatioSplitModal() {
         setError("No Weights assigned.");
         return;
       }
-      const billName = nameRef.current.value;
-      const billDate = dateRef.current.value;
-      const desc = descRef.current.value;
+      const billName = tempInfo.billName;
+      const billDate = tempInfo.billDate;
+      const desc = tempInfo.description;
       const totalAmt = amountRef.current.value;
       const payedBy = selectRef.current.value;
       const shares = [];
@@ -148,7 +162,7 @@ export default function DivideByRatioSplitModal() {
         }
       }
       const obj = {
-        id: Math.random(),
+        id: v4(),
         billName,
         billDate,
         desc,
@@ -233,9 +247,13 @@ export default function DivideByRatioSplitModal() {
       i.children[0].children[2].value = "";
       i.children[0].children[2].disabled = false;
     }
-    nameRef.current.value = "";
-    descRef.current.value = "";
-    dateRef.current.value = "";
+    dispatch(
+      splitCreateActions.editBillTempStore({
+        billName: "",
+        billDate: "",
+        description: "",
+      })
+    );
     amountRef.current.value = "";
     selectRef.current.value = "";
     setCheckedNo(friends.length);
@@ -249,40 +267,7 @@ export default function DivideByRatioSplitModal() {
   return (
     <div className={`${styles.main}`}>
       <div className=" p-4 lg:pr-2 flex flex-col lg:w-1/2 h-fit">
-        <div className="flex flex-col space-y-3 sm:space-y-0 text-center sm:text-start sm:flex-row rounded-xl bg-white p-3">
-          <div className="text-sm sm:text-base xl:text-lg bg-black  font-semibold text-white py-2 px-6 rounded-lg">
-            Bill Name
-          </div>
-          <input
-            type="text"
-            ref={nameRef}
-            maxLength={20}
-            placeholder="Name(Optional)...."
-            className="rounded-md text-center sm:text-start sm:ml-4 bg-slate-100 flex-grow p-2 pl-6 text-md"
-          />
-        </div>
-        <div className="flex mt-4 flex-col space-y-4 rounded-xl bg-white p-3">
-          <div className="text-sm sm:text-base xl:text-lg bg-black flex justify-center items-center font-semibold text-white py-2 px-6 rounded-lg">
-            Description
-          </div>
-          <Textarea
-            type="text"
-            ref={descRef}
-            maxLength={70}
-            placeholder="Desc(Optional)......"
-            className="text-md rounded-md h-[105px] bg-slate-100 flex-grow p-2 pl-4 text-md"
-          ></Textarea>
-        </div>
-        <div className="flex flex-col space-y-3 sm:space-y-0 text-center sm:text-start sm:flex-row rounded-xl bg-white p-3 mt-4">
-          <div className="text-sm sm:text-base xl:text-lg bg-black  font-semibold text-white py-2 px-6 rounded-lg">
-            Bill Date
-          </div>
-          <input
-            type="date"
-            ref={dateRef}
-            className="rounded-md  sm:ml-4 bg-slate-100 flex-grow p-2 pl-6 text-md"
-          />
-        </div>
+        <CommonModalPart />
         <div className="flex flex-col space-y-3 sm:space-y-0 text-center sm:text-start sm:flex-row rounded-xl bg-white p-3 mt-4">
           <div className="text-sm sm:text-base xl:text-lg bg-black text-center font-semibold text-white py-2 px-6 rounded-lg">
             Total Amount
@@ -292,7 +277,7 @@ export default function DivideByRatioSplitModal() {
             min={0}
             ref={amountRef}
             onChange={(event) => amountChange(event)}
-            placeholder="Total Amount...."
+            placeholder="Total Amount"
             className="rounded-md text-center sm:text-start sm:ml-4 bg-slate-100 flex-grow p-2 pl-6 text-md"
           />
         </div>
@@ -343,7 +328,7 @@ export default function DivideByRatioSplitModal() {
                       type="number"
                       min={0}
                       onChange={(event) => weightChange(event)}
-                      className="rounded-md bg-slate-100 p-1 w-[40px] sm:w-[60px]"
+                      className="rounded-md bg-slate-100 disableScroll p-1 w-[40px] sm:w-[60px]"
                     />
                   </label>
                   <div className="p-1 sm:p-2 rounded-md px-2 sm:px-3 flex justify-center items-center bg-white border-2 border-stone-200">

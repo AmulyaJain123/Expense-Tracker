@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { transactionActions } from "../../store/main";
+import { format } from "date-fns";
 
 const day = [
   "Monday",
@@ -88,7 +89,11 @@ const Pin = styled.button`
       ? "2px dashed #78716c"
       : "2px solid #2dc753"};
   font-size: ${(props) =>
-    props.$status === 0 ? "1.25rem" : props.$status === 1 ? "1rem" : "1rem"};
+    props.$status === 0
+      ? "1.25rem"
+      : props.$status === 1
+      ? "0.9rem"
+      : "0.9rem"};
   font-weight: 600; /* font-semibold */
   justify-content: center; /* justify-center */
   padding-top: 0.5rem; /* py-2 */
@@ -430,13 +435,19 @@ export default function DatePicker() {
             className={pin2 === 1 && pin1 === 0 ? "disabled" : ""}
             onClick={() => clickPin("first")}
           >
-            {pin1 === 0
-              ? "Pick Pin-1"
-              : pin1 === 1
-              ? "Place on Calander or Click Here to Cancel"
-              : `${date1.getDate()}/${
-                  date1.getMonth() + 1
-                }/${date1.getFullYear()} is Set. Click to Remove`}
+            {pin1 === 0 ? (
+              <span className="flex space-x-3">
+                <span>Pick</span>{" "}
+                <i className="fi fi-sr-circle-1 flex  justify-center items-center text-xl "></i>
+              </span>
+            ) : pin1 === 1 ? (
+              "Place on Calander or Click Here to Cancel"
+            ) : (
+              <span className="flex flex-col">
+                <span>{format(new Date(date1), "dd/MM/yyyy")}</span>
+                <span>Click to Remove</span>
+              </span>
+            )}
           </Pin>
           <Pin
             $status={pin2}
@@ -444,13 +455,19 @@ export default function DatePicker() {
             className={pin1 === 1 && pin2 === 0 ? "disabled" : ""}
             onClick={() => clickPin("second")}
           >
-            {pin2 === 0
-              ? "Pick Pin-2"
-              : pin2 === 1
-              ? "Place on Calander or Click Here to Cancel"
-              : `${date2.getDate()}/${
-                  date2.getMonth() + 1
-                }/${date2.getFullYear()} is Set. Click to Remove`}
+            {pin2 === 0 ? (
+              <span className="flex space-x-3">
+                <span>Pick</span>{" "}
+                <i className="fi fi-sr-circle-2 flex  justify-center items-center text-xl "></i>
+              </span>
+            ) : pin2 === 1 ? (
+              "Place on Calander or Click Here to Cancel"
+            ) : (
+              <span className="flex flex-col">
+                <span>{format(new Date(date2), "dd/MM/yyyy")}</span>
+                <span>Click to Remove</span>
+              </span>
+            )}
           </Pin>
         </div>
 

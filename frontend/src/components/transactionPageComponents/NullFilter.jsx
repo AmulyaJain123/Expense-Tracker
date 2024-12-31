@@ -26,7 +26,7 @@ export default function NullFilter() {
           <div className="text-2xl mt-4 tracking-wide font-bold mx-auto mb-[20px] uppercase">
             Filters Added:
           </div>
-          <div className="flex mt-4 overflow-auto pt-[20px] customScroll flex-wrap gap-3">
+          <div className="flex mt-4 overflow-auto pt-[20px] customScroll pr-4 flex-wrap gap-3">
             {filters.map((i, index) => {
               // console.log(i);
               return (
@@ -45,14 +45,26 @@ export default function NullFilter() {
                       {i.name}
                     </span>
                   </div>
-                  <div className="flex flex-col customScrollThin items-center gap-y-2 overflow-auto h-[220px] m-2 pt-4 pl-3 p-2">
+                  <div className="flex flex-col customScrollThin items-center gap-y-2 overflow-auto h-[200px] m-2 pt-4 pl-3 p-2">
                     {i.options.map((option) => {
                       return (
                         <span
                           key={Math.random()}
-                          className="rounded-lg text-center p-1 px-3 text-base bg-[#ccd5ae] text-[#606c38] font-medium"
+                          className="rounded-lg text-center capitalize p-1 px-3 text-base bg-[#ccd5ae] text-[#606c38] font-medium"
                         >
-                          {option}
+                          {i.name === "Category"
+                            ? option.length === 2
+                              ? "Null"
+                              : `${
+                                  option[1].length > 6
+                                    ? option[1].substr(0, 6) + "..."
+                                    : option[1]
+                                } > ${
+                                  option[2].length > 6
+                                    ? option[2].substr(0, 6) + "..."
+                                    : option[2]
+                                }`
+                            : option}
                         </span>
                       );
                     })}

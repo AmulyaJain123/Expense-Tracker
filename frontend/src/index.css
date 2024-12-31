@@ -20,27 +20,18 @@ a.active div {
   pointer-events: none;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
+tspan {
+  font-size: 14px;
+  font-weight: 500;
+  font-family: "Poppins";
 }
 
-thead {
-  height: 80px;
-  font-family: "Fredoka";
-  letter-spacing: 1px;
-  font-size: 20px;
-  text-transform: uppercase;
+.MuiChartsTooltip-root {
+  text-transform: capitalize;
+  font-family: "Poppins";
 }
-
-th,
-td {
-  padding: 10px;
-  text-align: center;
-}
-
-tr {
-  height: 55px;
+.css-rizt0-MuiTypography-root {
+  font-family: "Poppins" !important;
 }
 
 .customScroll::-webkit-scrollbar {
@@ -67,6 +58,7 @@ customScrollThinLight
 
 .customScrollThin::-webkit-scrollbar {
   width: 4px;
+  height: 8px;
   border-radius: 20px;
 }
 
@@ -90,6 +82,7 @@ customScrollThinLight
 
 .customScrollThinLight::-webkit-scrollbar-thumb {
   background: #d4d4d4;
+
   border-radius: 20px;
 }
 
@@ -99,15 +92,20 @@ customScrollThinLight
   background-size: cover;
 }
 
-.splitViewBg {
-  background-image: url("./assets/bg-pattern-fabric.png");
-  /* border: 2px solid #e2e8f0; */
+.whiteScr {
+  background-image: url("./assets/bg-pattern-once.png");
   background-repeat: repeat;
   background-size: contain;
 }
 
-.whiteScr {
-  background-image: url("./assets/bg-pattern-once.png");
+.interlaced {
+  background-image: url("./assets/strange_bullseyes.png");
+  background-repeat: repeat;
+  background-size: contain;
+}
+
+.billViewBg {
+  background-image: url("./assets/strange_bullseyes.png");
   background-repeat: repeat;
   background-size: contain;
 }
@@ -118,44 +116,8 @@ customScrollThinLight
   background-size: contain;
 }
 
-.akatsuki {
-  background-image: url("./assets/bg-pattern-akatsuki.jpg");
-  background-repeat: repeat;
-  background-size: cover;
-}
-
 .striped {
   background-image: url("./assets/bg-pattern-striped.jpg");
-  background-repeat: repeat;
-  background-size: cover;
-}
-
-.lemon {
-  background-image: url("./assets/bg-pattern-lemon.jpg");
-  background-repeat: repeat;
-  background-size: cover;
-}
-
-.waves {
-  background-image: url("./assets/bg-pattern-waves.jpg");
-  background-repeat: repeat;
-  background-size: cover;
-}
-
-.liquid {
-  background-image: url("./assets/bg-pattern-liquid.jpg");
-  background-repeat: repeat;
-  background-size: cover;
-}
-
-.skulls {
-  background-image: url("./assets/bg-pattern-skulls.jpg");
-  background-repeat: repeat;
-  background-size: cover;
-}
-
-.autumn {
-  background-image: url("./assets/bg-pattern-autumn.jpg");
   background-repeat: repeat;
   background-size: cover;
 }
@@ -199,11 +161,6 @@ customScrollThinLight
 .billCuts-stone {
   background-image: url("./assets/bg-pattern-fabric.png");
   background-repeat: no-repeat;
-}
-.billViewBg {
-  background-image: url("./assets/bg-pattern-fabric.png");
-  background-repeat: repeat;
-  background-size: contain;
 }
 input[type="file"] {
   display: none;

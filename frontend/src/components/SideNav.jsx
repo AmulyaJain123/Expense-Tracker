@@ -19,6 +19,8 @@ import splitoutline from "../assets/sideNavImages/split-outline.png";
 import splitsolid from "../assets/sideNavImages/split-solid.png";
 import vaultoutline from "../assets/sideNavImages/vault-outline.png";
 import vaultsolid from "../assets/sideNavImages/vault-solid.png";
+import friendsoutline from "../assets/sideNavImages/friends-outline.png";
+import friendssolid from "../assets/sideNavImages/friends-solid.png";
 
 const Main = styled.div`
   height: calc(100vh - ${styling.spacing * 2}px);
@@ -45,10 +47,11 @@ const pages = [
     children: [],
   },
   {
-    name: "BillVault",
+    name: "Vault",
     path: "vault",
     iconClass: vaultoutline,
     iconClassBold: vaultsolid,
+    hard: true,
     children: [
       {
         name: "Bill Upload",
@@ -61,8 +64,9 @@ const pages = [
     ],
   },
   {
-    name: "BillTrack",
+    name: "Track",
     path: "track",
+    hard: true,
     iconClass: billoutline,
     iconClassBold: billsolid,
     children: [
@@ -85,8 +89,9 @@ const pages = [
     ],
   },
   {
-    name: "BillSplit",
+    name: "Split",
     path: "split",
+    hard: true,
     iconClass: splitoutline,
     iconClassBold: splitsolid,
     children: [
@@ -97,17 +102,18 @@ const pages = [
     ],
   },
   {
+    name: "Friends",
+    path: "friends",
+    protected: true,
+    iconClass: friendsoutline,
+    iconClassBold: friendssolid,
+  },
+  {
     name: "Profile",
     path: "profile",
     protected: true,
     iconClass: profileoutline,
     iconClassBold: profilesolid,
-    children: [
-      {
-        name: "Split Create",
-        path: "split/create",
-      },
-    ],
   },
 ];
 

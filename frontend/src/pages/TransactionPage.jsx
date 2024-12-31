@@ -10,6 +10,7 @@ import { Button } from "../UIComponents/NextButton";
 import { Link } from "react-router-dom";
 import responsive from "../assets/responsive-website.png";
 import prohibition from "../assets/prohibition.png";
+import { Helmet } from "react-helmet-async";
 
 export default function TransactionPage() {
   const data = useLoaderData();
@@ -19,7 +20,7 @@ export default function TransactionPage() {
   // console.log(data);
   useEffect(() => {
     if (filters.length != 0) {
-      let arr = JSON.parse(JSON.stringify(data));
+      let arr = JSON.parse(JSON.stringify(data.transactions));
       for (let i of filters) {
         // console.log(i);
         const { name, options } = i;
@@ -110,7 +111,17 @@ export default function TransactionPage() {
       }
       // console.log("wekwfuef");
     }
-    if (name != "Date") {
+    if (name != "Date" && name != "Category" && name != "Type") {
+      return arrVal.toLowerCase().includes(val.toLowerCase());
+    } else if (name === "Category") {
+      return (
+        (val.length === 3 &&
+          val[0] === arrVal[0] &&
+          val[1] === arrVal[1] &&
+          val[2] === arrVal[2]) ||
+        (val.length === 2 && val[0] === arrVal[0] && val[1] === arrVal[1])
+      );
+    } else if (name === "Type") {
       return val === arrVal;
     } else {
       return (
@@ -166,6 +177,10 @@ export default function TransactionPage() {
 
   return (
     <>
+      <Helmet>
+        <title>Transactions | BILLBUD</title>
+        <meta name="description" content="Friends" />
+      </Helmet>
       <div className="h-full w-full bg-white overflow-auto pb-[200px] text-stone-700 rounded-l-xl">
         <div className="bg-[#f7ebfd] hidden 2xl:block rounded-xl  pb-[40px] m-4 mt-[30px] p-4">
           <div className="relative flex flex-col overflow-hidden  h-fit ">
@@ -178,12 +193,12 @@ export default function TransactionPage() {
                 </span>
                 {filters.length != 0 ? (
                   <div className="flex space-x-4">
-                    <span className="rounded-lg p-1 px-3 bg-white text-[#9f21e3] text-lg font-semibold">
+                    <span className="rounded-lg p-1 px-3 bg-white text-[#9f21e3] flex items-center font-semibold">
                       Filters Applied !!
                     </span>
                     <button
                       onClick={clearAll}
-                      className="rounded-lg p-1 hover:scale-110 duration-500 px-3 bg-white text-[#9f21e3] text-lg font-semibold"
+                      className="rounded-lg p-1 hover:scale-110 duration-500 px-3 bg-white text-[#9f21e3]  font-semibold"
                     >
                       Clear All
                     </button>
@@ -193,7 +208,9 @@ export default function TransactionPage() {
 
               <div className="p-4 px-8 rounded-t-sm space-y-2 rounded-b-xl bg-[#f7ebfd] flex-grow">
                 {filteredData === null ? (
-                  <DataDisplay data={JSON.parse(JSON.stringify(data))} />
+                  <DataDisplay
+                    data={JSON.parse(JSON.stringify(data.transactions))}
+                  />
                 ) : (
                   <DataDisplay
                     data={JSON.parse(JSON.stringify(filteredData))}
@@ -203,9 +220,13 @@ export default function TransactionPage() {
             </div>
           </div>
         </div>
-        <div className="hidden 2xl:flex justify-center">
-          <Link to="/track/dashboard">
+        <div className="hidden 2xl:flex justify-between">
+          <Link to="/track/protected/dashboard">
             <Button>Back to Dashboard</Button>
+          </Link>
+
+          <Link to="/track">
+            <Button>Back to TRACK</Button>
           </Link>
         </div>
 

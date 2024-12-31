@@ -7,7 +7,6 @@ import BillModal from "./BillModal";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { splitCreateActions } from "../../store/main";
-import loading from "../../assets/loadingLiq.gif";
 import {
   addBillHeirarchy,
   createSplitHeirachy,
@@ -19,7 +18,6 @@ import DiscardButton from "../../UIComponents/DiscardButton";
 export default function AddBillStage() {
   const modalRef = useRef();
   const bills = useSelector((state) => state.splitCreate.bills);
-  const [spliting, setSpliting] = useState(false);
   const selectBillNavStatus = useSelector(
     (state) => state.splitCreate.selectBillNavStatus
   );
@@ -36,48 +34,8 @@ export default function AddBillStage() {
     modalRef.current.open();
   }
 
-  function handleBackClick() {
-    dispatch(
-      splitCreateActions.changeTopNavEventStatus(createSplitHeirachy[0])
-    );
-  }
-
-  function disable() {
-    if (bills.length === 0) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-  function clickHandler() {
-    setSpliting(true);
-    setTimeout(() => {
-      splitAlgo(bills);
-      dispatch(
-        splitCreateActions.changeTopNavEventStatus(createSplitHeirachy[2])
-      );
-      setSpliting(false);
-    }, 3000);
-  }
-
   return (
     <>
-      <div className="flex justify-center sm:scale-100 scale-[80%] sm:justify-end">
-        <DiscardButton>Discard</DiscardButton>
-      </div>
-      {spliting ? (
-        <div className="absolute bg-black/40 top-0 bottom-0 flex justify-center items-center left-0 right-0">
-          <div className="flex flex-col w-[200px] sm:w-[300px] rounded-xl bg-white  p-6">
-            <div className="text-lg sm:text-2xl font-semibold flex justify-center">
-              Spliting....
-            </div>
-            <div className="sm:py-[30px] mx-auto">
-              <img src={loading} className="w-[150px] sm:w-[200px]" alt="" />
-            </div>
-          </div>
-        </div>
-      ) : null}
-
       <div className="max-w-[400px] sm:max-w-[900px] sm:w-[600px] xl:w-[900px] bg-[#fff] flex flex-col p-4 rounded-xl mt-8  mx-auto">
         <BillModal ref={modalRef} />
         <header
@@ -123,16 +81,6 @@ export default function AddBillStage() {
         >
           Add a Bill
         </button>
-      </div>
-      <div className="flex scale-[80%] flex-col sm:flex-row sm:scale-100 items-center sm:items-start justify-center sm:justify-between">
-        <BackButton onClick={handleBackClick}>{"<<-- Back"}</BackButton>
-        <Button
-          disabled={disable() ? true : false}
-          className={disable() ? "disabled" : ""}
-          onClick={clickHandler}
-        >
-          {"Split -->>"}
-        </Button>
       </div>
     </>
   );

@@ -11,14 +11,8 @@ export default function BillComponent({ id }) {
   });
   const dispatch = useDispatch();
   if (reqBill === undefined) {
-    return <p className="text-center">No Bill Selected.</p>;
+    return <p className="text-center mt-24">No Bill Selected</p>;
   }
-  const preDate = new Date(reqBill.billDate);
-  const date = `${preDate.getDate()}/${
-    preDate.getMonth() + 1
-  }/${preDate.getFullYear()}`;
-  // console.log(date);
-  // console.log(reqBill);
 
   return (
     <div className="px-3 pt-3 flex flex-col space-y-4 w-full h-full">
@@ -35,7 +29,9 @@ export default function BillComponent({ id }) {
           <span className="text-black mr-3 text-md font-semibold">
             Bill Date :
           </span>
-          <span className="p-1 px-2 text-stone-400 h-fit ">{date}</span>
+          <span className="p-1 px-2 text-stone-400 h-fit ">
+            {new Date(reqBill.billDate).toDateString()}
+          </span>
         </div>
       </div>
 

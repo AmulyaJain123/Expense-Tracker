@@ -9,8 +9,15 @@ const intialSplitCreateState = {
         description: "",
         splitDate: ""
     },
+    stage: 0,
     addBillNavStatus: "Divide Equally",
     selectBillNavStatus: null,
+    addBillTempStore: {
+        billName: "",
+        description: "",
+        billDate: "",
+        payedBy: ""
+    },
     bgPattern: null
 };
 
@@ -18,6 +25,12 @@ export const splitCreateSlice = createSlice({
     name: 'splitCreate',
     initialState: intialSplitCreateState,
     reducers: {
+        changeSplitName(state, action) {
+            state.splitInfo.splitName = action.payload;
+        },
+        changeSplitDesc(state, action) {
+            state.splitInfo.description = action.payload;
+        },
         addFriend(state, action) {
             state.friends.unshift({ name: action.payload.name });
         },
@@ -30,6 +43,12 @@ export const splitCreateSlice = createSlice({
                 ++index;
             }
             state.friends.splice(index, 1);
+        },
+        changeStage(state, action) {
+            state.stage = action.payload;
+        },
+        editBillTempStore(state, action) {
+            state.addBillTempStore = { ...state.addBillTempStore, ...action.payload }
         },
         addBill(state, action) {
             // console.log(action.payload);
@@ -85,13 +104,24 @@ export const splitCreateSlice = createSlice({
             state.selectBillNavStatus = action.payload;
         },
         clearAll(state) {
-            state.friends = [];
-            state.bills = [];
-            state.topNavSplitStatus = "Split Creation";
-            state.addBillNavStatus = "Divide Equally";
-            state.selectBillNavStatus = null;
-            state.splitInfo = { splitName: "", description: "" };
-            state.bgPattern = null;
+            state.friends = [],
+                state.bills = [],
+                state.topNavSplitStatus = "Split Creation",
+                state.splitInfo = {
+                    splitName: "",
+                    description: "",
+                    splitDate: ""
+                },
+                state.stage = 0,
+                state.addBillNavStatus = "Divide Equally",
+                state.selectBillNavStatus = null,
+                state.addBillTempStore = {
+                    billName: "",
+                    description: "",
+                    billDate: "",
+                    payedBy: ""
+                },
+                state.bgPattern = null
         },
         setBgPattern(state, action) {
             state.bgPattern = action.payload;

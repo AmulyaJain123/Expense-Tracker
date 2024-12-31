@@ -6,6 +6,8 @@ import { amountInRange } from "../../util/algo";
 import { useDispatch } from "react-redux";
 import { splitCreateActions } from "../../store/main";
 import styles from "./DivideEquallySplitModal.module.css";
+import CommonModalPart from "./CommonModalPart";
+import { v4 } from "uuid";
 
 const Textarea = styled.textarea`
   resize: none;
@@ -56,10 +58,8 @@ export default function DivideEquallySplitModal() {
   const checkboxRef = useRef();
   const selectRef = useRef();
   const amountRef = useRef();
-  const nameRef = useRef();
-  const descRef = useRef();
-  const dateRef = useRef();
   const cancelRef = useRef();
+  const tempInfo = useSelector((state) => state.splitCreate.addBillTempStore);
 
   function resetPreview(no) {
     if (
@@ -90,9 +90,9 @@ export default function DivideEquallySplitModal() {
     } else if (selectRef.current.value === "") {
       setError("Payer not Selected.");
     } else {
-      const billName = nameRef.current.value;
-      const billDate = dateRef.current.value;
-      const desc = descRef.current.value;
+      const billName = tempInfo.billName;
+      const billDate = tempInfo.billDate;
+      const desc = tempInfo.description;
       const totalAmt = amountRef.current.value;
       const payedBy = selectRef.current.value;
       const shares = [];
@@ -105,7 +105,7 @@ export default function DivideEquallySplitModal() {
         }
       }
       const obj = {
-        id: Math.random(),
+        id: v4(),
         billName,
         billDate,
         desc,
@@ -169,9 +169,13 @@ export default function DivideEquallySplitModal() {
       i.children[1].children[0].checked = true;
       i.children[0].children[1].innerText = "";
     }
-    nameRef.current.value = "";
-    descRef.current.value = "";
-    dateRef.current.value = "";
+    dispatch(
+      splitCreateActions.editBillTempStore({
+        billName: "",
+        billDate: "",
+        description: "",
+      })
+    );
     amountRef.current.value = "";
     selectRef.current.value = "";
     setCheckedNo(friends.length);
@@ -185,40 +189,8 @@ export default function DivideEquallySplitModal() {
   return (
     <div className={`${styles.main}`}>
       <div className=" p-4 lg:pr-2 flex flex-col lg:w-1/2 h-fit">
-        <div className="flex flex-col space-y-3 sm:space-y-0 text-center sm:text-start sm:flex-row rounded-xl bg-white p-3">
-          <div className=" text-sm sm:text-base xl:text-lg bg-black  font-semibold text-white py-2 px-6 rounded-lg">
-            Bill Name
-          </div>
-          <input
-            type="text"
-            ref={nameRef}
-            maxLength={20}
-            placeholder="Name(Optional)...."
-            className="rounded-md sm:ml-4 bg-slate-100 text-center sm:text-start flex-grow p-2 pl-6 text-md"
-          />
-        </div>
-        <div className="flex mt-4 flex-col space-y-4 rounded-xl bg-white p-3">
-          <div className=" text-sm sm:text-base xl:text-lg bg-black flex justify-center items-center font-semibold text-white py-2 px-6 rounded-lg">
-            Description
-          </div>
-          <Textarea
-            type="text"
-            ref={descRef}
-            maxLength={70}
-            placeholder="Desc(Optional)......"
-            className="text-md rounded-md h-[105px] bg-slate-100 flex-grow p-2 pl-4 text-md"
-          ></Textarea>
-        </div>
-        <div className="flex space-y-3 sm:space-y-0 text-center sm:text-start flex-col sm:flex-row mt-4 rounded-xl bg-white p-3">
-          <div className=" text-sm sm:text-base xl:text-lg bg-black  font-semibold text-white py-2 px-6 rounded-lg">
-            Bill Date
-          </div>
-          <input
-            type="date"
-            ref={dateRef}
-            className="rounded-md sm:ml-4 bg-slate-100 flex-grow p-2 pl-6 text-md"
-          />
-        </div>
+        <CommonModalPart />
+
         <div className="flex mt-4 flex-col sm:flex-row space-y-3 sm:space-y-0 rounded-xl bg-white p-3">
           <div className="text-sm sm:text-base text-center xl:text-lg bg-black  font-semibold text-white py-2 px-6 rounded-lg">
             Total Amount
@@ -228,7 +200,7 @@ export default function DivideEquallySplitModal() {
             min={0}
             ref={amountRef}
             onChange={(event) => amountChange(event)}
-            placeholder="Total Amount...."
+            placeholder="Total Amount"
             className="rounded-md text-center sm:text-start sm:ml-4 bg-slate-100 flex-grow p-2 pl-6 text-md"
           />
         </div>

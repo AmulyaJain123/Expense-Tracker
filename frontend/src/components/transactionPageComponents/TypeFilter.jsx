@@ -42,11 +42,11 @@ export default function TypeFilter() {
   function applyClick() {
     let options = null;
     if (selectedType === "Incoming") {
-      options = ["Incoming"];
+      options = ["incoming"];
     } else if (selectedType === "Outgoing") {
-      options = ["Outgoing"];
+      options = ["outgoing"];
     } else {
-      options = ["Incoming", "Outgoing"];
+      options = ["incoming", "outgoing"];
     }
     const obj = { name: filterParam, options: options };
     // console.log(obj);
@@ -56,45 +56,42 @@ export default function TypeFilter() {
 
   return (
     <div className="flex relative flex-col flex-grow bg-[#fefae0] mr-4 rounded-r-xl p-4 px-16">
-      <div className="font-semibold flex flex-col mt-[8px] mb-[40px] text-xl text-black text-center">
-        <div className="mb-4 p-1 px-3 w-fit mx-auto rounded-md bg-[#9d4edd] text-white">
-          {filterParam}
-        </div>
-      </div>
+      <div className="font-semibold flex flex-col mt-[8px] mb-[40px] text-xl text-black text-center"></div>
 
       <div className="text-xl font-semibold mx-auto mb-[20px] uppercase">
         Select a Type
       </div>
-      <div className="flex mt-8 space-x-4 justify-center">
+      <div className="flex mt-8 space-x-4 scale-90 justify-center">
         <button
           onClick={(event) => clickHandle(event)}
           style={{
-            backgroundColor:
-              selectedType === "Outgoing" ? "#78716c" : "#e7e5e4",
-            color: selectedType === "Outgoing" ? "#e7e5e4" : "#78716c",
+            backgroundColor: selectedType === "Outgoing" ? "#9d4edd" : "#fff",
+            color: selectedType === "Outgoing" ? "#fff" : "#78716c",
+            border: selectedType === "Outgoing" ? "0px" : "2px solid #a8a29e",
           }}
-          className="p-1 px-3 rounded-lg text-lg font-medium border-2 border-[#78716c]"
+          className="p-1 px-3 rounded-lg text-lg font-medium "
         >
           Outgoing
         </button>
         <button
           onClick={(event) => clickHandle(event)}
           style={{
-            backgroundColor:
-              selectedType === "Incoming" ? "#78716c" : "#e7e5e4",
-            color: selectedType === "Incoming" ? "#e7e5e4" : "#78716c",
+            backgroundColor: selectedType === "Incoming" ? "#9d4edd" : "#fff",
+            color: selectedType === "Incoming" ? "#fff" : "#78716c",
+            border: selectedType === "Incoming" ? "0px" : "2px solid #a8a29e",
           }}
-          className="p-1 px-3 rounded-lg text-lg font-medium border-2 border-[#78716c]"
+          className="p-1 px-3 rounded-lg text-lg font-medium "
         >
           Incoming
         </button>
         <button
           onClick={(event) => clickHandle(event)}
           style={{
-            backgroundColor: selectedType === "Both" ? "#78716c" : "#e7e5e4",
-            color: selectedType === "Both" ? "#e7e5e4" : "#78716c",
+            backgroundColor: selectedType === "Both" ? "#9d4edd" : "#fff",
+            color: selectedType === "Both" ? "#fff" : "#78716c",
+            border: selectedType === "Both" ? "0px" : "2px solid #a8a29e",
           }}
-          className="p-1 px-3 rounded-lg text-lg font-medium border-2 border-[#78716c]"
+          className="p-1 px-3 rounded-lg text-lg font-medium "
         >
           Both
         </button>

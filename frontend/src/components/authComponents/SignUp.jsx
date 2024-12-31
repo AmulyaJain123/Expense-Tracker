@@ -367,7 +367,10 @@ export default function SignUp({ login, disableButton, enableButton }) {
             <div className="overflow-auto mt-8 customScrollThinLight  pr-4 loginHeight">
               <div className="flex flex-col space-y-3  rounded-xl">
                 <span className="text-sm sm:text-lg text-black rounded-lg font-semibold p-1 px-2 w-fit">
-                  Username
+                  Username{" "}
+                  <span className="text-base ml-8 font-normal">
+                    *Cannot be changed afterwards
+                  </span>
                 </span>
                 <input
                   className="p-2 px-3 bg-stone-100  duration-700 focus:outline-none mx-1 flex rounded-lg pl-4 sm:pl-8 text-sm sm:text-lg flex-grow "

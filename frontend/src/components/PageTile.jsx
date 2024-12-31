@@ -45,7 +45,17 @@ export default function PageTile({ details }) {
             className="flex justify-center items-center w-[25px] mr-5 h-[25px]"
             alt=""
           />
-          <span className="text-sm lg:text-base">{name}</span>
+          <span
+            style={{
+              fontWeight: details.hard ? "600" : "",
+              textTransform: details.hard ? "uppercase" : "",
+              fontFamily: details.hard ? "Fredoka" : "",
+              fontSize: details.hard ? "15px" : "",
+            }}
+            className="text-sm  lg:text-base"
+          >
+            {name}
+          </span>
         </Main>
       </NavLink>
     </div>

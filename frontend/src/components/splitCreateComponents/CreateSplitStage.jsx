@@ -12,7 +12,6 @@ import styles from "./CreateSplitStage.module.css";
 export default function CreateSplitStage() {
   const dispatch = useDispatch();
   const friends = useSelector((state) => state.splitCreate.friends);
-  const [valid, setValid] = useState(false);
   const descRef = useRef();
   const nameRef = useRef();
   const splitInfo = useSelector((state) => state.splitCreate.splitInfo);
@@ -22,50 +21,23 @@ export default function CreateSplitStage() {
   );
 
   useEffect(() => {
-    if (nameRef.current.value != "") {
-      setValid(true);
-    }
     document
       .getElementById("Top")
       .scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
   }, []);
 
-  function splitClick() {
-    const res = splitAlgo(bills);
-    modalRef.current.open(res);
+  function nameChange(event) {
+    const str = event.target.value;
+    dispatch(splitCreateActions.changeSplitName(str));
   }
 
-  function disable() {
-    if (friends.length > 1 && valid) {
-      return false;
-    }
-    return true;
-  }
-
-  function changeHandler(event) {
-    if (event.target.value != "") {
-      setValid(true);
-    } else {
-      setValid(false);
-    }
-  }
-
-  function clickHandler() {
-    const splitName = nameRef.current.value.trim();
-    const desc = descRef.current.value.trim();
-    // console.log(desc);
-    dispatch(splitCreateActions.setSplitInfo({ name: splitName, desc: desc }));
-    const ind = createSplitHeirachy.indexOf(currentStatus);
-    const str = createSplitHeirachy[ind + 1];
-    // console.log(str);
-    dispatch(splitCreateActions.changeTopNavEventStatus(str));
+  function descChange(event) {
+    const str = event.target.value;
+    dispatch(splitCreateActions.changeSplitDesc(str));
   }
 
   return (
     <>
-      <div className="flex scale-[80%] sm:scale-100 justify-center sm:justify-end">
-        <DiscardButton>Discard</DiscardButton>
-      </div>
       <div className={`${styles.main}`}>
         <header
           style={{}}
@@ -80,12 +52,15 @@ export default function CreateSplitStage() {
           <input
             type="text"
             ref={nameRef}
-            maxLength={40}
-            defaultValue={splitInfo.splitName != "" ? splitInfo.splitName : ""}
-            placeholder="Name...."
-            onChange={(event) => changeHandler(event)}
+            maxLength={25}
+            value={splitInfo.splitName}
+            placeholder="Name"
+            onChange={(event) => nameChange(event)}
             className="rounded-md text-md text-center sm:text-start px-6 flex-grow p-2 bg-white "
           />
+          <span className="bg-white text-stone-500 font-semibold text-xl py-2 px-4 ml-3 rounded-md">
+            REQ
+          </span>
         </div>
         <div className="text-sm sm:text-base xl:text-lg mb-4 flex flex-col space-y-3 sm:space-y-0 sm:flex-row items-stretch text-stone-500 sm:items-center rounded-lg bg-slate-100 p-3">
           <span className="text-center sm:text-start rounded-md bg-[#000] text-white  sm:mr-3 p-2 font-semibold px-[20px]">
@@ -95,23 +70,13 @@ export default function CreateSplitStage() {
             ref={descRef}
             type="text"
             maxLength={70}
-            defaultValue={
-              splitInfo.description != "" ? splitInfo.description : ""
-            }
-            placeholder="Desc(Optional)...."
+            value={splitInfo.description}
+            onChange={(event) => descChange(event)}
+            placeholder="Description"
             className="text-center sm:text-start rounded-md text-md px-6 flex-grow p-2 bg-white "
           />
         </div>
         <Friends />
-      </div>
-      <div className="flex scale-[80%] sm:scale-100 justify-center sm:justify-end">
-        <Button
-          disabled={disable() ? true : false}
-          className={disable() ? "disabled" : ""}
-          onClick={clickHandler}
-        >
-          {"Next -->>"}
-        </Button>
       </div>
     </>
   );

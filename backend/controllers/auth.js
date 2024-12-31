@@ -1,4 +1,5 @@
 const { findUserByEmail, addUser, changePass } = require('../models/user');
+const { getProfile, pushActivity } = require('../models/profile')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { authTransport, generateOtp, generateUserId } = require('../util/nodemailer')
@@ -224,11 +225,32 @@ const getDetails = async (req, res) => {
         console.log(token);
         if (token) {
             const payload = jwt.verify(token, process.env.JWT_SECRET);
-            const doc = await findUserByEmail(payload.email);
+            const doc = await getProfile(payload.email);
             if (!doc) {
                 throw "notfound";
             }
-            res.status(200).json({ email: doc.email, username: doc.username });
+            const now = Date.now();
+            if (doc.activity.length != 0) {
+                const lastLoggedIn = new Date(parseInt(doc.activity[doc.activity.length - 1]));
+                const currDate = new Date(now);
+                if (lastLoggedIn.toDateString() != currDate.toDateString()) {
+                    const res = await pushActivity(payload.email, `${now}`);
+                    if (!res) {
+                        throw "activitysavefailed";
+                    }
+                }
+            } else {
+                const res = await pushActivity(payload.email, `${now}`);
+                if (!res) {
+                    throw "activitysavefailed";
+                }
+            }
+            const finalDoc = await getProfile(payload.email);
+            if (!finalDoc) {
+                throw "notfound";
+            }
+
+            res.status(200).json(finalDoc);
         } else {
             throw "notfound";
         }
@@ -237,29 +259,6 @@ const getDetails = async (req, res) => {
         res.status(200).json("notfound");
     }
 }
-
-
-// const signOut = async (req, res) => {
-//     try {
-//         let token;
-//         token = req.headers.authorization?.split(' ')[1];
-//         console.log("pu", token)
-//         if (token) {
-
-//             
-//             const result = await logOut(payload.email, token);
-//             res.status(200);
-//             res.send();
-//         } else {
-//             res.status(401);
-//             res.send();
-//         }
-//     } catch (err) {
-//         console.log(err);
-//         res.status(401);
-//         res.send()
-//     }
-// }
 
 exports.getOtp = getOtp;
 exports.checkOtp = checkOtp;

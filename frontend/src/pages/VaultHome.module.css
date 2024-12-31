@@ -17,6 +17,10 @@
   gap: 50px; /* equivalent to space-x-[50px] */
 }
 
+#menuContent p {
+  font-size: 16px;
+}
+
 #menuContent > div > div > div {
   font-size: large;
 }

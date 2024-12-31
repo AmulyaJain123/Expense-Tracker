@@ -16,18 +16,6 @@ import responsive from "../assets/responsive-website.png";
 
 export default function TopNav() {
   const location = useLocation();
-  const isOnCreateSplit = location.pathname === "/split/create";
-  const isOnCreateBill = location.pathname === "/vault/create";
-  const isOnCreateTransaction = location.pathname === "/track/create";
-  const isOnHome = location.pathname === "/";
-  const isOnSplitHome = location.pathname === "/split";
-  const isOnBillVaultHome = location.pathname === "/vault";
-  const isOnVault = location.pathname === "/vault/view";
-  const isOnBillView = location.pathname === "/vault/view/bill";
-  const isOnBillTrackHome = location.pathname === "/track";
-  const isOnDashboard = location.pathname === "/track/dashboard";
-  const isOnDistributions = location.pathname === "/track/distributions";
-  const isOnTransactions = location.pathname === "/track/transactions";
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -42,10 +30,6 @@ export default function TopNav() {
 
   function menuClick() {
     dispatch(universalActions.openMenu());
-  }
-
-  function notify() {
-    dialogRef.current.showModal();
   }
 
   return (
@@ -70,38 +54,8 @@ export default function TopNav() {
           <i className="fi fi-rs-burger-menu flex justify-center items-center text-xl sm:text-2xl"></i>
         </div>
       </button>
-      {isOnHome ? <TopNavButton>Home</TopNavButton> : null}
-      {isOnSplitHome ? <TopNavButton>BillSplit Home</TopNavButton> : null}
-      {isOnBillVaultHome ? <TopNavButton>BillVault Home</TopNavButton> : null}
 
-      {isOnBillTrackHome ? <TopNavButton>BillTrack Home</TopNavButton> : null}
-
-      {userDetails ? (
-        <>
-          {isOnCreateSplit
-            ? createSplitHeirachy.map((status) => (
-                <TopNavThumbs key={status} bool={location.search}>
-                  {status}
-                </TopNavThumbs>
-              ))
-            : ""}
-          {isOnCreateBill ? <TopNavButton>Bill Upload</TopNavButton> : null}
-          {isOnCreateTransaction ? (
-            <TopNavButton>Transaction Creation</TopNavButton>
-          ) : null}
-
-          {isOnVault ? <TopNavButton>Vault</TopNavButton> : null}
-          {isOnBillView ? <TopNavButton>Bill View</TopNavButton> : null}
-
-          {isOnDashboard ? <TopNavButton>Dashboard</TopNavButton> : null}
-          {isOnDistributions ? (
-            <TopNavButton>Distributions</TopNavButton>
-          ) : null}
-          {isOnTransactions ? <TopNavButton>Transactions</TopNavButton> : null}
-        </>
-      ) : null}
-
-      <button
+      {/* <button
         onClick={notify}
         className="p-2 relative rounded-xl hover:bg-slate-200 ml-auto mr-6 duration-700"
       >
@@ -109,9 +63,9 @@ export default function TopNav() {
         <div className="absolute  bg-[aquamarine] rounded-full flex items-center justify-center w-[15px] h-[15px] sm:w-[20px] sm:h-[20px] top-0 left-0 sm:top-[-2px] sm:left-[-2px] text-sm sm:text-base font-medium">
           1
         </div>
-      </button>
+      </button> */}
 
-      <dialog
+      {/* <dialog
         className="w-[90vw] max-h-[90vh]  scrollbar-hidden max-w-[350px] sm:max-w-[500px] lg:max-w-[700px] bg-white p-6 rounded-3xl"
         ref={dialogRef}
       >
@@ -147,47 +101,49 @@ export default function TopNav() {
             Close
           </button>
         </form>
-      </dialog>
+      </dialog> */}
 
-      {userDetails ? (
-        <div className="flex space-x-4 mr-[6px] sm:mr-[20px] ">
-          <Link to={"/profile"}>
-            <div className="flex rounded-full p-2 space-x-2 sm:space-x-6 bg-slate-200 pr-4 sm:pr-6">
+      <div className="ml-auto flex">
+        {userDetails ? (
+          <div className="flex space-x-4 mr-[6px] sm:mr-[20px] ">
+            <Link to={"/profile"}>
+              <div className="flex rounded-full p-1 items-center space-x-2 sm:space-x-6 bg-slate-200 pr-4 sm:pr-6">
+                <img
+                  src={userDetails.profilePic || userIcon}
+                  className="rounded-full w-[17px] h-[17px] sm:h-[35px] sm:w-[35px] bg-white"
+                  alt=""
+                />
+                <span className=" text-xs sm:text-base font-medium">
+                  {userDetails.username}
+                </span>
+              </div>
+            </Link>
+            <button
+              onClick={logOutClick}
+              className="rounded-xl hover:bg-slate-200 p-2 duration-500"
+            >
               <img
-                src={userIcon}
-                className="rounded-full w-[17px] h-[17px] sm:h-[25px] sm:w-[25px] bg-white"
+                src={logOut}
+                className="w-[17px] h-[17px] sm:h-[25px] sm:w-[25px]"
                 alt=""
               />
-              <span className=" text-xs sm:text-base font-medium">
-                {userDetails.username}
-              </span>
-            </div>
-          </Link>
-          <button
-            onClick={logOutClick}
-            className="rounded-xl hover:bg-slate-200 p-2 duration-500"
-          >
-            <img
-              src={logOut}
-              className="w-[17px] h-[17px] sm:h-[25px] sm:w-[25px]"
-              alt=""
-            />
-          </button>
-        </div>
-      ) : (
-        <div className="flex space-x-4 mr-[6px] sm:mr-[20px] ">
-          <Link
-            to={"/auth"}
-            className="rounded-xl hover:bg-slate-200 p-2 duration-500"
-          >
-            <img
-              src={logIn}
-              className=" w-[17px] h-[17px] sm:h-[25px] sm:w-[25px]"
-              alt=""
-            />
-          </Link>
-        </div>
-      )}
+            </button>
+          </div>
+        ) : (
+          <div className="flex space-x-4 mr-[6px] sm:mr-[20px] ">
+            <Link
+              to={"/auth"}
+              className="rounded-xl hover:bg-slate-200 p-2 duration-500"
+            >
+              <img
+                src={logIn}
+                className=" w-[17px] h-[17px] sm:h-[25px] sm:w-[25px]"
+                alt=""
+              />
+            </Link>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

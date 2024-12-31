@@ -125,6 +125,19 @@ async function getUserByEmail(email) {
     }
 }
 
+async function getUserByUserId(userId) {
+    try {
+        const user = await User.findOne({ userId: userId });
+        if (!user) {
+            throw "notfound";
+        }
+        return user;
+    } catch (err) {
+        console.log(err);
+        return null;
+    }
+}
+
 const User = mongoose.model('User', userSchema);
 
 
@@ -137,6 +150,7 @@ exports.editUser = editUser;
 exports.getUserByEmail = getUserByEmail;
 exports.changePass = changePass;
 exports.changeUsername = changeUsername;
+exports.getUserByUserId = getUserByUserId;
 
 
 

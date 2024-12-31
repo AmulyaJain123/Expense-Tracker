@@ -3,8 +3,8 @@ import { styling } from "../util/styling";
 import SideNav from "../components/SideNav";
 import TopNav from "../components/TopNav";
 import { useNavigation } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import { ToastContainer, toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { universalActions } from "../store/main";
 import { useEffect, useState } from "react";
@@ -15,19 +15,19 @@ import load from "../assets/loader.gif";
 export default function Root() {
   const navigate = useNavigation();
   const dispatch = useDispatch();
-  const toastMsg = useSelector((state) => state.universal.toastMsg);
+  // const toastMsg = useSelector((state) => state.universal.toastMsg);
   const userInfo = useSelector((state) => state.universal.userInfo);
   const [userFetch, setUserFetch] = useState(true);
 
-  useEffect(() => {
-    if (toastMsg != null) {
-      if (toastMsg.mood === "success") {
-        toast.success(toastMsg.msg);
-      } else if (toastMsg.mood === "error") {
-        toast.error(toastMsg.msg);
-      }
-    }
-  }, [toastMsg]);
+  // useEffect(() => {
+  //   if (toastMsg != null) {
+  //     if (toastMsg.mood === "success") {
+  //       toast.success(toastMsg.msg);
+  //     } else if (toastMsg.mood === "error") {
+  //       toast.error(toastMsg.msg);
+  //     }
+  //   }
+  // }, [toastMsg]);
 
   useEffect(() => {
     async function fetchUserInfo() {
@@ -45,6 +45,7 @@ export default function Root() {
           if (result == "notfound") {
             throw "notfound";
           }
+          console.log(result);
           dispatch(universalActions.setUserInfo(result));
           setUserFetch(false);
         } else {
@@ -81,8 +82,8 @@ export default function Root() {
             className="flex h-screen relative max-w-screen overflow-auto"
           >
             {navigate.state === "loading" ? (
-              <div className="w-[100vw] h-[40px] z-[100] absolute flex top-0 left-0 justify-center text-lg font-semibold items-center bg-[#dc93f6]">
-                Loading......
+              <div className="w-[100vw] h-[40px] z-[100] uppercase absolute flex top-0 left-0 justify-center text-lg font-semibold items-center bg-[#dc93f6]">
+                Loading
               </div>
             ) : null}
             <SideNav />
@@ -98,20 +99,6 @@ export default function Root() {
           </div>
         )}
       </>
-      <ToastContainer
-        position="top-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        onClose={close}
-        draggable
-        pauseOnHover
-        theme="light"
-        transition:Bounce
-      />
     </>
   );
 }
